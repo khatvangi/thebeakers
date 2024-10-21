@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Ancient History', href: '/humanities/history/ancient' },
+  { title: 'Medieval History', href: '/humanities/history/medieval' },
+  { title: 'Modern History', href: '/humanities/history/modern' },
+  { title: 'Contemporary History', href: '/humanities/history/contemporary' },
+];
+
+const articles = [
+  {
+    title: 'New Evidence Sheds Light on Ancient Mayan Collapse',
+    excerpt: 'Archaeologists uncover new artifacts that provide insights into the factors leading to the decline of the Mayan civilization.',
+    href: '/article/mayan-civilization-collapse',
+    image: 'https://via.placeholder.com/800x400.png?text=Mayan+Civilization',
+  },
+  {
+    title: 'Lost Medieval Manuscript Discovered in Monastery Archives',
+    excerpt: 'Researchers find a previously unknown manuscript that offers new perspectives on medieval European society and culture.',
+    href: '/article/lost-medieval-manuscript',
+    image: 'https://via.placeholder.com/800x400.png?text=Medieval+Manuscript',
+  },
+  {
+    title: 'Declassified Documents Reveal New Details About Cold War Espionage',
+    excerpt: 'Recently released government files provide fresh insights into covert operations during the height of the Cold War.',
+    href: '/article/cold-war-espionage-documents',
+    image: 'https://via.placeholder.com/800x400.png?text=Cold+War+Documents',
+  },
+];
+---
+
+<Layout title="History - News Website">
+  <h1 class="text-4xl font-bold mb-8">History</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-yellow-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-yellow-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in History</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

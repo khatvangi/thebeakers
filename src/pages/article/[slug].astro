@@ -1,0 +1,47 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export function getStaticPaths() {
+  return [
+    {params: {slug: 'quantum-computing-breakthrough'}},
+    {params: {slug: 'ai-natural-language-processing'}},
+    {params: {slug: 'ancient-civilization-discovery'}},
+    {params: {slug: 'new-particle-cern'}},
+    {params: {slug: 'cancer-research-breakthrough'}},
+    {params: {slug: 'math-proof-century-old-problem'}},
+    {params: {slug: 'solar-panel-efficiency'}},
+    {params: {slug: 'ai-diagnostic-tool'}},
+    {params: {slug: 'drought-resistant-crops'}},
+    {params: {slug: 'ancient-egyptian-text'}},
+    {params: {slug: 'nietzsche-interpretation'}},
+    {params: {slug: 'ai-novel-award'}},
+  ];
+}
+
+const { slug } = Astro.params;
+
+// In a real application, you would fetch the article data based on the slug
+// For this example, we'll use placeholder content
+const article = {
+  title: 'Article Title',
+  author: 'John Doe',
+  date: 'May 1, 2023',
+  content: `
+    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.</p>
+    <p class="mb-4">Nullam auctor, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.</p>
+    <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl. Sed euismod, nisl nec ultricies lacinia, nisl nisl aliquam nisl, nec aliquam nisl nisl sit amet nisl.</p>
+  `,
+};
+---
+
+<Layout title={article.title}>
+  <article class="max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">{article.title}</h1>
+    <div class="text-gray-600 mb-8">
+      <span>By {article.author}</span>
+      <span class="mx-2">|</span>
+      <span>{article.date}</span>
+    </div>
+    <div class="prose lg:prose-xl" set:html={article.content} />
+  </article>
+</Layout>

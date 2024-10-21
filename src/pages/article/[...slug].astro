@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articleEntries = await getCollection('articles');
+  return articleEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+---
+
+<Layout title={entry.data.title}>
+  <article class="max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">{entry.data.title}</h1>
+    <div class="text-gray-600 mb-8">
+      <span>By {entry.data.author}</span>
+      <span class="mx-2">|</span>
+      <span>{new Date(entry.data.date).toLocaleDateString()}</span>
+    </div>
+    <img src={entry.data.image} alt={entry.data.title} class="w-full h-64 object-cover mb-8 rounded-lg" />
+    <div class="prose lg:prose-xl">
+      <Content />
+    </div>
+  </article>
+</Layout>

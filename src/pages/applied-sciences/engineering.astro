@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Civil Engineering', href: '/applied-sciences/engineering/civil' },
+  { title: 'Mechanical Engineering', href: '/applied-sciences/engineering/mechanical' },
+  { title: 'Electrical Engineering', href: '/applied-sciences/engineering/electrical' },
+  { title: 'Chemical Engineering', href: '/applied-sciences/engineering/chemical' },
+];
+
+const articles = [
+  {
+    title: 'New Earthquake-Resistant Building Material Developed',
+    excerpt: 'Engineers create a novel composite material that significantly improves building resilience during seismic events.',
+    href: '/article/earthquake-resistant-material',
+    image: 'https://via.placeholder.com/800x400.png?text=Earthquake+Resistant+Material',
+  },
+  {
+    title: 'Revolutionary 3D-Printed Bridge Opens in Amsterdam',
+    excerpt: 'The world's first 3D-printed stainless steel bridge is installed over a canal in Amsterdam, showcasing the potential of additive manufacturing in construction.',
+    href: '/article/3d-printed-bridge-amsterdam',
+    image: 'https://via.placeholder.com/800x400.png?text=3D+Printed+Bridge',
+  },
+  {
+    title: 'Micro-Robots for Non-Invasive Surgery Breakthrough',
+    excerpt: 'A team of engineers develops microscopic robots capable of performing delicate surgical procedures with minimal invasion.',
+    href: '/article/micro-robots-surgery',
+    image: 'https://via.placeholder.com/800x400.png?text=Micro+Robots+Surgery',
+  },
+];
+---
+
+<Layout title="Engineering - News Website">
+  <h1 class="text-4xl font-bold mb-8">Engineering</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-blue-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-blue-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Engineering</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

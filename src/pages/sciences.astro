@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Chemistry', href: '/sciences/chemistry' },
+  { title: 'Physics', href: '/sciences/physics' },
+  { title: 'Biology', href: '/sciences/biology' },
+  { title: 'Mathematics', href: '/sciences/math' },
+];
+
+const articles = [
+  {
+    title: 'New Particle Discovered at CERN',
+    excerpt: 'Physicists at CERN have discovered a new subatomic particle, potentially reshaping our understanding of the universe.',
+    href: '/article/new-particle-cern',
+    image: 'https://via.placeholder.com/800x400.png?text=CERN+Particle',
+  },
+  {
+    title: 'Breakthrough in Cancer Research',
+    excerpt: 'A team of biologists has identified a new pathway for targeting cancer cells, offering hope for more effective treatments.',
+    href: '/article/cancer-research-breakthrough',
+    image: 'https://via.placeholder.com/800x400.png?text=Cancer+Research',
+  },
+  {
+    title: 'Mathematical Proof Solves Century-Old Problem',
+    excerpt: 'A mathematician has solved a problem that has puzzled experts for over 100 years, advancing the field of number theory.',
+    href: '/article/math-proof-century-old-problem',
+    image: 'https://via.placeholder.com/800x400.png?text=Math+Proof',
+  },
+];
+---
+
+<Layout title="Sciences - News Website">
+  <h1 class="text-4xl font-bold mb-8">Sciences</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-green-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-green-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Sciences</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

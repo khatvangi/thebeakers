@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Classical Literature', href: '/humanities/literature/classical' },
+  { title: 'Modern Literature', href: '/humanities/literature/modern' },
+  { title: 'Poetry', href: '/humanities/literature/poetry' },
+  { title: 'Literary Criticism', href: '/humanities/literature/criticism' },
+];
+
+const articles = [
+  {
+    title: 'Lost Shakespeare Play Discovered in Private Collection',
+    excerpt: 'Scholars authenticate a previously unknown play attributed to William Shakespeare, sparking excitement in the literary world.',
+    href: '/article/lost-shakespeare-play',
+    image: 'https://via.placeholder.com/800x400.png?text=Shakespeare+Play',
+  },
+  {
+    title: 'AI-Generated Novel Wins Prestigious Literary Award',
+    excerpt: 'A novel written by an artificial intelligence program receives a major literary prize, igniting debate about creativity and authorship.',
+    href: '/article/ai-novel-award',
+    image: 'https://via.placeholder.com/800x400.png?text=AI+Novel',
+  },
+  {
+    title: 'New Analysis Reveals Hidden Themes in Classic Poetry',
+    excerpt: 'Researchers using advanced textual analysis techniques uncover previously unrecognized themes and patterns in well-known poetic works.',
+    href: '/article/poetry-hidden-themes',
+    image: 'https://via.placeholder.com/800x400.png?text=Poetry+Analysis',
+  },
+];
+---
+
+<Layout title="Literature - News Website">
+  <h1 class="text-4xl font-bold mb-8">Literature</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-green-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-green-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Literature</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

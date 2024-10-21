@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Oncology', href: '/applied-sciences/medicine/oncology' },
+  { title: 'Neurology', href: '/applied-sciences/medicine/neurology' },
+  { title: 'Cardiology', href: '/applied-sciences/medicine/cardiology' },
+  { title: 'Immunology', href: '/applied-sciences/medicine/immunology' },
+];
+
+const articles = [
+  {
+    title: 'Personalized Cancer Vaccine Shows Promise in Clinical Trials',
+    excerpt: 'A new cancer vaccine tailored to individual patients' tumor profiles demonstrates significant efficacy in early-stage clinical trials.',
+    href: '/article/personalized-cancer-vaccine',
+    image: 'https://via.placeholder.com/800x400.png?text=Cancer+Vaccine',
+  },
+  {
+    title: 'Brain Implant Restores Speech in Paralyzed Patient',
+    excerpt: 'Neuroscientists successfully use a brain-computer interface to restore speech in a patient paralyzed by a stroke, marking a major breakthrough in neural prosthetics.',
+    href: '/article/brain-implant-speech-restoration',
+    image: 'https://via.placeholder.com/800x400.png?text=Brain+Implant',
+  },
+  {
+    title: 'Gene Therapy Cures Rare Immune Disorder',
+    excerpt: 'Researchers successfully treat a severe combined immunodeficiency using gene therapy, offering hope for patients with genetic immune disorders.',
+    href: '/article/gene-therapy-immune-disorder',
+    image: 'https://via.placeholder.com/800x400.png?text=Gene+Therapy',
+  },
+];
+---
+
+<Layout title="Medicine - News Website">
+  <h1 class="text-4xl font-bold mb-8">Medicine</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-red-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-red-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Medicine</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

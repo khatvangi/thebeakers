@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Organic Chemistry', href: '/sciences/chemistry/organic' },
+  { title: 'Inorganic Chemistry', href: '/sciences/chemistry/inorganic' },
+  { title: 'Physical Chemistry', href: '/sciences/chemistry/physical' },
+  { title: 'Biochemistry', href: '/sciences/chemistry/biochemistry' },
+];
+
+const articles = [
+  {
+    title: 'New Catalyst Speeds Up Carbon Dioxide Conversion',
+    excerpt: 'Chemists develop a novel catalyst that efficiently converts CO2 into useful compounds, potentially aiding in climate change mitigation.',
+    href: '/article/co2-conversion-catalyst',
+    image: 'https://via.placeholder.com/800x400.png?text=CO2+Catalyst',
+  },
+  {
+    title: 'Breakthrough in Hydrogen Storage Materials',
+    excerpt: 'Researchers create a new material that can store hydrogen more efficiently, bringing us closer to a hydrogen-based economy.',
+    href: '/article/hydrogen-storage-breakthrough',
+    image: 'https://via.placeholder.com/800x400.png?text=Hydrogen+Storage',
+  },
+  {
+    title: 'Novel Drug Delivery System Using Nanoparticles',
+    excerpt: 'A team of chemists and pharmacologists develop a nanoparticle-based drug delivery system for targeted cancer treatment.',
+    href: '/article/nanoparticle-drug-delivery',
+    image: 'https://via.placeholder.com/800x400.png?text=Nanoparticle+Delivery',
+  },
+];
+---
+
+<Layout title="Chemistry - News Website">
+  <h1 class="text-4xl font-bold mb-8">Chemistry</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-green-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-green-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Chemistry</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

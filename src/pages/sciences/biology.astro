@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Genetics', href: '/sciences/biology/genetics' },
+  { title: 'Ecology', href: '/sciences/biology/ecology' },
+  { title: 'Microbiology', href: '/sciences/biology/microbiology' },
+  { title: 'Neuroscience', href: '/sciences/biology/neuroscience' },
+];
+
+const articles = [
+  {
+    title: 'CRISPR Gene Editing Reverses Genetic Disease in Living Animals',
+    excerpt: 'Researchers successfully use CRISPR-Cas9 to treat a genetic disorder in adult mice, marking a significant step towards gene therapy for inherited diseases.',
+    href: '/article/crispr-genetic-disease-treatment',
+    image: 'https://via.placeholder.com/800x400.png?text=CRISPR+Gene+Editing',
+  },
+  {
+    title: 'New Species Discovered in Amazon Rainforest',
+    excerpt: 'Biologists identify several new species of plants and animals in a remote area of the Amazon, highlighting the importance of biodiversity conservation.',
+    href: '/article/amazon-new-species',
+    image: 'https://via.placeholder.com/800x400.png?text=Amazon+Species',
+  },
+  {
+    title: 'Brain-Computer Interface Allows Paralyzed Patients to Communicate',
+    excerpt: 'A groundbreaking study demonstrates a brain-computer interface that enables paralyzed individuals to communicate through thought alone.',
+    href: '/article/brain-computer-interface-communication',
+    image: 'https://via.placeholder.com/800x400.png?text=Brain+Computer+Interface',
+  },
+];
+---
+
+<Layout title="Biology - News Website">
+  <h1 class="text-4xl font-bold mb-8">Biology</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-green-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-green-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Biology</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

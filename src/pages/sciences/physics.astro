@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Quantum Physics', href: '/sciences/physics/quantum' },
+  { title: 'Astrophysics', href: '/sciences/physics/astrophysics' },
+  { title: 'Particle Physics', href: '/sciences/physics/particle' },
+  { title: 'Condensed Matter', href: '/sciences/physics/condensed-matter' },
+];
+
+const articles = [
+  {
+    title: 'Quantum Entanglement Achieved at Room Temperature',
+    excerpt: 'Physicists successfully demonstrate quantum entanglement in a macroscopic system at room temperature, a major step towards practical quantum technologies.',
+    href: '/article/room-temp-quantum-entanglement',
+    image: 'https://via.placeholder.com/800x400.png?text=Quantum+Entanglement',
+  },
+  {
+    title: 'New Observations Challenge Dark Matter Theory',
+    excerpt: 'Recent astronomical observations provide evidence that challenges the current understanding of dark matter, potentially revolutionizing our view of the universe.',
+    href: '/article/dark-matter-challenge',
+    image: 'https://via.placeholder.com/800x400.png?text=Dark+Matter',
+  },
+  {
+    title: 'Fusion Reactor Achieves Record-Breaking Plasma Confinement',
+    excerpt: 'Scientists report a breakthrough in fusion reactor technology, achieving the longest sustained plasma confinement time to date.',
+    href: '/article/fusion-reactor-breakthrough',
+    image: 'https://via.placeholder.com/800x400.png?text=Fusion+Reactor',
+  },
+];
+---
+
+<Layout title="Physics - News Website">
+  <h1 class="text-4xl font-bold mb-8">Physics</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-blue-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-blue-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Physics</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

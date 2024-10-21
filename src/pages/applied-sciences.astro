@@ -1,0 +1,51 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Engineering', href: '/applied-sciences/engineering' },
+  { title: 'Computer Science', href: '/applied-sciences/computer-science' },
+  { title: 'Medicine', href: '/applied-sciences/medicine' },
+  { title: 'Agriculture', href: '/applied-sciences/agriculture' },
+];
+
+const articles = [
+  {
+    title: 'Revolutionary Solar Panel Design Increases Efficiency',
+    excerpt: 'Engineers develop a new solar panel design that significantly improves energy capture and conversion.',
+    href: '/article/solar-panel-efficiency',
+    image: 'https://via.placeholder.com/800x400.png?text=Solar+Panels',
+  },
+  {
+    title: 'AI-Powered Diagnostic Tool for Early Disease Detection',
+    excerpt: 'Computer scientists create an AI system that can detect early signs of various diseases with high accuracy.',
+    href: '/article/ai-diagnostic-tool',
+    image: 'https://via.placeholder.com/800x400.png?text=AI+Diagnostics',
+  },
+  {
+    title: 'Drought-Resistant Crops Show Promise in Field Trials',
+    excerpt: 'Agricultural scientists develop new crop varieties that can thrive in water-scarce conditions.',
+    href: '/article/drought-resistant-crops',
+    image: 'https://via.placeholder.com/800x400.png?text=Drought+Resistant+Crops',
+  },
+];
+---
+
+<Layout title="Applied Sciences - News Website">
+  <h1 class="text-4xl font-bold mb-8">Applied Sciences</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-purple-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-purple-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Applied Sciences</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

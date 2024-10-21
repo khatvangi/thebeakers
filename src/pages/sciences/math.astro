@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Number Theory', href: '/sciences/math/number-theory' },
+  { title: 'Algebra', href: '/sciences/math/algebra' },
+  { title: 'Geometry', href: '/sciences/math/geometry' },
+  { title: 'Analysis', href: '/sciences/math/analysis' },
+];
+
+const articles = [
+  {
+    title: 'New Prime Number Discovered',
+    excerpt: 'Mathematicians uncover a new Mersenne prime number, the largest known prime to date, using distributed computing.',
+    href: '/article/new-prime-number',
+    image: 'https://via.placeholder.com/800x400.png?text=Prime+Number',
+  },
+  {
+    title: 'AI Solves Long-Standing Mathematical Conjecture',
+    excerpt: 'An artificial intelligence system proves a decades-old mathematical conjecture, showcasing the potential of AI in pure mathematics.',
+    href: '/article/ai-solves-math-conjecture',
+    image: 'https://via.placeholder.com/800x400.png?text=AI+Math+Solver',
+  },
+  {
+    title: 'Novel Geometric Approach Simplifies Complex Calculations',
+    excerpt: 'Researchers develop a new geometric method that simplifies intricate calculations in various fields, from physics to engineering.',
+    href: '/article/geometric-calculation-method',
+    image: 'https://via.placeholder.com/800x400.png?text=Geometric+Calculations',
+  },
+];
+---
+
+<Layout title="Mathematics - News Website">
+  <h1 class="text-4xl font-bold mb-8">Mathematics</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-purple-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-purple-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Mathematics</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>

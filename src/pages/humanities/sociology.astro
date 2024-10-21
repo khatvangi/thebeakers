@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
+
+const sections = [
+  { title: 'Social Theory', href: '/humanities/sociology/social-theory' },
+  { title: 'Cultural Sociology', href: '/humanities/sociology/cultural-sociology' },
+  { title: 'Urban Sociology', href: '/humanities/sociology/urban-sociology' },
+  { title: 'Social Movements', href: '/humanities/sociology/social-movements' },
+];
+
+const articles = await getCollection('articles', ({ data }) => {
+  return data.category === 'Humanities' && data.subcategory === 'Sociology';
+});
+
+const featuredArticles = articles
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Layout title="Sociology - News Website">
+  <h1 class="text-4xl font-bold mb-8">Sociology</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-orange-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-orange-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Sociology</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {featuredArticles.map((article) => (
+      <ArticleCard
+        title={article.data.title}
+        excerpt={article.data.excerpt}
+        slug={article.slug}
+        image={article.data.image}
+        date={article.data.date}
+      />
+    ))}
+  </div>
+</Layout>

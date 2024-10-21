@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+const sections = [
+  { title: 'Artificial Intelligence', href: '/applied-sciences/computer-science/ai' },
+  { title: 'Cybersecurity', href: '/applied-sciences/computer-science/cybersecurity' },
+  { title: 'Data Science', href: '/applied-sciences/computer-science/data-science' },
+  { title: 'Software Engineering', href: '/applied-sciences/computer-science/software-engineering' },
+];
+
+const articles = [
+  {
+    title: 'Quantum Machine Learning Algorithm Outperforms Classical Methods',
+    excerpt: 'Researchers develop a quantum algorithm that significantly accelerates machine learning tasks, demonstrating quantum advantage in AI applications.',
+    href: '/article/quantum-machine-learning',
+    image: 'https://via.placeholder.com/800x400.png?text=Quantum+Machine+Learning',
+  },
+  {
+    title: 'New Encryption Method Promises Unbreakable Security',
+    excerpt: 'Computer scientists unveil a novel encryption technique that claims to be resistant to quantum computing attacks.',
+    href: '/article/unbreakable-encryption',
+    image: 'https://via.placeholder.com/800x400.png?text=Unbreakable+Encryption',
+  },
+  {
+    title: 'AI System Predicts Protein Structures with Near-Perfect Accuracy',
+    excerpt: 'An artificial intelligence system achieves unprecedented accuracy in predicting protein structures, potentially revolutionizing drug discovery and biological research.',
+    href: '/article/ai-protein-structure-prediction',
+    image: 'https://via.placeholder.com/800x400.png?text=AI+Protein+Structure',
+  },
+];
+---
+
+<Layout title="Computer Science - News Website">
+  <h1 class="text-4xl font-bold mb-8">Computer Science</h1>
+  
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+    {sections.map((section) => (
+      <a href={section.href} class="bg-purple-500 text-white p-4 rounded-lg text-center font-semibold hover:bg-purple-600 transition-colors">
+        {section.title}
+      </a>
+    ))}
+  </div>
+
+  <h2 class="text-2xl font-semibold mb-4">Latest in Computer Science</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    {articles.map((article) => (
+      <ArticleCard {...article} />
+    ))}
+  </div>
+</Layout>
