@@ -111,10 +111,32 @@
         }
 
         .motto {
-            font-style: italic;
-            color: var(--accent-green);
-            font-size: 1.1rem;
+            text-align: center;
             margin-bottom: 2rem;
+        }
+
+        .motto .sanskrit {
+            font-size: 1.3rem;
+            color: var(--accent-green);
+            margin-bottom: 0.25rem;
+        }
+
+        .motto .transliteration {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: 0.25rem;
+        }
+
+        .motto .translation {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .motto .attribution {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
         }
 
         /* Categories */
@@ -296,7 +318,12 @@
         <section class="hero">
             <h1>Research, <span>Rewritten</span> for Students</h1>
             <p>Cutting-edge STEM research translated into language you can actually understand. Connected to what you're learning in class.</p>
-            <p class="motto">"What you learned in undergraduate is never wasted"</p>
+            <div class="motto">
+                <p class="sanskrit">व्यये कृते वर्धत एव नित्यं</p>
+                <p class="transliteration">Vyaye krite vardhata eva nityam</p>
+                <p class="translation">"Knowledge always grows when shared"</p>
+                <p class="attribution">— Chanakya Niti</p>
+            </div>
 
             <div class="categories">
                 <span class="category-tag science">Biology</span>
@@ -356,7 +383,8 @@
     </main>
 
     <footer>
-        <p>A project by <a href="https://spsdaily.thebeakers.com">The Beakers</a> • Built with academic honesty</p>
+        <p><strong>Founding Editor:</strong> Kiran Boggavarapu</p>
+        <p style="margin-top: 0.5rem;">A project by <a href="https://spsdaily.thebeakers.com">The Beakers</a> • Built with academic honesty</p>
         <p style="margin-top: 0.5rem;">Questions? <a href="mailto:thebeakerscom@gmail.com">thebeakerscom@gmail.com</a></p>
     </footer>
 </body>
