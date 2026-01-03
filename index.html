@@ -393,6 +393,7 @@
             max-width: 420px;
             margin: 0 auto;
             position: relative;
+            padding: 1.5rem;
         }
 
         .newsletter-form input {
@@ -415,11 +416,6 @@
             color: var(--text-light);
         }
 
-        /* Button with Swoosh */
-        .btn-wrapper {
-            position: relative;
-        }
-
         .newsletter-form button {
             padding: 0.9rem 1.75rem;
             border-radius: 8px;
@@ -439,31 +435,31 @@
             transform: scale(1.05);
         }
 
-        /* Swoosh SVG Animation */
+        /* Swoosh SVG Animation - encompasses entire form */
         .swoosh-svg {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 180px;
-            height: 80px;
+            width: 500px;
+            height: 120px;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
         .swoosh-path {
             fill: none;
             stroke: var(--accent-orange);
-            stroke-width: 2;
+            stroke-width: 2.5;
             stroke-linecap: round;
-            stroke-dasharray: 300;
-            stroke-dashoffset: 300;
-            animation: swooshDraw 2s ease-in-out infinite;
+            stroke-dasharray: 600;
+            stroke-dashoffset: 600;
+            animation: swooshDraw 2.5s ease-in-out infinite;
         }
 
         @keyframes swooshDraw {
             0% {
-                stroke-dashoffset: 300;
+                stroke-dashoffset: 600;
                 opacity: 0;
             }
             10% {
@@ -673,13 +669,13 @@
             <form class="newsletter-form" action="https://newsletter.thebeakers.com/subscription/form" method="post">
                 <input type="hidden" name="l" value="a5887db5-f279-42b5-aea6-0b3f660854dd">
                 <input type="email" name="email" placeholder="your@university.edu" required>
-                <div class="btn-wrapper">
-                    <svg class="swoosh-svg" viewBox="0 0 180 80">
-                        <path class="swoosh-path" d="M10,40 Q30,10 50,40 T90,40 T130,40 T170,40" />
-                        <path class="swoosh-path" d="M10,50 Q30,80 50,50 T90,50 T130,50 T170,50" style="animation-delay: 0.3s;" />
-                    </svg>
-                    <button type="submit">Notify Me</button>
-                </div>
+                <button type="submit">Notify Me</button>
+                <svg class="swoosh-svg" viewBox="0 0 500 120">
+                    <path class="swoosh-path" d="M20,30 Q80,5 140,30 T260,30 T380,30 T480,30" />
+                    <path class="swoosh-path" d="M20,90 Q80,115 140,90 T260,90 T380,90 T480,90" style="animation-delay: 0.3s;" />
+                    <path class="swoosh-path" d="M5,60 Q15,20 25,60 T45,60" style="animation-delay: 0.15s;" />
+                    <path class="swoosh-path" d="M475,60 Q485,100 495,60" style="animation-delay: 0.45s;" />
+                </svg>
             </form>
         </section>
     </main>
