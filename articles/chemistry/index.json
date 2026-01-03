@@ -1,0 +1,23 @@
+{
+  "discipline": "chemistry",
+  "count": 2,
+  "updated": "2026-01-03T17:49:49.841633",
+  "articles": [
+    {
+      "filename": "20260103-revolutionizing-cancer-treatments-peptides-that-st.json",
+      "headline": "Revolutionizing Cancer Treatments: Peptides That Stick Around to Fight Solid Tumors",
+      "hook": "If you\u2019re studying biochemistry or immunology, this could be the next big breakthrough in cancer treatment\u2014using chemistry to make CAR-T cells smarter and more effective.",
+      "difficulty": "Sophomore",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T17:45:11.906185"
+    },
+    {
+      "filename": "20260103-revolutionizing-cancer-treatment-how-peptide-rings.json",
+      "headline": "Revolutionizing Cancer Treatment: How Peptide Rings Outsmart Solid Tumors",
+      "hook": "If you\u2019ve ever wondered how scientists make CAR-T cells smarter, this breakthrough could be the key to fighting stubborn solid tumors\u2014without harming healthy tissue.",
+      "difficulty": "SOPHOMORE",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T17:44:23.983560"
+    }
+  ]
+}

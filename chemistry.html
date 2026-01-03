@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemistry — The Beakers</title>
+    <meta name="description" content="Chemistry research rewritten for undergraduate students. Reactions, mechanisms, and discoveries explained.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebeakers.com/chemistry.html">
+    <meta property="og:title" content="Chemistry — The Beakers">
+    <meta property="og:description" content="Chemistry research rewritten for undergraduate students.">
+    <meta property="og:image" content="https://thebeakers.com/chemistry.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #273549;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --accent-green: #10b981;
+            --accent-teal: #14b8a6;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)) brightness(1.3);
+        }
+
+        nav {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--text-primary); }
+
+        /* Page Hero */
+        .page-hero {
+            text-align: center;
+            padding: 2rem 2rem 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .page-hero h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .discipline-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        .section-count {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        /* Featured Article */
+        .featured-article {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #1a2744 100%);
+            border: 1px solid var(--accent-green);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--accent-green);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .featured-article h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .featured-article h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .featured-article h2 a:hover { color: var(--accent-green); }
+
+        .featured-hook {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .featured-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .featured-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .difficulty-badge.freshman { background: var(--accent-green); color: white; }
+        .difficulty-badge.sophomore { background: var(--accent-blue); color: white; }
+        .difficulty-badge.junior { background: var(--accent-purple); color: white; }
+
+        /* Article Cards Grid */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+        }
+
+        .article-card h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+            color: var(--text-primary);
+        }
+
+        .article-card .hook {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .article-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .article-card .source {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Quick Links Section */
+        .quick-links {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .quick-links h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .quick-links ul {
+            list-style: none;
+        }
+
+        .quick-links li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .quick-links li:last-child { border-bottom: none; }
+
+        .quick-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .quick-links a:hover { color: var(--accent-green); }
+
+        .quick-links .source-tag {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            background: var(--bg-dark);
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2.5rem 2rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-dark);
+            margin-top: 3rem;
+        }
+
+        footer p { margin-bottom: 0.3rem; }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover { text-decoration: underline; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 1.5rem; }
+            nav { display: none; }
+            .page-hero h1 { font-size: 2rem; }
+            .featured-article { padding: 1.5rem; }
+            .featured-article h2 { font-size: 1.5rem; }
+            .articles-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <img src="logo-48.png" alt="The Beakers" class="logo-icon">
+            The Beakers
+        </a>
+        <nav>
+            <a href="/">All Disciplines</a>
+            <a href="biology.html">Biology</a>
+            <a href="physics.html">Physics</a>
+            <a href="https://spsdaily.thebeakers.com">SPS Daily</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="/">Home</a> / Chemistry</p>
+            <h1>
+                <img src="chemistry.png" alt="Chemistry" class="discipline-icon">
+                Chemistry
+            </h1>
+            <p>The science of matter and its transformations. Research on reactions, mechanisms, and molecular discoveries — explained for undergraduates.</p>
+        </section>
+
+        <!-- Featured Article (Editor's Pick) -->
+        <section class="section" id="featured">
+            <div class="featured-article" id="editors-pick" style="display: none;">
+                <span class="featured-badge">Editor's Pick</span>
+                <h2><a href="#" id="featured-link"></a></h2>
+                <p class="featured-hook" id="featured-hook"></p>
+                <div class="featured-meta">
+                    <span id="featured-difficulty"></span>
+                    <span id="featured-source"></span>
+                    <span id="featured-date"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rewritten Articles -->
+        <section class="section" id="articles">
+            <div class="section-header">
+                <span class="section-title">This Week's Research</span>
+                <span class="section-count" id="article-count"></span>
+            </div>
+            <div class="articles-grid" id="articles-grid">
+                <!-- Articles loaded dynamically -->
+            </div>
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <p>No articles yet. Check back soon!</p>
+            </div>
+        </section>
+
+        <!-- Quick Links -->
+        <section class="section" id="quick-links-section" style="display: none;">
+            <div class="section-header">
+                <span class="section-title">Quick Links</span>
+            </div>
+            <div class="quick-links">
+                <h3>More Research</h3>
+                <ul id="quick-links-list">
+                    <!-- Quick links loaded dynamically -->
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Founding Editor:</strong> Kiran Boggavarapu</p>
+        <p>A project by <a href="/">The Beakers</a></p>
+        <p>Questions? <a href="mailto:thebeakerscom@gmail.com">thebeakerscom@gmail.com</a></p>
+    </footer>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+
+        // Load articles from JSON files
+        async function loadArticles() {
+            const articlesGrid = document.getElementById('articles-grid');
+            const articleCount = document.getElementById('article-count');
+            const emptyState = document.getElementById('empty-state');
+
+            try {
+                // Fetch list of chemistry articles
+                // In production, this would be a generated index.json
+                const articleFiles = await fetchArticleList('chemistry');
+
+                if (articleFiles.length === 0) {
+                    emptyState.style.display = 'block';
+                    return;
+                }
+
+                articleCount.textContent = `${articleFiles.length} article${articleFiles.length > 1 ? 's' : ''}`;
+
+                // Create cards from index data (no need to fetch each article)
+                for (const article of articleFiles) {
+                    const card = createArticleCard(article);
+                    articlesGrid.appendChild(card);
+                }
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                emptyState.style.display = 'block';
+            }
+        }
+
+        // Fetch article list from generated index
+        async function fetchArticleList(discipline) {
+            try {
+                const response = await fetch(`articles/${discipline}/index.json`);
+                if (!response.ok) return [];
+                const index = await response.json();
+                return index.articles || [];
+            } catch (error) {
+                console.error('Error fetching index:', error);
+                return [];
+            }
+        }
+
+        // Create article card element
+        function createArticleCard(article) {
+            const slug = article.filename.replace('.json', '');
+            const card = document.createElement('a');
+            card.className = 'article-card';
+            card.href = `article.html?id=chemistry/${slug}`;
+
+            const difficulty = (article.difficulty || 'SOPHOMORE').toLowerCase();
+            const source = article.source || 'Research';
+            const date = article.rewritten_at ? new Date(article.rewritten_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
+
+            card.innerHTML = `
+                <h3>${escapeHtml(article.headline)}</h3>
+                <p class="hook">${escapeHtml(article.hook)}</p>
+                <div class="meta">
+                    <span class="source">${escapeHtml(source)}</span>
+                    <span class="difficulty-badge ${difficulty}">${difficulty}</span>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Load quick links from curated data
+        async function loadQuickLinks() {
+            const section = document.getElementById('quick-links-section');
+            const list = document.getElementById('quick-links-list');
+
+            try {
+                const response = await fetch('data/chemistry.json');
+                const data = await response.json();
+
+                if (data.quickLinks && data.quickLinks.length > 0) {
+                    section.style.display = 'block';
+
+                    data.quickLinks.forEach(link => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener">
+                                ${escapeHtml(link.headline)}
+                                <span class="source-tag">${escapeHtml(link.source)}</span>
+                            </a>
+                        `;
+                        list.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                // Quick links optional
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize
+        loadArticles();
+        loadQuickLinks();
+    </script>
+</body>
+</html>

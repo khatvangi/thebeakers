@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article — The Beakers</title>
+    <meta name="description" content="Research rewritten for undergraduate students.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <!-- Mermaid for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-highlight: #1a2744;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --accent-green: #10b981;
+            --accent-teal: #14b8a6;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.4)) brightness(1.2);
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--text-primary); }
+
+        /* Article Layout */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+        }
+
+        /* Article Header */
+        .article-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .discipline-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+
+        .discipline-tag:hover { border-color: var(--accent-green); }
+
+        .article-header h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        .article-hook {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Meta bar */
+        .meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-dark);
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 0.25rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .difficulty-badge.freshman { background: var(--accent-green); color: white; }
+        .difficulty-badge.sophomore { background: var(--accent-blue); color: white; }
+        .difficulty-badge.junior { background: var(--accent-purple); color: white; }
+
+        /* Audio Player */
+        .audio-player {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-highlight) 100%);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.08);
+            background: var(--accent-teal);
+        }
+
+        .play-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+            margin-left: 3px;
+        }
+
+        .play-btn.playing svg { margin-left: 0; }
+
+        .audio-info {
+            flex: 1;
+        }
+
+        .audio-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+
+        .audio-teaser {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Content Sections */
+        .section {
+            margin: 2.5rem 0;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-content {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        .section-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Curriculum Connection - THE KEY */
+        .curriculum-section {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .curriculum-section .section-title {
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+        }
+
+        .curriculum-section .section-content {
+            font-size: 1rem;
+        }
+
+        .curriculum-section ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .curriculum-section li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .curriculum-section li:last-child { border-bottom: none; }
+
+        /* Key Terms */
+        .key-terms {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+        }
+
+        .key-terms ul {
+            list-style: none;
+        }
+
+        .key-terms li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 0.95rem;
+        }
+
+        .key-terms li:last-child { border-bottom: none; }
+
+        .key-terms strong {
+            color: var(--accent-green);
+        }
+
+        /* Mermaid Diagram */
+        .diagram-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+
+        .diagram-section .section-title {
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .mermaid {
+            background: transparent !important;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+        }
+
+        /* Think About */
+        .think-about {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
+            border-left: 4px solid var(--accent-orange);
+            border-radius: 0 12px 12px 0;
+            padding: 1.5rem 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .think-about .section-title {
+            color: var(--accent-orange);
+        }
+
+        .think-about p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        /* Original Source */
+        .original-source {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        .original-source h4 {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .original-source a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .original-source a:hover { text-decoration: underline; }
+
+        .original-source .source-name {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-dark);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .error {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--accent-red);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .article-container { padding: 2rem 1.25rem; }
+            .article-header h1 { font-size: 1.8rem; }
+            .audio-player { flex-direction: column; text-align: center; }
+            .curriculum-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">
+            <img src="logo-48.png" alt="The Beakers" class="logo-icon">
+            The Beakers
+        </a>
+        <a href="javascript:history.back()" class="back-link">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Back
+        </a>
+    </header>
+
+    <article class="article-container" id="article">
+        <div class="loading">Loading article...</div>
+    </article>
+
+    <footer>
+        <p><strong>Founding Editor:</strong> Kiran Boggavarapu</p>
+        <p><a href="/">The Beakers</a> — Research, Rewritten for Students</p>
+    </footer>
+
+    <script>
+        // Initialize Mermaid with dark theme
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e293b',
+                primaryTextColor: '#f1f5f9',
+                primaryBorderColor: '#334155',
+                lineColor: '#64748b',
+                secondaryColor: '#273549',
+                tertiaryColor: '#0f172a'
+            }
+        });
+
+        // Speech synthesis for audio teaser
+        let speechSynth = window.speechSynthesis;
+        let currentUtterance = null;
+        let isPlaying = false;
+
+        function playAudioTeaser(text) {
+            const playBtn = document.getElementById('play-btn');
+
+            if (isPlaying) {
+                speechSynth.cancel();
+                isPlaying = false;
+                playBtn.classList.remove('playing');
+                playBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                return;
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            currentUtterance.rate = 0.95;
+            currentUtterance.pitch = 1;
+
+            // Try to use a natural voice
+            const voices = speechSynth.getVoices();
+            const preferredVoice = voices.find(v => v.name.includes('Natural') || v.name.includes('Samantha') || v.name.includes('Google'));
+            if (preferredVoice) {
+                currentUtterance.voice = preferredVoice;
+            }
+
+            currentUtterance.onstart = () => {
+                isPlaying = true;
+                playBtn.classList.add('playing');
+                playBtn.innerHTML = `<svg viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`;
+            };
+
+            currentUtterance.onend = () => {
+                isPlaying = false;
+                playBtn.classList.remove('playing');
+                playBtn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+            };
+
+            speechSynth.speak(currentUtterance);
+        }
+
+        // Load article from URL parameter
+        async function loadArticle() {
+            const container = document.getElementById('article');
+            const params = new URLSearchParams(window.location.search);
+            const articleId = params.get('id');
+
+            if (!articleId) {
+                container.innerHTML = '<div class="error">No article specified.</div>';
+                return;
+            }
+
+            try {
+                const response = await fetch(`articles/${articleId}.json`);
+                if (!response.ok) throw new Error('Article not found');
+
+                const article = await response.json();
+                renderArticle(article, articleId);
+            } catch (error) {
+                console.error('Error loading article:', error);
+                container.innerHTML = '<div class="error">Article not found.</div>';
+            }
+        }
+
+        // Render article content
+        function renderArticle(article, articleId) {
+            const container = document.getElementById('article');
+            const discipline = articleId.split('/')[0];
+            const difficulty = (article.difficulty || 'SOPHOMORE').toLowerCase();
+            const date = article.rewritten_at ? new Date(article.rewritten_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : '';
+
+            // Update page title
+            document.title = `${article.headline} — The Beakers`;
+
+            // Format markdown-style content
+            const formatContent = (text) => {
+                if (!text) return '';
+                return text
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n- /g, '</p><li>')
+                    .replace(/^- /gm, '<li>');
+            };
+
+            const formatCurriculum = (text) => {
+                if (!text) return '';
+                // Split by course entries
+                const items = text.split(/\n- /).filter(Boolean);
+                if (items.length <= 1) return `<p>${formatContent(text)}</p>`;
+                return '<ul>' + items.map(item => `<li>${formatContent(item.trim())}</li>`).join('') + '</ul>';
+            };
+
+            const formatKeyTerms = (text) => {
+                if (!text) return '';
+                const items = text.split(/\n- /).filter(Boolean);
+                return '<ul>' + items.map(item => `<li>${formatContent(item.trim())}</li>`).join('') + '</ul>';
+            };
+
+            container.innerHTML = `
+                <div class="article-header">
+                    <a href="${discipline}.html" class="discipline-tag">${discipline}</a>
+                    <h1>${escapeHtml(article.headline)}</h1>
+                    <p class="article-hook">${escapeHtml(article.hook)}</p>
+                    <div class="meta-bar">
+                        <div class="meta-item">
+                            <span class="difficulty-badge ${difficulty}">${difficulty}</span>
+                        </div>
+                        <div class="meta-item">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            ${date}
+                        </div>
+                        <div class="meta-item">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2 2 0 00-2-2h-2"/>
+                            </svg>
+                            ${escapeHtml(article.original?.source || 'Research')}
+                        </div>
+                    </div>
+                </div>
+
+                ${article.audio_teaser ? `
+                <div class="audio-player">
+                    <button class="play-btn" id="play-btn" onclick="playAudioTeaser(\`${escapeHtml(article.audio_teaser).replace(/`/g, '\\`')}\`)">
+                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="audio-info">
+                        <div class="audio-label">Listen to Summary</div>
+                        <div class="audio-teaser">${escapeHtml(article.audio_teaser)}</div>
+                    </div>
+                </div>
+                ` : ''}
+
+                <div class="section">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                        The Research
+                    </div>
+                    <div class="section-content">
+                        <p>${formatContent(article.research)}</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                        Why It Matters
+                    </div>
+                    <div class="section-content">
+                        <p>${formatContent(article.why_it_matters)}</p>
+                    </div>
+                </div>
+
+                ${article.curriculum_connection ? `
+                <div class="curriculum-section">
+                    <div class="section-title">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Curriculum Connection
+                    </div>
+                    <div class="section-content">
+                        ${formatCurriculum(article.curriculum_connection)}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${article.mermaid_diagram ? `
+                <div class="diagram-section">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                        </svg>
+                        Visual Summary
+                    </div>
+                    <div class="mermaid" id="mermaid-diagram">
+                        ${article.mermaid_diagram}
+                    </div>
+                </div>
+                ` : ''}
+
+                ${article.key_terms ? `
+                <div class="section key-terms">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+                        </svg>
+                        Key Terms
+                    </div>
+                    ${formatKeyTerms(article.key_terms)}
+                </div>
+                ` : ''}
+
+                ${article.think_about ? `
+                <div class="think-about">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        Think About
+                    </div>
+                    <p>${escapeHtml(article.think_about)}</p>
+                </div>
+                ` : ''}
+
+                <div class="original-source">
+                    <h4>Original Research</h4>
+                    <a href="${escapeHtml(article.original?.url || '#')}" target="_blank" rel="noopener">
+                        ${escapeHtml(article.original?.headline || 'View original paper')}
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                    </a>
+                    <p class="source-name">${escapeHtml(article.original?.source || '')}</p>
+                </div>
+            `;
+
+            // Render Mermaid diagram if present
+            if (article.mermaid_diagram) {
+                setTimeout(() => {
+                    mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
+                }, 100);
+            }
+        }
+
+        // Escape HTML to prevent XSS
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load voices for speech synthesis
+        if (speechSynth.onvoiceschanged !== undefined) {
+            speechSynth.onvoiceschanged = () => {};
+        }
+
+        // Initialize
+        loadArticle();
+    </script>
+</body>
+</html>
