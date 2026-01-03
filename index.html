@@ -25,22 +25,25 @@
 
     <style>
         :root {
-            /* V1 Dark Background */
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-light: #64748b;
             --border-dark: #334155;
-            /* Accents */
             --accent-green: #10b981;
             --accent-teal: #14b8a6;
             --accent-blue: #3b82f6;
             --accent-purple: #8b5cf6;
             --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
@@ -48,6 +51,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -97,7 +101,7 @@
             color: var(--text-primary);
         }
 
-        /* Hero */
+        /* Hero with Animation */
         .hero {
             text-align: center;
             padding: 3rem 2rem 2rem;
@@ -112,6 +116,9 @@
             line-height: 1.15;
             margin-bottom: 1.5rem;
             color: var(--text-primary);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.8s ease forwards;
         }
 
         .hero h1 em {
@@ -127,9 +134,19 @@
             color: var(--text-secondary);
             max-width: 550px;
             margin: 0 auto 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease 0.2s forwards;
         }
 
-        /* Motto/Quote */
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Motto */
         .motto {
             background: var(--bg-card);
             border: 1px solid var(--border-dark);
@@ -138,6 +155,9 @@
             max-width: 600px;
             margin: 0 auto 3rem;
             text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUp 0.8s ease 0.4s forwards;
         }
 
         .motto .sanskrit {
@@ -189,27 +209,50 @@
             gap: 1.5rem;
         }
 
+        /* Card with fade-in animation */
         .card {
             background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border-dark);
-            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .card.visible {
+            animation: cardFadeIn 0.6s ease forwards;
+        }
+
+        @keyframes cardFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
             border-color: var(--accent-blue);
+        }
+
+        .card-image-wrapper {
+            overflow: hidden;
         }
 
         .card-image {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.08);
         }
 
         .card-content {
@@ -250,7 +293,80 @@
             font-style: italic;
         }
 
-        /* Newsletter */
+        /* Media Section - Podcasts & Videos */
+        .media-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .media-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-dark);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .media-card.visible {
+            animation: cardFadeIn 0.6s ease forwards;
+        }
+
+        .media-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-card h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .media-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .media-list {
+            list-style: none;
+        }
+
+        .media-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-dark);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .media-list li:last-child {
+            border-bottom: none;
+        }
+
+        .media-list .coming-badge {
+            font-size: 0.65rem;
+            background: var(--accent-purple);
+            color: white;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: auto;
+        }
+
+        /* Newsletter with Swoosh */
         .newsletter {
             background: var(--bg-card);
             border-top: 1px solid var(--border-dark);
@@ -276,6 +392,7 @@
             gap: 0.75rem;
             max-width: 420px;
             margin: 0 auto;
+            position: relative;
         }
 
         .newsletter-form input {
@@ -298,6 +415,11 @@
             color: var(--text-light);
         }
 
+        /* Button with Swoosh */
+        .btn-wrapper {
+            position: relative;
+        }
+
         .newsletter-form button {
             padding: 0.9rem 1.75rem;
             border-radius: 8px;
@@ -307,11 +429,57 @@
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.2s;
+            position: relative;
+            z-index: 2;
         }
 
         .newsletter-form button:hover {
             background: var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        /* Swoosh SVG Animation */
+        .swoosh-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 80px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .swoosh-path {
+            fill: none;
+            stroke: var(--accent-orange);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-dasharray: 300;
+            stroke-dashoffset: 300;
+            animation: swooshDraw 2s ease-in-out infinite;
+        }
+
+        @keyframes swooshDraw {
+            0% {
+                stroke-dashoffset: 300;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                stroke-dashoffset: 0;
+                opacity: 1;
+            }
+            60% {
+                opacity: 0;
+            }
+            100% {
+                stroke-dashoffset: 0;
+                opacity: 0;
+            }
         }
 
         /* Footer */
@@ -347,7 +515,9 @@
             nav { display: none; }
             .hero h1 { font-size: 2.5rem; }
             .cards-grid { grid-template-columns: 1fr; }
+            .media-grid { grid-template-columns: 1fr; }
             .newsletter-form { flex-direction: column; }
+            .swoosh-svg { display: none; }
         }
     </style>
 </head>
@@ -359,7 +529,8 @@
         </a>
         <nav>
             <a href="#disciplines">Disciplines</a>
-            <a href="#about">About</a>
+            <a href="#media">Podcasts</a>
+            <a href="#subscribe">Subscribe</a>
             <a href="https://spsdaily.thebeakers.com">SPS Daily</a>
         </nav>
     </header>
@@ -381,7 +552,9 @@
             <p class="section-label">Explore Disciplines</p>
             <div class="cards-grid">
                 <a href="biology.html" class="card">
-                    <img src="biology.png" alt="Biology" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="biology.png" alt="Biology" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category science">Natural Science</p>
                         <h3 class="card-title">Biology</h3>
@@ -391,7 +564,9 @@
                 </a>
 
                 <a href="chemistry.html" class="card">
-                    <img src="chemistry.png" alt="Chemistry" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="chemistry.png" alt="Chemistry" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category science">Natural Science</p>
                         <h3 class="card-title">Chemistry</h3>
@@ -401,7 +576,9 @@
                 </a>
 
                 <a href="physics.html" class="card">
-                    <img src="physics.png" alt="Physics" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="physics.png" alt="Physics" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category science">Natural Science</p>
                         <h3 class="card-title">Physics</h3>
@@ -411,7 +588,9 @@
                 </a>
 
                 <a href="agriculture.html" class="card">
-                    <img src="agriculture.png" alt="Agriculture" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="agriculture.png" alt="Agriculture" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category science">Natural Science</p>
                         <h3 class="card-title">Agriculture</h3>
@@ -421,7 +600,9 @@
                 </a>
 
                 <a href="ai.html" class="card">
-                    <img src="ai.png" alt="AI" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="ai.png" alt="AI" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category tech">Technology</p>
                         <h3 class="card-title">Artificial Intelligence</h3>
@@ -431,7 +612,9 @@
                 </a>
 
                 <a href="engineering.html" class="card">
-                    <img src="engineering.png" alt="Engineering" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="engineering.png" alt="Engineering" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category engineering">Engineering</p>
                         <h3 class="card-title">Engineering</h3>
@@ -441,7 +624,9 @@
                 </a>
 
                 <a href="mathematics.html" class="card">
-                    <img src="mathematics.png" alt="Mathematics" class="card-image">
+                    <div class="card-image-wrapper">
+                        <img src="mathematics.png" alt="Mathematics" class="card-image">
+                    </div>
                     <div class="card-content">
                         <p class="card-category math">Mathematics</p>
                         <h3 class="card-title">Mathematics</h3>
@@ -452,13 +637,49 @@
             </div>
         </section>
 
-        <section class="newsletter" id="about">
+        <!-- Media Section: Podcasts & Videos -->
+        <section class="media-section" id="media">
+            <p class="section-label">Beyond Articles</p>
+            <div class="media-grid">
+                <div class="media-card">
+                    <div class="media-icon">🎧</div>
+                    <h3>Weekly Podcasts</h3>
+                    <p>Research summaries you can listen to between classes. Bite-sized science for busy students.</p>
+                    <ul class="media-list">
+                        <li>🧪 This Week in Chemistry <span class="coming-badge">Soon</span></li>
+                        <li>⚙️ This Week in Engineering <span class="coming-badge">Soon</span></li>
+                        <li>🧬 This Week in Biology <span class="coming-badge">Soon</span></li>
+                        <li>🔢 This Week in Mathematics <span class="coming-badge">Soon</span></li>
+                    </ul>
+                </div>
+
+                <div class="media-card">
+                    <div class="media-icon">📺</div>
+                    <h3>Curated Videos</h3>
+                    <p>Hand-picked YouTube content that actually teaches. No clickbait, just quality explanations.</p>
+                    <ul class="media-list">
+                        <li>🎓 Lecture highlights <span class="coming-badge">Soon</span></li>
+                        <li>🔬 Lab demonstrations <span class="coming-badge">Soon</span></li>
+                        <li>💡 Concept explainers <span class="coming-badge">Soon</span></li>
+                        <li>🌍 Research documentaries <span class="coming-badge">Soon</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter" id="subscribe">
             <h2>Get notified when we launch</h2>
             <p>Research articles that connect to your coursework. No spam, ever.</p>
             <form class="newsletter-form" action="https://newsletter.thebeakers.com/subscription/form" method="post">
                 <input type="hidden" name="l" value="a5887db5-f279-42b5-aea6-0b3f660854dd">
                 <input type="email" name="email" placeholder="your@university.edu" required>
-                <button type="submit">Notify Me</button>
+                <div class="btn-wrapper">
+                    <svg class="swoosh-svg" viewBox="0 0 180 80">
+                        <path class="swoosh-path" d="M10,40 Q30,10 50,40 T90,40 T130,40 T170,40" />
+                        <path class="swoosh-path" d="M10,50 Q30,80 50,50 T90,50 T130,50 T170,50" style="animation-delay: 0.3s;" />
+                    </svg>
+                    <button type="submit">Notify Me</button>
+                </div>
             </form>
         </section>
     </main>
@@ -468,5 +689,31 @@
         <p>A project by <a href="https://spsdaily.thebeakers.com">The Beakers</a></p>
         <p>Questions? <a href="mailto:thebeakerscom@gmail.com">thebeakerscom@gmail.com</a></p>
     </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    // Add staggered delay based on index
+                    const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100;
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards
+        document.querySelectorAll('.card, .media-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
