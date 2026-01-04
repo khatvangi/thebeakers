@@ -69,25 +69,35 @@ thebeakers.com/
 
 ## Weekly Workflow
 
-### 1. Collect Articles (Sunday/Monday)
+### 1. Collect Articles (Monday)
 ```bash
 python scripts/feed_collector.py           # Collect from all feeds
 python scripts/feed_collector.py deepdive  # Show Deep Dive candidates
 ```
 
-### 2. Pick Deep Dives (Monday)
-- Select 1 article per discipline from review/education sources
-- Find PDF (Open Access or institutional access)
-- Upload to NotebookLM → generate all assets
+### 2. Pick & Process Deep Dives (Monday-Tuesday)
 
-### 3. Build Deep Dive Pages (Monday-Tuesday)
-- Download NotebookLM assets (podcast, video, infographic, study guide)
-- Upload podcast/video to YouTube
-- Create deepdive/[slug].html with our value-adds:
-  - Curriculum Connection section
-  - Interactive Quiz (5 questions)
+**For each of 7 disciplines:**
 
-### 4. Rewrite Regular Articles (Tuesday-Wednesday)
+1. **Select article** from review/education sources
+2. **Find PDF** (Open Access, institutional, or Sci-Hub)
+3. **NotebookLM** (notebooklm.google.com):
+   - Create notebook → Upload PDF
+   - Generate: Podcast, Video, Study Guide, Briefing Doc
+   - Download all assets
+4. **Upload media:**
+   - Podcast (audio) → SoundCloud
+   - Video → YouTube
+5. **Give Claude:**
+   - Article title + discipline
+   - SoundCloud URL
+   - YouTube URL
+   - Infographic/mind map images
+   - Key points for quiz questions
+
+Claude builds `deepdive/[slug].html` with embeds + Curriculum Connection + Quiz.
+
+### 3. Rewrite Regular Articles (Tuesday-Wednesday)
 ```bash
 python scripts/ai_rewriter.py rewrite chemistry 3
 python scripts/ai_rewriter.py rewrite physics 3
@@ -95,7 +105,7 @@ python scripts/ai_rewriter.py rewrite physics 3
 python scripts/generate_indexes.py
 ```
 
-### 5. Publish (Wednesday)
+### 4. Publish (Wednesday)
 ```bash
 git add . && git commit -m "Week X articles" && git push
 ```
@@ -165,7 +175,9 @@ Sections:
 - **Hosting:** Cloudflare Pages (auto-deploy from GitHub)
 - **Repo:** https://github.com/khatvangi/thebeakers
 - **Domain:** thebeakers.com (Cloudflare DNS)
-- **Media:** YouTube (for podcast/video - Cloudflare has size limits)
+- **Media Hosting:** (Cloudflare Pages has 25MB file limit)
+  - Podcasts → SoundCloud (free, audio-only)
+  - Videos → YouTube (free)
 
 ## Related Sites
 
@@ -178,8 +190,10 @@ Sections:
 - [x] Feed collector v2 with curated sources
 - [x] 21 articles published (3 per discipline)
 - [x] Deep Dive template created (solar-cell-bromine)
-- [ ] Upload solar cell media to YouTube
-- [ ] Public launch announcement
+- [x] Solar cell Deep Dive complete
+  - Video: https://www.youtube.com/watch?v=fZc-jc7PZEc
+  - Podcast: https://soundcloud.com/thebeakerscom/bromine_core_reaches_20
+- [ ] Public launch announcement (Monday, Jan 6)
 
 ## Contact
 
