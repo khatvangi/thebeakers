@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 7,
-  "updated": "2026-01-03T19:37:02.304287",
+  "count": 8,
+  "updated": "2026-01-03T19:48:38.350417",
   "articles": [
     {
       "filename": "index.json",
@@ -58,6 +58,14 @@
       "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research ties together concepts from organic chemistry (peptide synthesis), biochemistry (protein structure), and computational methods\u2014all foundational for sophomores in STEM fields.",
       "source": "Journal of the American Chemical Society",
       "rewritten_at": "2026-01-03T18:25:20.170511"
+    },
+    {
+      "filename": "20260103-bromine-beats-fluorine-how-computer-modeling-boost.json",
+      "headline": "Bromine Beats Fluorine: How Computer Modeling Boosts Solar Cell Efficiency",
+      "hook": "If you're building the future of renewable energy, this research shows how computer modeling can outsmart chemistry to power the next generation of solar cells.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, physical chemistry, and materials science) to grasp the computational methods and molecular design concepts.",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T19:47:16.108736"
     }
   ]
 }
