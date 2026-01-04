@@ -1,0 +1,575 @@
+{
+  "week": "",
+  "disciplines": {
+    "chemistry": {
+      "editorsPick": {
+        "headline": "[ASAP] Biodiesel in the Lab: Integrating Green Chemistry and Climate Change Education to Foster Hope and Self-Efficacy",
+        "teaser": "Journal of Chemical EducationDOI: 10.1021/acs.jchemed.5c01115",
+        "url": "http://dx.doi.org/10.1021/acs.jchemed.5c01115",
+        "source": "J. Chem. Education",
+        "source_type": "education",
+        "discipline": "chemistry"
+      },
+      "rewrite": [
+        {
+          "headline": "[ASAP] Hydrogen-Bonded Organic Framework Enables Phase-Pure Layered Tin Perovskite Nanowires for Room-Temperature Lasing",
+          "teaser": "Journal of the American Chemical SocietyDOI: 10.1021/jacs.5c14431",
+          "url": "http://dx.doi.org/10.1021/jacs.5c14431",
+          "source": "ACS Publications",
+          "source_type": "research",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Highly Acidic Second Coordination Spheres Promote In Situ Formation of Iron Phlorins Exhibiting Fast and Selective CO2 Reduction",
+          "teaser": "Journal of the American Chemical SocietyDOI: 10.1021/jacs.5c16378",
+          "url": "http://dx.doi.org/10.1021/jacs.5c16378",
+          "source": "ACS Publications",
+          "source_type": "research",
+          "discipline": "chemistry"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "[ASAP] Diverse N2 Functionalization Enabled by an Unsymmetric Dititanium Complex",
+          "teaser": "Journal of the American Chemical SocietyDOI: 10.1021/jacs.5c15167",
+          "url": "http://dx.doi.org/10.1021/jacs.5c15167",
+          "source": "ACS Publications",
+          "source_type": "research",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Fused-Ring Electron Acceptors as a Versatile Additive Platform for Efficient Perovskite Photovoltaics",
+          "teaser": "Journal of the American Chemical SocietyDOI: 10.1021/jacs.5c16976",
+          "url": "http://dx.doi.org/10.1021/jacs.5c16976",
+          "source": "ACS Publications",
+          "source_type": "research",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Exploring the Potential of Using ChatGPT in Chemistry Education",
+          "teaser": "Journal of Chemical EducationDOI: 10.1021/acs.jchemed.5c00854",
+          "url": "http://dx.doi.org/10.1021/acs.jchemed.5c00854",
+          "source": "J. Chem. Education",
+          "source_type": "education",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Salt Wars: A Card Game To Learn Inorganic Chemistry Nomenclature",
+          "teaser": "Journal of Chemical EducationDOI: 10.1021/acs.jchemed.5c01504",
+          "url": "http://dx.doi.org/10.1021/acs.jchemed.5c01504",
+          "source": "J. Chem. Education",
+          "source_type": "education",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Simplified Thin-Layer Chromatography of Real-Life Analgesics: An Undergraduate Laboratory Activity",
+          "teaser": "Journal of Chemical EducationDOI: 10.1021/acs.jchemed.5c00427",
+          "url": "http://dx.doi.org/10.1021/acs.jchemed.5c00427",
+          "source": "J. Chem. Education",
+          "source_type": "education",
+          "discipline": "chemistry"
+        },
+        {
+          "headline": "[ASAP] Analytical Chemistry in Daily Life \u2013 ChemEye: A Smartphone Based Mobile App for Colorimetric Analysis",
+          "teaser": "Journal of Chemical EducationDOI: 10.1021/acs.jchemed.5c00830",
+          "url": "http://dx.doi.org/10.1021/acs.jchemed.5c00830",
+          "source": "J. Chem. Education",
+          "source_type": "education",
+          "discipline": "chemistry"
+        }
+      ]
+    },
+    "physics": {
+      "editorsPick": {
+        "headline": "Quantum physics meets computational thinking: accessing quantum mechanics with Python-based computational exercises",
+        "teaser": "Learning quantum mechanics (QMs) poses unique challenges due to its abstract, unintuitive nature and departure from classical physics paradigms. In this context, computational methods hold potential not only for improving conceptual understanding but also for addressing the motivational difficulties",
+        "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae1edd",
+        "source": "Physics Education",
+        "source_type": "education",
+        "discipline": "physics"
+      },
+      "rewrite": [
+        {
+          "headline": "Turbulent Multiscale Interactions between Tearing Modes, Trapped-Electron Modes, and Zonal Flows",
+          "teaser": "Author(s): T. Jitsuk, M. J. Pueschel, P. W. Terry, and A. Di SienaInteractions between MHD-scale tearing modes (TMs) and ion-gyroradius-scale trapped-electron modes (TEMs) in a fusion plasma are simulated with global gyrokinetics, using a consistent set of fixed equilibrium profiles. Unstable core T",
+          "url": "http://link.aps.org/doi/10.1103/dlct-5vwy",
+          "source": "Physical Review Letters",
+          "source_type": "research",
+          "discipline": "physics"
+        },
+        {
+          "headline": "Half-Quantized Chiral Edge Current in a $C=1/2$ Parity Anomaly State",
+          "teaser": "Author(s): Deyi Zhuo, Bomin Zhang, Humian Zhou, Han Tay, Xiaoda Liu, Zhiyuan Xi, Chui-Zhen Chen, and Cui-Zu ChangA single massive Dirac surface band is predicted to exhibit a half-quantized Hall conductance, a hallmark of the $C=1/2$ parity anomaly state in quantum field theory. Experimental signatu",
+          "url": "http://link.aps.org/doi/10.1103/vxcb-rwbl",
+          "source": "Physical Review Letters",
+          "source_type": "research",
+          "discipline": "physics"
+        },
+        {
+          "headline": "Quantum physics meets computational thinking: accessing quantum mechanics with Python-based computational exercises",
+          "teaser": "Learning quantum mechanics (QMs) poses unique challenges due to its abstract, unintuitive nature and departure from classical physics paradigms. In this context, computational methods hold potential not only for improving conceptual understanding but also for addressing the motivational difficulties",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae1edd",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "Stripe-Nematic Phase of Composite Fermions",
+          "teaser": "Author(s): Chengyu Wang, S. K. Singh, C. T. Tai, A. Gupta, L. N. Pfeiffer, K. W. Baldwin, and M. ShayeganElectronic stripe-nematic phases are fascinating, strongly correlated states characterized by spontaneous rotational symmetry breaking. In the quantum Hall regime, such phases typically emerge at",
+          "url": "http://link.aps.org/doi/10.1103/79lt-2p4n",
+          "source": "Physical Review Letters",
+          "source_type": "research",
+          "discipline": "physics"
+        },
+        {
+          "headline": "From prompt to physics: evaluating Doppler effect simulation generated by ChatGPT",
+          "teaser": "This study aims to develop and evaluate a Doppler effect simulation generated by ChatGPT. The development process was carried out through iterative prompt engineering, focusing on user interface, user experience, sound wave visualisation, and the accuracy of physics concept representation. The simul",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae272c",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        },
+        {
+          "headline": "The left and right sides of the equation \u0394S = Q/T",
+          "teaser": "Heat and entropy are two central quantities in thermodynamics. At first glance, seems to be the simpler and more intuitive concept, while is reputed to be difficult. We argue that this impression is misleading: heat is, in fact, an insidious quantity. Entropy, on the other hand, has been given its b",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae236f",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        },
+        {
+          "headline": "Waves of understanding: introducing a model for teaching physics through surfing and experiential outdoor education in health and sports science",
+          "teaser": "This paper describes a case study of an innovative pedagogical intervention that integrates outdoor experiential learning with foundational physics education within an undergraduate Health and Sports Science (HSS) programme at South East Technological University, Ireland. Supported by the Strategic ",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae24d7",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        },
+        {
+          "headline": "Simulating non-ideal multimeters: revisiting the ammeter\u2013voltmeter method",
+          "teaser": "The ammeter\u2013voltmeter method is a classic approach for determining electrical resistance, widely used in educational and laboratory contexts. However, it may be presented under idealized assumptions that disregard the internal resistance of measuring instruments. This simplification, frequently foun",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae29d7",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        },
+        {
+          "headline": "Tracing natural convection current using tracker",
+          "teaser": "Using a tracker, the experiment traced the position of a tiny piece of eggshell that was placed on water with a natural convection current setup. The convection current was initiated by subjecting the leftmost part of the fluid container to heat. Using an infrared temperature detector, temperature m",
+          "url": "https://iopscience.iop.org/article/10.1088/1361-6552/ae272d",
+          "source": "Physics Education",
+          "source_type": "education",
+          "discipline": "physics"
+        }
+      ]
+    },
+    "biology": {
+      "editorsPick": {
+        "headline": "Some of your cells are not genetically yours \u2014 what can they tell us about life and death?",
+        "teaser": "Nature, Published online: 31 December 2025; doi:10.1038/d41586-025-04102-4A tiny population of cells that are passed across the placenta between mother and baby challenge basic tenets of human immunology.",
+        "url": "https://www.nature.com/articles/d41586-025-04102-4",
+        "source": "Nature",
+        "source_type": "research",
+        "discipline": "biology"
+      },
+      "rewrite": [
+        {
+          "headline": "Some of your cells are not genetically yours \u2014 what can they tell us about life and death?",
+          "teaser": "Nature, Published online: 31 December 2025; doi:10.1038/d41586-025-04102-4A tiny population of cells that are passed across the placenta between mother and baby challenge basic tenets of human immunology.",
+          "url": "https://www.nature.com/articles/d41586-025-04102-4",
+          "source": "Nature",
+          "source_type": "research",
+          "discipline": "biology"
+        },
+        {
+          "headline": "College students in the southern US can change their views about evolution",
+          "teaser": "Volume 59, Issue 5, November 2025, Page 833-849.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/00219266.2024.2419645?af=R",
+          "source": "J. Biological Education",
+          "source_type": "education",
+          "discipline": "biology"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "Science in 2026: what to expect this year",
+          "teaser": "Nature, Published online: 01 January 2026; doi:10.1038/d41586-025-04114-0More refined AI models, advancements in human gene editing and the continuing impact of the Trump Team on science \u2014 we run through what to look out for over the next 12 months.",
+          "url": "https://www.nature.com/articles/d41586-025-04114-0",
+          "source": "Nature",
+          "source_type": "research",
+          "discipline": "biology"
+        },
+        {
+          "headline": "A chiral fermionic valve driven by quantum geometry",
+          "teaser": "Nature, Published online: 31 December 2025; doi:10.1038/s41586-025-09864-5Fermionic currents of opposing chirality can be spatially filtered without the need for a magnetic field using the quantum geometry of topological bands in single-crystal PdGa.",
+          "url": "https://www.nature.com/articles/s41586-025-09864-5",
+          "source": "Nature",
+          "source_type": "research",
+          "discipline": "biology"
+        },
+        {
+          "headline": "Random heteropolymers as enzyme mimics",
+          "teaser": "Nature, Published online: 31 December 2025; doi:10.1038/s41586-025-09860-9Modulation of random heteropolymers results in globular polymer clusters with catalytic activity mimicking proteins.",
+          "url": "https://www.nature.com/articles/s41586-025-09860-9",
+          "source": "Nature",
+          "source_type": "research",
+          "discipline": "biology"
+        },
+        {
+          "headline": "Highly efficient LED device built by stacking layers of light-emitting perovskite",
+          "teaser": "Nature, Published online: 31 December 2025; doi:10.1038/d41586-025-04021-4Stacking light-generating layers in \u2018tandem\u2019 light-emitting diodes (LEDs) can enhance performance, but achieving efficient and stable tandem LEDs made with perovskite materials has remained a challenge. A tandem perovskite-bas",
+          "url": "https://www.nature.com/articles/d41586-025-04021-4",
+          "source": "Nature",
+          "source_type": "research",
+          "discipline": "biology"
+        },
+        {
+          "headline": "Active transport conceptual assessment (ATCA): a new tool for supporting the teaching and learning of physiology",
+          "teaser": "Volume 59, Issue 5, November 2025, Page 818-832.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/00219266.2024.2399514?af=R",
+          "source": "J. Biological Education",
+          "source_type": "education",
+          "discipline": "biology"
+        },
+        {
+          "headline": "What animals live there? Exploring the factors influencing primary school children\u2019s awareness of native and exotic fauna",
+          "teaser": "Volume 59, Issue 5, November 2025, Page 762-778.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/00219266.2024.2386270?af=R",
+          "source": "J. Biological Education",
+          "source_type": "education",
+          "discipline": "biology"
+        },
+        {
+          "headline": "How does a queen ant behave? An inquiry-based pre-service teacher learning experience",
+          "teaser": "Volume 59, Issue 5, November 2025, Page 878-889.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/00219266.2024.2419636?af=R",
+          "source": "J. Biological Education",
+          "source_type": "education",
+          "discipline": "biology"
+        }
+      ]
+    },
+    "mathematics": {
+      "editorsPick": {
+        "headline": "Leibniz Vindicated: Calculating Reliably with Differentials",
+        "teaser": "Volume 56, Issue 5, November 2025, Page 378-388.",
+        "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2025.2497219?af=R",
+        "source": "College Math Journal",
+        "source_type": "education",
+        "discipline": "mathematics"
+      },
+      "rewrite": [
+        {
+          "headline": "The Gopakumar\u2013Vafa finiteness conjecture",
+          "teaser": "The Gopakumar\u2013Vafa conjecture predicts that the BPS invariants of a symplectic $6$-manifold, defined in terms of the Gromov\u2013Witten invariants, are integers and all but finitely many vanish in every homology class. The integrality part of this conjecture was proved earlier \u2026 Continue reading \u2192",
+          "url": "https://annals.math.princeton.edu/articles/22419",
+          "source": "Annals of Mathematics",
+          "source_type": "research",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "Long time derivation of the Boltzmann equation from hard sphere dyamics",
+          "teaser": "We provide a rigorous derivation of Boltzmann\u2019s kinetic equation from the hard sphere system for rarefied gas, which is valid for arbitrarily long times, as long as the (regular) solution to the Boltzmann equation exists. This extends Lanford\u2019s landmark theorem \u2026 Continue reading \u2192",
+          "url": "https://annals.math.princeton.edu/articles/22284",
+          "source": "Annals of Mathematics",
+          "source_type": "research",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "Leibniz Vindicated: Calculating Reliably with Differentials",
+          "teaser": "Volume 56, Issue 5, November 2025, Page 378-388.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2025.2497219?af=R",
+          "source": "College Math Journal",
+          "source_type": "education",
+          "discipline": "mathematics"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "Arithmetic bigness and a uniform Bogomolov-type result",
+          "teaser": "In this paper, we construct the admissible canonical bundle of a quasi-projective family of curves, prove that it is a big adelic line bundle when the family has maximal variation, and apply it to prove a uniform Bogomolov-type theorem for \u2026 Continue reading \u2192",
+          "url": "https://annals.math.princeton.edu/2026/203-1/p02",
+          "source": "Annals of Mathematics",
+          "source_type": "research",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "Poisson\u2013Voronoi tessellations and fixed price in higher rank",
+          "teaser": "Let $G$ be a higher rank semisimple real Lie group or the product of at least two automorphism groups of regular trees. We prove all probability measure preserving actions of lattices in such groups have cost one, answering Gaboriau\u2019s fixed \u2026 Continue reading \u2192",
+          "url": "https://annals.math.princeton.edu/articles/22425",
+          "source": "Annals of Mathematics",
+          "source_type": "research",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "On $\\mathbb{P}^1$-stabilization in unstable motivic homotopy theory",
+          "teaser": "We analyze stabilization with respect to $\\mathbb{P}^1$ in the Morel\u2013Voevodsky unstable motivic homotopy theory. We introduce a refined notion of cellularity (a.k.a., biconnectivity) in various motivic homotopy categories taking into account both the simplicial and Tate circles. Under suitable cellu",
+          "url": "https://annals.math.princeton.edu/articles/22414",
+          "source": "Annals of Mathematics",
+          "source_type": "research",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "The Complexities of Falling Freely",
+          "teaser": "Volume 56, Issue 5, November 2025, Page 344-351.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2024.2419794?af=R",
+          "source": "College Math Journal",
+          "source_type": "education",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "How a Calculus Assignment Morphed into a Research Problem",
+          "teaser": "Volume 56, Issue 5, November 2025, Page 370-377.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2025.2451573?af=R",
+          "source": "College Math Journal",
+          "source_type": "education",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "Asymmetric Propeller Generalized to Similar Polygons",
+          "teaser": "Volume 56, Issue 5, November 2025, Page 389-394.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2025.2485624?af=R",
+          "source": "College Math Journal",
+          "source_type": "education",
+          "discipline": "mathematics"
+        },
+        {
+          "headline": "Hands-On Combinatorics: Building Colorful Trains to Manifest Pascal\u2019s Triangle, Fibonacci Numbers, and Much More",
+          "teaser": "Volume 56, Issue 5, November 2025, Page 401-405.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/07468342.2025.2560795?af=R",
+          "source": "College Math Journal",
+          "source_type": "education",
+          "discipline": "mathematics"
+        }
+      ]
+    },
+    "engineering": {
+      "editorsPick": {
+        "headline": "Teen Develops Flood-Detecting CubeSat",
+        "teaser": "High school sophomore Abigail Merchant has made it her mission to use technology to reduce flood-related deaths. The 15-year-old lives in Orlando, Fla., a state where flooding is frequent in part because of its low elevation.The changing climate is increasing the risk. Warmer air holds more water, l",
+        "url": "https://spectrum.ieee.org/teen-develops-flood-detecting-cubesat",
+        "source": "IEEE Spectrum",
+        "source_type": "research",
+        "discipline": "engineering"
+      },
+      "rewrite": [
+        {
+          "headline": "Hands-On Experience Can Increase Your Chances of Landing a Job",
+          "teaser": "As a college student, are you concerned that your knowledge alone won\u2019t be enough to impress potential employers? Do you feel you lack the necessary hands-on technical skills to secure a job? Maybe you\u2019ve thought of an engineering solution for a problem in your school or community but are unsure how",
+          "url": "https://spectrum.ieee.org/hands-on-projects-career-advice",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "Jacob\u2019s Ladder",
+          "teaser": "I know now how the sparks can climb,in broadening arcs of ions\u2014the heat they grow inside themselveslike some permission or belief.But at ten, it seemed mystical;their frown, glowing, then invisible.Gone. Save the odor of ozone.I was young and scared and alone.But the buzz and brightness begananew in",
+          "url": "https://spectrum.ieee.org/jacobs-ladder",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "Tech to Track in 2026",
+          "teaser": "Every September as we plan our January tech forecast issue, IEEE Spectrum\u2019s editors survey their beats and seek out promising projects that could solve seemingly intractable problems or transform entire industries.Often these projects fly under the radar of the popular technology press, which these ",
+          "url": "https://spectrum.ieee.org/tech-in-2026",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "Teen Develops Flood-Detecting CubeSat",
+          "teaser": "High school sophomore Abigail Merchant has made it her mission to use technology to reduce flood-related deaths. The 15-year-old lives in Orlando, Fla., a state where flooding is frequent in part because of its low elevation.The changing climate is increasing the risk. Warmer air holds more water, l",
+          "url": "https://spectrum.ieee.org/teen-develops-flood-detecting-cubesat",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "The Top 6 AI Stories of 2025",
+          "teaser": "Artificial intelligence in 2025 was less about flashy demos and more about hard questions. What actually works? What breaks in unexpected ways? And what are the environmental and economic costs of scaling these systems further?It was a year in which generative AI slipped from novelty into routine us",
+          "url": "https://spectrum.ieee.org/ai-2025",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "The Top 8 Semiconductor Stories of 2025",
+          "teaser": "This year\u2019s top semiconductor stories were mostly about the long and twisting trips a technology takes from idea (or even raw material) to commercial deployment. I\u2019ve been at IEEE Spectrum long enough to have seen some of the early days of things that became commercial only this year.In chip-making ",
+          "url": "https://spectrum.ieee.org/top-semiconductor-stories-2025",
+          "source": "IEEE Spectrum",
+          "source_type": "research",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "Increasing Latinx migratory high school students' engineering interest and self\u2010efficacy beliefs: A culturally responsive gamified engineering design activity",
+          "teaser": "Journal of Engineering Education, Volume 115, Issue 1, January 2026.",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/jee.70048?af=R",
+          "source": "J. Engineering Education",
+          "source_type": "education",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "Recommendations for the integration of generative artificial intelligence in support of engineering education research workflows",
+          "teaser": "Journal of Engineering Education, Volume 115, Issue 1, January 2026.",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/jee.70043?af=R",
+          "source": "J. Engineering Education",
+          "source_type": "education",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "How do engineering students understand and conceptualize individual resilience?",
+          "teaser": "Journal of Engineering Education, Volume 115, Issue 1, January 2026.",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/jee.70047?af=R",
+          "source": "J. Engineering Education",
+          "source_type": "education",
+          "discipline": "engineering"
+        },
+        {
+          "headline": "Undergraduate engineering students' perspectives on the intersection of engineering identity, marginalized social identities, and identification with social justice",
+          "teaser": "Journal of Engineering Education, Volume 115, Issue 1, January 2026.",
+          "url": "https://onlinelibrary.wiley.com/doi/10.1002/jee.70045?af=R",
+          "source": "J. Engineering Education",
+          "source_type": "education",
+          "discipline": "engineering"
+        }
+      ]
+    },
+    "agriculture": {
+      "editorsPick": {
+        "headline": "Soil organic carbon availability determines the role of crop straws in regulating N2O emissions from maize agroecosystems",
+        "teaser": "Publication date: 1 April 2026Source: Agriculture, Ecosystems & Environment, Volume 399Author(s): Nan Zhang, Zengming Chen, Ye Li, Shiqi Xu, Shujie Miao, Yunfa Qiao, Weixin Ding",
+        "url": "https://www.sciencedirect.com/science/article/pii/S016788092500698X?dgcid=rss_sd_all",
+        "source": "Agriculture, Ecosystems & Env",
+        "source_type": "research",
+        "discipline": "agriculture"
+      },
+      "rewrite": [
+        {
+          "headline": "Exploring the effects of carbon farming on cropland biodiversity in Europe: A review",
+          "teaser": "Publication date: 1 April 2026Source: Agriculture, Ecosystems & Environment, Volume 399Author(s): Adam Svoboda, Michaela Kol\u00e1\u0159ov\u00e1, Elena Larysch, Josef Holec, Jana Pol\u00e1kov\u00e1, Josef Soukup",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0167880925006942?dgcid=rss_sd_all",
+          "source": "Agriculture, Ecosystems & Env",
+          "source_type": "research",
+          "discipline": "agriculture"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "The decomposition and nutrient release dynamics of mixed cover crops in a no\u2010till row crop rotation",
+          "teaser": "Agronomy Journal, Volume 118, Issue 1, January/February 2026.",
+          "url": "https://acsess.onlinelibrary.wiley.com/doi/10.1002/agj2.70262?af=R",
+          "source": "Agronomy Journal",
+          "source_type": "research",
+          "discipline": "agriculture"
+        },
+        {
+          "headline": "Root measurements for different cassava genotypes planted under three water management levels",
+          "teaser": "Agronomy Journal, Volume 118, Issue 1, January/February 2026.",
+          "url": "https://acsess.onlinelibrary.wiley.com/doi/10.1002/agj2.70261?af=R",
+          "source": "Agronomy Journal",
+          "source_type": "research",
+          "discipline": "agriculture"
+        },
+        {
+          "headline": "Plant litter as a cornerstone of grassland ecosystem services",
+          "teaser": "Publication date: 1 April 2026Source: Agriculture, Ecosystems & Environment, Volume 399Author(s): Justin R. Clarke, Torre J. Hovick, Benjamin Geaumont, Jason P. Harmon, Kevin Sedivec",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0167880925007030?dgcid=rss_sd_all",
+          "source": "Agriculture, Ecosystems & Env",
+          "source_type": "research",
+          "discipline": "agriculture"
+        },
+        {
+          "headline": "Foundations First: A Self-Determination Theory Analysis of Agricultural Education Teacher Well-Being and Retention",
+          "teaser": "In the persistent shortage of school-based agricultural education (SBAE) teachers, this study examined the hierarchy of factors influencing teacher retention in Alabama. Grounded in self-determination theory (SDT), the research examined the interplay between intrinsic psychological needs and externa",
+          "url": "https://jae-online.org/index.php/jae/article/view/2912",
+          "source": "J. Agricultural Education",
+          "source_type": "education",
+          "discipline": "agriculture"
+        }
+      ]
+    },
+    "ai": {
+      "editorsPick": {
+        "headline": "Teachers\u2019 understanding of assessing computational thinking",
+        "teaser": "Volume 35, Issue 4, December 2025, Page 794-819.",
+        "url": "https://www.tandfonline.com/doi/full/10.1080/08993408.2024.2365566?af=R",
+        "source": "Computer Science Education",
+        "source_type": "education",
+        "discipline": "ai"
+      },
+      "rewrite": [
+        {
+          "headline": "Assessing the potential of deep learning for protein\u2013ligand docking",
+          "teaser": "Nature Machine Intelligence, Published online: 31 December 2025; doi:10.1038/s42256-025-01160-1Morehead et al. introduce the benchmark PoseBench and evaluate the strengths and limitations of current AI-based protein\u2013ligand docking and structure prediction methods.",
+          "url": "https://www.nature.com/articles/s42256-025-01160-1",
+          "source": "Nature Machine Intelligence",
+          "source_type": "research",
+          "discipline": "ai"
+        }
+      ],
+      "quickLinks": [
+        {
+          "headline": "Learning intermediate physical states for inverse metasurface design",
+          "teaser": "Nature Machine Intelligence, Published online: 31 December 2025; doi:10.1038/s42256-025-01167-8Deep generative models that learn intermediate surface-current maps, rather than layouts directly, offer a more stable route to inverse design of tunable and stacked metasurfaces.",
+          "url": "https://www.nature.com/articles/s42256-025-01167-8",
+          "source": "Nature Machine Intelligence",
+          "source_type": "research",
+          "discipline": "ai"
+        },
+        {
+          "headline": "Harnessing the power of single-cell large language models with parameter-efficient fine-tuning using scPEFT",
+          "teaser": "Nature Machine Intelligence, Published online: 31 December 2025; doi:10.1038/s42256-025-01170-zHe et al. present a parameter-efficient fine-tuning method for single-cell language models that improves performance on unseen diseases, treatments and cell types.",
+          "url": "https://www.nature.com/articles/s42256-025-01170-z",
+          "source": "Nature Machine Intelligence",
+          "source_type": "research",
+          "discipline": "ai"
+        },
+        {
+          "headline": "Current-diffusion model for metasurface structure discoveries with spatial-frequency dynamics",
+          "teaser": "Nature Machine Intelligence, Published online: 31 December 2025; doi:10.1038/s42256-025-01162-zMetasurface design driven by AI faces challenges, such as extrapolation to unexplored performance regimes. MetaAI, a physics-aware current-diffusion framework, is introduced to advance metamaterial discove",
+          "url": "https://www.nature.com/articles/s42256-025-01162-z",
+          "source": "Nature Machine Intelligence",
+          "source_type": "research",
+          "discipline": "ai"
+        },
+        {
+          "headline": "Towards Understanding Gradient Flow Dynamics of Homogeneous Neural Networks Beyond the Origin",
+          "teaser": "Recent works exploring the training dynamics of homogeneous neural network weights under gradient flow with small initialization have established that in the early stages of training, the weights remain small and near the origin, but converge in direction. Building on this, the current paper studies",
+          "url": "http://jmlr.org/papers/v26/25-1089.html",
+          "source": "J. Machine Learning Research",
+          "source_type": "research",
+          "discipline": "ai"
+        },
+        {
+          "headline": "Understanding growth mindset practices in an introductory physical computing classroom: high school students\u2019 engagement with debugging by design activities",
+          "teaser": "Volume 35, Issue 4, December 2025, Page 695-725.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/08993408.2024.2317080?af=R",
+          "source": "Computer Science Education",
+          "source_type": "education",
+          "discipline": "ai"
+        },
+        {
+          "headline": "The use of makerspaces for the development of computational thinking skills and dispositions: pedagogical practices facilitators use",
+          "teaser": "Volume 35, Issue 4, December 2025, Page 754-793.",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/08993408.2024.2374679?af=R",
+          "source": "Computer Science Education",
+          "source_type": "education",
+          "discipline": "ai"
+        },
+        {
+          "headline": "Qualitative analysis of peer reviews of a large introductory programming course",
+          "teaser": ".",
+          "url": "https://www.tandfonline.com/doi/full/10.1080/08993408.2025.2450587?af=R",
+          "source": "Computer Science Education",
+          "source_type": "education",
+          "discipline": "ai"
+        }
+      ]
+    }
+  }
+}

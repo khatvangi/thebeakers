@@ -1,8 +1,16 @@
 {
   "discipline": "biology",
-  "count": 2,
-  "updated": "2026-01-03T20:47:47.394266",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.405792",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-chiral-currents-without-magnets-how-quantum-geomet.json",
       "headline": "Chiral Currents Without Magnets: How Quantum Geometry Shapes Tomorrow's Electronics",

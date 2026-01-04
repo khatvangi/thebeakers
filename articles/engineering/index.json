@@ -1,8 +1,16 @@
 {
   "discipline": "engineering",
-  "count": 2,
-  "updated": "2026-01-03T20:47:47.394812",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.406441",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-watch-a-robot-evolve-how-ai-mimics-natural-selecti.json",
       "headline": "Watch a Robot Evolve: How AI Mimics Natural Selection in Real Time",

@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 10,
-  "updated": "2026-01-03T20:47:47.393525",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.405013",
   "articles": [
     {
       "filename": "index.json",
@@ -18,62 +18,6 @@
       "difficulty": "Sophomore (requires foundational chemistry, biochemistry, and organic chemistry knowledge).",
       "source": "ACS Publications",
       "rewritten_at": "2026-01-03T20:36:17.046306"
-    },
-    {
-      "filename": "20260103-revolutionizing-car-t-therapy-how-peptide-bonds-ar.json",
-      "headline": "Revolutionizing CAR-T Therapy: How Peptide Bonds Are Targeting Cancer's Strongest Defenses",
-      "hook": "Imagine a future where your immune system can precisely target cancer cells without harming healthy tissue\u2014this research is making it possible.",
-      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research integrates organic synthesis, protein structure, and immunology\u2014topics you\u2019re encountering in sophomore-level courses.",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T18:36:24.759153"
-    },
-    {
-      "filename": "20260103-revolutionizing-car-t-therapy-how-disulfide-bonds.json",
-      "headline": "Revolutionizing CAR-T Therapy: How Disulfide Bonds Target Solid Tumors",
-      "hook": "Imagine a future where your immune system can precisely target cancer cells without harming healthy tissue\u2014this research is making it possible.",
-      "difficulty": "**SOPHOMORE**: Needs intro-level major courses (organic, biochem, etc.) to grasp peptide synthesis, bonding principles, and protein structure.",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T19:36:52.215559"
-    },
-    {
-      "filename": "20260103-revolutionizing-cancer-treatments-peptides-that-st.json",
-      "headline": "Revolutionizing Cancer Treatments: Peptides That Stick Around to Fight Solid Tumors",
-      "hook": "If you\u2019re studying biochemistry or immunology, this could be the next big breakthrough in cancer treatment\u2014using chemistry to make CAR-T cells smarter and more effective.",
-      "difficulty": "Sophomore",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T17:45:11.906185"
-    },
-    {
-      "filename": "20260103-revolutionizing-cancer-treatment-how-peptide-rings.json",
-      "headline": "Revolutionizing Cancer Treatment: How Peptide Rings Outsmart Solid Tumors",
-      "hook": "If you\u2019ve ever wondered how scientists make CAR-T cells smarter, this breakthrough could be the key to fighting stubborn solid tumors\u2014without harming healthy tissue.",
-      "difficulty": "SOPHOMORE",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T17:44:23.983560"
-    },
-    {
-      "filename": "20260103-revolutionizing-cancer-treatment-how-peptide-bonds.json",
-      "headline": "Revolutionizing Cancer Treatment: How Peptide Bonds Are Shaping the Future of CAR-T Therapy",
-      "hook": "Imagine a future where your biology class concepts could revolutionize cancer treatment\u2014this research is proof that your studies are already shaping tomorrow\u2019s breakthroughs.",
-      "difficulty": "**SOPHOMORE**: Needs intro-level major courses (organic, biochem, etc.)\u2014this research blends concepts from all three.",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T19:09:50.000220"
-    },
-    {
-      "filename": "20260103-revolutionizing-cancer-treatment-how-disulfide-bon.json",
-      "headline": "Revolutionizing Cancer Treatment: How Disulfide Bonds Are Shaping the Future of CAR-T Therapy",
-      "hook": "If you're studying biochemistry or molecular biology, this breakthrough could redefine how you approach drug design\u2014and how you think about the future of personalized medicine.",
-      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research ties together concepts from organic chemistry (peptide synthesis), biochemistry (protein structure), and computational methods\u2014all foundational for sophomores in STEM fields.",
-      "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T18:25:20.170511"
-    },
-    {
-      "filename": "20260103-engineered-peptides-revolutionize-car-t-therapy-fo.json",
-      "headline": "Engineered Peptides Revolutionize CAR-T Therapy for Solid Tumors",
-      "hook": "Why should an undergrad care about this? Imagine a future where your body\u2019s own immune cells could target cancer like a precision laser\u2014this research is making that possible, and it\u2019s rooted in the same chemistry you\u2019re learning in class.",
-      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)\u2014this research builds on foundational concepts in peptide chemistry, protein structure, and immunology.",
-      "source": "ACS Publications",
-      "rewritten_at": "2026-01-03T20:35:22.795254"
     },
     {
       "filename": "20260103-bromine-beats-fluorine-how-computer-modeling-boost.json",

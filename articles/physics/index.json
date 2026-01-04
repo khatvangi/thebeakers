@@ -1,8 +1,16 @@
 {
   "discipline": "physics",
-  "count": 2,
-  "updated": "2026-01-03T20:47:47.393992",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.405470",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-unlocking-string-theory-s-hidden-geometry-a-new-to.json",
       "headline": "Unlocking String Theory's Hidden Geometry: A New Tool for Understanding Quantum Forces",

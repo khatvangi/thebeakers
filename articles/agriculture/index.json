@@ -1,8 +1,16 @@
 {
   "discipline": "agriculture",
-  "count": 2,
-  "updated": "2026-01-03T20:47:47.395086",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.406756",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-revolutionizing-crop-resilience-how-this-study-co.json",
       "headline": "\"Revolutionizing Crop Resilience: How This Study Could Feed the World in 2050\"",

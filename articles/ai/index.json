@@ -1,8 +1,16 @@
 {
   "discipline": "ai",
-  "count": 2,
-  "updated": "2026-01-03T20:47:47.395355",
+  "count": 3,
+  "updated": "2026-01-03T22:02:14.407076",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-quantum-circuits-just-got-smarter-alphatensor-quan.json",
       "headline": "Quantum Circuits Just Got Smarter: AlphaTensor-Quantum Cuts T-Count Without Retraining",
