@@ -16,24 +16,40 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 
 ## Content Strategy
 
-### Two-Tier System
+### Three Formats (Source-Based Guidelines)
 
-1. **Deep Dive Articles** (1 per discipline per week)
+Choose format based on source type (flexible, use judgment):
+
+| Source Type | Format | Description |
+|-------------|--------|-------------|
+| **Review journals** | Deep Dive | Full NotebookLM treatment: podcast, video, quiz |
+| **Education journals** | Visual Summary | Icons, SVGs, progress bars - quick visual grasp |
+| **High-impact journals** | Detailed Story | Text narrative + Mermaid diagrams |
+
+**Not rigid** - pick format that best fits each paper.
+
+### Format Details
+
+1. **Deep Dive** (`deepdive/[slug].html`)
    - Processed through Google NotebookLM
    - Assets: Podcast, Video, Mind Map, Infographic, Study Guide
    - Our value-add: Curriculum Connection + Interactive Quiz
-   - Source: Review journals + Education journals
-   - Host media on YouTube (Cloudflare Pages has size limits)
+   - Media: SoundCloud (podcast) + YouTube (video)
 
-2. **Regular Articles** (2-5 per discipline per week)
-   - Processed through Ollama (qwen3)
-   - Quick summaries with curriculum connections
-   - Source: High-impact research journals
+2. **Visual Summary** (`deepdive/[slug]-visual.html`)
+   - Lucide icons, SVG diagrams, progress bars
+   - Quick visual overview, minimal text
+   - Generated with napkin-local
+
+3. **Detailed Story** (`deepdive/[slug]-story.html`)
+   - Text narrative (2-3 paragraphs per section)
+   - Mermaid diagrams reinforcing concepts
+   - For papers needing more explanation
 
 ### Source Selection
-- **Review journals**: Comprehensive peer-reviewed articles (Deep Dive)
-- **Education journals**: Written for students (Deep Dive)
-- **High-impact journals**: Top research journals (Regular)
+- **Review journals**: Comprehensive peer-reviewed articles
+- **Education journals**: Written for students
+- **High-impact journals**: Top research journals
 - **NO arXiv**: Not peer-reviewed
 
 ## Site Structure
