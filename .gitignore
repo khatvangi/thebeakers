@@ -1,3 +1,9 @@
 *.pdf
 __pycache__/
 *.jpeg
+
+# Large media files - host on YouTube
+*.m4a
+*.mp4
+deepdive/*/podcast.*
+deepdive/*/video.*
