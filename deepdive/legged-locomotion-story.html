@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning-Based Legged Locomotion: The Robot Revolution</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e8e8e8;
+            line-height: 1.8;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300ff88" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 3px solid #00ff88;
+        }
+
+        .hero h1 {
+            font-size: 2.8em;
+            background: linear-gradient(90deg, #00ff88, #00d4ff, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-shadow: 0 0 30px rgba(0,255,136,0.3);
+        }
+
+        .hero .subtitle {
+            font-size: 1.3em;
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .meta-badge {
+            background: rgba(0,255,136,0.1);
+            border: 1px solid #00ff88;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .chapter {
+            margin-bottom: 60px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            padding: 40px;
+            border-left: 4px solid #00ff88;
+        }
+
+        .chapter-number {
+            font-size: 0.9em;
+            color: #00ff88;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .chapter h2 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .chapter p {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #ccc;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,212,255,0.1));
+            border: 1px solid rgba(0,255,136,0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .highlight-box h3 {
+            color: #00ff88;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #00ff88, #00d4ff, #ff6b9d);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 25px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #00ff88;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0,255,136,0.5);
+        }
+
+        .timeline-year {
+            font-weight: bold;
+            color: #00d4ff;
+            font-size: 1.1em;
+        }
+
+        .diagram-container {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .key-insight {
+            background: linear-gradient(135deg, #ff6b9d20, #ff6b9d10);
+            border-left: 4px solid #ff6b9d;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 0 15px 15px 0;
+        }
+
+        .key-insight::before {
+            content: '💡 Key Insight';
+            display: block;
+            color: #ff6b9d;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .comparison-card h4 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+        }
+
+        .comparison-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .comparison-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+        }
+
+        .quote-block {
+            font-style: italic;
+            font-size: 1.2em;
+            color: #aaa;
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin: 30px 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-tag {
+            background: rgba(0,212,255,0.2);
+            border: 1px solid #00d4ff;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0,255,136,0.1);
+            border-radius: 15px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #aaa;
+        }
+
+        .warning-box {
+            background: rgba(255,193,7,0.1);
+            border: 1px solid #ffc107;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .warning-box h3 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(0,0,0,0.3);
+            margin-top: 60px;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+            .chapter {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Learning-Based Legged Locomotion</h1>
+        <p class="subtitle">How Deep Reinforcement Learning is Teaching Robots to Walk, Run, and Navigate the World</p>
+        <div class="meta-info">
+            <span class="meta-badge">Engineering</span>
+            <span class="meta-badge">Robotics</span>
+            <span class="meta-badge">Deep Learning</span>
+            <span class="meta-badge">IJRR 2025</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Chapter 1: The Promise -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 1</div>
+            <h2>The Promise of Universal Mobility</h2>
+
+            <p>Imagine a robot that can walk anywhere a human can—climbing stairs, traversing rocky terrain, navigating cluttered warehouses, or exploring disaster sites. This is the promise of <strong>legged locomotion</strong>, and after four decades of research, we're finally achieving it.</p>
+
+            <p>The breakthrough? <strong>Deep Reinforcement Learning (DRL)</strong>. Instead of hand-coding every possible scenario a robot might encounter, we let robots learn to walk through millions of simulated experiences, then transfer those skills to the real world.</p>
+
+            <div class="quote-block">
+                "Legged robots are complex systems with highly nonlinear, hybrid, and inherently unstable dynamics. Yet learning-based methods have achieved what seemed impossible just a decade ago."
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Years of Research</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">1M+</div>
+                    <div class="stat-label">Sim Steps/Second</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Joints (Quadruped)</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">~$10K</div>
+                    <div class="stat-label">Affordable Hardware</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 2: Evolution of Hardware -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 2</div>
+            <h2>The Hardware Revolution</h2>
+
+            <p>The story of legged robots is also a story of hardware evolution. From massive hydraulic machines to sleek, affordable electric quadrupeds, the technology has transformed dramatically.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">1980s - Raibert's Hoppers</span>
+                    <p>Marc Raibert's Leg Lab demonstrated that simple feedback could achieve dynamic locomotion. The foundation was laid.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2005 - BigDog</span>
+                    <p>Boston Dynamics' hydraulic quadruped showed military-grade terrain traversal. Powerful but expensive and loud.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2014 - MIT Cheetah</span>
+                    <p>Custom high torque-density actuators enabled "proprioceptive actuation"—controlling force through motor current without springs or force sensors.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2018-2021 - Democratization</span>
+                    <p>Unitree A1, Go1, and open-source platforms made quadrupeds accessible to researchers worldwide. The floodgates opened.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2023-2024 - Humanoid Explosion</span>
+                    <p>New humanoid companies emerge rapidly. Unitree G1 brings humanoids to manipulator-arm price points.</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart LR
+                        subgraph Actuation["Actuation Types"]
+                            H[Hydraulic] --> |"High power, expensive"| E1[BigDog, Atlas]
+                            E[Electric + Gearbox] --> |"Non-backdrivable"| E2[Traditional]
+                            P[Proprioceptive] --> |"Low gear ratio, backdrivable"| E3[Modern Quadrupeds]
+                        end
+
+                        P --> Benefits
+                        subgraph Benefits["Key Benefits"]
+                            B1[High torque density]
+                            B2[Impact mitigation]
+                            B3[Force control via current]
+                        end
+
+                        style P fill:#00ff88,color:#000
+                        style Benefits fill:#1a1a2e
+                </div>
+            </div>
+
+            <div class="key-insight">
+                Proprioceptive actuators revolutionized the field by enabling robots to "feel" through their motors—sensing impacts and adjusting compliance without dedicated force sensors.
+            </div>
+        </div>
+
+        <!-- Chapter 3: The Learning Framework -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 3</div>
+            <h2>How Robots Learn to Walk</h2>
+
+            <p>At its core, learning locomotion is a <strong>Markov Decision Process (MDP)</strong>. The robot observes its state, takes an action, receives a reward, and transitions to a new state. Do this millions of times in simulation, and patterns emerge.</p>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart TB
+                        subgraph MDP["Markov Decision Process"]
+                            S[State s_t] --> P[Policy π]
+                            P --> A[Action a_t]
+                            A --> E[Environment]
+                            E --> R[Reward r_t]
+                            E --> S2[State s_t+1]
+                            S2 --> S
+                        end
+
+                        subgraph State["Robot State"]
+                            S1[Joint positions]
+                            S2a[Joint velocities]
+                            S3[Base orientation]
+                            S4[Base velocity]
+                        end
+
+                        subgraph Actions["Actions"]
+                            A1[Target joint positions]
+                            A2[Fed to PD controller]
+                            A3[Produces torque]
+                        end
+
+                        State --> S
+                        A --> Actions
+
+                        style P fill:#00d4ff,color:#000
+                        style R fill:#ff6b9d,color:#000
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>The Dominant Algorithm: PPO</h3>
+                <p><strong>Proximal Policy Optimization (PPO)</strong> has become the workhorse of legged locomotion learning. It takes conservative update steps, staying within a "trust region" near the current policy, which provides stable convergence even for complex, high-dimensional control problems.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">On-policy</span>
+                    <span class="tech-tag">Trust Region</span>
+                    <span class="tech-tag">Stable Training</span>
+                    <span class="tech-tag">GPU-parallelizable</span>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>Observations (What the robot sees)</h4>
+                    <ul>
+                        <li>Joint positions & velocities</li>
+                        <li>Base orientation (gravity vector)</li>
+                        <li>Base linear/angular velocity</li>
+                        <li>History buffer for memory</li>
+                        <li>Velocity commands (goals)</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>Rewards (What drives learning)</h4>
+                    <ul>
+                        <li>Velocity tracking reward</li>
+                        <li>Orientation stability</li>
+                        <li>Smooth actions (no jitter)</li>
+                        <li>Energy efficiency</li>
+                        <li>Foot air time (natural gait)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 4: Sim-to-Real -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 4</div>
+            <h2>The Sim-to-Real Gap</h2>
+
+            <p>Here's the catch: policies trained in simulation often fail spectacularly in the real world. Motors behave differently, surfaces have unexpected friction, and sensor noise wreaks havoc. Bridging this <strong>sim-to-real gap</strong> is perhaps the most critical challenge.</p>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart LR
+                        subgraph Sim["Simulation"]
+                            T[Train Policy]
+                            T --> |"Millions of steps"| P[Learned Policy]
+                        end
+
+                        subgraph Gap["Sim-to-Real Gap"]
+                            G1[Motor dynamics differ]
+                            G2[Contact models simplified]
+                            G3[Sensor noise]
+                            G4[Latency]
+                        end
+
+                        subgraph Solutions["Solutions"]
+                            DR[Domain Randomization]
+                            DA[Domain Adaptation]
+                            SI[System Identification]
+                        end
+
+                        P --> Gap
+                        Gap --> Solutions
+                        Solutions --> Real[Real Robot]
+
+                        style Gap fill:#ff6b9d20
+                        style Solutions fill:#00ff8820
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Domain Randomization: Train for Everything</h3>
+                <p>The key insight: if you train a policy to handle <em>every possible</em> variation in simulation—different masses, friction coefficients, motor strengths, latencies—the real world becomes just another variation it can handle.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>What Gets Randomized</h4>
+                    <ul>
+                        <li>Robot mass (±20%)</li>
+                        <li>Friction coefficients</li>
+                        <li>Motor strength</li>
+                        <li>Communication latency</li>
+                        <li>Terrain properties</li>
+                        <li>Sensor noise</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>Privileged Learning</h4>
+                    <ul>
+                        <li>Train "teacher" with perfect info</li>
+                        <li>Teacher knows friction, terrain</li>
+                        <li>Student learns from teacher</li>
+                        <li>Student uses only real sensors</li>
+                        <li>Implicit state estimation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                Privileged learning has become a cornerstone technique: a "teacher" policy with perfect simulation information guides a "student" policy that must work with real-world sensor limitations.
+            </div>
+        </div>
+
+        <!-- Chapter 5: Learning Frameworks -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 5</div>
+            <h2>Advanced Learning Strategies</h2>
+
+            <p>Simple end-to-end learning works for basic tasks, but challenging locomotion—parkour, stepping stones, confined spaces—requires more sophisticated approaches.</p>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart TB
+                        subgraph Basic["End-to-End Learning"]
+                            B1[Single Policy]
+                            B2[Direct state→action]
+                        end
+
+                        subgraph Curriculum["Curriculum Learning"]
+                            C1[Easy tasks first]
+                            C2[Gradually harder]
+                            C3[Adaptive difficulty]
+                        end
+
+                        subgraph Hierarchical["Hierarchical Learning"]
+                            H1[High-level: task planning]
+                            H2[Low-level: motor skills]
+                            H1 --> H2
+                        end
+
+                        subgraph Privileged["Privileged Learning"]
+                            P1[Teacher: full info]
+                            P2[Student: sensors only]
+                            P1 --> |"Distillation"| P2
+                        end
+
+                        Basic --> |"Limited"| Complex[Complex Tasks]
+                        Curriculum --> Complex
+                        Hierarchical --> Complex
+                        Privileged --> Complex
+
+                        style Complex fill:#00ff88,color:#000
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Curriculum Learning in Practice</h3>
+                <p>For terrain traversal, start on flat ground, then gradually introduce:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Gentle slopes → Steep slopes</li>
+                    <li>Small steps → Large steps</li>
+                    <li>Smooth surfaces → Rough terrain</li>
+                    <li>No disturbances → External pushes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chapter 6: From Quadrupeds to Bipeds -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 6</div>
+            <h2>The Rise of Humanoids</h2>
+
+            <p>Everything learned from quadrupeds is now being applied to bipedal robots. The challenge is greater—bipeds are inherently less stable—but the payoff is enormous: robots that can operate in human environments.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="timeline-year">2005</span>
+                    <p>First RL-trained biped walks in under 20 minutes (simplified robot)</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2015</span>
+                    <p>DARPA Robotics Challenge reveals humanoids are far from deployment-ready</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2020</span>
+                    <p>DRL successfully transfers to Cassie bipedal robot</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-year">2024</span>
+                    <p>Explosion of humanoid startups; soccer-playing bipeds; parkour demos</p>
+                </div>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>Quadrupeds: Advantages</h4>
+                    <ul>
+                        <li>Inherently stable (4 contact points)</li>
+                        <li>Easier to recover from falls</li>
+                        <li>Simpler gait patterns</li>
+                        <li>Affordable hardware available</li>
+                    </ul>
+                </div>
+                <div class="comparison-card">
+                    <h4>Bipeds: Advantages</h4>
+                    <ul>
+                        <li>Human form factor for human spaces</li>
+                        <li>Vast motion capture data available</li>
+                        <li>Natural manipulation (arms free)</li>
+                        <li>Social acceptance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chapter 7: Future Frontiers -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 7</div>
+            <h2>The Road Ahead</h2>
+
+            <p>Despite remarkable progress, major challenges remain. The field is now pushing into territories that seemed like science fiction just years ago.</p>
+
+            <div class="diagram-container">
+                <div class="mermaid">
+                    flowchart TB
+                        subgraph Current["Current Capabilities"]
+                            C1[Robust walking]
+                            C2[Rough terrain]
+                            C3[Basic parkour]
+                        end
+
+                        subgraph Frontiers["Research Frontiers"]
+                            F1[Loco-manipulation]
+                            F2[Safety guarantees]
+                            F3[Foundation models]
+                            F4[Unsupervised skill discovery]
+                        end
+
+                        subgraph Vision["Future Vision"]
+                            V1[General-purpose robots]
+                            V2[Human-level mobility]
+                            V3[Seamless interaction]
+                        end
+
+                        Current --> Frontiers
+                        Frontiers --> Vision
+
+                        style Vision fill:#00ff8840
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Key Open Problems</h3>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong>Unsupervised Skill Discovery:</strong> Can robots learn useful skills without hand-designed rewards?</li>
+                    <li><strong>Differentiable Simulation:</strong> Can we use gradients through physics for faster learning?</li>
+                    <li><strong>Safety Guarantees:</strong> How do we ensure robots never harm humans?</li>
+                    <li><strong>Loco-manipulation:</strong> Walking while carrying and manipulating objects</li>
+                    <li><strong>Foundation Models:</strong> Can LLMs guide robot behavior and planning?</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Chapter 8: Societal Impact -->
+        <div class="chapter">
+            <div class="chapter-number">Chapter 8</div>
+            <h2>The Responsibility We Bear</h2>
+
+            <p>With great capability comes great responsibility. As robots become more capable, the research community must actively engage with the ethical implications.</p>
+
+            <div class="warning-box">
+                <h3>Critical Concerns</h3>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li><strong>Weaponization:</strong> Multiple robotics companies have signed pledges against weaponizing mobile robots</li>
+                    <li><strong>Job Displacement:</strong> Automation will transform the workforce; policy must adapt</li>
+                    <li><strong>Environmental Impact:</strong> Training large models has a carbon footprint</li>
+                    <li><strong>Surveillance:</strong> Mobile robots could enable unprecedented monitoring</li>
+                </ul>
+            </div>
+
+            <div class="quote-block">
+                "There is a tendency for businesses, the military, and some public administrations to 'just talk' and do some 'ethics washing.' Academia and researchers can constitute a powerful entity that raises awareness about new technologies and their implications."
+            </div>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="chapter" style="border-left-color: #ff6b9d;">
+            <div class="chapter-number">Conclusion</div>
+            <h2>A New Era of Mobility</h2>
+
+            <p>We stand at an inflection point. The combination of affordable hardware, powerful simulators, and deep reinforcement learning has unlocked capabilities that seemed decades away. Quadrupeds now navigate terrain that would challenge humans. Humanoids are learning to play soccer, perform parkour, and manipulate objects.</p>
+
+            <p>The pace of innovation will only accelerate. As this survey demonstrates, the foundations are solid, the tools are available, and the problems—while challenging—are yielding to sustained research effort.</p>
+
+            <p>The robots are learning to walk. Soon, they'll be everywhere.</p>
+
+            <div class="stats-row">
+                <div class="stat-box">
+                    <div class="stat-number">600+</div>
+                    <div class="stat-label">Papers Cited</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Top Institutions</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">32</div>
+                    <div class="stat-label">Page Survey</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Based on: Ha et al., "Learning-based legged locomotion: State of the art and future perspectives"</p>
+        <p>International Journal of Robotics Research, 2025</p>
+        <p style="margin-top: 15px; color: #444;">Created for The Beakers | Deep Dive Format</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#00ff88',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#00ff88',
+                lineColor: '#00d4ff',
+                secondaryColor: '#16213e',
+                tertiaryColor: '#1a1a2e',
+                background: '#1a1a2e',
+                mainBkg: '#16213e',
+                nodeBorder: '#00ff88',
+                clusterBkg: '#0f3460',
+                clusterBorder: '#00d4ff',
+                titleColor: '#fff',
+                edgeLabelBackground: '#1a1a2e'
+            },
+            flowchart: {
+                curve: 'basis',
+                padding: 20
+            }
+        });
+    </script>
+</body>
+</html>
