@@ -190,18 +190,15 @@ Write exactly 3 sentences (under 75 words) that sound good read aloud. This is f
 One thought-provoking question that connects this research to a student's everyday life, future career, or a bigger scientific question they might explore.
 
 ## NAPKIN_VISUAL
-Create a description for a napkin.ai-style infographic (dark background, clean icons, color-coded sections).
-Structure it EXACTLY like this example:
+Create a simple 3-panel visual abstract. Follow scientific graphical abstract guidelines: SIMPLE, MINIMAL TEXT, CLEAR FLOW.
+Structure it EXACTLY like this:
 
-CENTRAL_CONCEPT: [Main idea in 3-5 words]
-BRANCHES:
-- [Category 1]: [Item A], [Item B], [Item C]
-- [Category 2]: [Item A], [Item B]
-- [Category 3]: [Item A], [Item B], [Item C]
-FLOW: [Step 1] -> [Step 2] -> [Step 3] -> [Outcome]
-KEY_VISUAL: [Describe one striking image that captures the research - molecular structure, cell diagram, etc.]
+PROBLEM: [What gap or challenge? 3-6 words max]
+METHOD: [How did they solve it? 3-6 words max]
+FINDING: [Key result? 3-6 words max]
+KEY_VISUAL: [One striking image - molecule, cell, device, etc.]
 
-This will be used to generate an infographic, so be specific and visual.
+KEEP IT SIMPLE. This becomes a visual: PROBLEM → METHOD → FINDING
 
 ---
 
