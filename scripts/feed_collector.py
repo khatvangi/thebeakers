@@ -35,6 +35,13 @@ DB_PATH = DATA_DIR / "articles.db"
 # education: Teaching-focused articles
 # =============================================================================
 
+# Open Access sources - PDFs freely available
+OPEN_ACCESS_SOURCES = {
+    "eLife", "PLOS", "arXiv", "Nature Communications", "Scientific Reports",
+    "MDPI", "Frontiers", "PeerJ", "BMC", "Annual Reviews",  # Annual Reviews often OA after 1 year
+    "JMLR", "arXiv cs.LG", "arXiv cs.AI", "bioRxiv", "medRxiv"
+}
+
 FEEDS = {
     "chemistry": {
         "review": [
@@ -77,6 +84,7 @@ FEEDS = {
     "biology": {
         "review": [
             # Review journals - perfect for Deep Dive
+            ("eLife", "https://elifesciences.org/rss/recent.xml"),  # OPEN ACCESS! Great reviews
             ("Nature Rev Genetics", "https://www.nature.com/nrg.rss"),  # IF 60
             ("Nature Rev Mol Cell Bio", "https://www.nature.com/nrm.rss"),  # IF 94
             ("Annual Rev Biochemistry", "https://www.annualreviews.org/rss/content/journals/biochem?fmt=rss"),  # IF 25
@@ -87,7 +95,6 @@ FEEDS = {
             ("Nature", "https://www.nature.com/nature.rss"),  # IF 50
             ("Cell", "https://www.cell.com/cell/rss"),  # IF 64
             ("Science", "https://www.science.org/rss/news_current.xml"),  # IF 56
-            ("eLife", "https://elifesciences.org/rss/recent.xml"),  # IF 8, open access
         ],
         "education": [
             ("CBE Life Sci Education", "https://www.lifescied.org/rss/recent.xml"),
@@ -155,16 +162,15 @@ FEEDS = {
     "ai": {
         "review": [
             # Review journals - perfect for Deep Dive
-            ("Nature Rev Machine Intelligence", "https://www.nature.com/natmachintell.rss"),  # Has reviews
-            ("AI Magazine", "https://ojs.aaai.org/index.php/aimagazine/gateway/plugin/WebFeedGatewayPlugin/atom"),  # Accessible
+            ("arXiv cs.LG", "https://rss.arxiv.org/rss/cs.LG"),  # FREE PDFs! Machine Learning
+            ("arXiv cs.AI", "https://rss.arxiv.org/rss/cs.AI"),  # FREE PDFs! AI
             ("ACM Computing Surveys", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=csur"),  # IF 16
+            ("AI Magazine", "https://ojs.aaai.org/index.php/aimagazine/gateway/plugin/WebFeedGatewayPlugin/atom"),
         ],
         "high_impact": [
             # Top research venues
             ("Nature Machine Intelligence", "https://www.nature.com/natmachintell.rss"),  # IF 25
-            ("JMLR", "https://jmlr.org/jmlr.xml"),  # Top ML journal
-            ("TMLR", "https://jmlr.org/tmlr.xml"),  # Newer transactions
-            ("arXiv cs.LG Highlights", "https://rss.arxiv.org/rss/cs.LG"),  # Filter needed
+            ("JMLR", "https://jmlr.org/jmlr.xml"),  # Top ML journal, OPEN ACCESS
         ],
         "education": [
             ("ACM SIGCSE", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=sigcse"),
@@ -256,14 +262,29 @@ def fetch_feed(feed_url, source_name, discipline, source_type, conn):
             elif 'description' in entry:
                 teaser = clean_text(entry.description)[:500]
 
+            # Extract DOI if available
+            doi = ""
+            if "doi.org" in url:
+                doi = url.split("doi.org/")[-1]
+            elif "dx.doi.org" in url:
+                doi = url.split("dx.doi.org/")[-1]
+            elif entry.get('id', '').startswith('10.'):
+                doi = entry.get('id')
+
+            # Check if Open Access
+            is_open_access = any(oa in source_name for oa in OPEN_ACCESS_SOURCES)
+
             articles.append({
                 "headline": headline,
                 "teaser": teaser,
                 "url": url,
+                "doi": doi,
                 "source": source_name,
                 "source_type": source_type,
                 "discipline": discipline,
-                "deep_dive_candidate": source_type == "review"  # Flag review articles
+                "deep_dive_candidate": source_type == "review",
+                "open_access": is_open_access,
+                "pdf_link": f"https://sci-hub.se/{doi}" if doi else ""  # For reference
             })
 
             mark_article_seen(conn, url, headline, discipline, source_type)
@@ -371,19 +392,26 @@ def show_deep_dive_candidates():
     with open(pending_path) as f:
         data = json.load(f)
 
-    print(f"\n{'='*60}")
+    print(f"\n{'='*70}")
     print("DEEP DIVE CANDIDATES (Review Articles)")
-    print(f"{'='*60}")
+    print("For NotebookLM: Download PDF, upload to notebook, generate content")
+    print(f"{'='*70}")
 
     for discipline, sources in data.get("disciplines", {}).items():
         reviews = sources.get("review", [])
         if reviews:
-            print(f"\n{discipline.upper()}:")
+            print(f"\n{'='*50}")
+            print(f"{discipline.upper()}")
+            print(f"{'='*50}")
             for i, article in enumerate(reviews[:5], 1):
-                print(f"  {i}. {article['headline'][:70]}...")
-                print(f"     Source: {article['source']}")
-                print(f"     URL: {article['url']}")
-                print()
+                oa_badge = "[OPEN ACCESS]" if article.get('open_access') else ""
+                print(f"\n  {i}. {article['headline'][:65]}...")
+                print(f"     Source: {article['source']} {oa_badge}")
+                if article.get('doi'):
+                    print(f"     DOI: {article['doi']}")
+                    print(f"     PDF: https://doi.org/{article['doi']}")
+                else:
+                    print(f"     URL: {article['url']}")
 
 
 if __name__ == "__main__":
