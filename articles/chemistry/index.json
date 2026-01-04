@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 6,
-  "updated": "2026-01-03T19:10:04.167805",
+  "count": 7,
+  "updated": "2026-01-03T19:37:02.304287",
   "articles": [
     {
       "filename": "index.json",
@@ -18,6 +18,14 @@
       "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research integrates organic synthesis, protein structure, and immunology\u2014topics you\u2019re encountering in sophomore-level courses.",
       "source": "Journal of the American Chemical Society",
       "rewritten_at": "2026-01-03T18:36:24.759153"
+    },
+    {
+      "filename": "20260103-revolutionizing-car-t-therapy-how-disulfide-bonds.json",
+      "headline": "Revolutionizing CAR-T Therapy: How Disulfide Bonds Target Solid Tumors",
+      "hook": "Imagine a future where your immune system can precisely target cancer cells without harming healthy tissue\u2014this research is making it possible.",
+      "difficulty": "**SOPHOMORE**: Needs intro-level major courses (organic, biochem, etc.) to grasp peptide synthesis, bonding principles, and protein structure.",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T19:36:52.215559"
     },
     {
       "filename": "20260103-revolutionizing-cancer-treatments-peptides-that-st.json",
