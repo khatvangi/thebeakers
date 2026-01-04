@@ -1,0 +1,23 @@
+{
+  "discipline": "physics",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.393992",
+  "articles": [
+    {
+      "filename": "20260103-unlocking-string-theory-s-hidden-geometry-a-new-to.json",
+      "headline": "Unlocking String Theory's Hidden Geometry: A New Tool for Understanding Quantum Forces",
+      "hook": "Imagine if you could visualize the invisible forces that shape the universe\u2014this research turns that vision into reality, bridging abstract math with real-world physics.",
+      "difficulty": "Sophomore (requires intro-level major courses in physics and math)",
+      "source": "Physical Review Letters",
+      "rewritten_at": "2026-01-03T20:38:18.101263"
+    },
+    {
+      "filename": "20260103-revolutionizing-quantum-control-a-faster-way-to-sh.json",
+      "headline": "Revolutionizing Quantum Control: A Faster Way to Shield Quantum Systems from Noise",
+      "hook": "If you're studying quantum computing, this breakthrough could redefine how you protect qubits from interference, making your future projects more efficient and reliable.",
+      "difficulty": "Sophomore (requires intro-level major courses in physics, engineering, or mathematics).",
+      "source": "Physical Review Letters",
+      "rewritten_at": "2026-01-03T20:37:18.758413"
+    }
+  ]
+}

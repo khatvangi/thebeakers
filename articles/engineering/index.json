@@ -1,0 +1,23 @@
+{
+  "discipline": "engineering",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.394812",
+  "articles": [
+    {
+      "filename": "20260103-watch-a-robot-evolve-how-ai-mimics-natural-selecti.json",
+      "headline": "Watch a Robot Evolve: How AI Mimics Natural Selection in Real Time",
+      "hook": "Imagine if your robot could adapt on its own\u2014like a living organism. This research shows how AI can mimic evolution, revolutionizing robotics and AI.",
+      "difficulty": "Sophomore-level, as it requires foundational knowledge in computer science, biology, and mathematics.",
+      "source": "IEEE Spectrum",
+      "rewritten_at": "2026-01-03T20:43:47.743909"
+    },
+    {
+      "filename": "20260103-jacob-s-ladder-how-sparks-turned-into-scientific-b.json",
+      "headline": "Jacob\u2019s Ladder: How Sparks Turned into Scientific Breakthroughs",
+      "hook": "Ever wondered why lightning crackles or why arc welders wear special gear? This research reveals the science behind those sparks\u2014and how it could revolutionize energy storage.",
+      "difficulty": "Sophomore (requires foundational knowledge in chemistry, physics, and engineering).",
+      "source": "IEEE Spectrum",
+      "rewritten_at": "2026-01-03T20:42:55.075401"
+    }
+  ]
+}

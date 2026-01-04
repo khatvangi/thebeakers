@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 8,
-  "updated": "2026-01-03T19:48:38.350417",
+  "count": 10,
+  "updated": "2026-01-03T20:47:47.393525",
   "articles": [
     {
       "filename": "index.json",
@@ -10,6 +10,14 @@
       "difficulty": "SOPHOMORE",
       "source": "",
       "rewritten_at": ""
+    },
+    {
+      "filename": "20260103-unlocking-cancer-s-weak-link-new-peptides-target-g.json",
+      "headline": "Unlocking Cancer's Weak Link: New Peptides Target GSK3\u03b2 with ATP-Mimicry",
+      "hook": "Imagine designing a drug that outsmarts cancer by mimicking ATP\u2014this research does just that, offering a blueprint for smarter therapies.",
+      "difficulty": "Sophomore (requires foundational chemistry, biochemistry, and organic chemistry knowledge).",
+      "source": "ACS Publications",
+      "rewritten_at": "2026-01-03T20:36:17.046306"
     },
     {
       "filename": "20260103-revolutionizing-car-t-therapy-how-peptide-bonds-ar.json",
@@ -58,6 +66,14 @@
       "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research ties together concepts from organic chemistry (peptide synthesis), biochemistry (protein structure), and computational methods\u2014all foundational for sophomores in STEM fields.",
       "source": "Journal of the American Chemical Society",
       "rewritten_at": "2026-01-03T18:25:20.170511"
+    },
+    {
+      "filename": "20260103-engineered-peptides-revolutionize-car-t-therapy-fo.json",
+      "headline": "Engineered Peptides Revolutionize CAR-T Therapy for Solid Tumors",
+      "hook": "Why should an undergrad care about this? Imagine a future where your body\u2019s own immune cells could target cancer like a precision laser\u2014this research is making that possible, and it\u2019s rooted in the same chemistry you\u2019re learning in class.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)\u2014this research builds on foundational concepts in peptide chemistry, protein structure, and immunology.",
+      "source": "ACS Publications",
+      "rewritten_at": "2026-01-03T20:35:22.795254"
     },
     {
       "filename": "20260103-bromine-beats-fluorine-how-computer-modeling-boost.json",

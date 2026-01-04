@@ -1,0 +1,23 @@
+{
+  "discipline": "ai",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.395355",
+  "articles": [
+    {
+      "filename": "20260103-quantum-circuits-just-got-smarter-alphatensor-quan.json",
+      "headline": "Quantum Circuits Just Got Smarter: AlphaTensor-Quantum Cuts T-Count Without Retraining",
+      "hook": "Why should an undergrad care about this? If you\u2019re studying computer science or physics, this breakthrough could shape the future of quantum computing\u2014making circuits faster, cheaper, and more scalable than ever before.",
+      "difficulty": "Sophomore-level, requiring foundational knowledge in quantum mechanics, machine learning, and linear algebra.",
+      "source": "Nature Machine Intelligence",
+      "rewritten_at": "2026-01-03T20:47:38.141772"
+    },
+    {
+      "filename": "20260103-how-ai-is-revolutionizing-metasurface-design-a-bri.json",
+      "headline": "How AI is Revolutionizing Metasurface Design: A Bridge Between Theory and Innovation",
+      "hook": "Imagine designing materials that manipulate light with the precision of a nanoscale engineer\u2014this research is making it possible, using AI to solve problems you\u2019ll encounter in your physics or materials science courses.",
+      "difficulty": "Sophomore-level (requires foundational knowledge of physics, math, and computer science).",
+      "source": "Nature Machine Intelligence",
+      "rewritten_at": "2026-01-03T20:46:43.424705"
+    }
+  ]
+}

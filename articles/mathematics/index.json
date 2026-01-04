@@ -1,0 +1,23 @@
+{
+  "discipline": "mathematics",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.394555",
+  "articles": [
+    {
+      "filename": "20260103-unlocking-hidden-symmetries-a-breakthrough-in-numb.json",
+      "headline": "Unlocking Hidden Symmetries: A Breakthrough in Number Theory for Future Mathematicians",
+      "hook": "Imagine if you could predict the behavior of numbers with the same precision as a calculator\u2014this research does just that, bridging abstract math to real-world problems like cryptography and physics.",
+      "difficulty": "**JUNIOR**: Needs upper-division background (physical chem, advanced algebra) to grasp automorphic forms and representation theory.",
+      "source": "Annals of Mathematics",
+      "rewritten_at": "2026-01-03T20:41:06.934122"
+    },
+    {
+      "filename": "20260103-unlocking-hidden-patterns-in-number-theory-how-mod.json",
+      "headline": "Unlocking Hidden Patterns in Number Theory: How Modular Curves Reveal New Mathematical Structures",
+      "hook": "Understanding these patterns could revolutionize cryptography, which is crucial for secure online transactions you use every day.",
+      "difficulty": "SOPHOMORE: This research builds on advanced calculus, algebraic structures, and number theory\u2014topics you\u2019re studying now.",
+      "source": "Annals of Mathematics",
+      "rewritten_at": "2026-01-03T20:41:55.929135"
+    }
+  ]
+}

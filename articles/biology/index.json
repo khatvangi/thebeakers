@@ -1,0 +1,23 @@
+{
+  "discipline": "biology",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.394266",
+  "articles": [
+    {
+      "filename": "20260103-chiral-currents-without-magnets-how-quantum-geomet.json",
+      "headline": "Chiral Currents Without Magnets: How Quantum Geometry Shapes Tomorrow's Electronics",
+      "hook": "Imagine controlling electron flow without magnets\u2014this breakthrough could redefine how we design electronics, just like the principles you're learning in your physics classes.",
+      "difficulty": "**SOPHOMORE**  \nThis research builds on foundational concepts in quantum mechanics, solid-state physics, and materials science, which are typically covered in sophomore-level courses.",
+      "source": "Nature",
+      "rewritten_at": "2026-01-03T20:40:08.531018"
+    },
+    {
+      "filename": "20260103-2026-science-forecast-ai-breakthroughs-gene-editin.json",
+      "headline": "2026 Science Forecast: AI Breakthroughs, Gene Editing, and Policy Shifts You Can\u2019t Ignore",
+      "hook": "As future scientists, you\u2019ll shape the next decade of innovation\u2014here\u2019s how AI and gene editing are already changing the game.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research requires foundational knowledge in chemistry, biology, and physics\u2014areas you\u2019re already studying. Understanding AI\u2019s thermodynamic limits or CRISPR\u2019s enzyme-like behavior ties directly to your courses.",
+      "source": "Nature",
+      "rewritten_at": "2026-01-03T20:39:19.276657"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "discipline": "agriculture",
+  "count": 2,
+  "updated": "2026-01-03T20:47:47.395086",
+  "articles": [
+    {
+      "filename": "20260103-revolutionizing-crop-resilience-how-this-study-co.json",
+      "headline": "\"Revolutionizing Crop Resilience: How This Study Could Feed the World in 2050\"",
+      "hook": "Why should an undergrad care about this? If you\u2019re studying biology, chemistry, or environmental science, this research shows how your classroom knowledge can directly tackle global food insecurity\u2014by engineering crops that thrive in extreme climates.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research combines genetics, ecology, and data science\u2014topics you\u2019re just starting to explore in your sophomore year. While some concepts (like CRISPR) are advanced, the study\u2019s focus on real-world applications ties directly to your coursework in biology, chemistry, and environmental science.",
+      "source": "Agronomy Journal",
+      "rewritten_at": "2026-01-03T20:44:46.047851"
+    },
+    {
+      "filename": "20260103-how-cover-crops-supercharge-soil-health-a-breakthr.json",
+      "headline": "How Cover Crops Supercharge Soil Health: A Breakthrough for Sustainable Farming",
+      "hook": "If you're studying agriculture or environmental science, this research could reshape how you approach soil health and sustainable farming\u2014without a single plow.",
+      "difficulty": "Sophomore (requires intro-level courses in agronomy, chemistry, and biology).",
+      "source": "Agronomy Journal",
+      "rewritten_at": "2026-01-03T20:45:39.186993"
+    }
+  ]
+}
