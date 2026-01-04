@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biology — The Beakers</title>
+    <meta name="description" content="Biology research rewritten for undergraduate students. Life sciences, genetics, and cellular discoveries explained.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebeakers.com/biology.html">
+    <meta property="og:title" content="Biology — The Beakers">
+    <meta property="og:description" content="Biology research rewritten for undergraduate students.">
+    <meta property="og:image" content="https://thebeakers.com/biology.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0f172a; --bg-card: #1e293b; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-light: #64748b; --border-dark: #334155; --accent-green: #10b981; --accent-blue: #3b82f6; --accent-purple: #8b5cf6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        header { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo { font-size: 1.5rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.75rem; background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .logo-icon { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)) brightness(1.3); }
+        nav { display: flex; gap: 2.5rem; }
+        nav a { color: var(--text-secondary); text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: color 0.2s; }
+        nav a:hover { color: var(--text-primary); }
+        .page-hero { text-align: center; padding: 2rem 2rem 3rem; max-width: 900px; margin: 0 auto; }
+        .breadcrumb { font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem; }
+        .breadcrumb a { color: var(--accent-green); text-decoration: none; }
+        .page-hero h1 { font-family: 'Instrument Serif', Georgia, serif; font-size: 3rem; font-weight: 400; line-height: 1.2; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .discipline-icon { width: 64px; height: 64px; border-radius: 12px; object-fit: cover; }
+        .page-hero p { font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; }
+        .section { max-width: 1100px; margin: 0 auto; padding: 0 2rem 3rem; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .section-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); }
+        .section-count { font-size: 0.75rem; color: var(--text-light); }
+        .articles-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+        .article-card { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 16px; padding: 1.75rem; transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .article-card:hover { transform: translateY(-4px); border-color: var(--accent-green); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+        .article-card h3 { font-family: 'Instrument Serif', Georgia, serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.75rem; line-height: 1.35; }
+        .article-card .hook { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .article-card .meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-light); }
+        .difficulty-badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 12px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .difficulty-badge.freshman { background: var(--accent-green); color: white; }
+        .difficulty-badge.sophomore { background: var(--accent-blue); color: white; }
+        .difficulty-badge.junior { background: var(--accent-purple); color: white; }
+        .empty-state { text-align: center; padding: 4rem 2rem; color: var(--text-secondary); }
+        footer { text-align: center; padding: 2.5rem 2rem; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-dark); margin-top: 3rem; }
+        footer a { color: var(--accent-green); text-decoration: none; }
+        @media (max-width: 768px) { header { padding: 1.5rem; } nav { display: none; } .page-hero h1 { font-size: 2rem; } .articles-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo"><img src="logo-48.png" alt="The Beakers" class="logo-icon">The Beakers</a>
+        <nav><a href="/">All Disciplines</a><a href="chemistry.html">Chemistry</a><a href="physics.html">Physics</a></nav>
+    </header>
+    <main>
+        <section class="page-hero">
+            <p class="breadcrumb"><a href="/">Home</a> / Biology</p>
+            <h1><img src="biology.png" alt="Biology" class="discipline-icon">Biology</h1>
+            <p>The science of life and living organisms. Genetics, cell biology, ecology, and evolution — explained for undergraduates.</p>
+        </section>
+        <section class="section" id="articles">
+            <div class="section-header"><span class="section-title">This Week's Research</span><span class="section-count" id="article-count"></span></div>
+            <div class="articles-grid" id="articles-grid"></div>
+            <div class="empty-state" id="empty-state" style="display: none;"><p>No articles yet. Check back soon!</p></div>
+        </section>
+    </main>
+    <footer><p><strong>Founding Editor:</strong> Kiran Boggavarapu</p><p>A project by <a href="/">The Beakers</a></p></footer>
+    <script>
+        const DISCIPLINE = 'biology';
+        async function loadArticles() {
+            const grid = document.getElementById('articles-grid'), count = document.getElementById('article-count'), empty = document.getElementById('empty-state');
+            try {
+                const res = await fetch(`articles/${DISCIPLINE}/index.json`);
+                if (!res.ok) { empty.style.display = 'block'; return; }
+                const data = await res.json();
+                const articles = (data.articles || []).filter(a => a.headline);
+                if (articles.length === 0) { empty.style.display = 'block'; return; }
+                count.textContent = `${articles.length} article${articles.length > 1 ? 's' : ''}`;
+                articles.forEach(a => {
+                    const slug = a.filename.replace('.json', ''), diff = (a.difficulty || 'sophomore').toLowerCase().split(/[\s:*]/)[0];
+                    const card = document.createElement('a');
+                    card.className = 'article-card'; card.href = `article.html?id=${DISCIPLINE}/${slug}`;
+                    card.innerHTML = `<h3>${esc(a.headline)}</h3><p class="hook">${esc(a.hook)}</p><div class="meta"><span>${esc(a.source || 'Research')}</span><span class="difficulty-badge ${diff}">${diff}</span></div>`;
+                    grid.appendChild(card);
+                });
+            } catch(e) { empty.style.display = 'block'; }
+        }
+        function esc(t) { if (!t) return ''; const d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+        loadArticles();
+    </script>
+</body>
+</html>
