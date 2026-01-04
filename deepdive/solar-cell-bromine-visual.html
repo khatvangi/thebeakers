@@ -3,19 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Story: Bromine Breaks the Rules in Solar Cells</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <title>The Bromine Boost: Visual Story</title>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
+            --bg-light: #334155;
             --accent-green: #10b981;
             --accent-blue: #3b82f6;
             --accent-cyan: #06b6d4;
             --accent-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --accent-red: #ef4444;
             --text-primary: #e2e8f0;
             --text-secondary: #94a3b8;
+            --fluorine: #22c55e;
+            --chlorine: #3b82f6;
+            --bromine: #f59e0b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,174 +31,498 @@
             font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
             background: var(--bg-dark);
             color: var(--text-primary);
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
+        /* Hero Section */
         .hero {
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e1b4b 100%);
+            padding: 4rem 2rem;
             text-align: center;
-            padding: 5rem 2rem;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border-bottom: 1px solid #334155;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
         .hero h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 3rem;
-            color: var(--accent-green);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            position: relative;
         }
 
         .hero .subtitle {
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
             max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
+            margin: 0 auto 2rem;
+            position: relative;
         }
 
-        .meta {
-            margin-top: 2rem;
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--bromine);
+        }
+
+        .hero-stat .label {
             font-size: 0.9rem;
-            color: var(--accent-cyan);
+            color: var(--text-secondary);
         }
 
-        .meta a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-        }
-
-        .meta a:hover {
-            text-decoration: underline;
-        }
-
+        /* Container */
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem;
         }
 
-        .scene {
-            margin-bottom: 4rem;
-            padding-bottom: 4rem;
-            border-bottom: 1px solid #334155;
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 3rem 0 1.5rem;
         }
 
-        .scene:last-child {
-            border-bottom: none;
+        .section-header .icon-box {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .scene-number {
-            display: inline-block;
-            background: var(--accent-green);
+        .section-header .icon-box i {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+        }
+
+        /* Visual Cards Grid */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .visual-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--bg-light);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+        }
+
+        .visual-card .card-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-dark);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .visual-card .card-icon i {
+            width: 28px;
+            height: 28px;
+        }
+
+        .visual-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .visual-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Molecule Comparison */
+        .molecule-comparison {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .molecule-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .molecule-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .molecule-card.fluorine { border-color: var(--fluorine); }
+        .molecule-card.chlorine { border-color: var(--chlorine); }
+        .molecule-card.bromine {
+            border-color: var(--bromine);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), var(--bg-card));
+        }
+
+        .molecule-card.bromine::before {
+            content: 'WINNER';
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: var(--bromine);
             color: var(--bg-dark);
+            padding: 4px 40px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+
+        .molecule-svg {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+        }
+
+        .molecule-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .molecule-card .halogen {
+            display: inline-block;
             padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
 
-        .scene h2 {
-            font-family: 'Instrument Serif', serif;
-            color: var(--text-primary);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
+        .molecule-card.fluorine .halogen { background: rgba(34, 197, 94, 0.2); color: var(--fluorine); }
+        .molecule-card.chlorine .halogen { background: rgba(59, 130, 246, 0.2); color: var(--chlorine); }
+        .molecule-card.bromine .halogen { background: rgba(245, 158, 11, 0.2); color: var(--bromine); }
+
+        .molecule-card .pce {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
         }
 
-        .scene-text {
-            color: var(--text-secondary);
+        .molecule-card.fluorine .pce { color: var(--fluorine); }
+        .molecule-card.chlorine .pce { color: var(--chlorine); }
+        .molecule-card.bromine .pce { color: var(--bromine); }
+
+        .molecule-card .metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .molecule-card .metric {
+            text-align: center;
+        }
+
+        .molecule-card .metric .val {
+            font-weight: 700;
             font-size: 1.1rem;
-            margin-bottom: 2rem;
         }
 
-        .scene-text p {
-            margin-bottom: 1rem;
+        .molecule-card .metric .lbl {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
         }
 
-        .scene-text strong {
-            color: var(--text-primary);
-        }
-
-        .diagram-box {
+        /* Flow Diagram */
+        .flow-diagram {
             background: var(--bg-card);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 2rem;
-            overflow-x: auto;
-            border: 1px solid #334155;
-        }
-
-        .mermaid {
-            display: flex;
-            justify-content: center;
-        }
-
-        .mermaid svg {
-            max-width: 100%;
-            height: auto;
-        }
-
-        .highlight-box {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--accent-green);
-            padding: 1.25rem 1.5rem;
             margin: 2rem 0;
-            border-radius: 0 8px 8px 0;
         }
 
-        .highlight-box strong {
+        .flow-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .flow-step {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+            position: relative;
+        }
+
+        .flow-step .step-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.75rem;
+            border: 2px solid var(--accent-green);
+        }
+
+        .flow-step .step-icon i {
+            width: 28px;
+            height: 28px;
             color: var(--accent-green);
         }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
+        .flow-step h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
         }
 
-        .stat-card {
-            background: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #334155;
-        }
-
-        .stat-card .value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--accent-orange);
-        }
-
-        .stat-card .label {
-            font-size: 0.85rem;
+        .flow-step p {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-top: 0.25rem;
         }
 
-        .back-link {
-            display: inline-flex;
+        .flow-arrow {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+        }
+
+        /* Why It Works Section */
+        .mechanism-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .mechanism-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-green);
+        }
+
+        .mechanism-card .mech-header {
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--accent-cyan);
-            text-decoration: none;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .mechanism-card .mech-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mechanism-card .mech-icon i {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-green);
+        }
+
+        .mechanism-card h4 {
+            font-size: 1rem;
+        }
+
+        .mechanism-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mechanism-card li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-bottom: 2rem;
         }
 
-        .back-link:hover {
-            text-decoration: underline;
+        .mechanism-card li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
         }
 
+        /* Efficiency Timeline */
+        .timeline-visual {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timeline-bar .label {
+            width: 180px;
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .timeline-bar .bar-container {
+            flex: 1;
+            height: 36px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-bar .bar {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: width 1s ease-out;
+        }
+
+        .timeline-bar.f .bar { background: linear-gradient(90deg, var(--fluorine), #16a34a); width: 73.5%; }
+        .timeline-bar.cl .bar { background: linear-gradient(90deg, var(--chlorine), #2563eb); width: 67.5%; }
+        .timeline-bar.br .bar { background: linear-gradient(90deg, var(--bromine), #d97706); width: 87.5%; }
+        .timeline-bar.base .bar { background: linear-gradient(90deg, var(--accent-purple), #7c3aed); width: 95%; }
+        .timeline-bar.final .bar { background: linear-gradient(90deg, var(--accent-green), #059669); width: 100%; }
+
+        /* Key Insight Box */
+        .insight-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(6, 182, 212, 0.1));
+            border: 2px solid var(--accent-green);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .insight-box .insight-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .insight-box .insight-icon i {
+            width: 40px;
+            height: 40px;
+            color: var(--bg-dark);
+        }
+
+        .insight-box h3 {
+            font-size: 1.3rem;
+            color: var(--accent-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .insight-box p {
+            color: var(--text-secondary);
+        }
+
+        .insight-box .rules {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .insight-box .rule {
+            padding: 0.75rem 1rem;
+            background: var(--bg-dark);
+            border-radius: 8px;
+        }
+
+        .insight-box .rule .type {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .insight-box .rule .formula {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .insight-box .rule.old .formula { color: var(--accent-red); }
+        .insight-box .rule.new .formula { color: var(--accent-green); }
+
+        /* Footer */
         footer {
             text-align: center;
             padding: 3rem 2rem;
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            border-top: 1px solid #334155;
-            background: var(--bg-card);
+            border-top: 1px solid var(--bg-light);
         }
 
         footer a {
@@ -199,298 +530,288 @@
             text-decoration: none;
         }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .scene h2 { font-size: 1.5rem; }
-            .container { padding: 2rem 1rem; }
+            .insight-box { flex-direction: column; text-align: center; }
+            .insight-box .rules { flex-direction: column; gap: 1rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Hero -->
     <div class="hero">
-        <h1>Bromine Breaks the Rules in Solar Cells</h1>
-        <p class="subtitle">How central-core halogenation with bromine achieved 20.14% efficiency - defying conventional wisdom that fluorine and chlorine always outperform</p>
-        <p class="meta">Based on: Chen et al., <em>J. Am. Chem. Soc.</em> 2025 | <a href="https://doi.org/10.1021/jacs.5c16058">DOI: 10.1021/jacs.5c16058</a></p>
+        <h1>The Bromine Boost</h1>
+        <p class="subtitle">A Surprising Key to High-Performance Organic Solar Cells</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">20.14%</div>
+                <div class="label">Peak Efficiency</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">Br > F > Cl</div>
+                <div class="label">Inverse Trend</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">JACS 2025</div>
+                <div class="label">Published In</div>
+            </div>
+        </div>
     </div>
 
     <div class="container">
-        <a href="solar-cell-bromine.html" class="back-link">&larr; Back to Full Deep Dive</a>
+        <!-- Section 1: The Challenge -->
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="alert-triangle"></i></div>
+            <h2>The Challenge</h2>
+        </div>
 
-        <!-- SCENE 1 -->
-        <div class="scene">
-            <span class="scene-number">Scene 1 of 8</span>
-            <h2>The Challenge: Making Solar Cells More Efficient</h2>
-            <div class="scene-text">
-                <p>Organic solar cells (OSCs) offer a promising path to cheap, flexible, and lightweight solar energy. Unlike rigid silicon panels, these can be printed like newspapers and applied to curved surfaces. But there's a catch: <strong>efficiency</strong>.</p>
-                <p>To generate electricity efficiently, an OSC must balance three competing factors: voltage (VOC), current (JSC), and fill factor. Improving one often hurts another. The key lies in the molecular design of the light-absorbing materials - particularly the <strong>nonfullerene acceptors (NFAs)</strong> that have revolutionized the field.</p>
-                <p>Y-series NFAs recently pushed efficiencies past 20%, largely through clever halogenation - adding fluorine or chlorine atoms to fine-tune molecular properties. But bromine? It's always been the underperformer. Or so everyone thought.</p>
+        <div class="visual-grid">
+            <div class="visual-card">
+                <div class="card-icon" style="color: var(--accent-orange);"><i data-lucide="sun"></i></div>
+                <h3>Organic Solar Cells</h3>
+                <p>Lightweight, flexible, solution-processable — but efficiency needs improvement to compete with silicon.</p>
             </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-mindmap
-  root((OSC Challenges))
-    Balance Efficiency Metrics
-      VOC - voltage
-      JSC - current
-      Fill factor
-    Control Molecular Interactions
-      Donor-acceptor pairing
-      Electrostatic forces
-    Optimize Film Structure
-      Nanoscale morphology
-      Crystallinity
-    NFA Innovation
-      Y-series approach
-      Halogenation strategies
+            <div class="visual-card">
+                <div class="card-icon" style="color: var(--accent-blue);"><i data-lucide="atom"></i></div>
+                <h3>Nonfullerene Acceptors</h3>
+                <p>Y-series NFAs pushed efficiency past 20%. Key to success: molecular engineering of acceptors.</p>
+            </div>
+            <div class="visual-card">
+                <div class="card-icon" style="color: var(--accent-purple);"><i data-lucide="flask-conical"></i></div>
+                <h3>Halogenation Strategy</h3>
+                <p>Traditional wisdom: F and Cl substitution works. Bromine always underperforms. Or does it?</p>
+            </div>
+        </div>
+
+        <!-- Section 2: The Research Question -->
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="help-circle"></i></div>
+            <h2>The Research Question</h2>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="flow-steps">
+                <div class="flow-step">
+                    <div class="step-icon"><i data-lucide="flask-round"></i></div>
+                    <h4>Traditional Approach</h4>
+                    <p>End-group halogenation</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-icon"><i data-lucide="check-circle"></i></div>
+                    <h4>Known Result</h4>
+                    <p>F > Cl >> Br</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-icon"><i data-lucide="lightbulb"></i></div>
+                    <h4>New Idea</h4>
+                    <p>Central core halogenation</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="step-icon"><i data-lucide="help-circle"></i></div>
+                    <h4>Question</h4>
+                    <p>Same rules apply?</p>
                 </div>
             </div>
         </div>
 
-        <!-- SCENE 2 -->
-        <div class="scene">
-            <span class="scene-number">Scene 2 of 8</span>
-            <h2>The Hypothesis: What If We're Looking in the Wrong Place?</h2>
-            <div class="scene-text">
-                <p>Previous research focused on halogenating the <strong>end groups</strong> of NFA molecules. In that position, the rule was clear: fluorine beats chlorine beats bromine. The smaller, more electronegative atoms always won.</p>
-                <p>But the researchers asked a different question: <strong>what happens if we halogenate the central core instead?</strong> The quinoxaline (Qx) platform they chose offered multiple functionalization sites that traditional designs couldn't access.</p>
-                <p>This wasn't just academic curiosity. If the halogen hierarchy could be inverted by changing position, it would open entirely new molecular design strategies for high-performance solar cells.</p>
+        <!-- Section 3: Molecular Design -->
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="hexagon"></i></div>
+            <h2>Molecular Design: Three Halogenated NFAs</h2>
+        </div>
+
+        <div class="molecule-comparison">
+            <div class="molecule-card fluorine">
+                <svg class="molecule-svg" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="45" fill="none" stroke="#22c55e" stroke-width="2"/>
+                    <circle cx="60" cy="60" r="25" fill="#22c55e" fill-opacity="0.2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#22c55e" font-size="24" font-weight="bold">F</text>
+                    <circle cx="30" cy="40" r="8" fill="#22c55e" fill-opacity="0.5"/>
+                    <circle cx="90" cy="40" r="8" fill="#22c55e" fill-opacity="0.5"/>
+                    <circle cx="30" cy="80" r="8" fill="#22c55e" fill-opacity="0.5"/>
+                    <circle cx="90" cy="80" r="8" fill="#22c55e" fill-opacity="0.5"/>
+                </svg>
+                <h3>Qx-PhF</h3>
+                <span class="halogen">Fluorine (64 pm)</span>
+                <div class="pce">14.77%</div>
+                <div class="metrics">
+                    <div class="metric"><div class="val">0.88V</div><div class="lbl">VOC</div></div>
+                    <div class="metric"><div class="val">22.56</div><div class="lbl">JSC</div></div>
+                    <div class="metric"><div class="val">74.2%</div><div class="lbl">FF</div></div>
+                </div>
             </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-flowchart LR
-    A["Traditional Approach"] --> B["End-group halogenation"]
-    B --> C["F > Cl > Br"]
-    C --> D["Limited options"]
 
-    E["New Approach"] --> F["Central-core halogenation"]
-    F --> G["Qx platform"]
-    G --> H["???"]
+            <div class="molecule-card chlorine">
+                <svg class="molecule-svg" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="45" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                    <circle cx="60" cy="60" r="30" fill="#3b82f6" fill-opacity="0.2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#3b82f6" font-size="24" font-weight="bold">Cl</text>
+                    <circle cx="25" cy="40" r="10" fill="#3b82f6" fill-opacity="0.5"/>
+                    <circle cx="95" cy="40" r="10" fill="#3b82f6" fill-opacity="0.5"/>
+                    <circle cx="25" cy="80" r="10" fill="#3b82f6" fill-opacity="0.5"/>
+                    <circle cx="95" cy="80" r="10" fill="#3b82f6" fill-opacity="0.5"/>
+                </svg>
+                <h3>Qx-PhCl</h3>
+                <span class="halogen">Chlorine (97 pm)</span>
+                <div class="pce">13.59%</div>
+                <div class="metrics">
+                    <div class="metric"><div class="val">0.89V</div><div class="lbl">VOC</div></div>
+                    <div class="metric"><div class="val">21.49</div><div class="lbl">JSC</div></div>
+                    <div class="metric"><div class="val">71.2%</div><div class="lbl">FF</div></div>
+                </div>
+            </div>
 
-    style H fill:#10b981,color:#000
+            <div class="molecule-card bromine">
+                <svg class="molecule-svg" viewBox="0 0 120 120">
+                    <circle cx="60" cy="60" r="45" fill="none" stroke="#f59e0b" stroke-width="3"/>
+                    <circle cx="60" cy="60" r="35" fill="#f59e0b" fill-opacity="0.2"/>
+                    <text x="60" y="65" text-anchor="middle" fill="#f59e0b" font-size="24" font-weight="bold">Br</text>
+                    <circle cx="20" cy="40" r="12" fill="#f59e0b" fill-opacity="0.5"/>
+                    <circle cx="100" cy="40" r="12" fill="#f59e0b" fill-opacity="0.5"/>
+                    <circle cx="20" cy="80" r="12" fill="#f59e0b" fill-opacity="0.5"/>
+                    <circle cx="100" cy="80" r="12" fill="#f59e0b" fill-opacity="0.5"/>
+                    <!-- Glow effect -->
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3"/>
+                </svg>
+                <h3>Qx-PhBr</h3>
+                <span class="halogen">Bromine (112 pm)</span>
+                <div class="pce">17.58%</div>
+                <div class="metrics">
+                    <div class="metric"><div class="val">0.91V</div><div class="lbl">VOC</div></div>
+                    <div class="metric"><div class="val">25.59</div><div class="lbl">JSC</div></div>
+                    <div class="metric"><div class="val">75.5%</div><div class="lbl">FF</div></div>
                 </div>
             </div>
         </div>
 
-        <!-- SCENE 3 -->
-        <div class="scene">
-            <span class="scene-number">Scene 3 of 8</span>
-            <h2>The Experiment: Three Molecules, One Variable</h2>
-            <div class="scene-text">
-                <p>Good science isolates variables. The team synthesized three nearly identical molecules - <strong>Qx-PhF, Qx-PhCl, and Qx-PhBr</strong> - differing only in the halogen attached to their central quinoxaline core.</p>
-                <p>Each molecule shared the same conjugated backbone, the same end groups, and the same overall architecture. The only difference was a single atom: fluorine (smallest, most electronegative), chlorine (medium), or bromine (largest, least electronegative).</p>
-                <p>By keeping everything else constant, any performance differences could be attributed directly to the halogen choice - a clean experimental design that would yield clear answers.</p>
+        <!-- Section 4: Why Bromine Wins -->
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="sparkles"></i></div>
+            <h2>Why Bromine Wins</h2>
+        </div>
+
+        <div class="mechanism-grid">
+            <div class="mechanism-card">
+                <div class="mech-header">
+                    <div class="mech-icon"><i data-lucide="zap"></i></div>
+                    <h4>Electrostatic Interactions</h4>
+                </div>
+                <ul>
+                    <li>Larger ESP difference with PM6</li>
+                    <li>Stronger donor-acceptor binding</li>
+                    <li>Positive ESP at halogen sites</li>
+                </ul>
             </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-flowchart TD
-    Start(("Qx-PhHal Platform"))
 
-    Start --> F["<b>Qx-PhF</b><br/>Fluorine<br/>64 pm radius"]
-    Start --> Cl["<b>Qx-PhCl</b><br/>Chlorine<br/>97 pm radius"]
-    Start --> Br["<b>Qx-PhBr</b><br/>Bromine<br/>112 pm radius"]
+            <div class="mechanism-card">
+                <div class="mech-header">
+                    <div class="mech-icon"><i data-lucide="layers"></i></div>
+                    <h4>Film Morphology</h4>
+                </div>
+                <ul>
+                    <li>Nanofibril structure (~27 nm)</li>
+                    <li>Ideal phase separation</li>
+                    <li>Higher crystallinity (CCL = 106 Å)</li>
+                </ul>
+            </div>
 
-    F --> Same["Same backbone<br/>Same end groups<br/>Same architecture"]
-    Cl --> Same
-    Br --> Same
+            <div class="mechanism-card">
+                <div class="mech-header">
+                    <div class="mech-icon"><i data-lucide="arrow-right-left"></i></div>
+                    <h4>Charge Transport</h4>
+                </div>
+                <ul>
+                    <li>μh = 6.51 × 10⁻⁴ cm²/Vs</li>
+                    <li>μe = 4.10 × 10⁻⁴ cm²/Vs</li>
+                    <li>Balanced μe/μh = 0.63</li>
+                </ul>
+            </div>
 
-    style Br fill:#10b981,color:#000
+            <div class="mechanism-card">
+                <div class="mech-header">
+                    <div class="mech-icon"><i data-lucide="clock"></i></div>
+                    <h4>Carrier Dynamics</h4>
+                </div>
+                <ul>
+                    <li>Lifetime: 6.52 μs (vs 1.3-1.8)</li>
+                    <li>Fast extraction: 0.20 μs</li>
+                    <li>Reduced recombination</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Section 5: Efficiency Timeline -->
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="trending-up"></i></div>
+            <h2>Path to 20% Efficiency</h2>
+        </div>
+
+        <div class="timeline-visual">
+            <div class="timeline-bars">
+                <div class="timeline-bar cl">
+                    <div class="label">PM6:Qx-PhCl (Binary)</div>
+                    <div class="bar-container">
+                        <div class="bar">13.59%</div>
+                    </div>
+                </div>
+                <div class="timeline-bar f">
+                    <div class="label">PM6:Qx-PhF (Binary)</div>
+                    <div class="bar-container">
+                        <div class="bar">14.77%</div>
+                    </div>
+                </div>
+                <div class="timeline-bar br">
+                    <div class="label">PM6:Qx-PhBr (Binary)</div>
+                    <div class="bar-container">
+                        <div class="bar">17.58%</div>
+                    </div>
+                </div>
+                <div class="timeline-bar base">
+                    <div class="label">PM6:BTP-eC9 (Baseline)</div>
+                    <div class="bar-container">
+                        <div class="bar">19.03%</div>
+                    </div>
+                </div>
+                <div class="timeline-bar final">
+                    <div class="label">+ Qx-PhBr (Ternary)</div>
+                    <div class="bar-container">
+                        <div class="bar">20.14%</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- SCENE 4 -->
-        <div class="scene">
-            <span class="scene-number">Scene 4 of 8</span>
-            <h2>The Method: Computation Meets Synthesis</h2>
-            <div class="scene-text">
-                <p>Modern materials science doesn't just synthesize and hope. The team used <strong>Density Functional Theory (DFT)</strong> computations to predict how each halogen would affect molecular properties before ever stepping into the lab.</p>
-                <p>These calculations revealed something intriguing: as you move from fluorine to bromine, the electrostatic potential (ESP) at the halogen site becomes more positive. This should create a larger ESP difference with the donor polymer (PM6), potentially strengthening donor-acceptor interactions.</p>
-                <p>With computational predictions in hand, they synthesized all three NFAs, characterized their optical and electronic properties, fabricated solar cell devices, and analyzed the resulting film morphologies. A comprehensive approach to answer a focused question.</p>
-            </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-flowchart LR
-    A["DFT Computation"] --> B["Synthesis"]
-    B --> C["Characterization"]
-    C --> D["Device Fabrication"]
-    D --> E["Morphology Analysis"]
-
-    A -.->|"Predict ESP, dipole"| B
-    B -.->|"UV-vis, CV"| C
-    C -.->|"J-V curves, EQE"| D
-    D -.->|"AFM, GIWAXS"| E
+        <!-- Key Insight -->
+        <div class="insight-box">
+            <div class="insight-icon"><i data-lucide="lightbulb"></i></div>
+            <div>
+                <h3>Key Scientific Insight</h3>
+                <p>Central-core halogenation follows the <strong>opposite rules</strong> compared to end-group halogenation. This opens entirely new molecular design strategies for high-performance NFAs.</p>
+                <div class="rules">
+                    <div class="rule old">
+                        <div class="type">End Groups (Traditional)</div>
+                        <div class="formula">F > Cl >> Br</div>
+                    </div>
+                    <div class="rule new">
+                        <div class="type">Central Core (New)</div>
+                        <div class="formula">Br > F > Cl</div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- SCENE 5 -->
-        <div class="scene">
-            <span class="scene-number">Scene 5 of 8</span>
-            <h2>The Surprise: Bromine Wins</h2>
-            <div class="scene-text">
-                <p>The results defied decades of conventional wisdom. <strong>Brominated Qx-PhBr achieved 17.58% power conversion efficiency</strong> - dramatically outperforming the fluorinated version (14.77%) and chlorinated version (13.59%).</p>
-                <p>This wasn't a small difference or experimental noise. Bromine beat fluorine by nearly 3 percentage points - a massive gap in a field where researchers celebrate 0.5% improvements. The entire halogen hierarchy had been inverted.</p>
-                <p>Every metric told the same story: higher open-circuit voltage (0.91V), higher current density (25.59 mA/cm2), and better fill factor (75.53%). Bromine wasn't just competitive - it was dominant.</p>
-            </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-flowchart TB
-    subgraph Expected["Expected (End Groups)"]
-        E1["F - Best"] --> E2["Cl - Medium"] --> E3["Br - Worst"]
-    end
-
-    subgraph Actual["Actual (Central Core)"]
-        A1["Br - 17.58%"] --> A2["F - 14.77%"] --> A3["Cl - 13.59%"]
-    end
-
-    Expected -.->|"INVERTED!"| Actual
-
-    style A1 fill:#10b981,color:#000
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <strong>Key Finding:</strong> Central-core bromination completely inverts the traditional halogen performance hierarchy. This is the opposite of what happens with end-group halogenation.
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="value">17.58%</div>
-                    <div class="label">Qx-PhBr PCE</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">0.91 V</div>
-                    <div class="label">Open-circuit voltage</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">25.59</div>
-                    <div class="label">JSC (mA/cm2)</div>
-                </div>
-                <div class="stat-card">
-                    <div class="value">75.53%</div>
-                    <div class="label">Fill Factor</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- SCENE 6 -->
-        <div class="scene">
-            <span class="scene-number">Scene 6 of 8</span>
-            <h2>The Explanation: Why Bromine Works</h2>
-            <div class="scene-text">
-                <p>Why does the larger, "weaker" halogen outperform? The answer lies in a cascade of interconnected effects that all favor bromine in this central-core position.</p>
-                <p><strong>Stronger electrostatic interactions:</strong> Bromine's more positive ESP creates a larger difference with the PM6 donor, strengthening donor-acceptor attraction. <strong>Better film morphology:</strong> The PM6:Qx-PhBr blend forms pronounced nanofibrils (~27 nm diameter) with higher crystallinity - ideal for separating charges and transporting them to electrodes.</p>
-                <p><strong>Superior charge dynamics:</strong> Carriers live 4-5x longer (6.52 microseconds vs ~1.5 for others), giving them more time to reach electrodes before recombining. The electron and hole mobilities are also better balanced (ratio of 0.63), reducing losses from mismatched transport.</p>
-            </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-mindmap
-  root(("Why Br Wins"))
-    Electrostatics
-      Larger ESP difference with PM6
-      Stronger D-A interaction
-    Morphology
-      27 nm nanofibrils
-      Higher crystallinity
-      Better phase separation
-    Charge Transport
-      Balanced mobility ratio 0.63
-      Higher electron mobility
-      Higher hole mobility
-    Reduced Losses
-      6.52 us carrier lifetime
-      98% exciton dissociation
-      88% charge collection
-                </div>
-            </div>
-        </div>
-
-        <!-- SCENE 7 -->
-        <div class="scene">
-            <span class="scene-number">Scene 7 of 8</span>
-            <h2>The Achievement: Breaking 20%</h2>
-            <div class="scene-text">
-                <p>The researchers didn't stop at 17.58%. They used Qx-PhBr as a <strong>third component</strong> in an already high-performing binary system (PM6:BTP-eC9), creating a ternary solar cell.</p>
-                <p>The result? A remarkable <strong>20.14% power conversion efficiency</strong> - breaking the psychologically important 20% barrier. This represents a meaningful improvement over the binary system's 19.03% efficiency.</p>
-                <p>This progression from concept to record-breaking device demonstrates the power of computation-guided molecular design. A counterintuitive prediction led to a concrete breakthrough.</p>
-            </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-timeline
-    title Efficiency Progression
-    section Binary Devices
-        Qx-PhCl : 13.59% PCE
-        Qx-PhF : 14.77% PCE
-        Qx-PhBr : 17.58% PCE
-    section Ternary Device
-        PM6 BTP-eC9 : 19.03% baseline
-        + Qx-PhBr : 20.14% final
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <strong>Final Achievement:</strong> Ternary solar cells incorporating Qx-PhBr achieved 20.14% power conversion efficiency - a new benchmark enabled by the counterintuitive choice of bromine.
-            </div>
-        </div>
-
-        <!-- SCENE 8 -->
-        <div class="scene">
-            <span class="scene-number">Scene 8 of 8</span>
-            <h2>The Implication: A New Design Paradigm</h2>
-            <div class="scene-text">
-                <p>This research fundamentally changes how we think about halogenation in organic solar cells. The old rule - "fluorine and chlorine always beat bromine" - only applies to end-group modification. <strong>Central-core halogenation follows different rules entirely.</strong></p>
-                <p>For materials scientists, this opens a vast new design space. Bromine, long dismissed as inferior, becomes a viable tool when placed strategically. The quinoxaline platform demonstrates that molecular position matters as much as atom choice.</p>
-                <p>More broadly, this work validates computation-guided design. DFT predictions correctly anticipated the inverted trend, allowing researchers to pursue a counterintuitive hypothesis with confidence. As computational tools improve, we can expect more such surprises - hidden opportunities that conventional wisdom overlooks.</p>
-            </div>
-            <div class="diagram-box">
-                <div class="mermaid">
-flowchart TD
-    Old["Old Rule<br/><em>End Groups</em>"]
-    New["New Rule<br/><em>Central Core</em>"]
-
-    Old --> O1["F > Cl > Br"]
-    New --> N1["Br > F > Cl"]
-
-    N1 --> I1["New design strategies"]
-    N1 --> I2["Bromine now viable"]
-    N1 --> I3["Expanded optimization space"]
-    N1 --> I4["Computation-guided discovery"]
-
-    style New fill:#10b981,color:#000
-    style N1 fill:#10b981,color:#000
-                </div>
-            </div>
-
-            <div class="highlight-box">
-                <strong>The Takeaway:</strong> Where you put the halogen matters as much as which halogen you choose. This position-dependent behavior opens new frontiers for organic solar cell design.
-            </div>
-        </div>
-
     </div>
 
     <footer>
-        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a> | <a href="solar-cell-bromine.html">Full Deep Dive</a></p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Diagrams generated with Mermaid.js</p>
+        <p>Based on Chen et al., <em>J. Am. Chem. Soc.</em> 2025 | DOI: 10.1021/jacs.5c16058</p>
+        <p>Visual story generated with <a href="#">napkin-local</a> for <a href="https://thebeakers.com">The Beakers</a></p>
     </footer>
 
     <script>
-        mermaid.initialize({
-            startOnLoad: true,
-            theme: 'dark',
-            themeVariables: {
-                primaryColor: '#10b981',
-                primaryTextColor: '#fff',
-                primaryBorderColor: '#10b981',
-                lineColor: '#64748b',
-                secondaryColor: '#3b82f6',
-                tertiaryColor: '#1e293b',
-                background: '#0f172a'
-            }
-        });
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
