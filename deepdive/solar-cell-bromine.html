@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Dive: Bromine Beats Fluorine in Solar Cells — The Beakers</title>
+    <meta name="description" content="An in-depth exploration of how a single atom swap revolutionized organic solar cell efficiency. Podcast, video, infographic, and interactive quiz.">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Deep Dive: One Tiny Atom, One Giant Leap for Solar Cells">
+    <meta property="og:description" content="How bromine beat fluorine to achieve 20% solar cell efficiency">
+    <meta property="og:image" content="https://thebeakers.com/deepdive/solar-cell-bromine/infographic.png">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #273549;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-cyan: #06b6d4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* Header */
+        header {
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-icon { width: 48px; height: 48px; }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .deep-dive-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue));
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.75rem;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* Podcast Section - THE CROWN JEWEL */
+        .podcast-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            border: 1px solid var(--accent-purple);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .podcast-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+        }
+
+        .podcast-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .podcast-badge {
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+        }
+
+        .podcast-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .podcast-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .audio-player {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .audio-player audio {
+            width: 100%;
+            height: 50px;
+        }
+
+        .audio-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-dark);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Infographic Section */
+        .infographic-section img {
+            width: 100%;
+            border-radius: 16px;
+            border: 1px solid var(--border-dark);
+        }
+
+        /* Mind Map Section */
+        .mindmap-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-dark);
+        }
+
+        .mindmap-section img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        /* Quiz Section - OUR VALUE ADD */
+        .quiz-section {
+            background: linear-gradient(135deg, #1e3a5f 0%, #1a365d 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--accent-blue);
+        }
+
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-badge {
+            background: var(--accent-blue);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+        }
+
+        .quiz-progress {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .quiz-question {
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-number {
+            font-size: 0.75rem;
+            color: var(--accent-blue);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .quiz-option {
+            background: rgba(255,255,255,0.05);
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent-blue);
+        }
+
+        .quiz-option.selected {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: var(--accent-blue);
+        }
+
+        .quiz-option.correct {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--accent-green);
+        }
+
+        .quiz-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--accent-red);
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .quiz-feedback {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: rgba(16, 185, 129, 0.2); }
+        .quiz-feedback.incorrect { background: rgba(239, 68, 68, 0.2); }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+
+        .quiz-btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quiz-btn:hover { transform: translateY(-2px); }
+        .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .quiz-score {
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+
+        .quiz-score.show { display: block; }
+
+        .score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--accent-green);
+        }
+
+        /* Curriculum Connection - OUR VALUE ADD */
+        .curriculum-section {
+            background: linear-gradient(135deg, #134e4a 0%, #115e59 100%);
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid var(--accent-green);
+        }
+
+        .curriculum-badge {
+            background: var(--accent-green);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .concept-tag {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--accent-green);
+            font-size: 0.75rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 8px;
+        }
+
+        /* Downloads Section */
+        .downloads-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .download-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+
+        .download-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-blue);
+        }
+
+        .download-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .download-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .download-size {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* Glossary */
+        .glossary-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border-dark);
+        }
+
+        .glossary-term {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-dark);
+        }
+
+        .glossary-term:last-child { border-bottom: none; }
+
+        .term-name {
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+        }
+
+        .term-def {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        footer a { color: var(--accent-green); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .stats-row { gap: 1.5rem; }
+            .podcast-section, .quiz-section, .curriculum-section { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../" class="logo">
+            <img src="../logo-48.png" alt="The Beakers" class="logo-icon">
+            The Beakers
+        </a>
+    </header>
+
+    <section class="hero">
+        <span class="deep-dive-badge">Deep Dive</span>
+        <h1>One Tiny Atom, One Giant Leap for Solar Cells</h1>
+        <p class="subtitle">How swapping fluorine for bromine defied conventional wisdom and achieved record-breaking 20% efficiency</p>
+
+        <div class="stats-row">
+            <div class="stat">
+                <div class="stat-value">20.14%</div>
+                <div class="stat-label">Peak Efficiency</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">3.5x</div>
+                <div class="stat-label">Longer Carrier Life</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">Br > F</div>
+                <div class="stat-label">The Surprise</div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- PODCAST - THE CROWN JEWEL -->
+        <section class="podcast-section">
+            <div class="podcast-header">
+                <span class="podcast-badge">AI Podcast</span>
+                <span style="color: var(--text-light); font-size: 0.9rem;">~15 min listen</span>
+            </div>
+            <h2 class="podcast-title">The Solar Power Underdog Story</h2>
+            <p class="podcast-description">Two AI hosts break down this research in a conversational, engaging podcast format. Perfect for your commute or study session.</p>
+
+            <div class="audio-player">
+                <audio controls preload="metadata">
+                    <source src="solar-cell-bromine/podcast.m4a" type="audio/mp4">
+                    Your browser does not support the audio element.
+                </audio>
+                <p class="audio-note">Generated by NotebookLM</p>
+            </div>
+        </section>
+
+        <!-- VIDEO -->
+        <section class="section video-section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-orange);">
+                    <span style="filter: grayscale(1) brightness(10);">&#x25B6;</span>
+                </div>
+                <h2 class="section-title">Video Explainer</h2>
+            </div>
+            <div class="video-container">
+                <video controls preload="metadata" poster="solar-cell-bromine/infographic.png">
+                    <source src="solar-cell-bromine/video.mp4" type="video/mp4">
+                </video>
+            </div>
+        </section>
+
+        <!-- INFOGRAPHIC -->
+        <section class="section infographic-section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-cyan);">
+                    <span style="filter: grayscale(1) brightness(10);">&#128202;</span>
+                </div>
+                <h2 class="section-title">Visual Summary</h2>
+            </div>
+            <img src="solar-cell-bromine/infographic.png" alt="Bromine Boost Infographic" loading="lazy">
+        </section>
+
+        <!-- CURRICULUM CONNECTION - OUR VALUE ADD -->
+        <section class="section curriculum-section">
+            <span class="curriculum-badge">The Beakers Exclusive</span>
+            <div class="section-header">
+                <h2 class="section-title" style="color: white;">Curriculum Connection</h2>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">See how concepts from your courses directly apply to this cutting-edge research.</p>
+
+            <div class="course-card">
+                <div class="course-code">CHEM 201</div>
+                <div class="course-name">Organic Chemistry I</div>
+                <p class="course-connection"><strong>Remember learning about halogens and electronegativity?</strong> This research flips the script: bromine (less electronegative than fluorine) creates better electrostatic interactions with donor polymers. The halogen's position on the molecule matters more than its electronegativity.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Halogens</span>
+                    <span class="concept-tag">Electronegativity</span>
+                    <span class="concept-tag">Molecular Orbitals</span>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-code">CHEM 341</div>
+                <div class="course-name">Physical Chemistry</div>
+                <p class="course-connection"><strong>DFT calculations in action!</strong> The researchers used Density Functional Theory to predict electrostatic potential maps before synthesis. This is computational chemistry guiding real experiments - exactly what you learn in p-chem lab.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">DFT</span>
+                    <span class="concept-tag">Electrostatic Potential</span>
+                    <span class="concept-tag">HOMO/LUMO</span>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-code">MSE 301</div>
+                <div class="course-name">Materials Characterization</div>
+                <p class="course-connection"><strong>GIWAXS, AFM, and charge mobility measurements</strong> - these are the exact techniques you learn for thin-film analysis. The "nanofibril morphology" they discovered is visible through AFM, while GIWAXS reveals the molecular packing orientation.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">GIWAXS</span>
+                    <span class="concept-tag">AFM</span>
+                    <span class="concept-tag">Thin Films</span>
+                    <span class="concept-tag">SCLC</span>
+                </div>
+            </div>
+
+            <div class="course-card">
+                <div class="course-code">PHYS 320</div>
+                <div class="course-name">Semiconductor Physics</div>
+                <p class="course-connection"><strong>Charge carrier dynamics in real devices.</strong> The carrier lifetime of 6.52 μs vs 1.82 μs directly impacts how many electrons reach the electrode. This is the charge transport theory from your semiconductor course applied to organic materials.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Carrier Lifetime</span>
+                    <span class="concept-tag">Charge Transport</span>
+                    <span class="concept-tag">Recombination</span>
+                    <span class="concept-tag">Fill Factor</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE QUIZ - OUR VALUE ADD -->
+        <section class="section quiz-section">
+            <div class="quiz-header">
+                <span class="quiz-badge">Test Your Understanding</span>
+                <span class="quiz-progress" id="quiz-progress">Question 1 of 5</span>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Questions loaded by JS -->
+            </div>
+
+            <div class="quiz-score" id="quiz-score">
+                <div class="score-value" id="score-value">0/5</div>
+                <p style="margin-top: 1rem; color: var(--text-secondary);">Great work! Review the study guide for more practice.</p>
+                <button class="quiz-btn" onclick="resetQuiz()" style="margin-top: 1rem;">Try Again</button>
+            </div>
+        </section>
+
+        <!-- MIND MAP -->
+        <section class="section mindmap-section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-purple);">
+                    <span style="filter: grayscale(1) brightness(10);">&#x1F5FA;</span>
+                </div>
+                <h2 class="section-title">Concept Map</h2>
+            </div>
+            <img src="solar-cell-bromine/mindmap.png" alt="Mind Map" loading="lazy">
+        </section>
+
+        <!-- GLOSSARY -->
+        <section class="section glossary-section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-cyan);">
+                    <span style="filter: grayscale(1) brightness(10);">&#x1F4D6;</span>
+                </div>
+                <h2 class="section-title">Key Terms</h2>
+            </div>
+
+            <div class="glossary-term">
+                <div class="term-name">Non-Fullerene Acceptor (NFA)</div>
+                <div class="term-def">Organic molecules that accept electrons in solar cells. They've replaced fullerene-based acceptors due to better light absorption and tunability.</div>
+            </div>
+            <div class="glossary-term">
+                <div class="term-name">Power Conversion Efficiency (PCE)</div>
+                <div class="term-def">The percentage of sunlight energy converted to electricity. The holy grail metric for solar cells.</div>
+            </div>
+            <div class="glossary-term">
+                <div class="term-name">Electrostatic Potential (ESP)</div>
+                <div class="term-def">A measure of how positive or negative different parts of a molecule are. Differences in ESP between donor and acceptor drive charge separation.</div>
+            </div>
+            <div class="glossary-term">
+                <div class="term-name">Carrier Lifetime</div>
+                <div class="term-def">How long charge carriers (electrons/holes) survive before recombining. Longer = more charges collected = higher efficiency.</div>
+            </div>
+            <div class="glossary-term">
+                <div class="term-name">Nanofibril Morphology</div>
+                <div class="term-def">A film structure with tiny fiber-like features that create efficient pathways for charge transport.</div>
+            </div>
+        </section>
+
+        <!-- DOWNLOADS -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: var(--accent-green);">
+                    <span style="filter: grayscale(1) brightness(10);">&#x2B07;</span>
+                </div>
+                <h2 class="section-title">Downloads</h2>
+            </div>
+
+            <div class="downloads-section">
+                <a href="solar-cell-bromine/summary.pdf" class="download-card" download>
+                    <div class="download-icon">&#x1F4C4;</div>
+                    <div class="download-title">Summary</div>
+                    <div class="download-size">PDF, 146 KB</div>
+                </a>
+                <a href="solar-cell-bromine/studyguide.pdf" class="download-card" download>
+                    <div class="download-icon">&#x1F4DA;</div>
+                    <div class="download-title">Study Guide</div>
+                    <div class="download-size">PDF, 131 KB</div>
+                </a>
+                <a href="solar-cell-bromine/infographic.png" class="download-card" download>
+                    <div class="download-icon">&#x1F5BC;</div>
+                    <div class="download-title">Infographic</div>
+                    <div class="download-size">PNG, 6 MB</div>
+                </a>
+                <a href="solar-cell-bromine/mindmap.png" class="download-card" download>
+                    <div class="download-icon">&#x1F5FA;</div>
+                    <div class="download-title">Mind Map</div>
+                    <div class="download-size">PNG, 1.3 MB</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- SOURCE -->
+        <section class="section" style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 16px;">
+            <p style="color: var(--text-light); margin-bottom: 0.5rem;">Original Research</p>
+            <p style="font-weight: 600;">Computation-Guided Placement of Nonfullerene Acceptor Core Halogenation</p>
+            <p style="color: var(--text-secondary);">Journal of the American Chemical Society</p>
+            <a href="https://doi.org/10.1021/jacs.5c16058" target="_blank" style="color: var(--accent-blue); margin-top: 1rem; display: inline-block;">Read Original Paper &rarr;</a>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>Deep Dive</strong> by The Beakers</p>
+        <p style="margin-top: 0.5rem;">Podcast & Video generated by <a href="https://notebooklm.google.com" target="_blank">NotebookLM</a></p>
+        <p style="margin-top: 0.5rem;"><a href="../chemistry.html">&larr; Back to Chemistry</a></p>
+    </footer>
+
+    <script>
+        // Quiz Data (from Study Guide)
+        const quizData = [
+            {
+                question: "What was the surprising finding about halogen performance in this study?",
+                options: [
+                    "Fluorine performed best, as expected",
+                    "Bromine outperformed fluorine and chlorine (inverse of typical results)",
+                    "Chlorine was the clear winner",
+                    "All halogens performed equally"
+                ],
+                correct: 1,
+                explanation: "This was an 'inverse performance trend' - bromination of the central core produced more efficient cells than fluorination, which is opposite to typical end-group halogenation results."
+            },
+            {
+                question: "What was the Power Conversion Efficiency (PCE) of the bromine-based solar cell?",
+                options: [
+                    "13.59%",
+                    "14.77%",
+                    "17.58%",
+                    "20.14%"
+                ],
+                correct: 2,
+                explanation: "The PM6:Qx-PhBr cell achieved 17.58% PCE. The 20.14% was achieved in a ternary system using Qx-PhBr as a third component."
+            },
+            {
+                question: "What morphological feature made the bromine blend superior?",
+                options: [
+                    "Amorphous structure",
+                    "Pronounced nanofibril morphology",
+                    "Large crystal domains",
+                    "Random orientation"
+                ],
+                correct: 1,
+                explanation: "The PM6:Qx-PhBr blend exhibited a 'pronounced nanofibril morphology' with larger diameter fibers, creating ideal pathways for charge transport."
+            },
+            {
+                question: "How much longer was the carrier lifetime in the bromine device compared to fluorine?",
+                options: [
+                    "About the same",
+                    "About 2x longer",
+                    "About 3.5x longer",
+                    "About 10x longer"
+                ],
+                correct: 2,
+                explanation: "Bromine: 6.52 μs vs Fluorine: 1.82 μs - that's about 3.5x longer carrier lifetime, meaning far fewer charges are lost to recombination."
+            },
+            {
+                question: "What computational method was used to guide the molecular design?",
+                options: [
+                    "Machine learning",
+                    "Molecular dynamics",
+                    "Density Functional Theory (DFT)",
+                    "Monte Carlo simulation"
+                ],
+                correct: 2,
+                explanation: "DFT calculations were used to predict electrostatic potentials and molecular properties before synthesis, enabling computation-guided design."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answered = false;
+
+        function renderQuestion() {
+            const container = document.getElementById('quiz-container');
+            const q = quizData[currentQuestion];
+
+            container.innerHTML = `
+                <div class="quiz-question">
+                    <div class="question-number">QUESTION ${currentQuestion + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="quiz-options">
+                        ${q.options.map((opt, i) => `
+                            <div class="quiz-option" onclick="selectOption(${i})" data-index="${i}">
+                                <span class="option-letter">${String.fromCharCode(65 + i)}</span>
+                                <span>${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="quiz-feedback" id="feedback"></div>
+                </div>
+                <div class="quiz-nav">
+                    <button class="quiz-btn" onclick="prevQuestion()" ${currentQuestion === 0 ? 'disabled' : ''}>Previous</button>
+                    <button class="quiz-btn" onclick="nextQuestion()" id="next-btn" disabled>Next</button>
+                </div>
+            `;
+
+            document.getElementById('quiz-progress').textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
+            answered = false;
+        }
+
+        function selectOption(index) {
+            if (answered) return;
+            answered = true;
+
+            const q = quizData[currentQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            const feedback = document.getElementById('feedback');
+
+            options.forEach((opt, i) => {
+                if (i === q.correct) opt.classList.add('correct');
+                if (i === index && i !== q.correct) opt.classList.add('incorrect');
+                opt.style.pointerEvents = 'none';
+            });
+
+            if (index === q.correct) {
+                score++;
+                feedback.className = 'quiz-feedback show correct';
+                feedback.innerHTML = `<strong>Correct!</strong> ${q.explanation}`;
+            } else {
+                feedback.className = 'quiz-feedback show incorrect';
+                feedback.innerHTML = `<strong>Not quite.</strong> ${q.explanation}`;
+            }
+
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                renderQuestion();
+            } else {
+                showScore();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                renderQuestion();
+            }
+        }
+
+        function showScore() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('quiz-score').classList.add('show');
+            document.getElementById('score-value').textContent = `${score}/${quizData.length}`;
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            document.getElementById('quiz-container').style.display = 'block';
+            document.getElementById('quiz-score').classList.remove('show');
+            renderQuestion();
+        }
+
+        // Initialize
+        renderQuestion();
+    </script>
+</body>
+</html>
