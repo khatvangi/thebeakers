@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Bromine Breaks the Rules in Solar Cells</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .meta {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .scene {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #334155;
+        }
+        
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .scene h2 {
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .scene .description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .diagram-box {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-dark);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+        
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+        }
+        
+        footer a {
+            color: var(--accent-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Bromine Breaks the Rules in Solar Cells</h1>
+        <p class="subtitle">How central-core halogenation with bromine achieved 20.14% efficiency — defying conventional wisdom that fluorine and chlorine always outperform</p>
+        <p class="meta">Based on: Chen et al., J. Am. Chem. Soc. 2025 | DOI: 10.1021/jacs.5c16058</p>
+    </div>
+    
+    <div class="container">
+
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 8</span>
+            <h2>Organic Solar Cell Challenges</h2>
+            <p class="description">Organic solar cells face key challenges in balancing efficiency metrics while controlling molecular interactions and film morphology.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+mindmap
+  OSC Challenges
+    Balance VOC/JSC/fill factor
+    Intermolecular interactions
+    Film morphology optimization
+    NFA Opportunity
+      Y-series NFAs (>20% efficiency)
+      Halogenation strategies
+        F/Cl end groups (effective)
+        Br underperformance
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 8</span>
+            <h2>Research Hypothesis</h2>
+            <p class="description">The research asks: does the conventional halogenation hierarchy (F > Cl > Br) apply when we modify the central core instead of end groups?</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TD
+    A(("Start"))
+    B["Traditional Approach"]
+    C["New Approach"]
+    D["F/Cl Substitution"]
+    E[/"Limited Sites"/]
+    F["Qx Platform"]
+    G["Functionalization"]
+    H{"F>Cl>Br Rule?"}
+    I(("Yes"))
+    J(("No"))
+    A --> B
+    A --> C
+    B --> D
+    B --> E
+    C --> F
+    C --> G
+    D --> H
+    G --> H
+    H --> I
+    H --> J
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 8</span>
+            <h2>Molecular Design: Three Halogenated NFAs</h2>
+            <p class="description">Three molecules were synthesized with identical structures except for the halogen on the central quinoxaline core.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TD
+    Start(("Shared Structure"))
+    Qx-PhF["Qx-PhF"]
+    Qx-PhCl["Qx-PhCl"]
+    Qx-PhBr["Qx-PhBr"]
+    End(("End"))
+    Start -->|"Fluorine (64 pm, most electronegative)"| Qx-PhF
+    Start -->|"Chlorine (97 pm, medium electronegativity)"| Qx-PhCl
+    Start -->|"Bromine (112 pm, least electronegative)"| Qx-PhBr
+    Qx-PhF -->|"Same conjugated backbone"| End
+    Qx-PhCl -->|"Same conjugated backbone"| End
+    Qx-PhBr -->|"Same conjugated backbone"| End
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 8</span>
+            <h2>Research Methodology</h2>
+            <p class="description">A systematic approach combining computation, synthesis, characterization, and device testing.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TD
+    A["DFT Computation"]
+    B["Synthesis"]
+    C["Optical/Electronic Characterization"]
+    D["Device Fabrication"]
+    E["Morphology Analysis"]
+    A -->|"Optimize geometry → ESP/dipole"| B
+    B -->|"Synthesis → Characterization"| C
+    C -->|"UV-vis/CV → Device"| D
+    D -->|"J-V/EQE → Morphology"| E
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 8</span>
+            <h2>Surprising Result: Bromine Wins</h2>
+            <p class="description">The results surprised everyone: Bromine achieved the highest efficiency, completely inverting the expected trend!</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TD
+    Start(("Start"))
+    Traditional["Traditional Expectation"]
+    F["F Substitution"]
+    Cl["Cl Substitution"]
+    Br["Br Substitution"]
+    Actual["Actual Results"]
+    Qx-PhBr[/"Qx-PhBr"/]
+    Qx-PhF[/"Qx-PhF"/]
+    Qx-PhCl[/"Qx-PhCl"/]
+    Metrics["Metrics Comparison"]
+    Start --> Traditional
+    Traditional --> F
+    Traditional --> Cl
+    Traditional --> Br
+    Actual --> Qx-PhBr
+    Actual --> Qx-PhF
+    Actual --> Qx-PhCl
+    Qx-PhBr --> Metrics
+    Qx-PhF --> Metrics
+    Qx-PhCl --> Metrics
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Key Finding:</strong> Brominated Qx-PhBr achieved 17.58% PCE — significantly higher than fluorinated (14.77%) or chlorinated (13.59%) variants. This is the opposite of end-group halogenation trends!
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="value">17.58%</div>
+                    <div class="label">Qx-PhBr PCE</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">0.91 V</div>
+                    <div class="label">Open-circuit voltage</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">25.59</div>
+                    <div class="label">JSC (mA/cm²)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">75.53%</div>
+                    <div class="label">Fill Factor</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 6 of 8</span>
+            <h2>Why Bromine Wins</h2>
+            <p class="description">Multiple factors explain bromine's superior performance, from morphology to charge transport.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+mindmap
+  Qx-PhBr Advantages
+    Electrostatic Interactions
+      Larger ESP difference with PM6 donor
+      Stronger donor-acceptor interaction
+    Film Morphology
+      Pronounced nanofibril structure (~27 nm diameter)
+      Better phase separation
+      Higher crystallinity (CCL = 106 Å)
+    Charge Transport
+      Higher hole mobility (6.51 × 10⁻⁴ cm²/Vs)
+      Higher electron mobility (4.10 × 10⁻⁴ cm²/Vs)
+      Better balanced μe/μh = 0.63
+    Reduced Recombination
+      Longer carrier lifetime (6.52 μs vs 1.3-1.8 μs)
+      Faster charge extraction (0.20 μs)
+      Lower trap-assisted recombination (n = 1.18)
+    Exciton Dynamics
+      Higher dissociation efficiency (98.1%)
+      Higher collection efficiency (88.3%)
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 7 of 8</span>
+            <h2>Path to 20% Efficiency</h2>
+            <p class="description">The efficiency progression from binary to ternary devices, culminating in 20.14% PCE.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+timeline
+    title Path to 20% Efficiency
+    Binary F : 14.77% PCE
+    Binary Cl : 13.59% PCE
+    Binary Br : 17.58% PCE
+    Ternary Baseline : 19.03% PCE
+    Ternary Final : 20.14% PCE (Final achievement!)
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Final Achievement:</strong> Ternary solar cells with Qx-PhBr as the third component in PM6:BTP-eC9 achieved a remarkable 20.14% power conversion efficiency!
+            </div>
+
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 8 of 8</span>
+            <h2>Key Scientific Insight</h2>
+            <p class="description">The key scientific insight that opens new molecular design strategies for future NFAs.</p>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TD
+    Start(("Start"))
+    TraditionalRule["Traditional Rule (End Groups)"]
+    NewRule["New Rule (Central Core)"]
+    Implication1[/"New Design Strategy"/]
+    Implication2[/"Bromine Viable"/]
+    Implication3[/"Optimization Space"/]
+    Implication4[/"Guides Future Engineering"/]
+    Start -->|"End Group Halogenation"| TraditionalRule
+    Start -->|"Central Core Halogenation"| NewRule
+    NewRule -->|"Enables"| Implication1
+    NewRule -->|"Enables"| Implication2
+    NewRule -->|"Opens"| Implication3
+    NewRule -->|"Guides"| Implication4
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <footer>
+        <p>Generated with <a href="#">napkin-local</a> | Visual story for <a href="https://thebeakers.com">The Beakers</a></p>
+    </footer>
+    
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#10b981',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#10b981',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>
