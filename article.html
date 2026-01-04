@@ -1001,6 +1001,10 @@
             else if (layout === 'timeline') renderTimeline(svgEl, rc, title, data);
             else if (layout === 'radial') renderRadial(svgEl, rc, title, data);
             else if (layout === 'flow') renderFlow(svgEl, rc, title, data);
+            else if (layout === 'stairs') renderStairs(svgEl, rc, title, data);
+            else if (layout === 'funnel') renderFunnel(svgEl, rc, title, data);
+            else if (layout === 'scale') renderScale(svgEl, rc, title, data);
+            else if (layout === 'target') renderTarget(svgEl, rc, title, data);
             else renderLinear(svgEl, rc, title, data); // default
         }
 
@@ -1227,6 +1231,121 @@
                     svg.appendChild(rc.line(620, 225, 400, 230, { stroke: '#64748b', strokeWidth: 1.5 }));
                 }
             }
+        }
+
+        // STAIRS: Progressive steps upward (incremental improvements)
+        function renderStairs(svg, rc, title, data) {
+            addText(svg, 400, 20, title || 'Progress', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 5);
+            const colors = ['#64748b', '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b'];
+            const stepW = 130, stepH = 35;
+
+            items.forEach(([key, val], i) => {
+                const x = 100 + i * (stepW - 20);
+                const y = 180 - i * stepH;
+                // Step rectangle
+                svg.appendChild(rc.rectangle(x, y, stepW, stepH, {
+                    fill: `rgba(${i === items.length-1 ? '16,185,129' : '59,130,246'},${0.15 + i * 0.1})`,
+                    stroke: colors[i], strokeWidth: 2, roughness: 0.8
+                }));
+                addText(svg, x + stepW/2, y + stepH/2 + 4, val.substring(0, 16), '#e2e8f0', 11);
+                // Arrow up
+                if (i < items.length - 1) {
+                    const arrowX = x + stepW - 10;
+                    svg.appendChild(rc.line(arrowX, y, arrowX, y - 15, { stroke: '#64748b', strokeWidth: 2 }));
+                }
+            });
+            // Rising arrow on right
+            svg.appendChild(rc.line(680, 180, 720, 60, { stroke: '#10b981', strokeWidth: 3, roughness: 0.5 }));
+            svg.appendChild(rc.polygon([[715, 70], [725, 55], [730, 75]], { fill: '#10b981', stroke: '#10b981' }));
+        }
+
+        // FUNNEL: Wide → narrow filtering (screening processes)
+        function renderFunnel(svg, rc, title, data) {
+            addText(svg, 400, 20, title || 'Filtering', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 4);
+            const colors = ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981'];
+            const centerX = 400;
+
+            items.forEach(([key, val], i) => {
+                const topW = 350 - i * 80;
+                const y = 45 + i * 50;
+                const h = 42;
+                // Trapezoid shape using polygon
+                const left = centerX - topW/2;
+                const right = centerX + topW/2;
+                const bottomW = topW - 60;
+                const bottomLeft = centerX - bottomW/2;
+                const bottomRight = centerX + bottomW/2;
+                svg.appendChild(rc.polygon([
+                    [left, y], [right, y], [bottomRight, y + h], [bottomLeft, y + h]
+                ], { fill: `rgba(${i === items.length-1 ? '16,185,129' : '59,130,246'},${0.1 + i * 0.1})`, stroke: colors[i], strokeWidth: 2, roughness: 0.8 }));
+                addText(svg, centerX, y + h/2 + 4, val.substring(0, 22), '#e2e8f0', 11);
+            });
+            // Arrow at bottom
+            svg.appendChild(rc.line(400, 205, 400, 225, { stroke: '#10b981', strokeWidth: 3 }));
+            svg.appendChild(rc.polygon([[395, 220], [400, 232], [405, 220]], { fill: '#10b981', stroke: '#10b981' }));
+        }
+
+        // SCALE: Balanced trade-off (weighing factors)
+        function renderScale(svg, rc, title, data) {
+            addText(svg, 400, 20, title || 'Balance', '#f1f5f9', 18, 'bold');
+            const entries = Object.entries(data);
+            const left = entries.find(([k]) => k === 'left') || entries[0];
+            const right = entries.find(([k]) => k === 'right') || entries[2];
+            const center = entries.find(([k]) => k === 'center' || k === 'balance') || entries[1];
+
+            // Base/fulcrum
+            svg.appendChild(rc.polygon([[400, 200], [380, 220], [420, 220]], { fill: 'rgba(100,116,139,0.3)', stroke: '#64748b', strokeWidth: 2, roughness: 0.8 }));
+            svg.appendChild(rc.rectangle(350, 220, 100, 15, { fill: 'rgba(100,116,139,0.2)', stroke: '#64748b', strokeWidth: 2, roughness: 0.8 }));
+
+            // Balance beam
+            svg.appendChild(rc.line(150, 130, 650, 130, { stroke: '#94a3b8', strokeWidth: 3, roughness: 0.5 }));
+            // Vertical support
+            svg.appendChild(rc.line(400, 130, 400, 200, { stroke: '#64748b', strokeWidth: 3, roughness: 0.5 }));
+
+            // Left pan
+            svg.appendChild(rc.line(150, 130, 150, 160, { stroke: '#ef4444', strokeWidth: 2 }));
+            svg.appendChild(rc.ellipse(150, 175, 120, 30, { fill: 'rgba(239,68,68,0.15)', stroke: '#ef4444', strokeWidth: 2, roughness: 0.8 }));
+            if (left) addText(svg, 150, 180, left[1].substring(0, 14), '#e2e8f0', 11);
+
+            // Right pan
+            svg.appendChild(rc.line(650, 130, 650, 160, { stroke: '#10b981', strokeWidth: 2 }));
+            svg.appendChild(rc.ellipse(650, 175, 120, 30, { fill: 'rgba(16,185,129,0.15)', stroke: '#10b981', strokeWidth: 2, roughness: 0.8 }));
+            if (right) addText(svg, 650, 180, right[1].substring(0, 14), '#e2e8f0', 11);
+
+            // Center label
+            if (center) {
+                svg.appendChild(rc.circle(400, 90, 60, { fill: 'rgba(139,92,246,0.2)', stroke: '#8b5cf6', strokeWidth: 2, roughness: 0.8 }));
+                addText(svg, 400, 95, center[1].substring(0, 14), '#e2e8f0', 10);
+            }
+        }
+
+        // TARGET: Concentric rings (precision/goals achieved)
+        function renderTarget(svg, rc, title, data) {
+            addText(svg, 400, 15, title || 'Precision', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 4);
+            const colors = ['#64748b', '#3b82f6', '#8b5cf6', '#10b981'];
+            const cx = 400, cy = 130;
+            const rings = [100, 70, 45, 20];
+
+            items.forEach(([key, val], i) => {
+                const r = rings[i] || 20;
+                svg.appendChild(rc.circle(cx, cy, r * 2, {
+                    fill: `rgba(${i === items.length-1 ? '16,185,129' : '59,130,246'},${0.1 + i * 0.15})`,
+                    stroke: colors[i], strokeWidth: 2, roughness: 0.8
+                }));
+            });
+            // Bullseye dot
+            svg.appendChild(rc.circle(cx, cy, 10, { fill: '#10b981', stroke: '#10b981', roughness: 0.5 }));
+
+            // Labels on right side
+            items.forEach(([key, val], i) => {
+                const y = 60 + i * 35;
+                const labelX = 580;
+                svg.appendChild(rc.circle(labelX - 20, y, 10, { fill: colors[i], stroke: colors[i], roughness: 0.5 }));
+                addText(svg, labelX + 40, y + 4, val.substring(0, 18), '#e2e8f0', 11);
+            });
         }
 
         // Helper: add text element

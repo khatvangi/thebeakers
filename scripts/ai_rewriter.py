@@ -201,10 +201,14 @@ LAYOUT TYPES (pick the ONE that best matches the data):
 - TIMELINE: Temporal sequence. Use for: historical findings, development phases
 - RADIAL: Central hub + spokes. Use for: properties of one entity, related aspects
 - FLOW: Multi-path branching. Use for: decision trees, metabolic pathways
+- STAIRS: Progressive steps upward. Use for: incremental improvements, dose-response
+- FUNNEL: Wide → narrow filtering. Use for: screening, selection processes
+- SCALE: Balanced trade-off. Use for: weighing factors, risk vs benefit
+- TARGET: Concentric rings to center. Use for: precision achieved, goals met
 
 Output EXACTLY in this format:
 
-LAYOUT: [linear/comparison/convergence/cycle/pyramid/timeline/radial/flow]
+LAYOUT: [linear/comparison/convergence/cycle/pyramid/timeline/radial/flow/stairs/funnel/scale/target]
 TITLE: [2-4 word title for the visual]
 DATA:
 - [item1]: [2-5 words]
@@ -251,6 +255,37 @@ DATA:
 - spoke1: High specificity
 - spoke2: Fast kinetics
 - spoke3: Stable structure
+
+LAYOUT: stairs
+TITLE: Efficiency Gains
+DATA:
+- step1: Baseline 10% PCE
+- step2: Optimization 14%
+- step3: Novel approach 17%
+- step4: Ternary cells 20%
+
+LAYOUT: funnel
+TITLE: Drug Screening
+DATA:
+- wide: 10000 compounds
+- mid: 500 candidates
+- narrow: 50 leads
+- tip: 3 clinical trials
+
+LAYOUT: scale
+TITLE: Design Trade-off
+DATA:
+- left: Stability
+- center: Optimal balance
+- right: Reactivity
+
+LAYOUT: target
+TITLE: Precision Achieved
+DATA:
+- outer: Initial attempts
+- middle: Refined method
+- inner: High accuracy
+- bullseye: 99% specificity
 
 ---
 

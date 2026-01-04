@@ -23,7 +23,7 @@
   "mermaid_diagram": "flowchart LR\n    subgraph Problem\n        A[Current Gap] --> B[Why It Matters]\n    end\n    subgraph Method\n        C[DFT Calculations] --> D[Halogen Substitution]\n    end\n    subgraph Results\n        E[17.58% PCE] --> F[20.14% Ternary]\n    end\n    Problem --> Method --> Results\n    Results --> G[Future Energy]",
   "audio_teaser": "",
   "think_about": "",
-  "napkin_visual": "LAYOUT: comparison\nTITLE: Halogen Performance\nDATA:\n- before: F/Cl NFAs ~14% PCE\n- vs: Core Bromination\n- after: Br NFA 17.58% PCE",
+  "napkin_visual": "LAYOUT: stairs\nTITLE: PCE Efficiency Gains\nDATA:\n- step1: F/Cl NFAs ~14%\n- step2: Br NFA 17.58%\n- step3: Ternary 20.14%",
   "figure_description": "",
   "paper_metadata": {
     "doi": "10.1021/jacs.5c16058",
