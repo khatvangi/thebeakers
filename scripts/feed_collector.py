@@ -35,12 +35,17 @@ DB_PATH = DATA_DIR / "articles.db"
 # education: Teaching-focused articles
 # =============================================================================
 
-# Open Access sources - PDFs freely available
+# Open Access sources - PDFs freely available (peer-reviewed only)
 OPEN_ACCESS_SOURCES = {
-    "eLife", "PLOS", "arXiv", "Nature Communications", "Scientific Reports",
-    "MDPI", "Frontiers", "PeerJ", "BMC", "Annual Reviews",  # Annual Reviews often OA after 1 year
-    "JMLR", "arXiv cs.LG", "arXiv cs.AI", "bioRxiv", "medRxiv"
+    "eLife", "PLOS", "Nature Communications", "Scientific Reports",
+    "MDPI", "Frontiers", "PeerJ", "BMC", "JMLR",
+    # Education journals often have OA or institutional access
+    "J. Chem. Education", "American J. Physics", "The Physics Teacher",
+    "CBE Life Sci Education", "J. Engineering Education"
 }
+
+# Note: Most journals have SOME open access papers (hybrid OA)
+# Check individual article pages for "Open Access" badge
 
 FEEDS = {
     "chemistry": {
@@ -161,19 +166,19 @@ FEEDS = {
 
     "ai": {
         "review": [
-            # Review journals - perfect for Deep Dive
-            ("arXiv cs.LG", "https://rss.arxiv.org/rss/cs.LG"),  # FREE PDFs! Machine Learning
-            ("arXiv cs.AI", "https://rss.arxiv.org/rss/cs.AI"),  # FREE PDFs! AI
+            # Review journals - perfect for Deep Dive (peer-reviewed)
             ("ACM Computing Surveys", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=csur"),  # IF 16
             ("AI Magazine", "https://ojs.aaai.org/index.php/aimagazine/gateway/plugin/WebFeedGatewayPlugin/atom"),
+            ("JMLR", "https://jmlr.org/jmlr.xml"),  # OPEN ACCESS, peer-reviewed
         ],
         "high_impact": [
             # Top research venues
             ("Nature Machine Intelligence", "https://www.nature.com/natmachintell.rss"),  # IF 25
-            ("JMLR", "https://jmlr.org/jmlr.xml"),  # Top ML journal, OPEN ACCESS
         ],
         "education": [
+            # Education journals - ALSO great for Deep Dive!
             ("ACM SIGCSE", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=sigcse"),
+            ("Computer Science Education", "https://www.tandfonline.com/feed/rss/ncse20"),
         ]
     }
 }
@@ -274,6 +279,9 @@ def fetch_feed(feed_url, source_name, discipline, source_type, conn):
             # Check if Open Access
             is_open_access = any(oa in source_name for oa in OPEN_ACCESS_SOURCES)
 
+            # Both REVIEW and EDUCATION articles are good for Deep Dive
+            is_deep_dive = source_type in ("review", "education")
+
             articles.append({
                 "headline": headline,
                 "teaser": teaser,
@@ -282,9 +290,8 @@ def fetch_feed(feed_url, source_name, discipline, source_type, conn):
                 "source": source_name,
                 "source_type": source_type,
                 "discipline": discipline,
-                "deep_dive_candidate": source_type == "review",
-                "open_access": is_open_access,
-                "pdf_link": f"https://sci-hub.se/{doi}" if doi else ""  # For reference
+                "deep_dive_candidate": is_deep_dive,
+                "open_access": is_open_access
             })
 
             mark_article_seen(conn, url, headline, discipline, source_type)
@@ -375,7 +382,7 @@ def collect_all():
 
     print("-" * 50)
     print(f"{'TOTAL':<15} {total_review:<10} {total_high:<12} {total_edu:<10}")
-    print(f"\nDeep Dive candidates: {total_review}")
+    print(f"\nDeep Dive candidates: {total_review + total_edu} (review + education)")
     print(f"Regular candidates: {total_high}")
     print(f"\nSaved to: {output_path}")
 
@@ -383,7 +390,7 @@ def collect_all():
 
 
 def show_deep_dive_candidates():
-    """Show review articles available for Deep Dive"""
+    """Show review AND education articles available for Deep Dive"""
     pending_path = DATA_DIR / "pending_articles.json"
     if not pending_path.exists():
         print("Run collector first: python feed_collector.py")
@@ -393,25 +400,41 @@ def show_deep_dive_candidates():
         data = json.load(f)
 
     print(f"\n{'='*70}")
-    print("DEEP DIVE CANDIDATES (Review Articles)")
-    print("For NotebookLM: Download PDF, upload to notebook, generate content")
+    print("DEEP DIVE CANDIDATES")
+    print("Review articles + Education articles = Perfect for NotebookLM")
+    print("Download PDF -> Upload to NotebookLM -> Generate podcast/video")
     print(f"{'='*70}")
 
     for discipline, sources in data.get("disciplines", {}).items():
+        # Combine review AND education articles
         reviews = sources.get("review", [])
-        if reviews:
+        education = sources.get("education", [])
+        candidates = reviews + education
+
+        if candidates:
             print(f"\n{'='*50}")
             print(f"{discipline.upper()}")
             print(f"{'='*50}")
-            for i, article in enumerate(reviews[:5], 1):
-                oa_badge = "[OPEN ACCESS]" if article.get('open_access') else ""
-                print(f"\n  {i}. {article['headline'][:65]}...")
-                print(f"     Source: {article['source']} {oa_badge}")
-                if article.get('doi'):
-                    print(f"     DOI: {article['doi']}")
-                    print(f"     PDF: https://doi.org/{article['doi']}")
-                else:
-                    print(f"     URL: {article['url']}")
+
+            # Show reviews first
+            if reviews:
+                print("\n  REVIEW ARTICLES:")
+                for i, article in enumerate(reviews[:3], 1):
+                    oa_badge = "[OA]" if article.get('open_access') else ""
+                    print(f"    {i}. {article['headline'][:60]}...")
+                    print(f"       {article['source']} {oa_badge}")
+                    if article.get('doi'):
+                        print(f"       https://doi.org/{article['doi']}")
+
+            # Then education
+            if education:
+                print("\n  EDUCATION ARTICLES (student-friendly!):")
+                for i, article in enumerate(education[:3], 1):
+                    oa_badge = "[OA]" if article.get('open_access') else ""
+                    print(f"    {i}. {article['headline'][:60]}...")
+                    print(f"       {article['source']} {oa_badge}")
+                    if article.get('doi'):
+                        print(f"       https://doi.org/{article['doi']}")
 
 
 if __name__ == "__main__":
