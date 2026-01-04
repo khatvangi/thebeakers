@@ -967,155 +967,160 @@
             }
         }
 
-        // Parse and render simple 3-panel visual abstract
+        // Parse and render data-driven visual based on layout type
         function renderNapkinVisual(napkinText) {
             const svgEl = document.getElementById('napkin-svg');
             if (!svgEl || !napkinText) return;
 
-            // Parse the napkin visual text - extract key info
+            // Parse the napkin visual text
             const lines = napkinText.split('\n').map(l => l.trim()).filter(l => l);
-
-            let problem = '', method = '', finding = '', keyVisual = '';
+            let layout = 'linear', title = '', data = {};
 
             for (const line of lines) {
                 const clean = line.replace(/\*\*/g, '');
-                if (clean.startsWith('PROBLEM:')) problem = clean.replace('PROBLEM:', '').trim();
-                else if (clean.startsWith('METHOD:')) method = clean.replace('METHOD:', '').trim();
-                else if (clean.startsWith('FINDING:')) finding = clean.replace('FINDING:', '').trim();
-                else if (clean.startsWith('KEY_VISUAL:')) keyVisual = clean.replace('KEY_VISUAL:', '').trim();
-                // Fallback: parse old format
-                else if (clean.startsWith('CENTRAL_CONCEPT:')) problem = clean.replace('CENTRAL_CONCEPT:', '').trim();
-                else if (clean.startsWith('FLOW:')) {
-                    const parts = clean.replace('FLOW:', '').split('->').map(s => s.trim());
-                    if (parts.length >= 3) {
-                        method = parts[0] + ' → ' + parts[1];
-                        finding = parts[parts.length - 1];
-                    }
+                if (clean.startsWith('LAYOUT:')) layout = clean.replace('LAYOUT:', '').trim().toLowerCase();
+                else if (clean.startsWith('TITLE:')) title = clean.replace('TITLE:', '').trim();
+                else if (clean.startsWith('- ')) {
+                    const match = clean.match(/^- (\w+):\s*(.+)$/);
+                    if (match) data[match[1]] = match[2];
                 }
+                // Fallback for old format
+                else if (clean.startsWith('PROBLEM:')) { data.problem = clean.replace('PROBLEM:', '').trim(); layout = 'linear'; }
+                else if (clean.startsWith('METHOD:')) data.method = clean.replace('METHOD:', '').trim();
+                else if (clean.startsWith('FINDING:')) data.result = clean.replace('FINDING:', '').trim();
             }
 
-            // Initialize rough.js
             const rc = rough.svg(svgEl);
             svgEl.innerHTML = '';
 
-            // Simple 3-panel layout: PROBLEM → METHOD → FINDING
-            const panelWidth = 200;
-            const panelHeight = 120;
-            const startX = 80;
-            const y = 60;
-            const gap = 70;
+            // Render based on layout type
+            if (layout === 'comparison') renderComparison(svgEl, rc, title, data);
+            else if (layout === 'convergence') renderConvergence(svgEl, rc, title, data);
+            else if (layout === 'cycle') renderCycle(svgEl, rc, title, data);
+            else renderLinear(svgEl, rc, title, data); // default
+        }
 
-            const panels = [
-                { label: 'PROBLEM', text: problem, icon: '❓', color: '#ef4444' },
-                { label: 'METHOD', text: method, icon: '🔧', color: '#3b82f6' },
-                { label: 'FINDING', text: finding, icon: '💡', color: '#10b981' }
-            ];
+        // LINEAR: A → B → C
+        function renderLinear(svg, rc, title, data) {
+            const items = Object.entries(data).slice(0, 3);
+            const colors = ['#ef4444', '#3b82f6', '#10b981'];
+            const icons = ['❓', '🔧', '💡'];
+            const w = 200, h = 100, gap = 60, startX = 70, y = 70;
 
-            panels.forEach((panel, i) => {
-                const x = startX + i * (panelWidth + gap);
+            // Title
+            addText(svg, 400, 30, title || 'Research Process', '#f1f5f9', 18, 'bold');
 
-                // Draw panel with rough.js
-                const box = rc.rectangle(x, y, panelWidth, panelHeight, {
-                    fill: 'rgba(30, 41, 59, 0.9)',
-                    fillStyle: 'solid',
-                    stroke: panel.color,
-                    strokeWidth: 2.5,
-                    roughness: 0.8
-                });
-                svgEl.appendChild(box);
-
-                // Icon
-                const iconEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                iconEl.setAttribute('x', x + panelWidth/2);
-                iconEl.setAttribute('y', y + 35);
-                iconEl.setAttribute('text-anchor', 'middle');
-                iconEl.setAttribute('font-size', '28');
-                iconEl.textContent = panel.icon;
-                svgEl.appendChild(iconEl);
-
-                // Label
-                const labelEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                labelEl.setAttribute('x', x + panelWidth/2);
-                labelEl.setAttribute('y', y + 60);
-                labelEl.setAttribute('text-anchor', 'middle');
-                labelEl.setAttribute('fill', panel.color);
-                labelEl.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-                labelEl.setAttribute('font-size', '11');
-                labelEl.setAttribute('font-weight', '700');
-                labelEl.setAttribute('letter-spacing', '0.1em');
-                labelEl.textContent = panel.label;
-                svgEl.appendChild(labelEl);
-
-                // Text (wrapped)
-                const words = (panel.text || '').split(' ');
-                let line1 = '', line2 = '';
-                words.forEach(word => {
-                    if (line1.length + word.length < 22) line1 += (line1 ? ' ' : '') + word;
-                    else if (line2.length + word.length < 22) line2 += (line2 ? ' ' : '') + word;
-                });
-
-                const text1 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                text1.setAttribute('x', x + panelWidth/2);
-                text1.setAttribute('y', y + 85);
-                text1.setAttribute('text-anchor', 'middle');
-                text1.setAttribute('fill', '#e2e8f0');
-                text1.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-                text1.setAttribute('font-size', '12');
-                text1.textContent = line1;
-                svgEl.appendChild(text1);
-
-                if (line2) {
-                    const text2 = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                    text2.setAttribute('x', x + panelWidth/2);
-                    text2.setAttribute('y', y + 102);
-                    text2.setAttribute('text-anchor', 'middle');
-                    text2.setAttribute('fill', '#e2e8f0');
-                    text2.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-                    text2.setAttribute('font-size', '12');
-                    text2.textContent = line2;
-                    svgEl.appendChild(text2);
-                }
-
-                // Arrow to next panel
-                if (i < 2) {
-                    const arrowX = x + panelWidth + 15;
-                    const arrowY = y + panelHeight/2;
-
-                    const arrow = rc.line(arrowX, arrowY, arrowX + 40, arrowY, {
-                        stroke: '#64748b',
-                        strokeWidth: 2,
-                        roughness: 0.5
-                    });
-                    svgEl.appendChild(arrow);
-
-                    // Arrowhead
-                    const head = rc.polygon([
-                        [arrowX + 35, arrowY - 6],
-                        [arrowX + 45, arrowY],
-                        [arrowX + 35, arrowY + 6]
-                    ], {
-                        fill: '#64748b',
-                        fillStyle: 'solid',
-                        stroke: '#64748b',
-                        roughness: 0.3
-                    });
-                    svgEl.appendChild(head);
+            items.forEach(([key, val], i) => {
+                const x = startX + i * (w + gap);
+                svg.appendChild(rc.rectangle(x, y, w, h, { fill: 'rgba(30,41,59,0.9)', stroke: colors[i], strokeWidth: 2.5, roughness: 0.8 }));
+                addText(svg, x + w/2, y + 30, icons[i], '#fff', 24);
+                addText(svg, x + w/2, y + 55, key.toUpperCase(), colors[i], 10, '700');
+                addText(svg, x + w/2, y + 78, val.substring(0, 24), '#e2e8f0', 12);
+                if (i < items.length - 1) {
+                    const ax = x + w + 10;
+                    svg.appendChild(rc.line(ax, y + h/2, ax + 40, y + h/2, { stroke: '#64748b', strokeWidth: 2 }));
+                    svg.appendChild(rc.polygon([[ax+35, y+h/2-5], [ax+45, y+h/2], [ax+35, y+h/2+5]], { fill: '#64748b', stroke: '#64748b' }));
                 }
             });
+        }
 
-            // Key visual at bottom (optional)
-            if (keyVisual) {
-                const kvText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-                kvText.setAttribute('x', '400');
-                kvText.setAttribute('y', '210');
-                kvText.setAttribute('text-anchor', 'middle');
-                kvText.setAttribute('fill', '#64748b');
-                kvText.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
-                kvText.setAttribute('font-size', '11');
-                kvText.setAttribute('font-style', 'italic');
-                kvText.textContent = keyVisual.substring(0, 70) + (keyVisual.length > 70 ? '...' : '');
-                svgEl.appendChild(kvText);
-            }
+        // COMPARISON: Before ↔ After
+        function renderComparison(svg, rc, title, data) {
+            addText(svg, 400, 30, title || 'Comparison', '#f1f5f9', 18, 'bold');
+            const left = data.before || data.old || Object.values(data)[0] || '';
+            const right = data.after || data.new || Object.values(data)[2] || '';
+            const vs = data.vs || 'vs';
+
+            // Left box (red - old/problem)
+            svg.appendChild(rc.rectangle(80, 60, 220, 110, { fill: 'rgba(239,68,68,0.15)', stroke: '#ef4444', strokeWidth: 2.5, roughness: 0.8 }));
+            addText(svg, 190, 95, '❌', '#fff', 28);
+            addText(svg, 190, 125, 'BEFORE', '#ef4444', 10, '700');
+            addText(svg, 190, 148, left.substring(0, 28), '#e2e8f0', 12);
+
+            // VS in middle
+            svg.appendChild(rc.circle(400, 115, 50, { fill: 'rgba(100,116,139,0.3)', stroke: '#64748b', strokeWidth: 2 }));
+            addText(svg, 400, 120, vs, '#94a3b8', 14, '700');
+
+            // Right box (green - new/solution)
+            svg.appendChild(rc.rectangle(500, 60, 220, 110, { fill: 'rgba(16,185,129,0.15)', stroke: '#10b981', strokeWidth: 2.5, roughness: 0.8 }));
+            addText(svg, 610, 95, '✓', '#fff', 28);
+            addText(svg, 610, 125, 'AFTER', '#10b981', 10, '700');
+            addText(svg, 610, 148, right.substring(0, 28), '#e2e8f0', 12);
+
+            // Arrows
+            svg.appendChild(rc.line(305, 115, 370, 115, { stroke: '#64748b', strokeWidth: 2 }));
+            svg.appendChild(rc.line(430, 115, 495, 115, { stroke: '#64748b', strokeWidth: 2 }));
+        }
+
+        // CONVERGENCE: Multiple → One
+        function renderConvergence(svg, rc, title, data) {
+            addText(svg, 400, 25, title || 'Synthesis', '#f1f5f9', 18, 'bold');
+            const entries = Object.entries(data);
+            const inputs = entries.filter(([k]) => k !== 'outcome' && k !== 'result');
+            const outcome = data.outcome || data.result || '';
+            const colors = ['#ef4444', '#f59e0b', '#8b5cf6', '#3b82f6'];
+
+            // Input boxes on left, stacked
+            inputs.slice(0, 4).forEach(([key, val], i) => {
+                const y = 50 + i * 45;
+                svg.appendChild(rc.rectangle(50, y, 180, 38, { fill: 'rgba(30,41,59,0.9)', stroke: colors[i], strokeWidth: 2, roughness: 0.8 }));
+                addText(svg, 140, y + 24, val.substring(0, 22), '#e2e8f0', 11);
+                // Arrow to center
+                svg.appendChild(rc.line(235, y + 19, 340, 120, { stroke: colors[i], strokeWidth: 1.5, roughness: 0.5 }));
+            });
+
+            // Center circle
+            svg.appendChild(rc.circle(400, 120, 80, { fill: 'rgba(16,185,129,0.2)', stroke: '#10b981', strokeWidth: 3, roughness: 0.8 }));
+            addText(svg, 400, 110, '🎯', '#fff', 28);
+            addText(svg, 400, 138, 'RESULT', '#10b981', 9, '700');
+
+            // Arrow to outcome
+            svg.appendChild(rc.line(445, 120, 520, 120, { stroke: '#10b981', strokeWidth: 2 }));
+            svg.appendChild(rc.polygon([[515, 115], [525, 120], [515, 125]], { fill: '#10b981', stroke: '#10b981' }));
+
+            // Outcome box
+            svg.appendChild(rc.rectangle(530, 85, 200, 70, { fill: 'rgba(16,185,129,0.15)', stroke: '#10b981', strokeWidth: 2.5, roughness: 0.8 }));
+            addText(svg, 630, 115, 'OUTCOME', '#10b981', 10, '700');
+            addText(svg, 630, 138, outcome.substring(0, 24), '#e2e8f0', 12);
+        }
+
+        // CYCLE: A → B → C → A
+        function renderCycle(svg, rc, title, data) {
+            addText(svg, 400, 25, title || 'Cycle', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 4);
+            const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6'];
+            const cx = 400, cy = 130, r = 90;
+
+            items.forEach(([key, val], i) => {
+                const angle = (i / items.length) * 2 * Math.PI - Math.PI/2;
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+                svg.appendChild(rc.circle(x, y, 60, { fill: 'rgba(30,41,59,0.9)', stroke: colors[i], strokeWidth: 2.5, roughness: 0.8 }));
+                addText(svg, x, y + 5, val.substring(0, 12), '#e2e8f0', 10);
+
+                // Arrow to next
+                const nextAngle = ((i + 1) / items.length) * 2 * Math.PI - Math.PI/2;
+                const midAngle = (angle + nextAngle) / 2 + (i === items.length - 1 ? Math.PI : 0);
+                const ax1 = cx + (r - 35) * Math.cos(angle + 0.4);
+                const ay1 = cy + (r - 35) * Math.sin(angle + 0.4);
+                const ax2 = cx + (r - 35) * Math.cos(nextAngle - 0.4);
+                const ay2 = cy + (r - 35) * Math.sin(nextAngle - 0.4);
+                svg.appendChild(rc.line(ax1, ay1, ax2, ay2, { stroke: '#64748b', strokeWidth: 1.5 }));
+            });
+        }
+
+        // Helper: add text element
+        function addText(svg, x, y, text, fill, size, weight) {
+            const el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            el.setAttribute('x', x);
+            el.setAttribute('y', y);
+            el.setAttribute('text-anchor', 'middle');
+            el.setAttribute('fill', fill);
+            el.setAttribute('font-family', 'Plus Jakarta Sans, sans-serif');
+            el.setAttribute('font-size', size);
+            if (weight) el.setAttribute('font-weight', weight);
+            el.textContent = text;
+            svg.appendChild(el);
         }
 
         // Escape HTML to prevent XSS

@@ -190,15 +190,46 @@ Write exactly 3 sentences (under 75 words) that sound good read aloud. This is f
 One thought-provoking question that connects this research to a student's everyday life, future career, or a bigger scientific question they might explore.
 
 ## NAPKIN_VISUAL
-Create a simple 3-panel visual abstract. Follow scientific graphical abstract guidelines: SIMPLE, MINIMAL TEXT, CLEAR FLOW.
-Structure it EXACTLY like this:
+Create a data-driven visual. First, identify what DATA STRUCTURE best represents this research:
 
-PROBLEM: [What gap or challenge? 3-6 words max]
-METHOD: [How did they solve it? 3-6 words max]
-FINDING: [Key result? 3-6 words max]
-KEY_VISUAL: [One striking image - molecule, cell, device, etc.]
+LAYOUT TYPES (pick ONE):
+- LINEAR: Process/causation (A → B → C)
+- COMPARISON: Old vs New, Before vs After (A ↔ B)
+- CONVERGENCE: Multiple factors → one outcome
+- CYCLE: Feedback loop, iterative process
 
-KEEP IT SIMPLE. This becomes a visual: PROBLEM → METHOD → FINDING
+Output EXACTLY in this format:
+
+LAYOUT: [linear/comparison/convergence/cycle]
+TITLE: [2-4 word title for the visual]
+DATA:
+- [item1]: [2-5 words]
+- [item2]: [2-5 words]
+- [item3]: [2-5 words]
+- [item4]: [2-5 words] (optional, for comparison use "vs" as item)
+
+Examples:
+LAYOUT: linear
+TITLE: CAR-T Engineering
+DATA:
+- problem: Unstable tumor targeting
+- method: Disulfide bond design
+- result: Stable CAR-T cells
+
+LAYOUT: comparison
+TITLE: Treatment Advance
+DATA:
+- before: Traditional CARs fail
+- vs: Key Innovation
+- after: DDMPs succeed
+
+LAYOUT: convergence
+TITLE: Multi-Factor Synthesis
+DATA:
+- factor1: Peptide chemistry
+- factor2: Bond engineering
+- factor3: Antigen design
+- outcome: Effective therapy
 
 ---
 
