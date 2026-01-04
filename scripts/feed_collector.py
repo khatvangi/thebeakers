@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """
-The Beakers Feed Collector
-Fetches articles from research + education journals
-Weekly collection for STEM disciplines
+The Beakers Feed Collector v2
+Curated article collection for STEM disciplines
+
+Strategy:
+- REVIEW journals -> Deep Dive candidates (NotebookLM)
+- HIGH_IMPACT journals -> Regular summaries (Ollama)
+- EDUCATION journals -> Teaching resources
 """
 
 import feedparser
 import json
 import re
 import sqlite3
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 import html
 import socket
@@ -22,98 +26,152 @@ BEAKERS_DIR = Path(__file__).parent.parent
 DATA_DIR = BEAKERS_DIR / "data"
 DB_PATH = DATA_DIR / "articles.db"
 
-# RSS Feeds organized by discipline
-# Each has: research journals + education journals
+# =============================================================================
+# CURATED FEEDS - Quality over quantity
+# =============================================================================
+#
+# review: Review articles for Deep Dive (NotebookLM treatment)
+# high_impact: Top journals for regular summaries (Ollama)
+# education: Teaching-focused articles
+# =============================================================================
+
 FEEDS = {
     "chemistry": {
-        "research": [
-            ("ACS Publications", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=jacsat"),  # JACS
-            ("ACS Central Science", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=acscii"),
-            ("RSC Advances", "https://pubs.rsc.org/en/journals/journalissues/ra?_type=rss"),
-            ("Nature Chemistry", "https://www.nature.com/nchem.rss"),
-            ("Angewandte Chemie", "https://onlinelibrary.wiley.com/feed/15213773/most-recent"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Chemical Reviews", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=chreay"),  # IF 62
+            ("Chem Society Reviews", "https://pubs.rsc.org/en/journals/journalissues/cs?_type=rss"),  # IF 46
+            ("Acc. Chemical Research", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=achre4"),  # IF 24
+        ],
+        "high_impact": [
+            # Top research journals
+            ("JACS", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=jacsat"),  # IF 15
+            ("Nature Chemistry", "https://www.nature.com/nchem.rss"),  # IF 24
+            ("Angewandte Chemie", "https://onlinelibrary.wiley.com/feed/15213773/most-recent"),  # IF 16
+            ("ACS Central Science", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=acscii"),  # IF 18
         ],
         "education": [
             ("J. Chem. Education", "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=jceda8"),
-            ("Chemistry Education R&P", "https://pubs.rsc.org/en/journals/journalissues/rp?_type=rss"),
-            ("Education in Chemistry", "https://edu.rsc.org/rss"),
         ]
     },
+
     "physics": {
-        "research": [
-            ("Physical Review Letters", "https://feeds.aps.org/rss/recent/prl.xml"),
-            ("Physical Review X", "https://feeds.aps.org/rss/recent/prx.xml"),
-            ("Nature Physics", "https://www.nature.com/nphys.rss"),
-            ("Physics Today", "https://pubs.aip.org/rss/site_1000043/1000043.xml"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Reviews of Modern Physics", "https://feeds.aps.org/rss/recent/rmp.xml"),  # IF 54
+            ("Physics Reports", "https://rss.sciencedirect.com/publication/science/03701573"),  # IF 30
+            ("Reports on Progress in Physics", "https://iopscience.iop.org/journal/rss/0034-4885"),  # IF 19
+        ],
+        "high_impact": [
+            # Top research journals
+            ("Nature Physics", "https://www.nature.com/nphys.rss"),  # IF 19
+            ("Physical Review Letters", "https://feeds.aps.org/rss/recent/prl.xml"),  # IF 9
+            ("Physical Review X", "https://feeds.aps.org/rss/recent/prx.xml"),  # IF 12
         ],
         "education": [
             ("American J. Physics", "https://pubs.aip.org/rss/site_1000029/1000029.xml"),
             ("The Physics Teacher", "https://pubs.aip.org/rss/site_1000031/1000031.xml"),
-            ("Physics Education", "https://iopscience.iop.org/journal/rss/0031-9120"),
         ]
     },
+
     "biology": {
-        "research": [
-            ("Nature", "https://www.nature.com/nature.rss"),
-            ("Cell", "https://www.cell.com/cell/rss"),
-            ("PNAS", "https://www.pnas.org/rss/current.xml"),
-            ("Science", "https://www.science.org/rss/news_current.xml"),
-            ("eLife", "https://elifesciences.org/rss/recent.xml"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Nature Rev Genetics", "https://www.nature.com/nrg.rss"),  # IF 60
+            ("Nature Rev Mol Cell Bio", "https://www.nature.com/nrm.rss"),  # IF 94
+            ("Annual Rev Biochemistry", "https://www.annualreviews.org/rss/content/journals/biochem?fmt=rss"),  # IF 25
+            ("Trends in Biochem Sci", "https://www.cell.com/trends/biochemical-sciences/rss"),  # IF 14
+        ],
+        "high_impact": [
+            # Top research journals
+            ("Nature", "https://www.nature.com/nature.rss"),  # IF 50
+            ("Cell", "https://www.cell.com/cell/rss"),  # IF 64
+            ("Science", "https://www.science.org/rss/news_current.xml"),  # IF 56
+            ("eLife", "https://elifesciences.org/rss/recent.xml"),  # IF 8, open access
         ],
         "education": [
             ("CBE Life Sci Education", "https://www.lifescied.org/rss/recent.xml"),
-            ("J. Biological Education", "https://www.tandfonline.com/feed/rss/rjbe20"),
         ]
     },
+
     "mathematics": {
-        "research": [
-            ("Annals of Mathematics", "https://annals.math.princeton.edu/feed/"),
-            ("J. American Math Society", "https://www.ams.org/rss/jams.rss"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("SIAM Review", "https://epubs.siam.org/action/showFeed?type=etoc&feed=rss&jc=siread"),  # IF 10
+            ("Bulletin of the AMS", "https://www.ams.org/rss/bull.rss"),  # Survey articles
+            ("Notices of the AMS", "https://www.ams.org/rss/notices.rss"),  # Expository
+        ],
+        "high_impact": [
+            # Top research journals
+            ("Annals of Mathematics", "https://annals.math.princeton.edu/feed/"),  # Top journal
+            ("J. American Math Society", "https://www.ams.org/rss/jams.rss"),  # Top journal
             ("Inventiones Mathematicae", "https://link.springer.com/search.rss?facet-content-type=Article&facet-journal-id=222"),
+            ("Acta Mathematica", "https://link.springer.com/search.rss?facet-content-type=Article&facet-journal-id=11511"),
         ],
         "education": [
             ("College Math Journal", "https://www.tandfonline.com/feed/rss/ucmj20"),
             ("American Math Monthly", "https://www.tandfonline.com/feed/rss/uamm20"),
-            ("PRIMUS", "https://www.tandfonline.com/feed/rss/upri20"),
-            ("Math Teacher Learning & Teaching", "https://pubs.nctm.org/rss/mtlt.xml"),
         ]
     },
+
     "engineering": {
-        "research": [
-            ("IEEE Spectrum", "https://spectrum.ieee.org/feeds/feed.rss"),
-            ("ASME J. Mechanical Design", "https://asmedigitalcollection.asme.org/rss/site_1000054/1000054.xml"),
-            ("J. Structural Engineering", "https://ascelibrary.org/action/showFeed?type=etoc&feed=rss&jc=jsendh"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Progress in Materials Sci", "https://rss.sciencedirect.com/publication/science/00796425"),  # IF 37
+            ("Renewable & Sustainable Energy Rev", "https://rss.sciencedirect.com/publication/science/13640321"),  # IF 16
+            ("Progress in Energy & Combustion", "https://rss.sciencedirect.com/publication/science/03601285"),  # IF 35
+        ],
+        "high_impact": [
+            # Top research journals
+            ("Nature Materials", "https://www.nature.com/nmat.rss"),  # IF 41
+            ("Nature Energy", "https://www.nature.com/nenergy.rss"),  # IF 67
+            ("IEEE Spectrum", "https://spectrum.ieee.org/feeds/feed.rss"),  # News + features
+            ("Joule", "https://www.cell.com/joule/rss"),  # IF 46
         ],
         "education": [
             ("J. Engineering Education", "https://onlinelibrary.wiley.com/feed/21689830/most-recent"),
-            ("Advances in Eng. Education", "https://advances.asee.org/feed/"),
-            ("European J. Eng. Education", "https://www.tandfonline.com/feed/rss/ceee20"),
         ]
     },
+
     "agriculture": {
-        "research": [
-            ("Agronomy Journal", "https://acsess.onlinelibrary.wiley.com/feed/14350645/most-recent"),
-            ("J. Agricultural Science", "https://www.cambridge.org/core/rss/product/id/1CE0BFAB89CE573B461F4F5BAB2F29C6"),
-            ("Agriculture, Ecosystems & Env", "https://rss.sciencedirect.com/publication/science/01678809"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Trends in Plant Science", "https://www.cell.com/trends/plant-science/rss"),  # IF 20
+            ("Annual Rev Plant Biology", "https://www.annualreviews.org/rss/content/journals/arplant?fmt=rss"),  # IF 22
+            ("Nature Plants", "https://www.nature.com/nplants.rss"),  # IF 18 (has reviews)
+        ],
+        "high_impact": [
+            # Top research journals
+            ("Nature Food", "https://www.nature.com/natfood.rss"),  # IF 24
+            ("Plant Cell", "https://academic.oup.com/rss/site_5326/3172.xml"),  # IF 12
+            ("Global Food Security", "https://rss.sciencedirect.com/publication/science/22119124"),  # IF 7
+            ("Food Chemistry", "https://rss.sciencedirect.com/publication/science/03088146"),  # IF 9
         ],
         "education": [
             ("J. Agricultural Education", "https://www.jae-online.org/index.php/jae/gateway/plugin/WebFeedGatewayPlugin/rss2"),
-            ("NACTA Journal", "https://www.nactateachers.org/index.php/journal/feed"),
         ]
     },
+
     "ai": {
-        "research": [
-            ("Nature Machine Intelligence", "https://www.nature.com/natmachintell.rss"),
-            ("AI Magazine", "https://ojs.aaai.org/index.php/aimagazine/gateway/plugin/WebFeedGatewayPlugin/atom"),
-            ("J. Machine Learning Research", "https://jmlr.org/jmlr.xml"),
-            ("arXiv cs.AI", "https://rss.arxiv.org/rss/cs.AI"),
+        "review": [
+            # Review journals - perfect for Deep Dive
+            ("Nature Rev Machine Intelligence", "https://www.nature.com/natmachintell.rss"),  # Has reviews
+            ("AI Magazine", "https://ojs.aaai.org/index.php/aimagazine/gateway/plugin/WebFeedGatewayPlugin/atom"),  # Accessible
+            ("ACM Computing Surveys", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=csur"),  # IF 16
+        ],
+        "high_impact": [
+            # Top research venues
+            ("Nature Machine Intelligence", "https://www.nature.com/natmachintell.rss"),  # IF 25
+            ("JMLR", "https://jmlr.org/jmlr.xml"),  # Top ML journal
+            ("TMLR", "https://jmlr.org/tmlr.xml"),  # Newer transactions
+            ("arXiv cs.LG Highlights", "https://rss.arxiv.org/rss/cs.LG"),  # Filter needed
         ],
         "education": [
             ("ACM SIGCSE", "https://dl.acm.org/action/showFeed?type=etoc&feed=rss&jc=sigcse"),
-            ("Computer Science Education", "https://www.tandfonline.com/feed/rss/ncse20"),
         ]
     }
 }
+
 
 def init_db():
     """Initialize the articles database"""
@@ -146,10 +204,12 @@ def init_db():
     conn.commit()
     return conn
 
+
 def is_article_seen(conn, url):
     """Check if article URL has been seen before"""
     cur = conn.execute("SELECT 1 FROM seen_articles WHERE url = ?", (url,))
     return cur.fetchone() is not None
+
 
 def mark_article_seen(conn, url, headline, discipline, source_type):
     """Mark an article as seen"""
@@ -158,6 +218,7 @@ def mark_article_seen(conn, url, headline, discipline, source_type):
         (url, headline, discipline, source_type)
     )
     conn.commit()
+
 
 def clean_text(text):
     """Clean and normalize text"""
@@ -168,14 +229,6 @@ def clean_text(text):
     text = re.sub(r'\s+', ' ', text).strip()
     return text
 
-def extract_source(feed_url, entry):
-    """Extract source name from feed URL or entry"""
-    for discipline, sources in FEEDS.items():
-        for source_type in ['research', 'education']:
-            for name, url in sources.get(source_type, []):
-                if url in feed_url or feed_url in url:
-                    return name
-    return "Unknown"
 
 def fetch_feed(feed_url, source_name, discipline, source_type, conn):
     """Fetch and parse a single feed"""
@@ -184,10 +237,10 @@ def fetch_feed(feed_url, source_name, discipline, source_type, conn):
         feed = feedparser.parse(feed_url)
 
         if feed.bozo and not feed.entries:
-            print(f"  ⚠ Error parsing {source_name}")
+            print(f"    - {source_name}: error parsing")
             return articles
 
-        for entry in feed.entries[:15]:  # Limit per feed
+        for entry in feed.entries[:10]:  # Limit per feed
             url = entry.get('link', '')
             if not url or is_article_seen(conn, url):
                 continue
@@ -199,52 +252,68 @@ def fetch_feed(feed_url, source_name, discipline, source_type, conn):
             # Get teaser/summary
             teaser = ""
             if 'summary' in entry:
-                teaser = clean_text(entry.summary)[:300]
+                teaser = clean_text(entry.summary)[:500]
             elif 'description' in entry:
-                teaser = clean_text(entry.description)[:300]
+                teaser = clean_text(entry.description)[:500]
 
             articles.append({
                 "headline": headline,
                 "teaser": teaser,
                 "url": url,
                 "source": source_name,
-                "source_type": source_type,  # 'research' or 'education'
-                "discipline": discipline
+                "source_type": source_type,
+                "discipline": discipline,
+                "deep_dive_candidate": source_type == "review"  # Flag review articles
             })
 
             mark_article_seen(conn, url, headline, discipline, source_type)
 
-        print(f"  ✓ {source_name}: {len(articles)} new articles")
+        if articles:
+            print(f"    + {source_name}: {len(articles)} new")
+        else:
+            print(f"    - {source_name}: 0 new")
 
     except Exception as e:
-        print(f"  ✗ {source_name}: {e}")
+        print(f"    x {source_name}: {str(e)[:50]}")
 
     return articles
 
+
 def collect_all():
-    """Collect articles from all feeds"""
+    """Collect articles from all curated feeds"""
     print(f"\n{'='*60}")
-    print(f"The Beakers Feed Collector - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    print(f"The Beakers Feed Collector v2")
+    print(f"Curated Collection - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print(f"{'='*60}\n")
 
     conn = init_db()
     all_articles = {}
 
     for discipline, sources in FEEDS.items():
-        print(f"\n📚 {discipline.upper()}")
+        print(f"\n{'='*40}")
+        print(f"  {discipline.upper()}")
+        print(f"{'='*40}")
+
         all_articles[discipline] = {
-            "research": [],
-            "education": []
+            "review": [],      # Deep Dive candidates
+            "high_impact": [], # Regular summaries
+            "education": []    # Teaching resources
         }
 
-        # Collect from research journals
-        print("  Research journals:")
-        for source_name, feed_url in sources.get("research", []):
-            articles = fetch_feed(feed_url, source_name, discipline, "research", conn)
-            all_articles[discipline]["research"].extend(articles)
+        # Collect from REVIEW journals (Deep Dive candidates)
+        print("  REVIEW (Deep Dive candidates):")
+        for source_name, feed_url in sources.get("review", []):
+            articles = fetch_feed(feed_url, source_name, discipline, "review", conn)
+            all_articles[discipline]["review"].extend(articles)
 
-        # Collect from education journals
-        print("  Education journals:")
+        # Collect from HIGH IMPACT journals (Regular summaries)
+        print("  HIGH IMPACT (Regular summaries):")
+        for source_name, feed_url in sources.get("high_impact", []):
+            articles = fetch_feed(feed_url, source_name, discipline, "high_impact", conn)
+            all_articles[discipline]["high_impact"].extend(articles)
+
+        # Collect from EDUCATION journals
+        print("  EDUCATION:")
         for source_name, feed_url in sources.get("education", []):
             articles = fetch_feed(feed_url, source_name, discipline, "education", conn)
             all_articles[discipline]["education"].extend(articles)
@@ -255,6 +324,7 @@ def collect_all():
     output = {
         "collected": datetime.now().isoformat(),
         "week": datetime.now().strftime("%Y-W%W"),
+        "version": 2,
         "disciplines": all_articles
     }
 
@@ -264,18 +334,63 @@ def collect_all():
 
     # Print summary
     print(f"\n{'='*60}")
-    print("SUMMARY")
+    print("COLLECTION SUMMARY")
     print(f"{'='*60}")
-    for discipline, sources in all_articles.items():
-        research_count = len(sources["research"])
-        education_count = len(sources["education"])
-        print(f"  {discipline}: {research_count} research + {education_count} education")
+    print(f"{'Discipline':<15} {'Review':<10} {'High-Impact':<12} {'Education':<10}")
+    print("-" * 50)
 
-    total = sum(len(s["research"]) + len(s["education"]) for s in all_articles.values())
-    print(f"\n  TOTAL: {total} articles")
-    print(f"  Saved to: {output_path}")
+    total_review = 0
+    total_high = 0
+    total_edu = 0
+
+    for discipline, sources in all_articles.items():
+        r = len(sources["review"])
+        h = len(sources["high_impact"])
+        e = len(sources["education"])
+        total_review += r
+        total_high += h
+        total_edu += e
+        print(f"{discipline:<15} {r:<10} {h:<12} {e:<10}")
+
+    print("-" * 50)
+    print(f"{'TOTAL':<15} {total_review:<10} {total_high:<12} {total_edu:<10}")
+    print(f"\nDeep Dive candidates: {total_review}")
+    print(f"Regular candidates: {total_high}")
+    print(f"\nSaved to: {output_path}")
 
     return all_articles
 
+
+def show_deep_dive_candidates():
+    """Show review articles available for Deep Dive"""
+    pending_path = DATA_DIR / "pending_articles.json"
+    if not pending_path.exists():
+        print("Run collector first: python feed_collector.py")
+        return
+
+    with open(pending_path) as f:
+        data = json.load(f)
+
+    print(f"\n{'='*60}")
+    print("DEEP DIVE CANDIDATES (Review Articles)")
+    print(f"{'='*60}")
+
+    for discipline, sources in data.get("disciplines", {}).items():
+        reviews = sources.get("review", [])
+        if reviews:
+            print(f"\n{discipline.upper()}:")
+            for i, article in enumerate(reviews[:5], 1):
+                print(f"  {i}. {article['headline'][:70]}...")
+                print(f"     Source: {article['source']}")
+                print(f"     URL: {article['url']}")
+                print()
+
+
 if __name__ == "__main__":
-    collect_all()
+    import sys
+
+    if len(sys.argv) > 1 and sys.argv[1] == "deepdive":
+        show_deep_dive_candidates()
+    else:
+        collect_all()
+        print("\nRun 'python feed_collector.py deepdive' to see Deep Dive candidates")
