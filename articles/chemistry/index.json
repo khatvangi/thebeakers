@@ -1,8 +1,16 @@
 {
   "discipline": "chemistry",
-  "count": 2,
-  "updated": "2026-01-03T17:49:49.841633",
+  "count": 4,
+  "updated": "2026-01-03T18:16:50.933149",
   "articles": [
+    {
+      "filename": "index.json",
+      "headline": "",
+      "hook": "",
+      "difficulty": "SOPHOMORE",
+      "source": "",
+      "rewritten_at": ""
+    },
     {
       "filename": "20260103-revolutionizing-cancer-treatments-peptides-that-st.json",
       "headline": "Revolutionizing Cancer Treatments: Peptides That Stick Around to Fight Solid Tumors",
@@ -18,6 +26,14 @@
       "difficulty": "SOPHOMORE",
       "source": "Journal of the American Chemical Society",
       "rewritten_at": "2026-01-03T17:44:23.983560"
+    },
+    {
+      "filename": "20260103-revolutionizing-cancer-treatment-how-peptide-bonds.json",
+      "headline": "Revolutionizing Cancer Treatment: How Peptide Bonds Are Reshaping CAR-T Therapy",
+      "hook": "If you're studying biochemistry or medicine, this research could redefine how we fight cancer\u2014by turning your classroom knowledge into life-saving breakthroughs.",
+      "difficulty": "**Sophomore**: This research requires foundational knowledge in organic chemistry (reaction mechanisms, synthesis) and biochemistry (protein structure, enzyme kinetics), which are typically covered in sophomore-level courses.",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T18:16:25.830481"
     }
   ]
 }

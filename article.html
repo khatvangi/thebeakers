@@ -263,35 +263,124 @@
             font-weight: 600;
         }
 
-        /* Curriculum Connection - THE KEY */
+        /* Research subsections */
+        .research-grid {
+            display: grid;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .research-subsection {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+        }
+
+        .research-subsection .subsection-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .research-subsection .subsection-content {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .researchers-box {
+            border-left: 3px solid var(--accent-blue);
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.08) 0%, transparent 100%);
+        }
+
+        .problem-box {
+            border-left: 3px solid var(--accent-red);
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, transparent 100%);
+        }
+
+        .approach-box {
+            border-left: 3px solid var(--accent-green);
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, transparent 100%);
+        }
+
+        .findings-box {
+            border-left: 3px solid var(--accent-orange);
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, transparent 100%);
+        }
+
+        /* Curriculum Connection - THE BIG ENCHILADA */
         .curriculum-section {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
-            border: 1px solid var(--accent-purple);
-            border-radius: 16px;
-            padding: 2rem;
-            margin: 2.5rem 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 2px solid var(--accent-purple);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            position: relative;
+        }
+
+        .curriculum-section::before {
+            content: 'THE BIG ENCHILADA';
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
         }
 
         .curriculum-section .section-title {
             color: var(--accent-purple);
-            font-size: 0.85rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
         }
 
         .curriculum-section .section-content {
             font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .curriculum-section h3 {
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 1.5rem 0 0.75rem 0;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .curriculum-section h3:first-of-type {
+            border-top: none;
+            margin-top: 1rem;
         }
 
         .curriculum-section ul {
             list-style: none;
-            margin-top: 1rem;
+            margin: 1rem 0;
         }
 
         .curriculum-section li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        .curriculum-section li:last-child { border-bottom: none; }
+        .curriculum-section li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-purple);
+        }
 
         /* Key Terms */
         .key-terms {
@@ -555,10 +644,26 @@
 
             const formatCurriculum = (text) => {
                 if (!text) return '';
-                // Split by course entries
-                const items = text.split(/\n- /).filter(Boolean);
-                if (items.length <= 1) return `<p>${formatContent(text)}</p>`;
-                return '<ul>' + items.map(item => `<li>${formatContent(item.trim())}</li>`).join('') + '</ul>';
+                // Convert markdown headers and lists to HTML
+                let html = text
+                    // Convert ### headers to h3
+                    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                    // Convert **bold** to strong
+                    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                    // Convert bullet points
+                    .replace(/^- (.+)$/gm, '<li>$1</li>')
+                    // Wrap consecutive li elements in ul
+                    .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
+                    // Convert paragraphs (double newlines)
+                    .replace(/\n\n/g, '</p><p>')
+                    // Clean up extra newlines
+                    .replace(/\n/g, ' ');
+
+                // Wrap in paragraph if no structure
+                if (!html.includes('<h3>') && !html.includes('<ul>')) {
+                    html = `<p>${html}</p>`;
+                }
+                return html;
             };
 
             const formatKeyTerms = (text) => {
@@ -603,6 +708,59 @@
                 </div>
                 ` : ''}
 
+                <!-- The Research: Expanded Sections -->
+                <div class="research-grid">
+                    ${article.researchers ? `
+                    <div class="research-subsection researchers-box">
+                        <div class="subsection-title">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                            </svg>
+                            The Researchers
+                        </div>
+                        <div class="subsection-content">${formatContent(article.researchers)}</div>
+                    </div>
+                    ` : ''}
+
+                    ${article.problem ? `
+                    <div class="research-subsection problem-box">
+                        <div class="subsection-title">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>
+                            </svg>
+                            The Problem
+                        </div>
+                        <div class="subsection-content">${formatContent(article.problem)}</div>
+                    </div>
+                    ` : ''}
+
+                    ${article.approach ? `
+                    <div class="research-subsection approach-box">
+                        <div class="subsection-title">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            The Approach
+                        </div>
+                        <div class="subsection-content">${formatContent(article.approach)}</div>
+                    </div>
+                    ` : ''}
+
+                    ${article.findings ? `
+                    <div class="research-subsection findings-box">
+                        <div class="subsection-title">
+                            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Key Findings
+                        </div>
+                        <div class="subsection-content">${formatContent(article.findings)}</div>
+                    </div>
+                    ` : ''}
+                </div>
+
+                <!-- Legacy: If no expanded sections, show combined research -->
+                ${!article.researchers && !article.problem && article.research ? `
                 <div class="section">
                     <div class="section-title">
                         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -614,6 +772,7 @@
                         <p>${formatContent(article.research)}</p>
                     </div>
                 </div>
+                ` : ''}
 
                 <div class="section">
                     <div class="section-title">
@@ -642,7 +801,7 @@
                 </div>
                 ` : ''}
 
-                ${article.mermaid_diagram ? `
+                ${(article.concept_map || article.mermaid_diagram) ? `
                 <div class="diagram-section">
                     <div class="section-title">
                         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -651,10 +810,10 @@
                             <rect x="14" y="14" width="7" height="7" rx="1"/>
                             <rect x="3" y="14" width="7" height="7" rx="1"/>
                         </svg>
-                        Visual Summary
+                        Concept Map
                     </div>
                     <div class="mermaid" id="mermaid-diagram">
-                        ${article.mermaid_diagram}
+                        ${article.concept_map || article.mermaid_diagram}
                     </div>
                 </div>
                 ` : ''}
@@ -696,7 +855,7 @@
             `;
 
             // Render Mermaid diagram if present
-            if (article.mermaid_diagram) {
+            if (article.concept_map || article.mermaid_diagram) {
                 setTimeout(() => {
                     mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 }, 100);
