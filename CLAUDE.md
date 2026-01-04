@@ -43,7 +43,8 @@ Choose format based on source type (flexible, use judgment):
 
 3. **Detailed Story** (`deepdive/[slug]-story.html`)
    - Text narrative (2-3 paragraphs per section)
-   - Mermaid diagrams reinforcing concepts
+   - Mermaid diagrams reinforcing concepts (hover to enlarge, click to fullscreen)
+   - Curriculum Connection section with course links
    - For papers needing more explanation
 
 ### Source Selection
@@ -206,9 +207,14 @@ Sections:
 - [x] Feed collector v2 with curated sources
 - [x] 21 articles published (3 per discipline)
 - [x] Deep Dive template created (solar-cell-bromine)
-- [x] Solar cell Deep Dive complete
+- [x] Solar cell Deep Dive complete (Chemistry)
   - Video: https://www.youtube.com/watch?v=fZc-jc7PZEc
   - Podcast: https://soundcloud.com/thebeakerscom/bromine_core_reaches_20
+- [x] Legged Locomotion Deep Dive complete (Engineering)
+  - Detailed Story: `deepdive/legged-locomotion-story.html`
+  - Visual Summary: `deepdive/legged-locomotion-visual.html`
+  - Source: Ha et al., IJRR 2025 (32-page survey)
+  - Curriculum Connection: 6 courses (ME, EECS, CS, MATH)
 - [ ] Public launch announcement (Monday, Jan 6)
 
 ## Contact
