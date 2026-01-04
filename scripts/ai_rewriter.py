@@ -114,32 +114,44 @@ Choose ONE and explain briefly why:
 - JUNIOR: Needs upper-division background (physical chem, advanced bio, etc.)
 
 ## CONCEPT_MAP
-Create a Mermaid.js diagram that shows the CONCEPTUAL RELATIONSHIPS in this research (not a flowchart of steps).
+Create a Mermaid.js flowchart that shows the CONCEPTUAL RELATIONSHIPS in this research.
 Show how ideas connect: problem → approach → key insight → findings → implications.
-Use this format:
+
+IMPORTANT SYNTAX RULES:
+- Use flowchart LR (left to right) or TD (top down)
+- Keep node text SHORT (under 30 chars)
+- NO colons, quotes, or special characters in node text
+- Use simple arrow connections
+
+Use this exact format:
 ```mermaid
-mindmap
-  root((Central Concept))
-    Problem
-      Current limitation
-      Why it matters
-    Approach
-      Key technique 1
-      Key technique 2
-    Discovery
-      Finding 1
-      Finding 2
-    Impact
-      Application 1
-      Future direction
+flowchart LR
+    subgraph Problem
+        A[Current Gap] --> B[Why It Matters]
+    end
+    subgraph Method
+        C[Key Technique 1] --> D[Key Technique 2]
+    end
+    subgraph Results
+        E[Finding 1] --> F[Finding 2]
+    end
+    Problem --> Method --> Results
+    Results --> G[Future Impact]
 ```
-Make it educational - someone should understand the research structure from this diagram alone.
+Keep it simple: 6-8 nodes maximum. Make it educational.
 
 ## AUDIO_TEASER
 Write exactly 3 sentences (under 75 words) that sound good read aloud. This is for the audio player - make it engaging, conversational, and make listeners want to read more.
 
 ## THINK_ABOUT
 One thought-provoking question that connects this research to a student's everyday life, future career, or a bigger scientific question they might explore.
+
+## FIGURE_DESCRIPTION
+Describe what the key figure or graphical abstract from this paper likely shows. Be specific:
+- What type of visualization (molecular structure, graph, schematic, microscopy image)?
+- What does it depict (the peptide structure, binding mechanism, experimental results)?
+- What makes it visually striking or informative?
+This helps us find or create an appropriate visual.
 
 ---
 
@@ -252,6 +264,8 @@ def rewrite_article(article):
         # Audio and reflection
         "audio_teaser": sections.get('AUDIO_TEASER', ''),
         "think_about": sections.get('THINK_ABOUT', ''),
+        # Figure info
+        "figure_description": sections.get('FIGURE_DESCRIPTION', ''),
         # Raw output for debugging
         "raw_output": raw_output
     }
@@ -360,6 +374,7 @@ def test_single_article():
         print(f"\n🗺️ CONCEPT MAP:\n```mermaid\n{rewritten.get('concept_map', '')}\n```")
         print(f"\n🎧 AUDIO TEASER:\n{rewritten.get('audio_teaser', '')}")
         print(f"\n🤔 THINK ABOUT:\n{rewritten.get('think_about', '')}")
+        print(f"\n🖼️ FIGURE DESCRIPTION:\n{rewritten.get('figure_description', '')}")
 
         return rewritten
     else:

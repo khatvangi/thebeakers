@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 4,
-  "updated": "2026-01-03T18:16:50.933149",
+  "count": 5,
+  "updated": "2026-01-03T18:25:29.292120",
   "articles": [
     {
       "filename": "index.json",
@@ -34,6 +34,14 @@
       "difficulty": "**Sophomore**: This research requires foundational knowledge in organic chemistry (reaction mechanisms, synthesis) and biochemistry (protein structure, enzyme kinetics), which are typically covered in sophomore-level courses.",
       "source": "Journal of the American Chemical Society",
       "rewritten_at": "2026-01-03T18:16:25.830481"
+    },
+    {
+      "filename": "20260103-revolutionizing-cancer-treatment-how-disulfide-bon.json",
+      "headline": "Revolutionizing Cancer Treatment: How Disulfide Bonds Are Shaping the Future of CAR-T Therapy",
+      "hook": "If you're studying biochemistry or molecular biology, this breakthrough could redefine how you approach drug design\u2014and how you think about the future of personalized medicine.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research ties together concepts from organic chemistry (peptide synthesis), biochemistry (protein structure), and computational methods\u2014all foundational for sophomores in STEM fields.",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T18:25:20.170511"
     }
   ]
 }
