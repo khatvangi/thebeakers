@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
   "count": 6,
-  "updated": "2026-01-03T18:36:37.351978",
+  "updated": "2026-01-03T18:43:49.866341",
   "articles": [
     {
       "filename": "index.json",
@@ -37,11 +37,11 @@
     },
     {
       "filename": "20260103-revolutionizing-cancer-treatment-how-peptide-bonds.json",
-      "headline": "Revolutionizing Cancer Treatment: How Peptide Bonds Are Reshaping CAR-T Therapy",
-      "hook": "If you're studying biochemistry or medicine, this research could redefine how we fight cancer\u2014by turning your classroom knowledge into life-saving breakthroughs.",
-      "difficulty": "**Sophomore**: This research requires foundational knowledge in organic chemistry (reaction mechanisms, synthesis) and biochemistry (protein structure, enzyme kinetics), which are typically covered in sophomore-level courses.",
+      "headline": "Revolutionizing Cancer Treatment: How Peptide Bonds Are Engineering Safer CAR-T Cells for Solid Tumors",
+      "hook": "Imagine a future where your body\u2019s own cells fight cancer with precision\u2014this research is making that possible.",
+      "difficulty": "**SOPHOMORE**: Needs intro-level major courses (organic, biochem, etc.)\u2014this research blends concepts from chemistry, biology, and engineering, requiring foundational knowledge of molecular structure and cell signaling.",
       "source": "Journal of the American Chemical Society",
-      "rewritten_at": "2026-01-03T18:16:25.830481"
+      "rewritten_at": "2026-01-03T18:43:35.937613"
     },
     {
       "filename": "20260103-revolutionizing-cancer-treatment-how-disulfide-bon.json",
