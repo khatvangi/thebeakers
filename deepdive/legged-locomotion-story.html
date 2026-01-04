@@ -156,12 +156,75 @@
             border-radius: 15px;
             padding: 30px;
             margin: 30px 0;
-            overflow-x: auto;
+            overflow: visible;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .diagram-container:hover {
+            transform: scale(1.08);
+            z-index: 100;
+            box-shadow: 0 20px 60px rgba(0,255,136,0.4);
+        }
+
+        .diagram-container.expanded {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1);
+            width: 95vw;
+            max-width: 1400px;
+            max-height: 95vh;
+            overflow: auto;
+            z-index: 1001;
+            cursor: zoom-out;
+            padding: 50px;
+            background: rgba(15, 52, 96, 0.98);
+            border: 2px solid #00ff88;
+        }
+
+        .diagram-container.expanded:hover {
+            transform: translate(-50%, -50%) scale(1);
+            box-shadow: 0 0 100px rgba(0,255,136,0.5);
+        }
+
+        .diagram-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+        }
+
+        .diagram-overlay.active {
+            display: block;
         }
 
         .mermaid {
             display: flex;
             justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .diagram-hint {
+            text-align: center;
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .diagram-container:hover .diagram-hint {
+            opacity: 1;
         }
 
         .key-insight {
@@ -758,10 +821,13 @@
         <p style="margin-top: 15px; color: #444;">Created for The Beakers | Deep Dive Format</p>
     </footer>
 
+    <div class="diagram-overlay" id="diagramOverlay"></div>
+
     <script>
         mermaid.initialize({
             startOnLoad: true,
             theme: 'dark',
+            fontSize: 18,
             themeVariables: {
                 primaryColor: '#00ff88',
                 primaryTextColor: '#fff',
@@ -775,12 +841,65 @@
                 clusterBkg: '#0f3460',
                 clusterBorder: '#00d4ff',
                 titleColor: '#fff',
-                edgeLabelBackground: '#1a1a2e'
+                edgeLabelBackground: '#1a1a2e',
+                fontSize: '18px'
             },
             flowchart: {
                 curve: 'basis',
-                padding: 20
+                padding: 20,
+                nodeSpacing: 50,
+                rankSpacing: 50
+            },
+            timeline: {
+                padding: 30
             }
+        });
+
+        // Click to expand diagrams
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('diagramOverlay');
+            const diagrams = document.querySelectorAll('.diagram-container');
+
+            diagrams.forEach(diagram => {
+                // Add hint text
+                const hint = document.createElement('div');
+                hint.className = 'diagram-hint';
+                hint.textContent = '🔍 Click to enlarge • ESC to close';
+                diagram.appendChild(hint);
+                diagram.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    if (this.classList.contains('expanded')) {
+                        this.classList.remove('expanded');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    } else {
+                        this.classList.add('expanded');
+                        overlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            overlay.addEventListener('click', function() {
+                const expanded = document.querySelector('.diagram-container.expanded');
+                if (expanded) {
+                    expanded.classList.remove('expanded');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+
+            // ESC key to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const expanded = document.querySelector('.diagram-container.expanded');
+                    if (expanded) {
+                        expanded.classList.remove('expanded');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
         });
     </script>
 </body>
