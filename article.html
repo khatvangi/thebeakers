@@ -429,6 +429,98 @@
             max-width: 100%;
         }
 
+        /* Napkin-style Visual */
+        .napkin-section {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border: 2px solid var(--accent-teal);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .napkin-section .section-title {
+            color: var(--accent-teal);
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .napkin-title {
+            text-align: center;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin: 1rem 0 1.5rem;
+        }
+
+        .napkin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .napkin-quadrant {
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 1.25rem;
+            border-left: 3px solid;
+        }
+
+        .napkin-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .napkin-label {
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .napkin-items {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .napkin-items li {
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .napkin-items li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--text-light);
+        }
+
+        .napkin-flow {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(20, 184, 166, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: var(--accent-teal);
+            font-weight: 600;
+        }
+
+        .napkin-key-visual {
+            text-align: center;
+            margin-top: 1rem;
+            padding: 1rem;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 600px) {
+            .napkin-grid { grid-template-columns: 1fr; }
+        }
+
         /* Think About */
         .think-about {
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
@@ -830,6 +922,19 @@
                 </div>
                 ` : ''}
 
+                ${article.napkin_visual ? `
+                <div class="napkin-section">
+                    <div class="section-title">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18M9 21V9"/>
+                        </svg>
+                        Visual Summary
+                    </div>
+                    <div id="napkin-content"></div>
+                </div>
+                ` : ''}
+
                 ${article.think_about ? `
                 <div class="think-about">
                     <div class="section-title">
@@ -860,6 +965,93 @@
                     mermaid.run({ nodes: document.querySelectorAll('.mermaid') });
                 }, 100);
             }
+
+            // Render napkin visual if present
+            if (article.napkin_visual) {
+                renderNapkinVisual(article.napkin_visual);
+            }
+        }
+
+        // Parse and render napkin-style visual
+        function renderNapkinVisual(napkinText) {
+            const container = document.getElementById('napkin-content');
+            if (!container || !napkinText) return;
+
+            // Parse the napkin visual text
+            const lines = napkinText.split('\n').map(l => l.trim()).filter(l => l);
+
+            let centralConcept = '';
+            let branches = [];
+            let flow = [];
+            let keyVisual = '';
+
+            let currentSection = '';
+
+            for (const line of lines) {
+                if (line.startsWith('CENTRAL_CONCEPT:')) {
+                    centralConcept = line.replace('CENTRAL_CONCEPT:', '').trim();
+                } else if (line.startsWith('BRANCHES:')) {
+                    currentSection = 'branches';
+                } else if (line.startsWith('FLOW:')) {
+                    const flowText = line.replace('FLOW:', '').trim();
+                    flow = flowText.split('->').map(s => s.trim()).filter(s => s);
+                    currentSection = '';
+                } else if (line.startsWith('KEY_VISUAL:')) {
+                    keyVisual = line.replace('KEY_VISUAL:', '').trim();
+                    currentSection = '';
+                } else if (currentSection === 'branches' && line.startsWith('-')) {
+                    // Parse branch: - Category: Item1, Item2, Item3
+                    let branchLine = line.substring(1).trim();
+                    // Strip markdown bold markers
+                    branchLine = branchLine.replace(/\*\*/g, '');
+                    const colonIdx = branchLine.indexOf(':');
+                    if (colonIdx > 0) {
+                        const label = branchLine.substring(0, colonIdx).trim();
+                        const itemsText = branchLine.substring(colonIdx + 1).trim();
+                        const items = itemsText.split(',').map(s => s.trim()).filter(s => s);
+                        branches.push({ label, items });
+                    }
+                }
+            }
+
+            // Pick icons and colors for branches
+            const icons = ['🔬', '⚡', '🧪', '📊', '🎯', '💡', '🌟', '🔍'];
+            const colors = ['#10b981', '#3b82f6', '#f59e0b', '#8b5cf6', '#ef4444', '#14b8a6'];
+
+            // Build HTML
+            let html = '';
+
+            if (centralConcept) {
+                html += `<h3 class="napkin-title">${escapeHtml(centralConcept)}</h3>`;
+            }
+
+            if (branches.length > 0) {
+                html += '<div class="napkin-grid">';
+                branches.slice(0, 4).forEach((branch, i) => {
+                    const color = colors[i % colors.length];
+                    const icon = icons[i % icons.length];
+                    const itemsHtml = branch.items.map(item => `<li>${escapeHtml(item)}</li>`).join('');
+                    html += `
+                        <div class="napkin-quadrant" style="border-color: ${color}">
+                            <div class="napkin-icon">${icon}</div>
+                            <div class="napkin-label" style="color: ${color}">${escapeHtml(branch.label)}</div>
+                            <ul class="napkin-items">${itemsHtml}</ul>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+
+            if (flow.length > 0) {
+                const flowHtml = flow.map(step => escapeHtml(step)).join(' → ');
+                html += `<div class="napkin-flow">${flowHtml}</div>`;
+            }
+
+            if (keyVisual) {
+                html += `<div class="napkin-key-visual">🎨 ${escapeHtml(keyVisual)}</div>`;
+            }
+
+            container.innerHTML = html;
         }
 
         // Escape HTML to prevent XSS
