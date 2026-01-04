@@ -8,6 +8,7 @@ Uses Ollama for local LLM processing
 import json
 import subprocess
 import re
+import requests
 from pathlib import Path
 from datetime import datetime
 
@@ -16,6 +17,44 @@ OLLAMA_MODEL = "qwen3:latest"  # Good balance of quality/speed
 BEAKERS_DIR = Path(__file__).parent.parent
 DATA_DIR = BEAKERS_DIR / "data"
 ARTICLES_DIR = BEAKERS_DIR / "articles"
+
+
+def fetch_paper_metadata(doi):
+    """Fetch real paper metadata from Semantic Scholar and CrossRef"""
+    if not doi:
+        return {}
+
+    # Clean DOI
+    doi = doi.replace('http://dx.doi.org/', '').replace('https://doi.org/', '')
+
+    result = {'doi': doi, 'url': f"https://doi.org/{doi}"}
+
+    # Try Semantic Scholar (best for authors, TLDR)
+    try:
+        ss_url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}?fields=title,tldr,authors,year,venue,citationCount"
+        resp = requests.get(ss_url, timeout=10)
+        if resp.status_code == 200:
+            data = resp.json()
+            result['authors'] = [a.get('name') for a in data.get('authors', []) if a.get('name')]
+            result['year'] = data.get('year')
+            result['tldr'] = data.get('tldr', {}).get('text') if data.get('tldr') else None
+            result['citations'] = data.get('citationCount')
+            print(f"  📚 Found {len(result.get('authors', []))} authors via Semantic Scholar")
+    except Exception as e:
+        print(f"  ⚠️ Semantic Scholar error: {e}")
+
+    # Try CrossRef for publisher info
+    try:
+        cr_url = f"https://api.crossref.org/works/{doi}"
+        resp = requests.get(cr_url, timeout=10)
+        if resp.status_code == 200:
+            data = resp.json().get('message', {})
+            result['publisher'] = data.get('publisher')
+            result['journal'] = data.get('container-title', [''])[0] if data.get('container-title') else None
+    except Exception:
+        pass
+
+    return result
 
 # The KEY prompt - transforms research into student-friendly content
 # This is comprehensive - we want SUBSTANTIAL content, not token summaries
@@ -26,7 +65,9 @@ Your goal: Make this research EXCITING and deeply CONNECTED to what students are
 Given this article:
 TITLE: {title}
 SOURCE: {source}
+AUTHORS: {authors}
 ABSTRACT/TEASER: {teaser}
+ADDITIONAL CONTEXT: {tldr}
 
 Produce the following sections. Be accurate but accessible. Write like a brilliant teaching assistant who genuinely wants students to understand.
 
@@ -40,7 +81,9 @@ One powerful sentence: Why should an undergrad care about this? Connect it to th
 
 ## THE_RESEARCHERS
 (50-75 words)
-Who did this research? What institution? If you don't know specifics, describe the type of research group (e.g., "A team of biochemists and oncologists at a major research university..."). Why are they qualified to tackle this problem? This humanizes the science.
+The authors are listed above. Use their actual names (first author + "and colleagues" if many).
+Describe what type of researchers they likely are based on the research topic and journal.
+What expertise would they need? This humanizes the science - make students feel connected to real scientists.
 
 ## THE_PROBLEM
 (100-150 words)
@@ -146,12 +189,19 @@ Write exactly 3 sentences (under 75 words) that sound good read aloud. This is f
 ## THINK_ABOUT
 One thought-provoking question that connects this research to a student's everyday life, future career, or a bigger scientific question they might explore.
 
-## FIGURE_DESCRIPTION
-Describe what the key figure or graphical abstract from this paper likely shows. Be specific:
-- What type of visualization (molecular structure, graph, schematic, microscopy image)?
-- What does it depict (the peptide structure, binding mechanism, experimental results)?
-- What makes it visually striking or informative?
-This helps us find or create an appropriate visual.
+## NAPKIN_VISUAL
+Create a description for a napkin.ai-style infographic (dark background, clean icons, color-coded sections).
+Structure it EXACTLY like this example:
+
+CENTRAL_CONCEPT: [Main idea in 3-5 words]
+BRANCHES:
+- [Category 1]: [Item A], [Item B], [Item C]
+- [Category 2]: [Item A], [Item B]
+- [Category 3]: [Item A], [Item B], [Item C]
+FLOW: [Step 1] -> [Step 2] -> [Step 3] -> [Outcome]
+KEY_VISUAL: [Describe one striking image that captures the research - molecular structure, cell diagram, etc.]
+
+This will be used to generate an infographic, so be specific and visual.
 
 ---
 
@@ -218,10 +268,25 @@ def parse_rewritten_article(raw_output):
 
 def rewrite_article(article):
     """Rewrite a single article"""
+    # Fetch real metadata from DOI
+    doi = article.get('url', '').replace('http://dx.doi.org/', '').replace('https://doi.org/', '')
+    metadata = {}
+    if doi and ('10.' in doi):
+        print(f"  🔍 Fetching metadata for DOI: {doi}")
+        metadata = fetch_paper_metadata(doi)
+
+    # Format authors
+    authors = metadata.get('authors', [])
+    authors_str = ', '.join(authors[:5])
+    if len(authors) > 5:
+        authors_str += f" et al. ({len(authors)} total)"
+
     prompt = REWRITER_PROMPT.format(
         title=article.get('headline', ''),
         source=article.get('source', ''),
-        teaser=article.get('teaser', '')
+        authors=authors_str or 'Not available',
+        teaser=article.get('teaser', ''),
+        tldr=metadata.get('tldr', '') or ''
     )
 
     print(f"  🤖 Sending to {OLLAMA_MODEL}...")
@@ -264,8 +329,17 @@ def rewrite_article(article):
         # Audio and reflection
         "audio_teaser": sections.get('AUDIO_TEASER', ''),
         "think_about": sections.get('THINK_ABOUT', ''),
-        # Figure info
-        "figure_description": sections.get('FIGURE_DESCRIPTION', ''),
+        # Visual info
+        "napkin_visual": sections.get('NAPKIN_VISUAL', ''),
+        "figure_description": sections.get('FIGURE_DESCRIPTION', ''),  # Legacy
+        # Paper metadata (real data from APIs)
+        "paper_metadata": {
+            "doi": metadata.get('doi'),
+            "authors": metadata.get('authors', []),
+            "year": metadata.get('year'),
+            "citations": metadata.get('citations'),
+            "paper_url": metadata.get('url'),
+        },
         # Raw output for debugging
         "raw_output": raw_output
     }
@@ -374,7 +448,8 @@ def test_single_article():
         print(f"\n🗺️ CONCEPT MAP:\n```mermaid\n{rewritten.get('concept_map', '')}\n```")
         print(f"\n🎧 AUDIO TEASER:\n{rewritten.get('audio_teaser', '')}")
         print(f"\n🤔 THINK ABOUT:\n{rewritten.get('think_about', '')}")
-        print(f"\n🖼️ FIGURE DESCRIPTION:\n{rewritten.get('figure_description', '')}")
+        print(f"\n🎨 NAPKIN VISUAL:\n{rewritten.get('napkin_visual', '')}")
+        print(f"\n👥 REAL AUTHORS: {', '.join(rewritten.get('paper_metadata', {}).get('authors', [])[:3])}...")
 
         return rewritten
     else:

@@ -1,7 +1,7 @@
 {
   "discipline": "chemistry",
-  "count": 5,
-  "updated": "2026-01-03T18:25:29.292120",
+  "count": 6,
+  "updated": "2026-01-03T18:36:37.351978",
   "articles": [
     {
       "filename": "index.json",
@@ -10,6 +10,14 @@
       "difficulty": "SOPHOMORE",
       "source": "",
       "rewritten_at": ""
+    },
+    {
+      "filename": "20260103-revolutionizing-car-t-therapy-how-peptide-bonds-ar.json",
+      "headline": "Revolutionizing CAR-T Therapy: How Peptide Bonds Are Targeting Cancer's Strongest Defenses",
+      "hook": "Imagine a future where your immune system can precisely target cancer cells without harming healthy tissue\u2014this research is making it possible.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research integrates organic synthesis, protein structure, and immunology\u2014topics you\u2019re encountering in sophomore-level courses.",
+      "source": "Journal of the American Chemical Society",
+      "rewritten_at": "2026-01-03T18:36:24.759153"
     },
     {
       "filename": "20260103-revolutionizing-cancer-treatments-peptides-that-st.json",
