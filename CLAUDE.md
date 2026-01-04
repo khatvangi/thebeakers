@@ -3,6 +3,7 @@
 STEM research rewritten for undergraduate students. Cutting-edge research translated into language students can understand, connected to what they're learning in class.
 
 **Live site:** https://thebeakers.com
+**Launch:** Monday, January 6, 2026
 
 ## Vision
 
@@ -13,49 +14,133 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 
 **Motto:** व्यये कृते वर्धत एव नित्यं — "Knowledge always grows when shared" (Chanakya Niti)
 
+## Content Strategy
+
+### Two-Tier System
+
+1. **Deep Dive Articles** (1 per discipline per week)
+   - Processed through Google NotebookLM
+   - Assets: Podcast, Video, Mind Map, Infographic, Study Guide
+   - Our value-add: Curriculum Connection + Interactive Quiz
+   - Source: Review journals + Education journals
+   - Host media on YouTube (Cloudflare Pages has size limits)
+
+2. **Regular Articles** (2-5 per discipline per week)
+   - Processed through Ollama (qwen3)
+   - Quick summaries with curriculum connections
+   - Source: High-impact research journals
+
+### Source Selection
+- **Review journals**: Comprehensive peer-reviewed articles (Deep Dive)
+- **Education journals**: Written for students (Deep Dive)
+- **High-impact journals**: Top research journals (Regular)
+- **NO arXiv**: Not peer-reviewed
+
 ## Site Structure
 
 ```
 thebeakers.com/
 ├── index.html              # Main page with cards, animations, newsletter
-├── index-v1.html           # Backup: Original dark theme with tags
-├── index-v2.html           # Backup: Light cream theme with cards
-├── chemistry.html          # Chemistry discipline page (template for others)
-├── article.html            # Individual article page (dynamic, loads from JSON)
-├── logo.png                # Main logo (transparent)
-├── logo-48.png             # Header logo
-├── favicon.ico             # Browser favicon
-├── [discipline].png        # Card images (biology, chemistry, physics, etc.)
+├── [discipline].html       # 7 discipline pages (chemistry, physics, etc.)
+├── article.html            # Regular article page (dynamic, loads from JSON)
+├── deepdive/
+│   └── [slug].html         # Deep Dive articles (static, rich media)
 ├── articles/
 │   └── [discipline]/
 │       ├── index.json      # Auto-generated article index
-│       └── *.json          # Rewritten articles (one per article)
+│       └── *.json          # Rewritten articles
 ├── data/
-│   ├── pending_articles.json   # Collected articles awaiting curation
-│   └── approved_articles.json  # Curator-approved articles
+│   ├── articles.db         # SQLite: seen_articles, archive tables
+│   └── pending_articles.json
 └── scripts/
-    ├── feed_collector.py       # RSS feed collector (7 disciplines)
-    ├── ai_rewriter.py          # Article rewriter using Ollama/qwen3
-    ├── telegram_curator.py     # Telegram bot for curation
-    └── generate_indexes.py     # Generate article index files
+    ├── feed_collector.py   # v2: Curated RSS collector
+    ├── ai_rewriter.py      # Ollama rewriter for regular articles
+    └── generate_indexes.py # Generate article index files
 ```
 
-## Disciplines (Card Categories)
+## Disciplines
 
-### Natural Sciences
-- Biology - biology.png
-- Chemistry - chemistry.png
-- Physics - physics.png
-- Agriculture - agriculture.png
+| Category | Disciplines |
+|----------|-------------|
+| Natural Sciences | Biology, Chemistry, Physics, Agriculture |
+| Technology | Artificial Intelligence |
+| Engineering | Engineering (Civil, Mechanical, Electrical, Chemical) |
+| Mathematics | Mathematics |
 
-### Technology
-- Artificial Intelligence - ai.png
+## Weekly Workflow
 
-### Engineering
-- Engineering (Civil, Mechanical, Electrical, Chemical) - engineering.png
+### 1. Collect Articles (Sunday/Monday)
+```bash
+python scripts/feed_collector.py           # Collect from all feeds
+python scripts/feed_collector.py deepdive  # Show Deep Dive candidates
+```
 
-### Mathematics
-- Mathematics - mathematics.png
+### 2. Pick Deep Dives (Monday)
+- Select 1 article per discipline from review/education sources
+- Find PDF (Open Access or institutional access)
+- Upload to NotebookLM → generate all assets
+
+### 3. Build Deep Dive Pages (Monday-Tuesday)
+- Download NotebookLM assets (podcast, video, infographic, study guide)
+- Upload podcast/video to YouTube
+- Create deepdive/[slug].html with our value-adds:
+  - Curriculum Connection section
+  - Interactive Quiz (5 questions)
+
+### 4. Rewrite Regular Articles (Tuesday-Wednesday)
+```bash
+python scripts/ai_rewriter.py rewrite chemistry 3
+python scripts/ai_rewriter.py rewrite physics 3
+# ... for each discipline
+python scripts/generate_indexes.py
+```
+
+### 5. Publish (Wednesday)
+```bash
+git add . && git commit -m "Week X articles" && git push
+```
+
+## Feed Collector v2
+
+Curated sources organized by type:
+
+```python
+FEEDS = {
+    "chemistry": {
+        "review": [        # Deep Dive candidates
+            ("Chemical Reviews", "..."),      # IF 62
+            ("Chem Society Reviews", "..."),  # IF 46
+        ],
+        "high_impact": [   # Regular summaries
+            ("JACS", "..."),                  # IF 15
+            ("Nature Chemistry", "..."),      # IF 24
+        ],
+        "education": [     # Deep Dive candidates
+            ("J. Chem. Education", "..."),
+        ]
+    },
+    # ... similar for other disciplines
+}
+```
+
+Database tracks seen articles to avoid duplicates:
+- `seen_articles`: All collected articles with status
+- `archive`: Approved/published articles
+
+## Deep Dive Page Template
+
+Located at `deepdive/solar-cell-bromine.html` as reference.
+
+Sections:
+1. Hero with title and metadata
+2. Podcast player (YouTube embed)
+3. Video player (YouTube embed)
+4. Infographic display
+5. **Curriculum Connection** (our value-add)
+6. **Interactive Quiz** (our value-add) - JavaScript-based
+7. Mind Map
+8. Glossary
+9. Downloads (PDF study guide, etc.)
 
 ## Design
 
@@ -63,15 +148,6 @@ thebeakers.com/
 - Dark background (#0f172a)
 - Card-based layout with Midjourney illustrations
 - Plus Jakarta Sans + Instrument Serif fonts
-- Inspired by writingexamples.com (Webby award winner)
-
-### Animations
-- Hero text slide-up on load
-- Motto fade-in with delay
-- Cards fade-in on scroll (staggered via Intersection Observer)
-- Card image zoom on hover
-- Swoosh animation around newsletter form
-- Smooth scroll navigation
 
 ### Color Palette
 ```css
@@ -81,76 +157,29 @@ thebeakers.com/
 --accent-blue: #3b82f6   (Technology)
 --accent-orange: #f59e0b (Engineering)
 --accent-purple: #8b5cf6 (Mathematics)
+--accent-cyan: #06b6d4   (Deep Dive accent)
 ```
-
-## Sections
-
-1. **Hero** - Title, tagline, Chanakya quote
-2. **Disciplines** - 7 cards with category images
-3. **Beyond Articles** - Podcasts & Curated Videos
-   - Weekly Podcasts: This Week in Chemistry/Engineering/Biology/Math
-   - Curated Videos: Lecture highlights, lab demos, concept explainers
-4. **Newsletter** - Email signup with swoosh animation
-5. **Footer** - Founding Editor, links
 
 ## Deployment
 
-- **Hosting:** Cloudflare Pages
+- **Hosting:** Cloudflare Pages (auto-deploy from GitHub)
 - **Repo:** https://github.com/khatvangi/thebeakers
 - **Domain:** thebeakers.com (Cloudflare DNS)
+- **Media:** YouTube (for podcast/video - Cloudflare has size limits)
 
 ## Related Sites
 
-- **SPS Daily:** https://spsdaily.thebeakers.com — Science, Philosophy & Society digest
-- **Course:** https://course.thebeakers.com — (placeholder)
-- **Newsletter:** https://newsletter.thebeakers.com — Listmonk instance
+- **SPS Daily:** https://spsdaily.thebeakers.com
+- **Newsletter:** https://newsletter.thebeakers.com (Listmonk)
 
-## Article Pipeline
+## Current Status (Jan 2026)
 
-### 1. Collection (Weekly)
-```bash
-python scripts/feed_collector.py
-```
-- Collects from research + education journals for 7 disciplines
-- Saves to `data/pending_articles.json`
-
-### 2. Curation (Telegram Bot)
-```bash
-python scripts/telegram_curator.py
-```
-- Bot: @thebeakers_stem_bot
-- Buttons: Quick Link, Rewrite, Editor's Pick, Skip
-- Commands: /review, /status, /publish
-
-### 3. AI Rewriting
-```bash
-python scripts/ai_rewriter.py test      # Test single article
-python scripts/ai_rewriter.py rewrite chemistry 5  # Rewrite 5 chemistry articles
-```
-- Uses Ollama with qwen3:latest model
-- Produces: Headline, Hook, Research, Why It Matters, Curriculum Connection, Key Terms, Difficulty, Mermaid Diagram, Audio Teaser, Think About
-- Saves to `articles/[discipline]/[date]-[slug].json`
-
-### 4. Index Generation
-```bash
-python scripts/generate_indexes.py
-```
-- Creates `articles/[discipline]/index.json` for each discipline
-
-## Article Page Features
-
-- **Mermaid.js diagrams** - Auto-rendered visual summaries
-- **Audio player** - Browser SpeechSynthesis API (free TTS)
-- **Curriculum connections** - Highlighted section linking to courses
-- **Difficulty badges** - Freshman/Sophomore/Junior
-- **Original source link** - Links back to research paper
-
-## Planned Features
-
-- [ ] Weekly podcasts
-- [ ] Curated YouTube video playlists
-- [ ] Pop-up definitions for key terms
-- [ ] Search across all articles
+- [x] All 7 discipline pages created
+- [x] Feed collector v2 with curated sources
+- [x] 21 articles published (3 per discipline)
+- [x] Deep Dive template created (solar-cell-bromine)
+- [ ] Upload solar cell media to YouTube
+- [ ] Public launch announcement
 
 ## Contact
 
