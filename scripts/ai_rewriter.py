@@ -190,25 +190,31 @@ Write exactly 3 sentences (under 75 words) that sound good read aloud. This is f
 One thought-provoking question that connects this research to a student's everyday life, future career, or a bigger scientific question they might explore.
 
 ## NAPKIN_VISUAL
-Create a data-driven visual. First, identify what DATA STRUCTURE best represents this research:
+Create a data-driven visual. The layout must match the DATA STRUCTURE of the research (not aesthetics).
 
-LAYOUT TYPES (pick ONE):
-- LINEAR: Process/causation (A → B → C)
-- COMPARISON: Old vs New, Before vs After (A ↔ B)
-- CONVERGENCE: Multiple factors → one outcome
-- CYCLE: Feedback loop, iterative process
+LAYOUT TYPES (pick the ONE that best matches the data):
+- LINEAR: Sequential process (A → B → C). Use for: methods, causation chains
+- COMPARISON: Side-by-side (Old ↔ New). Use for: before/after, vs studies
+- CONVERGENCE: Multiple → One. Use for: factors combining to outcome
+- CYCLE: Circular loop. Use for: feedback systems, iterative processes
+- PYRAMID: Hierarchical layers. Use for: importance levels, taxonomies
+- TIMELINE: Temporal sequence. Use for: historical findings, development phases
+- RADIAL: Central hub + spokes. Use for: properties of one entity, related aspects
+- FLOW: Multi-path branching. Use for: decision trees, metabolic pathways
 
 Output EXACTLY in this format:
 
-LAYOUT: [linear/comparison/convergence/cycle]
+LAYOUT: [linear/comparison/convergence/cycle/pyramid/timeline/radial/flow]
 TITLE: [2-4 word title for the visual]
 DATA:
 - [item1]: [2-5 words]
 - [item2]: [2-5 words]
 - [item3]: [2-5 words]
-- [item4]: [2-5 words] (optional, for comparison use "vs" as item)
+- [item4]: [2-5 words] (optional)
+- [item5]: [2-5 words] (optional, max 5 items)
 
 Examples:
+
 LAYOUT: linear
 TITLE: CAR-T Engineering
 DATA:
@@ -230,6 +236,21 @@ DATA:
 - factor2: Bond engineering
 - factor3: Antigen design
 - outcome: Effective therapy
+
+LAYOUT: pyramid
+TITLE: Drug Specificity
+DATA:
+- top: Target receptor
+- middle: Binding mechanism
+- base: Clinical outcome
+
+LAYOUT: radial
+TITLE: Enzyme Properties
+DATA:
+- center: Novel Enzyme
+- spoke1: High specificity
+- spoke2: Fast kinetics
+- spoke3: Stable structure
 
 ---
 

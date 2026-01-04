@@ -997,6 +997,10 @@
             if (layout === 'comparison') renderComparison(svgEl, rc, title, data);
             else if (layout === 'convergence') renderConvergence(svgEl, rc, title, data);
             else if (layout === 'cycle') renderCycle(svgEl, rc, title, data);
+            else if (layout === 'pyramid') renderPyramid(svgEl, rc, title, data);
+            else if (layout === 'timeline') renderTimeline(svgEl, rc, title, data);
+            else if (layout === 'radial') renderRadial(svgEl, rc, title, data);
+            else if (layout === 'flow') renderFlow(svgEl, rc, title, data);
             else renderLinear(svgEl, rc, title, data); // default
         }
 
@@ -1107,6 +1111,122 @@
                 const ay2 = cy + (r - 35) * Math.sin(nextAngle - 0.4);
                 svg.appendChild(rc.line(ax1, ay1, ax2, ay2, { stroke: '#64748b', strokeWidth: 1.5 }));
             });
+        }
+
+        // PYRAMID: Hierarchical layers (top important, base broad)
+        function renderPyramid(svg, rc, title, data) {
+            addText(svg, 400, 25, title || 'Hierarchy', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 4);
+            const colors = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b'];
+            const layers = items.length;
+            const baseY = 50, layerH = 45;
+
+            items.forEach(([key, val], i) => {
+                const topW = 100 + i * 100;
+                const x = 400 - topW / 2;
+                const y = baseY + i * layerH;
+                svg.appendChild(rc.rectangle(x, y, topW, layerH - 5, {
+                    fill: `rgba(${i === 0 ? '139,92,246' : i === 1 ? '59,130,246' : i === 2 ? '16,185,129' : '245,158,11'},0.2)`,
+                    stroke: colors[i], strokeWidth: 2, roughness: 0.8
+                }));
+                addText(svg, 400, y + layerH/2 + 3, val.substring(0, 28), '#e2e8f0', 12);
+            });
+        }
+
+        // TIMELINE: Temporal sequence
+        function renderTimeline(svg, rc, title, data) {
+            addText(svg, 400, 25, title || 'Timeline', '#f1f5f9', 18, 'bold');
+            const items = Object.entries(data).slice(0, 5);
+            const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+            const startX = 80, endX = 720, y = 120;
+            const step = (endX - startX) / (items.length - 1 || 1);
+
+            // Main timeline
+            svg.appendChild(rc.line(startX - 20, y, endX + 20, y, { stroke: '#64748b', strokeWidth: 3, roughness: 0.5 }));
+
+            items.forEach(([key, val], i) => {
+                const x = startX + i * step;
+                // Node circle
+                svg.appendChild(rc.circle(x, y, 24, { fill: 'rgba(30,41,59,0.95)', stroke: colors[i], strokeWidth: 2.5, roughness: 0.8 }));
+                addText(svg, x, y + 4, (i + 1).toString(), colors[i], 12, '700');
+                // Label above/below alternating
+                const labelY = i % 2 === 0 ? y - 35 : y + 45;
+                addText(svg, x, labelY, val.substring(0, 18), '#e2e8f0', 11);
+                // Key label
+                const keyY = i % 2 === 0 ? y - 50 : y + 60;
+                addText(svg, x, keyY, key.toUpperCase(), colors[i], 9, '700');
+            });
+        }
+
+        // RADIAL: Central hub with spokes
+        function renderRadial(svg, rc, title, data) {
+            addText(svg, 400, 20, title || 'Properties', '#f1f5f9', 18, 'bold');
+            const entries = Object.entries(data);
+            const center = entries.find(([k]) => k === 'center' || k === 'hub');
+            const spokes = entries.filter(([k]) => k.startsWith('spoke') || (k !== 'center' && k !== 'hub'));
+            const colors = ['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6'];
+            const cx = 400, cy = 130, r = 100;
+
+            // Center circle
+            svg.appendChild(rc.circle(cx, cy, 70, { fill: 'rgba(139,92,246,0.2)', stroke: '#8b5cf6', strokeWidth: 3, roughness: 0.8 }));
+            addText(svg, cx, cy + 5, center ? center[1].substring(0, 14) : 'Core', '#e2e8f0', 13, '600');
+
+            // Spokes
+            spokes.slice(0, 5).forEach(([key, val], i) => {
+                const angle = (i / spokes.length) * 2 * Math.PI - Math.PI/2;
+                const x = cx + r * Math.cos(angle);
+                const y = cy + r * Math.sin(angle);
+
+                // Line from center to spoke
+                svg.appendChild(rc.line(cx + 35 * Math.cos(angle), cy + 35 * Math.sin(angle),
+                    x - 30 * Math.cos(angle), y - 30 * Math.sin(angle),
+                    { stroke: colors[i], strokeWidth: 2, roughness: 0.5 }));
+
+                // Spoke circle
+                svg.appendChild(rc.circle(x, y, 50, { fill: 'rgba(30,41,59,0.9)', stroke: colors[i], strokeWidth: 2, roughness: 0.8 }));
+                addText(svg, x, y + 5, val.substring(0, 14), '#e2e8f0', 10);
+            });
+        }
+
+        // FLOW: Multi-path branching (decision tree / pathways)
+        function renderFlow(svg, rc, title, data) {
+            addText(svg, 400, 20, title || 'Pathways', '#f1f5f9', 18, 'bold');
+            const entries = Object.entries(data).slice(0, 5);
+            const colors = ['#8b5cf6', '#3b82f6', '#f59e0b', '#10b981', '#ef4444'];
+
+            // Start node
+            svg.appendChild(rc.rectangle(320, 45, 160, 40, { fill: 'rgba(139,92,246,0.2)', stroke: '#8b5cf6', strokeWidth: 2.5, roughness: 0.8 }));
+            addText(svg, 400, 70, entries[0] ? entries[0][1].substring(0, 18) : 'Start', '#e2e8f0', 12);
+
+            // Branches (diamond for decision)
+            if (entries.length >= 2) {
+                // Decision diamond in center
+                svg.appendChild(rc.polygon([[400, 100], [450, 130], [400, 160], [350, 130]],
+                    { fill: 'rgba(59,130,246,0.2)', stroke: '#3b82f6', strokeWidth: 2, roughness: 0.8 }));
+                addText(svg, 400, 135, entries[1] ? entries[1][1].substring(0, 12) : '?', '#e2e8f0', 10);
+
+                // Branch lines
+                svg.appendChild(rc.line(350, 130, 200, 190, { stroke: '#f59e0b', strokeWidth: 2 }));
+                svg.appendChild(rc.line(450, 130, 600, 190, { stroke: '#10b981', strokeWidth: 2 }));
+
+                // Left branch
+                if (entries[2]) {
+                    svg.appendChild(rc.rectangle(100, 180, 160, 45, { fill: 'rgba(245,158,11,0.15)', stroke: '#f59e0b', strokeWidth: 2, roughness: 0.8 }));
+                    addText(svg, 180, 207, entries[2][1].substring(0, 18), '#e2e8f0', 11);
+                }
+
+                // Right branch
+                if (entries[3]) {
+                    svg.appendChild(rc.rectangle(540, 180, 160, 45, { fill: 'rgba(16,185,129,0.15)', stroke: '#10b981', strokeWidth: 2, roughness: 0.8 }));
+                    addText(svg, 620, 207, entries[3][1].substring(0, 18), '#e2e8f0', 11);
+                }
+
+                // Outcome (merge back)
+                if (entries[4]) {
+                    svg.appendChild(rc.line(180, 225, 400, 230, { stroke: '#64748b', strokeWidth: 1.5 }));
+                    svg.appendChild(rc.line(620, 225, 400, 230, { stroke: '#64748b', strokeWidth: 1.5 }));
+                }
+            }
         }
 
         // Helper: add text element
