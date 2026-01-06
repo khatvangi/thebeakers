@@ -3,313 +3,433 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protecting skins of Au–Cl can stabilize Au nanostructures | The Beakers</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <title>Protecting skins of Au–Cl can stabilize Au nanostructures</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
-            --bg: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-elevated: #1a1a24;
-            --text: #f0f0f5;
-            --text-muted: #8888a0;
-            --accent: #10b981;
-            --accent-glow: #10b98140;
-            --border: #2a2a3a;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-light: #334155;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
-
-        /* Animated gradient background */
-        .bg-gradient {
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
-            pointer-events: none;
-            z-index: -1;
-            animation: pulse 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        /* Grain texture */
-        .grain {
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(10,10,15,0.8);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .logo span { color: var(--accent); }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--accent); }
 
         /* Hero */
         .hero {
-            padding: 8rem 2rem 4rem;
-            max-width: 900px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e1b4b 100%);
+            padding: 4rem 2rem;
             text-align: center;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: var(--accent-glow);
-            border: 1px solid var(--accent);
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out;
+        .hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
         }
 
-        h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        .meta {
+        .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
+            gap: 3rem;
+            flex-wrap: wrap;
         }
 
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .hero-stat .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-orange);
         }
 
-        /* Content */
-        .content {
-            max-width: 720px;
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out 0.3s both;
-            transition: transform 0.3s, box-shadow 0.3s;
+        /* Scene Sections */
+        .scene-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--bg-light);
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
-        }
-
-        .card h2 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .card p:last-child { margin-bottom: 0; }
-
-        /* Tags */
-        .tags {
+        .section-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .tag {
-            padding: 0.3rem 0.8rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* CTA Button */
-        .cta {
-            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--accent);
-            color: var(--bg);
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 100px;
-            transition: all 0.3s;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box i {
+            width: 26px;
+            height: 26px;
+            color: white;
+        }
+
+        .scene-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+        }
+
+        /* Scene content grid */
+        .scene-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .scene-content-grid.has-figure {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .scene-content-grid.has-figure {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scene-text {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .scene-content {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Stats grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .stat-item {
+            background: var(--bg-dark);
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        .stat-item .label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Figures */
+        .scene-figure {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .scene-figure img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-style: italic;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 4rem;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header { padding: 1rem; }
-            nav a { margin-left: 1rem; font-size: 0.8rem; }
-            .hero { padding: 6rem 1rem 2rem; }
-            .content { padding: 1rem; }
-            .card { padding: 1.5rem; }
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="grain"></div>
-
-    <header>
-        <a href="/" class="logo">The <span>Beakers</span></a>
+    <header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;backdrop-filter:blur(20px);background:rgba(15,23,42,0.9);border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+        <a href="/" style="font-family:'Instrument Serif',serif;font-size:1.5rem;color:#e2e8f0;text-decoration:none;">The <span style="color:#10b981;">Beakers</span></a>
         <nav>
-            <a href="/chemistry.html">Chemistry</a>
-            <a href="/deepdive/">Deep Dives</a>
+            <a href="/chemistry.html" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Chemistry</a>
+            <a href="/deepdive/" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Deep Dives</a>
         </nav>
     </header>
-
-    <main>
-        <section class="hero">
-            <span class="badge">INDEPTH · CHEMISTRY</span>
-            <h1>Protecting skins of Au–Cl can stabilize Au nanostructures</h1>
-            <div class="meta">
-                <span class="meta-item">📅 </span>
-                <span class="meta-item">📰 Nature Chem</span>
+    <div style="height:70px;"></div>
+    
+    <div class="hero">
+        <h1>Protecting skins of Au–Cl can stabilize Au nanostructures</h1>
+        <p class="subtitle">Visual Story</p>
+        <div class="hero-stats">
+            
+            <div class="hero-stat">
+                <div class="value">10</div>
+                <div class="label">instability</div>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section class="content">
-            <article class="card">
-                <h2>Summary</h2>
-                <p>**Protecting skins of Au–Cl can stabilize Au nanostructures**</p><p>**ONE-SENTENCE CLAIM:** The formation of an Au–Cl adlayer at the surface of gold nanoparticles enables the stabilization and control of their properties through electrochemical cycling.</p><p>**WHY IT MATTERS:**
-Understanding how to modify the surface chemistry of gold nanoparticles is crucial for harnessing their potential in various applications, such as catalysis, electronics, and medicine. The ability to stabilize these nanostructures can enhance their performance and longevity, leading to more efficient and effective technologies. Additionally, this research provides a new framework for controlling the behavior of gold nanoparticles at the molecular level.</p><p>**THE MECHANISM:**
-1. **A:** During electrochemical cycling, the gold nanoparticles undergo oxidation, resulting in the loss of surface atoms.
-2. **B:** The vacant sites on the surface react with chloride ions from the electrolyte solution, forming an Au–Cl adlayer.
-3. **C:** This Au–Cl adlayer acts as a protective shield, shielding the underlying gold surface from further oxidation and allowing for the stabilization of the nanoparticles.</p><p>**CURRICULUM BRIDGE:**
-This research connects to concepts in kinetics and diffusion. The formation of the Au–Cl adlayer is an example of a kinetically driven process, where the rate of surface reaction influences the overall stability of the system. Additionally, the diffusion of chloride ions onto the surface is essential for creating this protective layer.</p><p>**WHY TO DOUBT IT:**
-One limitation of this research is that it assumes a specific electrochemical environment and may not be directly applicable to all scenarios. The formation of an Au–Cl adlayer might require specific conditions or concentrations of chloride ions, which could limit its generalizability.</p><p>**TAKEAWAY:**
-The discovery of the Au–Cl adlayer demonstrates the potential for controlling the surface chemistry of gold nanoparticles through electrochemical cycling. This research highlights the importance of understanding the interfacial chemistry of nanostructures and provides a new tool for stabilizing and modifying their properties, paving the way for further innovations in materials science.</p>
-            </article>
-
-            <article class="card">
-                <h2>Curriculum Connection</h2>
-                <p>Connect this research to your coursework:</p>
-                <div class="tags">
-                    <span class="tag">kinetics</span><span class="tag">diffusion</span>
-                    <span class="tag">interpret rate law</span>
+    <div class="container">
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #06b6d4, #06b6d488);">
+                    <i data-lucide="layers"></i>
                 </div>
-            </article>
-
-            <div style="text-align: center;">
-                <a href="https://www.nature.com/articles/s41557-025-02027-z" class="cta" target="_blank">
-                    Read Original Paper →
-                </a>
+                <div>
+                    <span class="scene-badge" style="background: #06b6d4;">INTRO</span>
+                    <h2>The Challenge: Unstable Au Nanostructures</h2>
+                </div>
             </div>
-        </section>
-    </main>
 
-    <footer>
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Au nanoparticles are crucial for various applications, but their surface chemistry is hard to control. This instability affects their functionality and performance.</p>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #3b82f6, #3b82f688);">
+                    <i data-lucide="microscope"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #3b82f6;">BACKGROUND</span>
+                    <h2>Observing the Interfacial Chemistry</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Researchers use precision nanoparticle gaps to study the chemical changes at Au interfaces during electrochemical cycling.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">1000</div>
+                    <div class="label">cycling</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
+                    <i data-lucide="sun"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
+                    <h2>The Breakthrough: Au–Cl Adlayer Formation</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">By observing the chemical changes, researchers discovered the formation of an Au–Cl adlayer that modulates the surface chemistry.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">30</div>
+                    <div class="label">adlayer</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
+                    <i data-lucide="clock"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
+                    <h2>Kinetics and Diffusion: The Role of Precision Gaps</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The precision nanoparticle gaps provide a spectroscopic window to observe the chemical changes, allowing researchers to study kinetics and diffusion.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.5</div>
+                    <div class="label">diffusion rate</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #f59e0b88);">
+                    <i data-lucide="chart"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #f59e0b;">INSIGHT</span>
+                    <h2>Insights into Au Nanostructure Stability</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The discovery of the Au–Cl adlayer provides new insights into the stability of Au nanostructures and their potential applications.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">80</div>
+                    <div class="label">stability</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #f59e0b88);">
+                    <i data-lucide="question mark"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #f59e0b;">INSIGHT</span>
+                    <h2>Implications for Future Research</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Further research is needed to fully understand the role of the Au–Cl adlayer in modulating surface chemistry and its potential applications.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">5</div>
+                    <div class="label">future research</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
+                    <i data-lucide="sun"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
+                    <h2>Conclusion: A New Perspective on Au Nanostructures</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The discovery of the Au–Cl adlayer provides a new understanding of Au nanostructure stability and opens up new avenues for research.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">90</div>
+                    <div class="label">stability</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <div style="max-width:1100px;margin:0 auto;padding:2rem;">
+        <div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:2rem;margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem;color:#10b981;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;">
+                <span>🎓</span> Curriculum Connection
+            </h2>
+            <p style="color:#94a3b8;margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">kinetics</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">diffusion</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #10b981;border-radius:100px;font-size:0.8rem;color:#10b981;margin:0.25rem;">interpret rate law</span>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <a href="https://www.nature.com/articles/s41557-025-02027-z" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:#10b981;color:#0f172a;text-decoration:none;font-weight:600;border-radius:100px;">
+                Read Original Paper →
+            </a>
+        </div>
+    </div>
+    
+    <footer style="text-align:center;padding:3rem 2rem;color:#94a3b8;font-size:0.85rem;border-top:1px solid #334155;">
         <p>The Beakers — Research, Rewritten for Students</p>
-        <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
+        <p style="margin-top:0.5rem;">© 2026 The Beakers</p>
     </footer>
+    
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

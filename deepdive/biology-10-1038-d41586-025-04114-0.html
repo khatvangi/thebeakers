@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science in 2026: what to expect this year | The Beakers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a24;
+            --text: #f0f0f5;
+            --text-muted: #8888a0;
+            --accent: #22c55e;
+            --accent-glow: #22c55e40;
+            --border: #2a2a3a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Grain texture */
+        .grain {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,15,0.8);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content */
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
+        }
+
+        .card h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child { margin-bottom: 0; }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* CTA Button */
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            nav a { margin-left: 1rem; font-size: 0.8rem; }
+            .hero { padding: 6rem 1rem 2rem; }
+            .content { padding: 1rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grain"></div>
+
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
+        <nav>
+            <a href="/biology.html">Biology</a>
+            <a href="/deepdive/">Deep Dives</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <span class="badge">INDEPTH · BIOLOGY</span>
+            <h1>Science in 2026: what to expect this year</h1>
+            <div class="meta">
+                <span class="meta-item">📅 </span>
+                <span class="meta-item">📰 Nature Highlights</span>
+            </div>
+        </section>
+
+        <section class="content">
+            <article class="card">
+                <h2>Summary</h2>
+                <p>**Science in 2026: What to Expect This Year**</p><p>**ONE-SENTENCE CLAIM**: By 2026, AI models will have reached unprecedented levels of sophistication, enabling them to simulate complex biological systems and make groundbreaking predictions in fields such as medicine and ecology.</p><p>**WHY IT MATTERS**: The development of more refined AI models has the potential to revolutionize various scientific disciplines by providing new insights into complex biological processes. This breakthrough could lead to the discovery of novel treatments for diseases, improved conservation strategies, and a deeper understanding of ecological systems. Moreover, AI-driven predictions can help scientists respond to emerging threats such as climate change and pandemics more effectively.</p><p>**THE MECHANISM**: The development of more refined AI models can be broken down into three key steps:</p><p>A. **Improved Data Collection and Integration**: Advances in data analytics and machine learning have enabled the collection and integration of vast amounts of biological data from various sources, including genomics, transcriptomics, and imaging studies.</p><p>B. **Advanced Algorithmic Techniques**: The development of more sophisticated algorithmic techniques, such as deep learning and reinforcement learning, has allowed AI models to learn complex patterns in large datasets and make accurate predictions.</p><p>C. **Integration with Biological Systems**: By integrating these advanced AI models with biological systems, scientists can simulate complex processes and make predictions about their behavior, leading to new insights and discoveries.</p><p>**CURRICULUM BRIDGE**: The development of more refined AI models is closely related to concepts in kinetics and diffusion, which are fundamental principles in understanding biological systems. For example, the movement of particles in a reaction or the spread of diseases can be modeled using kinetic equations, while diffusion processes can be described using Fick's laws. Understanding these principles provides a foundation for grasping the complex relationships between AI models and biological systems.</p><p>**WHY TO DOUBT IT**: One limitation of more refined AI models is the potential for overfitting, where the model becomes too specialized to generalizable to new data or scenarios. This can occur if the training dataset is not representative of the larger population or if the model is overly complex.</p><p>**TAKEAWAY**: By 2026, more refined AI models will have reached unprecedented levels of sophistication, enabling scientists to simulate complex biological systems and make groundbreaking predictions in fields such as medicine and ecology. As we continue to develop these technologies, it's essential to consider the limitations and potential biases of AI-driven predictions, ensuring that their applications are used responsibly and for the greater good.</p>
+            </article>
+
+            <article class="card">
+                <h2>Curriculum Connection</h2>
+                <p>Connect this research to your coursework:</p>
+                <div class="tags">
+                    <span class="tag">kinetics</span><span class="tag">diffusion</span>
+                    <span class="tag">interpret rate law</span>
+                </div>
+            </article>
+
+            <div style="text-align: center;">
+                <a href="https://www.nature.com/articles/d41586-025-04114-0" class="cta" target="_blank">
+                    Read Original Paper →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>The Beakers — Research, Rewritten for Students</p>
+        <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
+    </footer>
+</body>
+</html>

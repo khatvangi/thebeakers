@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harnessing the power of single-cell large language models with parameter-efficient fine-tuning using scPEFT | The Beakers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --bg-elevated: #1a1a24;
+            --text: #f0f0f5;
+            --text-muted: #8888a0;
+            --accent: #06b6d4;
+            --accent-glow: #06b6d440;
+            --border: #2a2a3a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+
+        /* Grain texture */
+        .grain {
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,15,0.8);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text);
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .logo span { color: var(--accent); }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--accent); }
+
+        /* Hero */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content */
+        .content {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
+        }
+
+        .card h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .card p:last-child { margin-bottom: 0; }
+
+        /* Tags */
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* CTA Button */
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 4rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            nav a { margin-left: 1rem; font-size: 0.8rem; }
+            .hero { padding: 6rem 1rem 2rem; }
+            .content { padding: 1rem; }
+            .card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="grain"></div>
+
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
+        <nav>
+            <a href="/ai.html">Ai</a>
+            <a href="/deepdive/">Deep Dives</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <span class="badge">INDEPTH · AI</span>
+            <h1>Harnessing the power of single-cell large language models with parameter-efficient fine-tuning using scPEFT</h1>
+            <div class="meta">
+                <span class="meta-item">📅 </span>
+                <span class="meta-item">📰 Nat Machine Intel</span>
+            </div>
+        </section>
+
+        <section class="content">
+            <article class="card">
+                <h2>Summary</h2>
+                <p>**Harnessing the Power of Single-Cell Large Language Models with Parameter-Efficient Fine-Tuning using scPEFT**</p><p>**ONE-SENTENCE CLAIM:** Researchers have developed a method called scPEFT that enables significant improvements in language model performance on unseen diseases, treatments, and cell types by fine-tuning single-cell large language models with parameter-efficient optimization.</p><p>**WHY IT MATTERS:** The increasing availability of large-scale biological datasets has created an unprecedented opportunity to develop more accurate models of disease mechanisms. Effective fine-tuning methods are crucial for unlocking the full potential of these datasets. By leveraging parameter-efficient optimization, scPEFT can help bridge the gap between high-performance language models and limited computational resources.</p><p>**THE MECHANISM:**</p><p>1. **Step A: Data Preparation**: Single-cell large language models are trained on a vast amount of biological data, including genomic sequences, transcriptomic profiles, and clinical information.
+2. **Step B: Fine-Tuning**: The pre-trained model is fine-tuned using a subset of the training data, with a focus on maximizing performance on unseen diseases, treatments, and cell types. This process involves adjusting the model's parameters to better capture the nuances of the target data.
+3. **Step C: scPEFT Optimization**: The fine-tuning process is facilitated by the scPEFT algorithm, which employs parameter-efficient optimization techniques to reduce computational overhead while maintaining or improving model performance.</p><p>**CURRICULUM BRIDGE:** This concept bridges the gap between kinetics and diffusion concepts in your coursework. In a similar vein, many machine learning algorithms rely on kinetic processes to iteratively refine their predictions. Similarly, scPEFT's iterative fine-tuning process leverages diffusive optimization techniques to balance exploration and exploitation during the search for optimal parameters.</p><p>**WHY TO DOUBT IT:** One potential limitation of scPEFT is its reliance on a relatively small amount of labeled data. While this approach can be effective when high-quality annotations are available, it may struggle in scenarios where such data is scarce or unavailable. This limitation highlights the need for further research into more robust and generalizable fine-tuning methods.</p><p>**TAKEAWAY:** The scPEFT method offers a promising solution for harnessing the power of single-cell large language models, enabling significant improvements in performance on unseen diseases, treatments, and cell types. By leveraging parameter-efficient optimization, researchers can unlock the full potential of these models while minimizing computational overhead. This breakthrough has far-reaching implications for fields such as personalized medicine, disease diagnosis, and synthetic biology.</p>
+            </article>
+
+            <article class="card">
+                <h2>Curriculum Connection</h2>
+                <p>Connect this research to your coursework:</p>
+                <div class="tags">
+                    <span class="tag">kinetics</span><span class="tag">diffusion</span>
+                    <span class="tag">interpret rate law</span>
+                </div>
+            </article>
+
+            <div style="text-align: center;">
+                <a href="https://www.nature.com/articles/s42256-025-01170-z" class="cta" target="_blank">
+                    Read Original Paper →
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>The Beakers — Research, Rewritten for Students</p>
+        <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
+    </footer>
+</body>
+</html>
