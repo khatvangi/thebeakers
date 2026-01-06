@@ -4,589 +4,243 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry — The Beakers</title>
-    <meta name="description" content="Chemistry research rewritten for undergraduate students. Reactions, mechanisms, and discoveries explained.">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebeakers.com/chemistry.html">
+    <meta name="description" content="Chemistry research rewritten for undergraduate students. Deep dives, explainers, and quick summaries.">
     <meta property="og:title" content="Chemistry — The Beakers">
-    <meta property="og:description" content="Chemistry research rewritten for undergraduate students.">
     <meta property="og:image" content="https://thebeakers.com/chemistry.png">
-
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-
-    <!-- Mermaid for diagrams -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-
     <style>
         :root {
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
-            --bg-card-hover: #273549;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-light: #64748b;
             --border-dark: #334155;
             --accent-green: #10b981;
-            --accent-teal: #14b8a6;
             --accent-blue: #3b82f6;
             --accent-purple: #8b5cf6;
             --accent-orange: #f59e0b;
-            --accent-red: #ef4444;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
 
-        html { scroll-behavior: smooth; }
+        header { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+        .logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: var(--accent-green); }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; }
+        nav a:hover { color: var(--accent-green); }
 
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+        .hero { text-align: center; padding: 3rem 2rem; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-family: 'Instrument Serif', serif; font-size: 3rem; font-weight: 400; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .hero-icon { width: 64px; height: 64px; border-radius: 12px; }
+        .hero p { color: var(--text-secondary); font-size: 1.1rem; }
 
-        /* Header */
-        header {
-            padding: 2rem 3rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+        /* Section Headers */
+        .section { margin-bottom: 3rem; }
+        .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-dark); }
+        .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+        .section-header h2 { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; }
+        .section-count { margin-left: auto; font-size: 0.8rem; color: var(--text-light); }
 
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)) brightness(1.3);
-        }
-
-        nav {
-            display: flex;
-            gap: 2.5rem;
-        }
-
-        nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--text-primary); }
-
-        /* Page Hero */
-        .page-hero {
-            text-align: center;
-            padding: 2rem 2rem 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .breadcrumb {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 1rem;
-        }
-
-        .breadcrumb a {
-            color: var(--accent-green);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover { text-decoration: underline; }
-
-        .page-hero h1 {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 3rem;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .discipline-icon {
-            width: 64px;
-            height: 64px;
-            border-radius: 12px;
-            object-fit: cover;
-        }
-
-        .page-hero p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Section Styles */
-        .section {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 2rem 3rem;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            font-size: 0.8rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--text-light);
-        }
-
-        .section-count {
-            font-size: 0.75rem;
-            color: var(--text-light);
-        }
-
-        /* Featured Article */
-        .featured-article {
-            background: linear-gradient(135deg, var(--bg-card) 0%, #1a2744 100%);
-            border: 1px solid var(--accent-green);
+        /* Deep Dive - Featured Card */
+        .deepdive-card {
+            background: linear-gradient(135deg, #064e3b 0%, var(--bg-card) 100%);
+            border: 2px solid var(--accent-green);
             border-radius: 20px;
             padding: 2.5rem;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-article::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
-        }
-
-        .featured-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            background: var(--accent-green);
-            color: white;
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .featured-article h2 {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 2rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-
-        .featured-article h2 a {
-            color: var(--text-primary);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .featured-article h2 a:hover { color: var(--accent-green); }
-
-        .featured-hook {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .featured-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-
-        .featured-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty-badge.freshman { background: var(--accent-green); color: white; }
-        .difficulty-badge.sophomore { background: var(--accent-blue); color: white; }
-        .difficulty-badge.junior { background: var(--accent-purple); color: white; }
-
-        /* Article Cards Grid */
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .article-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-dark);
-            border-radius: 16px;
-            padding: 1.75rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
-        }
-
-        .article-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--accent-blue);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-        }
-
-        .article-card h3 {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin-bottom: 0.75rem;
-            line-height: 1.35;
-            color: var(--text-primary);
-        }
-
-        .article-card .hook {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
+            transition: all 0.3s;
+            position: relative;
             overflow: hidden;
         }
-
-        .article-card .meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-light);
+        .deepdive-card::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
         }
+        .deepdive-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(16,185,129,0.2); }
+        .deepdive-badge { display: inline-block; background: var(--accent-green); color: var(--bg-dark); font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
+        .deepdive-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.75rem; }
+        .deepdive-card .desc { color: var(--text-secondary); font-size: 1rem; margin-bottom: 1rem; }
+        .deepdive-card .meta { font-size: 0.85rem; color: var(--text-light); display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .deepdive-empty { background: var(--bg-card); border: 1px dashed var(--border-dark); border-radius: 16px; padding: 2rem; text-align: center; color: var(--text-light); }
 
-        .article-card .source {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        /* Quick Links Section */
-        .quick-links {
+        /* Explainer Cards Grid */
+        .explainer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+        .explainer-card {
             background: var(--bg-card);
             border: 1px solid var(--border-dark);
-            border-radius: 16px;
-            padding: 2rem;
-        }
-
-        .quick-links h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .quick-links ul {
-            list-style: none;
-        }
-
-        .quick-links li {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid var(--border-dark);
-        }
-
-        .quick-links li:last-child { border-bottom: none; }
-
-        .quick-links a {
-            color: var(--text-secondary);
+            border-radius: 14px;
+            padding: 1.5rem;
             text-decoration: none;
-            font-size: 0.9rem;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+        .explainer-card:hover { transform: translateY(-2px); border-color: var(--accent-blue); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+        .explainer-badge { display: inline-block; background: var(--accent-blue); color: white; font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .explainer-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.3; }
+        .explainer-card .source { font-size: 0.8rem; color: var(--text-light); }
+
+        /* TL;DR List */
+        .tldr-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .tldr-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: color 0.2s;
-        }
-
-        .quick-links a:hover { color: var(--accent-green); }
-
-        .quick-links .source-tag {
-            font-size: 0.7rem;
-            color: var(--text-light);
-            background: var(--bg-dark);
-            padding: 0.2rem 0.5rem;
-            border-radius: 8px;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .empty-state p {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 2.5rem 2rem;
-            color: var(--text-light);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border-dark);
-            margin-top: 3rem;
-        }
-
-        footer p { margin-bottom: 0.3rem; }
-
-        footer a {
-            color: var(--accent-green);
+            gap: 1rem;
             text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
         }
+        .tldr-item:hover { border-color: var(--accent-purple); background: #252d3d; }
+        .tldr-item h4 { font-family: 'Instrument Serif', serif; font-size: 0.95rem; font-weight: 400; flex: 1; }
+        .tldr-item .venue { font-size: 0.75rem; color: var(--text-light); white-space: nowrap; }
+        .tldr-badge { background: var(--accent-purple); color: white; font-size: 0.6rem; font-weight: 600; padding: 0.15rem 0.4rem; border-radius: 4px; text-transform: uppercase; }
 
-        footer a:hover { text-decoration: underline; }
+        footer { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-dark); }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            header { padding: 1.5rem; }
-            nav { display: none; }
-            .page-hero h1 { font-size: 2rem; }
-            .featured-article { padding: 1.5rem; }
-            .featured-article h2 { font-size: 1.5rem; }
-            .articles-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .deepdive-card { padding: 1.5rem; }
+            .deepdive-card h3 { font-size: 1.4rem; }
+            .explainer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="/" class="logo">
-            <img src="logo-48.png" alt="The Beakers" class="logo-icon">
-            The Beakers
-        </a>
+        <a href="/" class="logo">The <span>Beakers</span></a>
         <nav>
-            <a href="/">All Disciplines</a>
-            <a href="biology.html">Biology</a>
+            <a href="/">Home</a>
             <a href="physics.html">Physics</a>
-            <a href="https://spsdaily.thebeakers.com">SPS Daily</a>
+            <a href="biology.html">Biology</a>
         </nav>
     </header>
 
-    <main>
-        <section class="page-hero">
-            <p class="breadcrumb"><a href="/">Home</a> / Chemistry</p>
-            <h1>
-                <img src="chemistry.png" alt="Chemistry" class="discipline-icon">
-                Chemistry
-            </h1>
-            <p>The science of matter and its transformations. Research on reactions, mechanisms, and molecular discoveries — explained for undergraduates.</p>
-        </section>
+    <section class="hero">
+        <h1><img src="chemistry.png" alt="" class="hero-icon"> Chemistry</h1>
+        <p>The science of matter and its transformations. Research explained for undergraduates.</p>
+    </section>
 
-        <!-- Featured Article (Editor's Pick) -->
-        <section class="section" id="featured">
-            <div class="featured-article" id="editors-pick" style="display: none;">
-                <span class="featured-badge">Editor's Pick</span>
-                <h2><a href="#" id="featured-link"></a></h2>
-                <p class="featured-hook" id="featured-hook"></p>
-                <div class="featured-meta">
-                    <span id="featured-difficulty"></span>
-                    <span id="featured-source"></span>
-                    <span id="featured-date"></span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Rewritten Articles -->
-        <section class="section" id="articles">
+    <main class="container">
+        <!-- Deep Dives -->
+        <section class="section" id="deepdives">
             <div class="section-header">
-                <span class="section-title">This Week's Research</span>
-                <span class="section-count" id="article-count"></span>
+                <div class="section-icon" style="background: #10b98120; color: #10b981;">🔬</div>
+                <h2>Deep Dives</h2>
+                <span class="section-count" id="deepdive-count">1 article</span>
             </div>
-            <div class="articles-grid" id="articles-grid">
-                <!-- Articles loaded dynamically -->
-            </div>
-            <div class="empty-state" id="empty-state" style="display: none;">
-                <p>No articles yet. Check back soon!</p>
-            </div>
+            <div id="deepdive-content"></div>
         </section>
 
-        <!-- Quick Links -->
-        <section class="section" id="quick-links-section" style="display: none;">
+        <!-- Explainers -->
+        <section class="section" id="explainers">
             <div class="section-header">
-                <span class="section-title">Quick Links</span>
+                <div class="section-icon" style="background: #3b82f620; color: #3b82f6;">📖</div>
+                <h2>Explainers</h2>
+                <span class="section-count" id="explainer-count">5 articles</span>
             </div>
-            <div class="quick-links">
-                <h3>More Research</h3>
-                <ul id="quick-links-list">
-                    <!-- Quick links loaded dynamically -->
-                </ul>
+            <div class="explainer-grid" id="explainer-content"></div>
+        </section>
+
+        <!-- TL;DRs -->
+        <section class="section" id="tldrs">
+            <div class="section-header">
+                <div class="section-icon" style="background: #8b5cf620; color: #8b5cf6;">⚡</div>
+                <h2>TL;DRs</h2>
+                <span class="section-count" id="tldr-count">10 articles</span>
             </div>
+            <div class="tldr-list" id="tldr-content"></div>
         </section>
     </main>
 
     <footer>
-        <p><strong>Founding Editor:</strong> Kiran Boggavarapu</p>
-        <p>A project by <a href="/">The Beakers</a></p>
-        <p>Questions? <a href="mailto:thebeakerscom@gmail.com">thebeakerscom@gmail.com</a></p>
+        <p>The Beakers — Research, Rewritten for Students</p>
     </footer>
 
     <script>
-        // Initialize Mermaid
-        mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+        const SUBJECT = 'chemistry';
 
-        // Load articles from JSON files
-        async function loadArticles() {
-            const articlesGrid = document.getElementById('articles-grid');
-            const articleCount = document.getElementById('article-count');
-            const emptyState = document.getElementById('empty-state');
+        // Deep Dives (manual, from deepdive folder)
+        const DEEPDIVES = [
+            { file: 'deepdive/solar-cell-bromine.html', title: 'Solar Cells: The Bromine Revolution', desc: 'How halogen atoms boost perovskite solar cell efficiency to 20%', source: 'Nature Communications', tags: ['Podcast', 'Video', 'Quiz'] }
+        ];
 
-            try {
-                // Fetch list of chemistry articles
-                // In production, this would be a generated index.json
-                const articleFiles = await fetchArticleList('chemistry');
+        // Explainers (automated, from explain folder)
+        const EXPLAINERS = [
+            { file: 'explain/chemistry-10-1038-s41557-025-02038-w.html', title: 'Intralayer bidentate diammoniums for stable 2D perovskites', source: 'Nature Chemistry' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02018-0.html', title: 'Direct enantioselective C(sp³)−H coupling via metallaphotoredox', source: 'Nature Chemistry' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02016-2.html', title: 'Unravelling gas evolution in battery electrodes', source: 'Nature Chemistry' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02027-z.html', title: 'Protecting skins of Au–Cl stabilize Au nanostructures', source: 'Nature Chemistry' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02032-2.html', title: 'Bringing biocatalysis into teaching labs', source: 'Nature Chemistry' },
+        ];
 
-                if (articleFiles.length === 0) {
-                    emptyState.style.display = 'block';
-                    return;
-                }
-
-                articleCount.textContent = `${articleFiles.length} article${articleFiles.length > 1 ? 's' : ''}`;
-
-                // Create cards from index data (no need to fetch each article)
-                for (const article of articleFiles) {
-                    const card = createArticleCard(article);
-                    articlesGrid.appendChild(card);
-                }
-            } catch (error) {
-                console.error('Error loading articles:', error);
-                emptyState.style.display = 'block';
+        function renderDeepDives() {
+            const container = document.getElementById('deepdive-content');
+            if (DEEPDIVES.length === 0) {
+                container.innerHTML = '<div class="deepdive-empty">Deep dive coming soon...</div>';
+                return;
             }
-        }
-
-        // Fetch article list from generated index
-        async function fetchArticleList(discipline) {
-            try {
-                const response = await fetch(`articles/${discipline}/index.json`);
-                if (!response.ok) return [];
-                const index = await response.json();
-                return index.articles || [];
-            } catch (error) {
-                console.error('Error fetching index:', error);
-                return [];
-            }
-        }
-
-        // Create article card element
-        function createArticleCard(article) {
-            const slug = article.filename.replace('.json', '');
-            const card = document.createElement('a');
-            card.className = 'article-card';
-            card.href = `article.html?id=chemistry/${slug}`;
-
-            const difficulty = (article.difficulty || 'SOPHOMORE').toLowerCase();
-            const source = article.source || 'Research';
-            const date = article.rewritten_at ? new Date(article.rewritten_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
-
-            card.innerHTML = `
-                <h3>${escapeHtml(article.headline)}</h3>
-                <p class="hook">${escapeHtml(article.hook)}</p>
-                <div class="meta">
-                    <span class="source">${escapeHtml(source)}</span>
-                    <span class="difficulty-badge ${difficulty}">${difficulty}</span>
-                </div>
+            const d = DEEPDIVES[0];
+            container.innerHTML = `
+                <a href="${d.file}" class="deepdive-card">
+                    <span class="deepdive-badge">Deep Dive</span>
+                    <h3>${d.title}</h3>
+                    <p class="desc">${d.desc}</p>
+                    <div class="meta">
+                        <span>📰 ${d.source}</span>
+                        ${d.tags ? d.tags.map(t => `<span>✓ ${t}</span>`).join('') : ''}
+                    </div>
+                </a>
             `;
-
-            return card;
         }
 
-        // Load quick links from curated data
-        async function loadQuickLinks() {
-            const section = document.getElementById('quick-links-section');
-            const list = document.getElementById('quick-links-list');
+        function renderExplainers() {
+            const container = document.getElementById('explainer-content');
+            document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
+            container.innerHTML = EXPLAINERS.map(e => `
+                <a href="${e.file}" class="explainer-card">
+                    <span class="explainer-badge">Visual Story</span>
+                    <h3>${e.title}</h3>
+                    <span class="source">${e.source}</span>
+                </a>
+            `).join('');
+        }
 
+        async function renderTLDRs() {
+            const container = document.getElementById('tldr-content');
             try {
-                const response = await fetch('data/chemistry.json');
-                const data = await response.json();
-
-                if (data.quickLinks && data.quickLinks.length > 0) {
-                    section.style.display = 'block';
-
-                    data.quickLinks.forEach(link => {
-                        const li = document.createElement('li');
-                        li.innerHTML = `
-                            <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener">
-                                ${escapeHtml(link.headline)}
-                                <span class="source-tag">${escapeHtml(link.source)}</span>
-                            </a>
-                        `;
-                        list.appendChild(li);
-                    });
-                }
-            } catch (error) {
-                // Quick links optional
+                const res = await fetch('data/digests_2026-01-05.json');
+                const all = await res.json();
+                const tldrs = all.filter(d => d.subject === SUBJECT).slice(0, 10);
+                document.getElementById('tldr-count').textContent = `${tldrs.length} articles`;
+                container.innerHTML = tldrs.map(t => `
+                    <a href="${t.url}" target="_blank" class="tldr-item">
+                        <span class="tldr-badge">TL;DR</span>
+                        <h4>${t.title.replace(/\[ASAP\]\s*/g, '')}</h4>
+                        <span class="venue">${t.venue}</span>
+                    </a>
+                `).join('');
+            } catch(e) {
+                container.innerHTML = '<p style="color: var(--text-light);">Loading...</p>';
             }
         }
 
-        // Escape HTML to prevent XSS
-        function escapeHtml(text) {
-            if (!text) return '';
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Initialize
-        loadArticles();
-        loadQuickLinks();
+        renderDeepDives();
+        renderExplainers();
+        renderTLDRs();
     </script>
 </body>
 </html>
