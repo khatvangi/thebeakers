@@ -1,6 +1,6 @@
 [
   {
-    "id": "rss:nature_chem:60456",
+    "id": "rss:nature_chem:68833",
     "title": "Biomimetic catalysis enables asymmetric Atherton\u2013Todd reaction",
     "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02030-4\">doi:10.1038/s41557-025-02030-4</a></p>Chiral phosphorus(V) compounds are vital in t...",
     "course_hooks": [
@@ -12,7 +12,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:nature_chem:12659",
+    "id": "rss:nature_chem:12232",
     "title": "Global profiling of arginine reactivity and ligandability in the human proteome",
     "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02012-6\">doi:10.1038/s41557-025-02012-6</a></p>The reactivity and ligandability of arginine ...",
     "course_hooks": [
@@ -24,7 +24,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:nature_comm:31581",
+    "id": "rss:nature_comm:59238",
     "title": "Palladium-catalyzed asymmetric migratory diarylation of unactivated directing-group-free internal alkenes",
     "tldr": "<p>Nature Communications, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41467-025-68006-7\">doi:10.1038/s41467-025-68006-7</a></p>Enantioselective dicarbofunctionalizatio...",
     "course_hooks": [
@@ -36,7 +36,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:science:24521",
+    "id": "rss:science:33078",
     "title": "De novo design of small molecule\u2013regulated protein oligomers",
     "tldr": "Science, Volume 391, Issue 6780, January 2026. <br />",
     "course_hooks": [
@@ -48,7 +48,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:pnas:45874",
+    "id": "rss:pnas:51018",
     "title": "Molecular mechanism of substrate transport by human peroxisomal ABCD3",
     "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificancePeroxisomes are involved in essential cellular metabolic processes that include fatty acid oxida...",
     "course_hooks": [
@@ -60,7 +60,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:jacs:34415",
+    "id": "rss:jacs:44959",
     "title": "[ASAP] Living Cell Surfacome Lysine Footprinting (LiFT) Captures Virus-Induced Conformational Dynamics and Uncovers Influenza A Virus Host Factors",
     "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c14196/asset/images/medium/ja5c14196_0006.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
     "course_hooks": [
@@ -72,7 +72,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:jacs:8292",
+    "id": "rss:jacs:83775",
     "title": "[ASAP] Development and Mechanism of Rh-Catalyzed Keto-(5 + 1 + 2) Reaction of Keto-Vinylcyclopropanes and CO, and Answering Why Rh-Catalyzed Keto-(5 + 2) Reaction of Keto-Vinylcyclopropanes Fails",
     "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15273/asset/images/medium/ja5c15273_0009.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
     "course_hooks": [
@@ -84,7 +84,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:jacs:69945",
+    "id": "rss:jacs:92660",
     "title": "[ASAP] Phosphonium Ionic Imine Cage with an Uncommon Tri24Di6 Topology for Selective Capture of Propyne in Propyne/Propylene Separation",
     "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15864/asset/images/medium/ja5c15864_0005.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
     "course_hooks": [
@@ -96,7 +96,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:jacs:88518",
+    "id": "rss:jacs:42326",
     "title": "[ASAP] Mechanistic Study of Cycloisomerization of 1,7-Allenenes and Guidance to Develop a [2 + 1 + 2] Reaction of 1,7-Allenenes with CO for Accessing cis- and trans-5/5 Skeletons",
     "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c17013/asset/images/medium/ja5c17013_0014.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
     "course_hooks": [
@@ -108,7 +108,7 @@
     "subject": "chemistry"
   },
   {
-    "id": "rss:jacs:13815",
+    "id": "rss:jacs:58126",
     "title": "[ASAP] Pnictogen Interaction Promotes Nitric Oxide (NO) Release via the NO2 Roaming Mechanism in 2-Nitropyridine",
     "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c20000/asset/images/medium/ja5c20000_0004.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
     "course_hooks": [
@@ -118,5 +118,710 @@
     "url": "http://dx.doi.org/10.1021/jacs.5c20000",
     "venue": "Jacs",
     "subject": "chemistry"
+  },
+  {
+    "id": "rss:nature_phys:53077",
+    "title": "Self-induced superradiant masing",
+    "tldr": "<p>Nature Physics, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41567-025-03123-0\">doi:10.1038/s41567-025-03123-0</a></p>Superradiance is usually driven by light-mediat...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41567-025-03123-0",
+    "venue": "Nature Phys",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_phys:26430",
+    "title": "Challenges and opportunities in orbitronics",
+    "tldr": "<p>Nature Physics, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03143-w\">doi:10.1038/s41567-025-03143-w</a></p>Orbitronics uses the electron\u2019s orbital angula...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41567-025-03143-w",
+    "venue": "Nature Phys",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_phys:85517",
+    "title": "Experimental evidence of a spatially textured electron fluid",
+    "tldr": "<p>Nature Physics, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03133-y\">doi:10.1038/s41567-025-03133-y</a></p>In most metals, free electrons form a homogene...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41567-025-03133-y",
+    "venue": "Nature Phys",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_phys:3979",
+    "title": "Observation of a hidden charge density wave liquid",
+    "tldr": "<p>Nature Physics, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03108-z\">doi:10.1038/s41567-025-03108-z</a></p>Liquid charge density wave order is thought to...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41567-025-03108-z",
+    "venue": "Nature Phys",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_phys:27348",
+    "title": "Interplay of orbital angular momentum and chirality",
+    "tldr": "<p>Nature Physics, Published online: 29 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03113-2\">doi:10.1038/s41567-025-03113-2</a></p>Orbital angular momentum textures can drive or...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41567-025-03113-2",
+    "venue": "Nature Phys",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_comm:45066",
+    "title": "Low-noise optomechanical single phonon-photon conversion for quantum networks",
+    "tldr": "<p>Nature Communications, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41467-025-67956-2\">doi:10.1038/s41467-025-67956-2</a></p>Optomechanical crystals are promising bu...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41467-025-67956-2",
+    "venue": "Nature Comm",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:science_advances:28285",
+    "title": "Combining tethered and untethered magnetic robots via a magnetically triggerable latch for target payload delivery and retrieval",
+    "tldr": "Science Advances, Volume 12, Issue 1, January 2026. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/sciadv.adu6025?af=R",
+    "venue": "Science Advances",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:science_advances:96540",
+    "title": "STING/type I interferon pathway is required for antigen-containing PLGA nanoparticle- and apoptotic cell\u2013induced CD4+ T cell tolerance",
+    "tldr": "Science Advances, Volume 12, Issue 1, January 2026. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/sciadv.adv8860?af=R",
+    "venue": "Science Advances",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:pnas:58304",
+    "title": "Symmetries and selection rules in photoelectron chiral dichroism",
+    "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificanceWe derive here a group theoretical description of selection rules imposed by symmetries of elect...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.2504816122?af=R",
+    "venue": "Pnas",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:phys_rev_lett:25694",
+    "title": "Faster Randomized Dynamical Decoupling",
+    "tldr": "Author(s): Changhao Yi, Leeseok Kim, and Milad Marvian<br /><p>We present a randomized dynamical decoupling (DD) protocol that can substantially improve the performance of any given deterministic DD s...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://link.aps.org/doi/10.1103/fk7j-y1vl",
+    "venue": "Phys Rev Lett",
+    "subject": "physics"
+  },
+  {
+    "id": "rss:nature_highlights:27356",
+    "title": "Random heteropolymers as enzyme mimics",
+    "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s41586-025-09860-9\">doi:10.1038/s41586-025-09860-9</a></p>Modulation of random heteropolymers results in globula...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41586-025-09860-9",
+    "venue": "Nature Highlights",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_highlights:90461",
+    "title": "Some of your cells are not genetically yours \u2014 what can they tell us about life and death?",
+    "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/d41586-025-04102-4\">doi:10.1038/d41586-025-04102-4</a></p>A tiny population of cells that are passed across the ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/d41586-025-04102-4",
+    "venue": "Nature Highlights",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_highlights:72001",
+    "title": "Economic inequality does not equate to poor well-being or mental health",
+    "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/d41586-025-03833-8\">doi:10.1038/d41586-025-03833-8</a></p>A meta-analysis of 168 studies covering more than 11 m...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/d41586-025-03833-8",
+    "venue": "Nature Highlights",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:69271",
+    "title": "Machine learning framework reveals a concordant cell-state landscape across single-cell datasets",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02978-1\">doi:10.1038/s41587-025-02978-1</a></p>Comprehensively resolving the cell state ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02978-1",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:45186",
+    "title": "Moving beyond monogenic disorders in clinical healthcare",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02931-2\">doi:10.1038/s41587-025-02931-2</a></p>Our understanding of the genetic mechanis...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02931-2",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:40288",
+    "title": "Revealing a coherent cell-state landscape across single-cell datasets with CONCORD",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02950-z\">doi:10.1038/s41587-025-02950-z</a></p>CONCORD generates denoised cell encodings...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02950-z",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:97299",
+    "title": "Integrated experimental and AI innovations for RNA structure determination",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02974-5\">doi:10.1038/s41587-025-02974-5</a></p>RNA\u2019s dynamic nature and complex physioch...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02974-5",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:22958",
+    "title": "Mapping isoforms and regulatory mechanisms from spatial transcriptomics data with SPLISOSM",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02965-6\">doi:10.1038/s41587-025-02965-6</a></p>Differential isoform usage is identified ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02965-6",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:75075",
+    "title": "CRISPR\u2013Cas3-based editing for targeted deletions in a mouse model of transthyretin amyloidosis",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02949-6\">doi:10.1038/s41587-025-02949-6</a></p>Cas3 nuclease is used for therapeutic del...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02949-6",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "rss:nature_bio:7219",
+    "title": "Engineering bispecific exosome activators of T cells to target immune checkpoint inhibitor-resistant metastatic melanoma",
+    "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02890-8\">doi:10.1038/s41587-025-02890-8</a></p>Engineered inhalable exosomes deliver a b...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41587-025-02890-8",
+    "venue": "Nature Bio",
+    "subject": "biology"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18137931",
+    "title": "Mathematical foundation for TOE",
+    "tldr": "",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18137931",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18125884",
+    "title": "Mathematics Laboratory Usage and Development of Students' Mathematics Skills in Public Secondary Schools in Rwanda: A Case of Selected Schools in Musanze District",
+    "tldr": "This study investigated the effect of Mathematics laboratory usage on development of students' Mathematics skills in public secondary schools in Musanze District, Rwanda. This study blueprinted the sp...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18125884",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18142481",
+    "title": "Signal True Always True \u2014 Mathematical Kernel",
+    "tldr": "This document presents the **Mathematical Kernel** of the *Signal True Always True* framework (GUT).The purpose of this kernel is to extract and formalize the **minimal, rigorous, and falsifiable core...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18142481",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18134006",
+    "title": "Truth After Proof: Formal Epistemics in Modern Mathematics",
+    "tldr": "This work examines how the relationship between proof, verification, and truth has changed in modern mathematics. As mathematical arguments have grown in scale, abstraction, and formal sophistication,...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18134006",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18142171",
+    "title": "Unified dual Magnetic currents deciphering mathematical conjectures validating physico mathematical phenomena",
+    "tldr": "",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18142171",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18119702",
+    "title": "MH370 BTO mathematical model",
+    "tldr": "",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18119702",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.17654/0974165826006",
+    "title": "Advances and Applications in Discrete Mathematics",
+    "tldr": "A zero forcing set in a graph is called a dom-forcing set if is also a dominating set of . The minimum cardinality of such a set is known as the dom-forcing number of the graph , denoted by . If the s...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.17654/0974165826006",
+    "venue": "Advances and Applications in Discrete Mathematics",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.1080/03043797.2025.2607635",
+    "title": "Mathematics abilities as the key to successfully completing an engineering major: an analysis of a remedial mathematics course",
+    "tldr": "",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.1080/03043797.2025.2607635",
+    "venue": "European Journal of Engineering Education",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.22460/infinity.v15i1.p1-18",
+    "title": "Assessment of mathematical modeling competency among undergraduates in Hebei province",
+    "tldr": "Mathematical modeling competency, a key skill for applying mathematical knowledge to solve real-world problems, has gained increasing attention across various fields. Research indicates that students'...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.22460/infinity.v15i1.p1-18",
+    "venue": "Infinity Journal",
+    "subject": "mathematics"
+  },
+  {
+    "id": "doi:10.70232/jrmste.v3i1.57",
+    "title": "TPCK of Mathematics Trainee Teachers: A Comparison using Mahalanobis Distance",
+    "tldr": "This body of knowledge, known as \u2018Technological Pedagogical Content Knowledge (TPCK)\u2019, is essential to teaching both today and in the future. Teachers possess a high degree of knowledge that is based ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.70232/jrmste.v3i1.57",
+    "venue": "Journal of Research in Mathematics, Science, and Technology Education.",
+    "subject": "mathematics"
+  },
+  {
+    "id": "rss:science_robotics:89047",
+    "title": "Efficacy and effectiveness of robot-assisted therapy for autism spectrum disorder: From lab to reality",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.adl2266?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:science_robotics:71194",
+    "title": "Jump, recharge, repeat: Insect-inspired jumping robots and the challenge of energy harvesting",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.aed6461?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:science_robotics:91398",
+    "title": "How reliable is robotic manipulation in the real world?",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.adz6787?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:science_robotics:40529",
+    "title": "Robots do not like Asimov\u2019s three laws",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.aee0315?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:science_robotics:53502",
+    "title": "Learning robot behavior from human-human interactions",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.aee5779?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:science_robotics:10452",
+    "title": "Reconfigurable aerial robot for subterranean mine inspection",
+    "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/scirobotics.aee7991?af=R",
+    "venue": "Science Robotics",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:pnas:42855",
+    "title": "A neuromorphic robotic electronic skin with active pain and injury perception",
+    "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificanceAdvances in robotics demand sophisticated tactile perception akin to human skin\u2019s multifaceted s...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.2520922122?af=R",
+    "venue": "Pnas",
+    "subject": "engineering"
+  },
+  {
+    "id": "doi:10.1038/s41551-025-01563-w",
+    "title": "Generation of T cells with reduced off-target cross-reactivities by engineering co-signalling receptors",
+    "tldr": "Abstract Adoptive T cell therapy using T cells engineered with novel T cell receptors (TCRs) targeting tumour-specific peptides is a promising immunotherapy. However, these TCR-T cells can cross-react...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.1038/s41551-025-01563-w",
+    "venue": "Nature Biomedical Engineering",
+    "subject": "engineering"
+  },
+  {
+    "id": "doi:10.5445/ir/1000189162",
+    "title": "Methodology of Algorithm Engineering",
+    "tldr": "Research on algorithms has drastically increased in recent years. Various sub-disciplines of computer science investigate algorithms according to different objectives and standards. This plurality of ...",
+    "course_hooks": [],
+    "url": "https://doi.org/10.5445/ir/1000189162",
+    "venue": "KITopen",
+    "subject": "engineering"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18136248",
+    "title": "Quantum Mechanics as Discontinuum Engineering.",
+    "tldr": "Abstract: This paper provides a novel mechanical interpretation of quantum phenomena through the lens of Tensorial Mechanics and Discontinuum Topology. By replacing probabilistic wave functions with t...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18136248",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "engineering"
+  },
+  {
+    "id": "rss:nat_machine_intel:80770",
+    "title": "Assessing the potential of deep learning for protein\u2013ligand docking",
+    "tldr": "<p>Nature Machine Intelligence, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01160-1\">doi:10.1038/s42256-025-01160-1</a></p>Morehead et al. introduce the ben...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s42256-025-01160-1",
+    "venue": "Nat Machine Intel",
+    "subject": "ai"
+  },
+  {
+    "id": "rss:nat_machine_intel:21342",
+    "title": "ImmunoStruct enables multimodal deep learning for immunogenicity prediction",
+    "tldr": "<p>Nature Machine Intelligence, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01163-y\">doi:10.1038/s42256-025-01163-y</a></p>A multimodal deep learning model ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s42256-025-01163-y",
+    "venue": "Nat Machine Intel",
+    "subject": "ai"
+  },
+  {
+    "id": "rss:nat_machine_intel:65654",
+    "title": "Author Correction: Scalable and robust DNA-based storage via coding theory and deep learning",
+    "tldr": "<p>Nature Machine Intelligence, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01175-8\">doi:10.1038/s42256-025-01175-8</a></p>Author Correction: Scalable and r...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s42256-025-01175-8",
+    "venue": "Nat Machine Intel",
+    "subject": "ai"
+  },
+  {
+    "id": "rss:science:88255",
+    "title": "Neural basis of cooperative behavior in biological and artificial intelligence systems",
+    "tldr": "Science, Volume 391, Issue 6780, January 2026. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/science.adw8151?af=R",
+    "venue": "Science",
+    "subject": "ai"
+  },
+  {
+    "id": "rss:pnas:52636",
+    "title": "Maladaptive immunity to the microbiota promotes neuronal hyperinnervation and itch via IL-17A",
+    "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificancePruritus (itch), a phenomenon associated with various inflammatory skin diseases including psori...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.2525146122?af=R",
+    "venue": "Pnas",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18135140",
+    "title": "The Butterfly Revolution of Artificial Intelligence",
+    "tldr": "The Butterfly Revolution of Artificial Intelligence Breaking the Cocoon: A Conceptual Prelude to a New Cognitive World \"In a world where ideas are humanity's existential capital, and their telos unfol...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18135140",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18114467",
+    "title": "Artificial Intelligence in Healthcare",
+    "tldr": "Artificial intelligence (AI) is changing modern healthcare by enabling more accurate diagnostics, efficient workflows, and personalized care delivery. AI uses computer programs that learn from large a...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18114467",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.38124/ijisrt/25dec1424",
+    "title": "Dentistry Detection by Artificial Intelligence",
+    "tldr": "The integration of Artificial Intelligence (AI) into dental diagnostics has emerged as a transformative force in modern dentistry. AI systems, particularly those based on deep learning, have demonstra...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.38124/ijisrt/25dec1424",
+    "venue": "International Journal of Innovative Science and Research Technology (IJISRT)",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18125735",
+    "title": "The Relational Dependency Hypothesis in Artificial Intelligence",
+    "tldr": "This paper introduces the Relational Dependency Hypothesis, a theoretical and empirically grounded framework analysing how artificial intelligence systems develop asymmetric dependency patterns when h...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18125735",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18140476",
+    "title": "ARTIFICIAL INTELLIGENCE IN HEALTH CARE \u2013 A REVIEW",
+    "tldr": "Artificial Intelligence (AI) has been one of the key technologies to change the face of modern healthcare by bringing forth a variety of solutions for the different parts of the medical process like d...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18140476",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "ai"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18119717",
+    "title": "Regenerative Agriculture is Transforming Farms into Vital Carbon Sinks",
+    "tldr": "Regenerative agriculture is gaining global attention as a powerful tool to combat climate change and restore degraded ecosystems. According to the Food and Agriculture Organization (FAO), nearly 33% o...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18119717",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.58683/dnswsb.2072",
+    "title": "Challenges and prospects of the effective development of agricultural exports of Ukraine",
+    "tldr": "It is substantiated that the highly specialized, raw material-oriented structure of Ukrainian commodity exports is irrational and economically ineffective. It has been established that one of the chal...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.58683/dnswsb.2072",
+    "venue": "Zeszyty Naukowe Wy\u017cszej Szko\u0142y Bankowej w Poznaniu",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.3390/agriengineering8010015",
+    "title": "Application of Metal Detection Technology in Agricultural Machinery Equipment",
+    "tldr": "Metal foreign objects left in fields pose a significant challenge during silage harvester operation, leading to reduced mechanical efficiency, compromised feed quality, and risks to livestock safety. ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.3390/agriengineering8010015",
+    "venue": "AgriEngineering",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.3390/su18010435",
+    "title": "Biochar Derived from Agricultural Residues for Wastewater Contaminant Removal",
+    "tldr": "The valorization of agricultural residues helps improve crop economic efficiency and alleviate environmental pressures. Owing to the merits of simplicity, high efficiency, low costs, and scalability, ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.3390/su18010435",
+    "venue": "Sustainability",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18139065",
+    "title": "Netherlands Agricultural Robotics Market: Advancements, Adoption, and Future Outlook",
+    "tldr": "The Netherlands Agricultural Robotics Market is emerging as a key driver of innovation in the country\u2019s highly productive farming sector. Agricultural robots, or agribots, are being increasingly adopt...",
+    "course_hooks": [],
+    "url": "https://doi.org/10.5281/zenodo.18139065",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18136659",
+    "title": "Youth Participation in Indian Agriculture: Challenges, Opportunities, and Future Prospects",
+    "tldr": "Agriculture has long been central to India\u2019s economy, supporting food security and rural livelihoods. However, declining youth participation and an ageing farming population pose serious challenges to...",
+    "course_hooks": [],
+    "url": "https://doi.org/10.5281/zenodo.18136659",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.3390/su18010431",
+    "title": "Impact of Artificial Intelligence Technology on the Sustainable Development Performance of Agricultural Enterprises",
+    "tldr": "The wide application of artificial intelligence (AI) technology is reshaping the production methods and governance models of agricultural enterprises, laying a solid foundation for them to achieve sus...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.3390/su18010431",
+    "venue": "Sustainability",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18120210",
+    "title": "The qNPT Protocol: Unveiling the Hidden Drain of Subsistence Agriculture",
+    "tldr": "To this day, African agriculture is analyzed almost exclusively through the lens of subsistence.Policymakers and economists focus on spatial metrics: yield perhectare, income per season, or food secur...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://doi.org/10.5281/zenodo.18120210",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18139154",
+    "title": "Denmark Agriculture Robots Market: Automation, Innovation, and the Future of Sustainable Farming",
+    "tldr": "The Denmark Agriculture Robots Market is experiencing significant transformation as farmers and agribusinesses increasingly adopt automation to improve efficiency, productivity, and sustainability. Ag...",
+    "course_hooks": [],
+    "url": "https://doi.org/10.5281/zenodo.18139154",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
+  },
+  {
+    "id": "doi:10.5281/zenodo.18139215",
+    "title": "Finland Agriculture Robots Market: Advancing Automation for Sustainable and Efficient Farming",
+    "tldr": "The Finland Agriculture Robots Market is gaining strong momentum as the country increasingly adopts advanced automation technologies to modernize its agricultural sector. Faced with challenges such as...",
+    "course_hooks": [],
+    "url": "https://doi.org/10.5281/zenodo.18139215",
+    "venue": "Zenodo (CERN European Organization for Nuclear Research)",
+    "subject": "agriculture"
   }
 ]

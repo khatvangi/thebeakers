@@ -117,6 +117,11 @@ class Article:
 
 import feedparser
 import re
+import sys
+
+# Add napkin to path
+sys.path.insert(0, "/storage/napkin")
+from src.visual_story import generate_story_scenes, generate_visual_story_html
 
 DOI_PATTERN = re.compile(r'\b10\.\d{4,9}/[^\s<>"]+')
 
@@ -377,14 +382,32 @@ def generate_indepth(article: Article, pdf_path: Optional[Path]) -> str:
     slug = article.doi.replace("/", "-").replace(".", "-")[:50]
     output_path = DEEPDIVE_DIR / f"{article.subject}-{slug}.html"
 
-    # Use napkin visual-story if PDF available
-    if pdf_path and pdf_path.exists():
-        cmd = f'cd /storage/napkin && python cli.py visual-story --pdf "{pdf_path}" --title "{article.title}" -o "{output_path}"'
-        os.system(cmd)
-        if output_path.exists():
-            return str(output_path)
+    # Build article text for visual story
+    article_text = f"""
+TITLE: {article.title}
 
-    # Fallback: generate with Ollama
+ABSTRACT: {article.abstract}
+
+VENUE: {article.venue}
+
+COURSE HOOKS: {', '.join(article.course_hooks or [])}
+SKILL HOOKS: {', '.join(article.skill_hooks or [])}
+"""
+
+    try:
+        # Use napkin visual story generator
+        print(f"         Generating visual story with napkin...")
+        scenes = generate_story_scenes(article_text, model=OLLAMA_MODEL)
+        html = generate_visual_story_html(scenes, title=article.title)
+
+        # Add The Beakers branding and curriculum connection
+        html = add_beakers_branding(html, article)
+        output_path.write_text(html)
+        return str(output_path)
+    except Exception as e:
+        print(f"         Napkin error: {e}, using fallback...")
+
+    # Fallback: generate with award-winning template
     prompt = f"""Create an In-Depth educational article for undergraduate students.
 
 TITLE: {article.title}
@@ -416,6 +439,64 @@ Be clear, avoid jargon, write for curious undergrads."""
     html = generate_award_html(article, content, "indepth")
     output_path.write_text(html)
     return str(output_path)
+
+
+def add_beakers_branding(html: str, article: Article) -> str:
+    """Add The Beakers header, footer, and curriculum connection to napkin HTML"""
+    # Insert header after <body>
+    header = '''
+    <header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;backdrop-filter:blur(20px);background:rgba(15,23,42,0.9);border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+        <a href="/" style="font-family:'Instrument Serif',serif;font-size:1.5rem;color:#e2e8f0;text-decoration:none;">The <span style="color:#10b981;">Beakers</span></a>
+        <nav>
+            <a href="/chemistry.html" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Chemistry</a>
+            <a href="/deepdive/" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Deep Dives</a>
+        </nav>
+    </header>
+    <div style="height:70px;"></div>
+    '''
+
+    # Curriculum connection section
+    course_tags = "".join(f'<span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">{h}</span>' for h in (article.course_hooks or []))
+    skill_tags = "".join(f'<span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #10b981;border-radius:100px;font-size:0.8rem;color:#10b981;margin:0.25rem;">{h}</span>' for h in (article.skill_hooks or []))
+
+    curriculum = f'''
+    <div style="max-width:1100px;margin:0 auto;padding:2rem;">
+        <div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:2rem;margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem;color:#10b981;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;">
+                <span>🎓</span> Curriculum Connection
+            </h2>
+            <p style="color:#94a3b8;margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                {course_tags}{skill_tags}
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <a href="{article.url}" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:#10b981;color:#0f172a;text-decoration:none;font-weight:600;border-radius:100px;">
+                Read Original Paper →
+            </a>
+        </div>
+    </div>
+    '''
+
+    # Replace footer
+    new_footer = f'''
+    <footer style="text-align:center;padding:3rem 2rem;color:#94a3b8;font-size:0.85rem;border-top:1px solid #334155;">
+        <p>The Beakers — Research, Rewritten for Students</p>
+        <p style="margin-top:0.5rem;">© {datetime.now().year} The Beakers</p>
+    </footer>
+    '''
+
+    # Insert header after <body>
+    html = html.replace('<body>', '<body>' + header)
+
+    # Add curriculum before footer
+    html = html.replace('<footer>', curriculum + '<footer>')
+
+    # Replace footer content
+    import re
+    html = re.sub(r'<footer>.*?</footer>', new_footer, html, flags=re.DOTALL)
+
+    return html
 
 def generate_digest(article: Article) -> str:
     """Generate Digest visual summary using napkin style"""

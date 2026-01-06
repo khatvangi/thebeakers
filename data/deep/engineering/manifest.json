@@ -1,0 +1,26 @@
+{
+  "title": "Quantifying the global eco-footprint of wearable healthcare electronics",
+  "doi": "10.1038/s41586-025-09819-w",
+  "url": "https://www.nature.com/articles/s41586-025-09819-w",
+  "venue": "Nature Highlights",
+  "published": "",
+  "authors": [],
+  "subject": "engineering",
+  "scores": {
+    "S": 4,
+    "E": 4,
+    "T": 5,
+    "M": 3,
+    "H": 1
+  },
+  "course_hooks": [
+    "kinetics",
+    "diffusion"
+  ],
+  "skill_hooks": [
+    "interpret rate law"
+  ],
+  "youtube_url": "",
+  "soundcloud_url": "",
+  "status": "pending"
+}

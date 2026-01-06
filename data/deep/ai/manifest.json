@@ -1,0 +1,26 @@
+{
+  "title": "Deep learning and superoscillatory speckles empowered multimode fiber probe for in situ nano-displacement detection and micro-imaging",
+  "doi": "10.1038/s41467-025-67942-8",
+  "url": "https://www.nature.com/articles/s41467-025-67942-8",
+  "venue": "Nature Comm",
+  "published": "",
+  "authors": [],
+  "subject": "ai",
+  "scores": {
+    "S": 4,
+    "E": 4,
+    "T": 5,
+    "M": 3,
+    "H": 1
+  },
+  "course_hooks": [
+    "kinetics",
+    "diffusion"
+  ],
+  "skill_hooks": [
+    "interpret rate law"
+  ],
+  "youtube_url": "",
+  "soundcloud_url": "",
+  "status": "pending"
+}

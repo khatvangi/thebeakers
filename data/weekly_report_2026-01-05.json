@@ -148,18 +148,890 @@
           ]
         }
       ]
+    },
+    "physics": {
+      "deep_candidate": {
+        "title": "These women helped to shape quantum mechanics \u2014 it\u2019s time to recognize them",
+        "doi": "10.1038/d41586-025-04151-9",
+        "folder": "/storage/thebeakers/data/deep/physics",
+        "manifest": "/storage/thebeakers/data/deep/physics/manifest.json",
+        "pdf": null
+      },
+      "explain": [
+        {
+          "title": "A chiral fermionic valve driven by quantum geometry",
+          "doi": "10.1038/s41586-025-09864-5",
+          "file": "/storage/thebeakers/deepdive/physics-10-1038-s41586-025-09864-5.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Highly efficient LED device built by stacking layers of light-emitting perovskite",
+          "doi": "10.1038/d41586-025-04021-4",
+          "file": "/storage/thebeakers/deepdive/physics-10-1038-d41586-025-04021-4.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Embryo geometry sets the tempo",
+          "doi": "10.1038/s41567-025-03136-9",
+          "file": "/storage/thebeakers/deepdive/physics-10-1038-s41567-025-03136-9.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Geometry-driven asymmetric cell divisions pattern cell cycles and zygotic genome activation in the zebrafish embryo",
+          "doi": "10.1038/s41567-025-03122-1",
+          "file": "/storage/thebeakers/deepdive/physics-10-1038-s41567-025-03122-1.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Two-dimensional non-equilibrium melting of charged colloids",
+          "doi": "10.1038/s41567-025-03121-2",
+          "file": "/storage/thebeakers/deepdive/physics-10-1038-s41567-025-03121-2.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Self-induced superradiant masing",
+          "doi": "10.1038/s41567-025-03123-0",
+          "tldr": "<p>Nature Physics, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41567-025-03123-0\">doi:10.1038/s41567-025-03123-0</a></p>Superradiance is usually driven by light-mediat...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Challenges and opportunities in orbitronics",
+          "doi": "10.1038/s41567-025-03143-w",
+          "tldr": "<p>Nature Physics, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03143-w\">doi:10.1038/s41567-025-03143-w</a></p>Orbitronics uses the electron\u2019s orbital angula...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Experimental evidence of a spatially textured electron fluid",
+          "doi": "10.1038/s41567-025-03133-y",
+          "tldr": "<p>Nature Physics, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03133-y\">doi:10.1038/s41567-025-03133-y</a></p>In most metals, free electrons form a homogene...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Observation of a hidden charge density wave liquid",
+          "doi": "10.1038/s41567-025-03108-z",
+          "tldr": "<p>Nature Physics, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03108-z\">doi:10.1038/s41567-025-03108-z</a></p>Liquid charge density wave order is thought to...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Interplay of orbital angular momentum and chirality",
+          "doi": "10.1038/s41567-025-03113-2",
+          "tldr": "<p>Nature Physics, Published online: 29 December 2025; <a href=\"https://www.nature.com/articles/s41567-025-03113-2\">doi:10.1038/s41567-025-03113-2</a></p>Orbital angular momentum textures can drive or...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Low-noise optomechanical single phonon-photon conversion for quantum networks",
+          "doi": "10.1038/s41467-025-67956-2",
+          "tldr": "<p>Nature Communications, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41467-025-67956-2\">doi:10.1038/s41467-025-67956-2</a></p>Optomechanical crystals are promising bu...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Combining tethered and untethered magnetic robots via a magnetically triggerable latch for target payload delivery and retrieval",
+          "doi": "10.1126/sciadv.adu6025?af=R",
+          "tldr": "Science Advances, Volume 12, Issue 1, January 2026. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "STING/type I interferon pathway is required for antigen-containing PLGA nanoparticle- and apoptotic cell\u2013induced CD4+ T cell tolerance",
+          "doi": "10.1126/sciadv.adv8860?af=R",
+          "tldr": "Science Advances, Volume 12, Issue 1, January 2026. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Symmetries and selection rules in photoelectron chiral dichroism",
+          "doi": "10.1073/pnas.2504816122?af=R",
+          "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificanceWe derive here a group theoretical description of selection rules imposed by symmetries of elect...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Faster Randomized Dynamical Decoupling",
+          "doi": "10.1103/fk7j-y1vl",
+          "tldr": "Author(s): Changhao Yi, Leeseok Kim, and Milad Marvian<br /><p>We present a randomized dynamical decoupling (DD) protocol that can substantially improve the performance of any given deterministic DD s...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    },
+    "biology": {
+      "deep_candidate": {
+        "title": "I see Mozambique\u2019s baboons as windows into hominid evolution",
+        "doi": "10.1038/d41586-025-04153-7",
+        "folder": "/storage/thebeakers/data/deep/biology",
+        "manifest": "/storage/thebeakers/data/deep/biology/manifest.json",
+        "pdf": null
+      },
+      "explain": [
+        {
+          "title": "Sunyaev\u2013Zeldovich detection of hot intracluster gas at redshift 4.3",
+          "doi": "10.1038/s41586-025-09901-3",
+          "file": "/storage/thebeakers/deepdive/biology-10-1038-s41586-025-09901-3.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Pandemic PhDs: graduates anxious, but optimistic, about the future",
+          "doi": "10.1038/d41586-025-04152-8",
+          "file": "/storage/thebeakers/deepdive/biology-10-1038-d41586-025-04152-8.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Author Correction: Repulsions instruct synaptic partner matching in an olfactory circuit",
+          "doi": "10.1038/s41586-025-10089-9",
+          "file": "/storage/thebeakers/deepdive/biology-10-1038-s41586-025-10089-9.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Author Correction: Rewiring an olfactory circuit by altering cell-surface combinatorial code",
+          "doi": "10.1038/s41586-025-10090-2",
+          "file": "/storage/thebeakers/deepdive/biology-10-1038-s41586-025-10090-2.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Science in 2026: what to expect this year",
+          "doi": "10.1038/d41586-025-04114-0",
+          "file": "/storage/thebeakers/deepdive/biology-10-1038-d41586-025-04114-0.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Random heteropolymers as enzyme mimics",
+          "doi": "10.1038/s41586-025-09860-9",
+          "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s41586-025-09860-9\">doi:10.1038/s41586-025-09860-9</a></p>Modulation of random heteropolymers results in globula...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Some of your cells are not genetically yours \u2014 what can they tell us about life and death?",
+          "doi": "10.1038/d41586-025-04102-4",
+          "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/d41586-025-04102-4\">doi:10.1038/d41586-025-04102-4</a></p>A tiny population of cells that are passed across the ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Economic inequality does not equate to poor well-being or mental health",
+          "doi": "10.1038/d41586-025-03833-8",
+          "tldr": "<p>Nature, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/d41586-025-03833-8\">doi:10.1038/d41586-025-03833-8</a></p>A meta-analysis of 168 studies covering more than 11 m...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Machine learning framework reveals a concordant cell-state landscape across single-cell datasets",
+          "doi": "10.1038/s41587-025-02978-1",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02978-1\">doi:10.1038/s41587-025-02978-1</a></p>Comprehensively resolving the cell state ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Moving beyond monogenic disorders in clinical healthcare",
+          "doi": "10.1038/s41587-025-02931-2",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02931-2\">doi:10.1038/s41587-025-02931-2</a></p>Our understanding of the genetic mechanis...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Revealing a coherent cell-state landscape across single-cell datasets with CONCORD",
+          "doi": "10.1038/s41587-025-02950-z",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02950-z\">doi:10.1038/s41587-025-02950-z</a></p>CONCORD generates denoised cell encodings...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Integrated experimental and AI innovations for RNA structure determination",
+          "doi": "10.1038/s41587-025-02974-5",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02974-5\">doi:10.1038/s41587-025-02974-5</a></p>RNA\u2019s dynamic nature and complex physioch...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Mapping isoforms and regulatory mechanisms from spatial transcriptomics data with SPLISOSM",
+          "doi": "10.1038/s41587-025-02965-6",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02965-6\">doi:10.1038/s41587-025-02965-6</a></p>Differential isoform usage is identified ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "CRISPR\u2013Cas3-based editing for targeted deletions in a mouse model of transthyretin amyloidosis",
+          "doi": "10.1038/s41587-025-02949-6",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02949-6\">doi:10.1038/s41587-025-02949-6</a></p>Cas3 nuclease is used for therapeutic del...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Engineering bispecific exosome activators of T cells to target immune checkpoint inhibitor-resistant metastatic melanoma",
+          "doi": "10.1038/s41587-025-02890-8",
+          "tldr": "<p>Nature Biotechnology, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41587-025-02890-8\">doi:10.1038/s41587-025-02890-8</a></p>Engineered inhalable exosomes deliver a b...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    },
+    "mathematics": {
+      "deep_candidate": {
+        "title": "Journal of the European Mathematical Society",
+        "doi": "10.4171/jems",
+        "folder": "/storage/thebeakers/data/deep/mathematics",
+        "manifest": "/storage/thebeakers/data/deep/mathematics/manifest.json",
+        "pdf": "/storage/thebeakers/data/deep/mathematics/article.pdf"
+      },
+      "explain": [
+        {
+          "title": "Interfaces and Free Boundaries, Mathematical Analysis, Computation and Applications",
+          "doi": "10.4171/ifb",
+          "file": "/storage/thebeakers/deepdive/mathematics-10-4171-ifb.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "The Role of Realistic Mathematics Education in Teaching Mathematics from the Perspective of Mathematics Teachers",
+          "doi": "10.70232/jrmste.v3i1.49",
+          "file": "/storage/thebeakers/deepdive/mathematics-10-70232-jrmste-v3i1-49.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Self-Generative Mathematics",
+          "doi": "10.5281/zenodo.18118187",
+          "file": "/storage/thebeakers/deepdive/mathematics-10-5281-zenodo-18118187.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "UMath - Dataset of Mathematical Terminology",
+          "doi": "10.17632/6m76ftmyv9.4",
+          "file": "/storage/thebeakers/deepdive/mathematics-10-17632-6m76ftmyv9-4.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Analytical Emergence of Mathematical Constants",
+          "doi": "10.5281/zenodo.18130404",
+          "file": "/storage/thebeakers/deepdive/mathematics-10-5281-zenodo-18130404.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Mathematical foundation for TOE",
+          "doi": "10.5281/zenodo.18137931",
+          "tldr": "",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Mathematics Laboratory Usage and Development of Students' Mathematics Skills in Public Secondary Schools in Rwanda: A Case of Selected Schools in Musanze District",
+          "doi": "10.5281/zenodo.18125884",
+          "tldr": "This study investigated the effect of Mathematics laboratory usage on development of students' Mathematics skills in public secondary schools in Musanze District, Rwanda. This study blueprinted the sp...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Signal True Always True \u2014 Mathematical Kernel",
+          "doi": "10.5281/zenodo.18142481",
+          "tldr": "This document presents the **Mathematical Kernel** of the *Signal True Always True* framework (GUT).The purpose of this kernel is to extract and formalize the **minimal, rigorous, and falsifiable core...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Truth After Proof: Formal Epistemics in Modern Mathematics",
+          "doi": "10.5281/zenodo.18134006",
+          "tldr": "This work examines how the relationship between proof, verification, and truth has changed in modern mathematics. As mathematical arguments have grown in scale, abstraction, and formal sophistication,...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Unified dual Magnetic currents deciphering mathematical conjectures validating physico mathematical phenomena",
+          "doi": "10.5281/zenodo.18142171",
+          "tldr": "",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "MH370 BTO mathematical model",
+          "doi": "10.5281/zenodo.18119702",
+          "tldr": "",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Advances and Applications in Discrete Mathematics",
+          "doi": "10.17654/0974165826006",
+          "tldr": "A zero forcing set in a graph is called a dom-forcing set if is also a dominating set of . The minimum cardinality of such a set is known as the dom-forcing number of the graph , denoted by . If the s...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Mathematics abilities as the key to successfully completing an engineering major: an analysis of a remedial mathematics course",
+          "doi": "10.1080/03043797.2025.2607635",
+          "tldr": "",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Assessment of mathematical modeling competency among undergraduates in Hebei province",
+          "doi": "10.22460/infinity.v15i1.p1-18",
+          "tldr": "Mathematical modeling competency, a key skill for applying mathematical knowledge to solve real-world problems, has gained increasing attention across various fields. Research indicates that students'...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "TPCK of Mathematics Trainee Teachers: A Comparison using Mahalanobis Distance",
+          "doi": "10.70232/jrmste.v3i1.57",
+          "tldr": "This body of knowledge, known as \u2018Technological Pedagogical Content Knowledge (TPCK)\u2019, is essential to teaching both today and in the future. Teachers possess a high degree of knowledge that is based ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    },
+    "engineering": {
+      "deep_candidate": {
+        "title": "Quantifying the global eco-footprint of wearable healthcare electronics",
+        "doi": "10.1038/s41586-025-09819-w",
+        "folder": "/storage/thebeakers/data/deep/engineering",
+        "manifest": "/storage/thebeakers/data/deep/engineering/manifest.json",
+        "pdf": null
+      },
+      "explain": [
+        {
+          "title": "How to reduce the environmental impact of wearable health-care devices",
+          "doi": "10.1038/d41586-025-03982-w",
+          "file": "/storage/thebeakers/deepdive/engineering-10-1038-d41586-025-03982-w.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Microscopic robots that sense, think, act, and compute",
+          "doi": "10.1126/scirobotics.adu8009?af=R",
+          "file": "/storage/thebeakers/deepdive/engineering-10-1126-scirobotics-adu8009?af=R.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Resilient odometry via hierarchical adaptation",
+          "doi": "10.1126/scirobotics.adv1818?af=R",
+          "file": "/storage/thebeakers/deepdive/engineering-10-1126-scirobotics-adv1818?af=R.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Deep learning\u2013based autonomous retinal vein cannulation in ex vivo porcine eyes",
+          "doi": "10.1126/scirobotics.adw2969?af=R",
+          "file": "/storage/thebeakers/deepdive/engineering-10-1126-scirobotics-adw2969?af=R.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Soft deployable airless wheel for lunar lava tube intact exploration",
+          "doi": "10.1126/scirobotics.adx2549?af=R",
+          "file": "/storage/thebeakers/deepdive/engineering-10-1126-scirobotics-adx2549?af=R.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Efficacy and effectiveness of robot-assisted therapy for autism spectrum disorder: From lab to reality",
+          "doi": "10.1126/scirobotics.adl2266?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Jump, recharge, repeat: Insect-inspired jumping robots and the challenge of energy harvesting",
+          "doi": "10.1126/scirobotics.aed6461?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "How reliable is robotic manipulation in the real world?",
+          "doi": "10.1126/scirobotics.adz6787?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Robots do not like Asimov\u2019s three laws",
+          "doi": "10.1126/scirobotics.aee0315?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Learning robot behavior from human-human interactions",
+          "doi": "10.1126/scirobotics.aee5779?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Reconfigurable aerial robot for subterranean mine inspection",
+          "doi": "10.1126/scirobotics.aee7991?af=R",
+          "tldr": "Science Robotics, Volume 10, Issue 109, December 2025. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "A neuromorphic robotic electronic skin with active pain and injury perception",
+          "doi": "10.1073/pnas.2520922122?af=R",
+          "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificanceAdvances in robotics demand sophisticated tactile perception akin to human skin\u2019s multifaceted s...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Generation of T cells with reduced off-target cross-reactivities by engineering co-signalling receptors",
+          "doi": "10.1038/s41551-025-01563-w",
+          "tldr": "Abstract Adoptive T cell therapy using T cells engineered with novel T cell receptors (TCRs) targeting tumour-specific peptides is a promising immunotherapy. However, these TCR-T cells can cross-react...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Methodology of Algorithm Engineering",
+          "doi": "10.5445/ir/1000189162",
+          "tldr": "Research on algorithms has drastically increased in recent years. Various sub-disciplines of computer science investigate algorithms according to different objectives and standards. This plurality of ...",
+          "course_hooks": []
+        },
+        {
+          "title": "Quantum Mechanics as Discontinuum Engineering.",
+          "doi": "10.5281/zenodo.18136248",
+          "tldr": "Abstract: This paper provides a novel mechanical interpretation of quantum phenomena through the lens of Tensorial Mechanics and Discontinuum Topology. By replacing probabilistic wave functions with t...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    },
+    "ai": {
+      "deep_candidate": {
+        "title": "Deep learning and superoscillatory speckles empowered multimode fiber probe for in situ nano-displacement detection and micro-imaging",
+        "doi": "10.1038/s41467-025-67942-8",
+        "folder": "/storage/thebeakers/data/deep/ai",
+        "manifest": "/storage/thebeakers/data/deep/ai/manifest.json",
+        "pdf": null
+      },
+      "explain": [
+        {
+          "title": "Learning intermediate physical states for inverse metasurface design",
+          "doi": "10.1038/s42256-025-01167-8",
+          "file": "/storage/thebeakers/deepdive/ai-10-1038-s42256-025-01167-8.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Reusability report: Optimizing T count in general quantum circuits with AlphaTensor-Quantum",
+          "doi": "10.1038/s42256-025-01166-9",
+          "file": "/storage/thebeakers/deepdive/ai-10-1038-s42256-025-01166-9.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Harnessing the power of single-cell large language models with parameter-efficient fine-tuning using scPEFT",
+          "doi": "10.1038/s42256-025-01170-z",
+          "file": "/storage/thebeakers/deepdive/ai-10-1038-s42256-025-01170-z.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Inferring spatial single-cell-level interactions through interpreting cell state and niche correlations learned by self-supervised graph transformer",
+          "doi": "10.1038/s42256-025-01161-0",
+          "file": "/storage/thebeakers/deepdive/ai-10-1038-s42256-025-01161-0.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Current-diffusion model for metasurface structure discoveries with spatial-frequency dynamics",
+          "doi": "10.1038/s42256-025-01162-z",
+          "file": "/storage/thebeakers/deepdive/ai-10-1038-s42256-025-01162-z.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Assessing the potential of deep learning for protein\u2013ligand docking",
+          "doi": "10.1038/s42256-025-01160-1",
+          "tldr": "<p>Nature Machine Intelligence, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01160-1\">doi:10.1038/s42256-025-01160-1</a></p>Morehead et al. introduce the ben...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "ImmunoStruct enables multimodal deep learning for immunogenicity prediction",
+          "doi": "10.1038/s42256-025-01163-y",
+          "tldr": "<p>Nature Machine Intelligence, Published online: 31 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01163-y\">doi:10.1038/s42256-025-01163-y</a></p>A multimodal deep learning model ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Author Correction: Scalable and robust DNA-based storage via coding theory and deep learning",
+          "doi": "10.1038/s42256-025-01175-8",
+          "tldr": "<p>Nature Machine Intelligence, Published online: 30 December 2025; <a href=\"https://www.nature.com/articles/s42256-025-01175-8\">doi:10.1038/s42256-025-01175-8</a></p>Author Correction: Scalable and r...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Neural basis of cooperative behavior in biological and artificial intelligence systems",
+          "doi": "10.1126/science.adw8151?af=R",
+          "tldr": "Science, Volume 391, Issue 6780, January 2026. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Maladaptive immunity to the microbiota promotes neuronal hyperinnervation and itch via IL-17A",
+          "doi": "10.1073/pnas.2525146122?af=R",
+          "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificancePruritus (itch), a phenomenon associated with various inflammatory skin diseases including psori...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "The Butterfly Revolution of Artificial Intelligence",
+          "doi": "10.5281/zenodo.18135140",
+          "tldr": "The Butterfly Revolution of Artificial Intelligence Breaking the Cocoon: A Conceptual Prelude to a New Cognitive World \"In a world where ideas are humanity's existential capital, and their telos unfol...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Artificial Intelligence in Healthcare",
+          "doi": "10.5281/zenodo.18114467",
+          "tldr": "Artificial intelligence (AI) is changing modern healthcare by enabling more accurate diagnostics, efficient workflows, and personalized care delivery. AI uses computer programs that learn from large a...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Dentistry Detection by Artificial Intelligence",
+          "doi": "10.38124/ijisrt/25dec1424",
+          "tldr": "The integration of Artificial Intelligence (AI) into dental diagnostics has emerged as a transformative force in modern dentistry. AI systems, particularly those based on deep learning, have demonstra...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "The Relational Dependency Hypothesis in Artificial Intelligence",
+          "doi": "10.5281/zenodo.18125735",
+          "tldr": "This paper introduces the Relational Dependency Hypothesis, a theoretical and empirically grounded framework analysing how artificial intelligence systems develop asymmetric dependency patterns when h...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "ARTIFICIAL INTELLIGENCE IN HEALTH CARE \u2013 A REVIEW",
+          "doi": "10.5281/zenodo.18140476",
+          "tldr": "Artificial Intelligence (AI) has been one of the key technologies to change the face of modern healthcare by bringing forth a variety of solutions for the different parts of the medical process like d...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    },
+    "agriculture": {
+      "deep_candidate": {
+        "title": "Sub-Saharan Africa has lost almost one-quarter of its pre-industrial biodiversity",
+        "doi": "10.1038/d41586-025-04007-2",
+        "folder": "/storage/thebeakers/data/deep/agriculture",
+        "manifest": "/storage/thebeakers/data/deep/agriculture/manifest.json",
+        "pdf": "/storage/thebeakers/data/deep/agriculture/article.pdf"
+      },
+      "explain": [
+        {
+          "title": "Harnessing strengthening-metastability synergy for extreme work hardening in additively manufactured titanium alloys",
+          "doi": "10.1038/s41467-025-67683-8",
+          "file": "/storage/thebeakers/deepdive/agriculture-10-1038-s41467-025-67683-8.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Postdomestication selection of MKK3 shaped seed dormancy and end-use traits in barley",
+          "doi": "10.1126/science.adx2022?af=R",
+          "file": "/storage/thebeakers/deepdive/agriculture-10-1126-science-adx2022?af=R.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Measuring Agricultural Economic Resilience in Indonesia",
+          "doi": "10.5281/zenodo.18137763",
+          "file": "/storage/thebeakers/deepdive/agriculture-10-5281-zenodo-18137763.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "MICROBIAL AND SUSTAINABLE AGRICULTURE DEVELOPMENT IN INDIA",
+          "doi": "10.36713/epra25579",
+          "file": "/storage/thebeakers/deepdive/agriculture-10-36713-epra25579.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "USD\u2013PYG and Agricultural Export Prices: An Econometric Analysis",
+          "doi": "10.5281/zenodo.18133399",
+          "file": "/storage/thebeakers/deepdive/agriculture-10-5281-zenodo-18133399.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Regenerative Agriculture is Transforming Farms into Vital Carbon Sinks",
+          "doi": "10.5281/zenodo.18119717",
+          "tldr": "Regenerative agriculture is gaining global attention as a powerful tool to combat climate change and restore degraded ecosystems. According to the Food and Agriculture Organization (FAO), nearly 33% o...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Challenges and prospects of the effective development of agricultural exports of Ukraine",
+          "doi": "10.58683/dnswsb.2072",
+          "tldr": "It is substantiated that the highly specialized, raw material-oriented structure of Ukrainian commodity exports is irrational and economically ineffective. It has been established that one of the chal...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Application of Metal Detection Technology in Agricultural Machinery Equipment",
+          "doi": "10.3390/agriengineering8010015",
+          "tldr": "Metal foreign objects left in fields pose a significant challenge during silage harvester operation, leading to reduced mechanical efficiency, compromised feed quality, and risks to livestock safety. ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Biochar Derived from Agricultural Residues for Wastewater Contaminant Removal",
+          "doi": "10.3390/su18010435",
+          "tldr": "The valorization of agricultural residues helps improve crop economic efficiency and alleviate environmental pressures. Owing to the merits of simplicity, high efficiency, low costs, and scalability, ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Netherlands Agricultural Robotics Market: Advancements, Adoption, and Future Outlook",
+          "doi": "10.5281/zenodo.18139065",
+          "tldr": "The Netherlands Agricultural Robotics Market is emerging as a key driver of innovation in the country\u2019s highly productive farming sector. Agricultural robots, or agribots, are being increasingly adopt...",
+          "course_hooks": []
+        },
+        {
+          "title": "Youth Participation in Indian Agriculture: Challenges, Opportunities, and Future Prospects",
+          "doi": "10.5281/zenodo.18136659",
+          "tldr": "Agriculture has long been central to India\u2019s economy, supporting food security and rural livelihoods. However, declining youth participation and an ageing farming population pose serious challenges to...",
+          "course_hooks": []
+        },
+        {
+          "title": "Impact of Artificial Intelligence Technology on the Sustainable Development Performance of Agricultural Enterprises",
+          "doi": "10.3390/su18010431",
+          "tldr": "The wide application of artificial intelligence (AI) technology is reshaping the production methods and governance models of agricultural enterprises, laying a solid foundation for them to achieve sus...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "The qNPT Protocol: Unveiling the Hidden Drain of Subsistence Agriculture",
+          "doi": "10.5281/zenodo.18120210",
+          "tldr": "To this day, African agriculture is analyzed almost exclusively through the lens of subsistence.Policymakers and economists focus on spatial metrics: yield perhectare, income per season, or food secur...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Denmark Agriculture Robots Market: Automation, Innovation, and the Future of Sustainable Farming",
+          "doi": "10.5281/zenodo.18139154",
+          "tldr": "The Denmark Agriculture Robots Market is experiencing significant transformation as farmers and agribusinesses increasingly adopt automation to improve efficiency, productivity, and sustainability. Ag...",
+          "course_hooks": []
+        },
+        {
+          "title": "Finland Agriculture Robots Market: Advancing Automation for Sustainable and Efficient Farming",
+          "doi": "10.5281/zenodo.18139215",
+          "tldr": "The Finland Agriculture Robots Market is gaining strong momentum as the country increasingly adopts advanced automation technologies to modernize its agricultural sector. Faced with challenges such as...",
+          "course_hooks": []
+        }
+      ]
     }
   },
   "education": {
     "type": "teaching_move",
-    "title": "Reversing the Order of Operations",
-    "misconception": "Students often incorrectly apply the order of operations (PEMDAS) when solving equations.",
-    "why_wrong": "This leads to errors in calculations and can be frustrating for students.",
-    "correct_model": "The correct application of PEMDAS: Parentheses, Exponents, Multiplication and Division (from left to right), Addition and Subtraction (from left to right).",
-    "classroom_move": "Write a simple equation on the board and ask students to solve it using the incorrect order of operations. Then, reveal the correct solution and have students work in pairs to solve another equation with the correct application of PEMDAS.",
+    "title": "Visualization Vortex: How to Avoid Misconceptions in Thermodynamics",
+    "why_wrong": "Students often struggle with thermodynamic concepts due to a lack of visual understanding.",
+    "correct_model": "Using 3D visualization tools, we can help students visualize and understand complex thermodynamic processes like phase changes and heat transfer.",
+    "classroom_move": "Step 1: Write down three common misconceptions about thermodynamics (e.g., 'Heat always increases entropy').\n\nStep 2: Pair up with a classmate and quickly research each misconception using online resources.\n\nStep 3: Gather around a computer or whiteboard and explore a visualization tool like PhET or Grapher, focusing on the specific concept you researched. Take notes and ask questions as you go.",
     "exit_questions": [
-      "What is the first step in applying PEMDAS?",
-      "Can you think of a scenario where the order of operations might not matter?"
+      "How did visualization help clarify thermodynamic concepts for you?",
+      "What's one common misconception about thermodynamics that you've overcome through visualization?"
     ]
   }
 }
