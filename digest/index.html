@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TL;DRs — The Beakers</title>
+    <meta name="description" content="Quick research summaries for busy students. 70 TL;DRs across 7 subjects.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-dark: #0f172a; --bg-card: #1e293b; --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-light: #64748b; --border-dark: #334155; --accent-green: #10b981; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
+        header { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; border-bottom: 1px solid var(--border-dark); }
+        .logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: var(--accent-green); }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; }
+        nav a:hover { color: var(--accent-green); }
+        .hero { text-align: center; padding: 3rem 2rem; max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-family: 'Instrument Serif', serif; font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .hero p { color: var(--text-secondary); }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 2rem 4rem; }
+        .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; justify-content: center; }
+        .filter-btn { padding: 0.5rem 1rem; background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 20px; color: var(--text-secondary); cursor: pointer; font-size: 0.85rem; transition: all 0.2s; }
+        .filter-btn:hover, .filter-btn.active { background: var(--accent-green); color: var(--bg-dark); border-color: var(--accent-green); }
+        .digest-list { display: flex; flex-direction: column; gap: 1rem; }
+        .digest-card { background: var(--bg-card); border: 1px solid var(--border-dark); border-radius: 12px; padding: 1.25rem; transition: all 0.2s; }
+        .digest-card:hover { border-color: var(--accent-green); }
+        .digest-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+        .digest-card h3 a { color: var(--text-primary); text-decoration: none; }
+        .digest-card h3 a:hover { color: var(--accent-green); }
+        .digest-card .tldr { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0.75rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .digest-card .meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: var(--text-light); }
+        .subject-badge { padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
+        .tags { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+        .tag { padding: 0.15rem 0.4rem; background: var(--bg-dark); border-radius: 4px; font-size: 0.7rem; color: var(--text-light); }
+        footer { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-dark); }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/explain/">Explain</a>
+            <a href="/deepdive/">Deep Dives</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>TL;DRs</h1>
+        <p>Quick research summaries. 70 articles, 7 subjects, under 60 seconds each.</p>
+    </section>
+    <main class="container">
+        <div class="filter-bar" id="filters"></div>
+        <div class="digest-list" id="digest-list"></div>
+    </main>
+    <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
+    <script>
+        const COLORS = { chemistry: '#10b981', physics: '#3b82f6', biology: '#22c55e', mathematics: '#8b5cf6', engineering: '#f59e0b', ai: '#06b6d4', agriculture: '#84cc16' };
+        let DIGESTS = [];
+        let activeFilter = 'all';
+
+        async function load() {
+            const res = await fetch('/data/digests_2026-01-05.json');
+            DIGESTS = await res.json();
+            renderFilters();
+            render();
+        }
+
+        function renderFilters() {
+            const subjects = ['all', ...new Set(DIGESTS.map(d => d.subject))];
+            document.getElementById('filters').innerHTML = subjects.map(s =>
+                `<button class="filter-btn ${s === activeFilter ? 'active' : ''}" onclick="filter('${s}')">${s === 'all' ? 'All' : s.charAt(0).toUpperCase() + s.slice(1)}</button>`
+            ).join('');
+        }
+
+        function filter(subject) {
+            activeFilter = subject;
+            renderFilters();
+            render();
+        }
+
+        function render() {
+            const filtered = activeFilter === 'all' ? DIGESTS : DIGESTS.filter(d => d.subject === activeFilter);
+            document.getElementById('digest-list').innerHTML = filtered.map(d => `
+                <div class="digest-card" data-subject="${d.subject}">
+                    <h3><a href="${d.url}" target="_blank">${d.title.replace(/\[ASAP\]\s*/g, '')}</a></h3>
+                    <p class="tldr">${stripHtml(d.tldr)}</p>
+                    <div class="meta">
+                        <span class="subject-badge" style="background: ${COLORS[d.subject]}20; color: ${COLORS[d.subject]};">${d.subject}</span>
+                        <span>${d.venue}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        load();
+    </script>
+</body>
+</html>

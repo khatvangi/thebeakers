@@ -24,7 +24,9 @@ DATA_DIR = ROOT / "data"
 CONTENT_DIR = ROOT / "content"
 ISSUES_DIR = CONTENT_DIR / "issues"
 NOTES_DIR = CONTENT_DIR / "notes"
-DEEPDIVE_DIR = ROOT / "deepdive"
+DEEPDIVE_DIR = ROOT / "deepdive"   # Manual deep dives (1 per subject)
+EXPLAIN_DIR = ROOT / "explain"      # Automated explain articles (5 per subject)
+DIGEST_DIR = ROOT / "digest"        # TL;DRs (10 per subject)
 PDF_DIR = DATA_DIR / "pdfs"
 DEEP_DIR = DATA_DIR / "deep"  # Deep candidates organized by subject
 
@@ -378,9 +380,9 @@ def download_pdf(article: Article) -> Optional[Path]:
     return None
 
 def generate_indepth(article: Article, pdf_path: Optional[Path]) -> str:
-    """Generate In-Depth HTML using napkin visual-story"""
+    """Generate Explain article HTML using napkin visual-story"""
     slug = article.doi.replace("/", "-").replace(".", "-")[:50]
-    output_path = DEEPDIVE_DIR / f"{article.subject}-{slug}.html"
+    output_path = EXPLAIN_DIR / f"{article.subject}-{slug}.html"
 
     # Build article text for visual story
     article_text = f"""
@@ -887,7 +889,7 @@ def run_weekly(subjects: List[str] = None, days: int = 7):
     print()
 
     # Ensure directories exist
-    for d in [DATA_DIR, CONTENT_DIR, ISSUES_DIR, NOTES_DIR, DEEPDIVE_DIR, PDF_DIR]:
+    for d in [DATA_DIR, CONTENT_DIR, ISSUES_DIR, NOTES_DIR, DEEPDIVE_DIR, EXPLAIN_DIR, DIGEST_DIR, PDF_DIR]:
         d.mkdir(parents=True, exist_ok=True)
 
     week_of = datetime.now().strftime("%Y-%m-%d")
