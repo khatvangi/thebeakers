@@ -14,6 +14,41 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 
 **Motto:** व्यये कृते वर्धत एव नित्यं — "Knowledge always grows when shared" (Chanakya Niti)
 
+## DO NOT REINVENT - USE EXISTING CODE
+
+**CRITICAL: Always use existing scripts and templates. Never create new ones from scratch.**
+
+### Canonical Templates (COPY THESE EXACTLY)
+| Purpose | File | Notes |
+|---------|------|-------|
+| Deep Dive | `deepdive/solar-cell-bromine.html` | Full NotebookLM treatment |
+| Visual Story | `/storage/napkin/examples/solar-cell/solar_cell_visual_story_v2.html` | Lucide icons, visual cards |
+| Explain Article | Use `generate_award_html()` in `scripts/weekly_pipeline.py` | 6 visual cards with icons |
+
+### Canonical Scripts (USE THESE)
+| Purpose | Script | Command |
+|---------|--------|---------|
+| Weekly pipeline | `scripts/weekly_pipeline.py` | `python scripts/weekly_pipeline.py` |
+| Visual stories | `/storage/napkin/src/visual_story.py` | `generate_story_scenes()`, `generate_visual_story_html()` |
+| Feed collection | `scripts/feed_collector.py` | `python scripts/feed_collector.py` |
+
+### Rules
+1. **NEVER** create new HTML templates - copy existing ones
+2. **NEVER** change the visual card structure without explicit permission
+3. **NEVER** remove Lucide icons or change icon names
+4. **ALWAYS** use `generate_award_html()` for explain articles
+5. **ALWAYS** check existing code before writing new code
+6. When in doubt, ask: "Is there existing code for this?"
+
+### Explain Article Structure (6 Cards)
+Each explain article has exactly 6 visual cards with these Lucide icons:
+1. **The Discovery** - `lightbulb` icon (#f59e0b orange)
+2. **Why It Matters** - `target` icon (#10b981 green)
+3. **How It Works** - `git-branch` icon (#3b82f6 blue)
+4. **Connect to Coursework** - `graduation-cap` icon (#8b5cf6 purple)
+5. **Limitations** - `alert-triangle` icon (#ef4444 red)
+6. **Key Takeaway** - `bookmark` icon (#06b6d4 cyan)
+
 ## Content Strategy
 
 ### Three Formats (Source-Based Guidelines)
