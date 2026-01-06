@@ -30,6 +30,7 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 |--------|-------------|
 | Visual Summary | `/storage/napkin/prompts/explain-visual.txt` |
 | Detailed Story | `/storage/napkin/prompts/explain-story.txt` |
+| TL;DR | `/storage/napkin/prompts/tldr.txt` |
 
 ### Canonical Scripts (USE THESE)
 | Purpose | Script | Command |
@@ -74,6 +75,25 @@ Quick visual overview with cards, grids, progress bars. NO Mermaid.
 8. The Implication (flowchart + takeaway highlight-box)
 
 **Visual Elements:** Mermaid diagrams (mindmap, flowchart, timeline), highlight-box, stats-grid
+
+### TL;DR Format (LOCKED)
+One sentence (max 2) summary for quick scanning.
+
+**Structure:**
+```
+[Researchers/Team] [action verb] [what they did/found], which [why it matters].
+```
+
+**Rules:**
+- ONE sentence (two max)
+- Active voice ("Researchers discovered" not "It was discovered")
+- Simple words (no jargon)
+- Concrete benefit (why should a student care?)
+- No citations, no journal names
+- Plain text only (no HTML)
+
+**Example:**
+"Researchers discovered that adding bromine to the center of solar cell molecules boosts efficiency to 20% — flipping decades of conventional wisdom."
 
 ## Content Strategy
 
