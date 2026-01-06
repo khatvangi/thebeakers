@@ -26,6 +26,7 @@ ISSUES_DIR = CONTENT_DIR / "issues"
 NOTES_DIR = CONTENT_DIR / "notes"
 DEEPDIVE_DIR = ROOT / "deepdive"
 PDF_DIR = DATA_DIR / "pdfs"
+DEEP_DIR = DATA_DIR / "deep"  # Deep candidates organized by subject
 
 # Ollama
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
@@ -704,22 +705,91 @@ def run_weekly(subjects: List[str] = None, days: int = 7):
             print(f"\n   🎯 DEEP CANDIDATE (for NotebookLM):")
             print(f"      Title: {deep_candidate.title}")
             print(f"      DOI: {deep_candidate.doi}")
-            print(f"      PDF: {deep_candidate.pdf_url or 'Not available'}")
-            print(f"      Score: S={deep_candidate.S} E={deep_candidate.E} T={deep_candidate.T} M={deep_candidate.M} H={deep_candidate.H}")
 
-            # Download PDF for NotebookLM
-            pdf_path = download_pdf(deep_candidate)
-            if pdf_path:
-                print(f"      📥 PDF saved: {pdf_path}")
+            # Create subject folder for Deep
+            deep_folder = DEEP_DIR / subject
+            deep_folder.mkdir(parents=True, exist_ok=True)
+
+            # Download PDF
+            pdf_path = None
+            if deep_candidate.pdf_url:
+                pdf_path = deep_folder / "article.pdf"
+                try:
+                    resp = requests.get(deep_candidate.pdf_url, timeout=60, headers={
+                        "User-Agent": "TheBeakers/1.0 (educational)"
+                    })
+                    if resp.status_code == 200 and b"%PDF" in resp.content[:10]:
+                        pdf_path.write_bytes(resp.content)
+                        print(f"      📥 PDF: {pdf_path}")
+                except Exception as e:
+                    print(f"      ⚠️  PDF download failed: {e}")
+                    pdf_path = None
+
+            # Create manifest.json for user to fill in
+            manifest = {
+                "title": deep_candidate.title,
+                "doi": deep_candidate.doi,
+                "url": deep_candidate.url,
+                "venue": deep_candidate.venue,
+                "published": deep_candidate.published,
+                "authors": deep_candidate.authors,
+                "subject": subject,
+                "scores": {
+                    "S": deep_candidate.S,
+                    "E": deep_candidate.E,
+                    "T": deep_candidate.T,
+                    "M": deep_candidate.M,
+                    "H": deep_candidate.H
+                },
+                "course_hooks": deep_candidate.course_hooks,
+                "skill_hooks": deep_candidate.skill_hooks,
+                # === USER FILLS THESE IN ===
+                "youtube_url": "",      # Paste YouTube URL here
+                "soundcloud_url": "",   # Paste SoundCloud URL here
+                "status": "pending"     # Change to "ready" when done
+            }
+
+            manifest_path = deep_folder / "manifest.json"
+            with open(manifest_path, "w") as f:
+                json.dump(manifest, f, indent=2)
+            print(f"      📋 Manifest: {manifest_path}")
+
+            # Create README for user
+            readme = f"""# Deep Dive: {subject.title()}
+
+## Article
+**{deep_candidate.title}**
+
+DOI: {deep_candidate.doi}
+Venue: {deep_candidate.venue}
+
+## Your Workflow
+
+1. ✅ PDF downloaded (article.pdf)
+2. ⬜ Upload to NotebookLM
+3. ⬜ Generate podcast → Upload to SoundCloud → Paste URL in manifest.json
+4. ⬜ Generate video → Upload to YouTube → Paste URL in manifest.json
+5. ⬜ Download study guide → Save as study_guide.pdf
+6. ⬜ Set "status": "ready" in manifest.json
+
+## Files to Add
+- study_guide.pdf (from NotebookLM)
+- Any extra images/figures
+
+## Generate Final HTML
+```bash
+python3 scripts/weekly_pipeline.py --build-deep {subject}
+```
+"""
+            (deep_folder / "README.md").write_text(readme)
+            print(f"      📖 README: {deep_folder}/README.md")
 
             subject_report["deep_candidate"] = {
                 "title": deep_candidate.title,
                 "doi": deep_candidate.doi,
-                "url": deep_candidate.url,
-                "pdf_url": deep_candidate.pdf_url,
-                "pdf_local": str(pdf_path) if pdf_path else None,
-                "scores": {"S": deep_candidate.S, "E": deep_candidate.E, "T": deep_candidate.T, "M": deep_candidate.M, "H": deep_candidate.H},
-                "course_hooks": deep_candidate.course_hooks
+                "folder": str(deep_folder),
+                "manifest": str(manifest_path),
+                "pdf": str(pdf_path) if pdf_path else None
             }
 
         # === EXPLAIN (5 automated detailed articles) ===
@@ -830,24 +900,318 @@ Respond in JSON:
     }
 
 
+def build_deep(subject: str):
+    """
+    Build Deep Dive HTML from completed folder.
+    Reads manifest.json and generates final HTML with all embeds.
+    """
+    deep_folder = DEEP_DIR / subject
+    manifest_path = deep_folder / "manifest.json"
+
+    if not manifest_path.exists():
+        print(f"❌ No manifest found at {manifest_path}")
+        print(f"   Run the weekly pipeline first to create Deep candidates.")
+        return False
+
+    with open(manifest_path) as f:
+        manifest = json.load(f)
+
+    if manifest.get("status") != "ready":
+        print(f"⚠️  Status is '{manifest.get('status')}', not 'ready'")
+        print(f"   Fill in youtube_url and soundcloud_url in manifest.json")
+        print(f"   Then set status to 'ready'")
+        return False
+
+    youtube_url = manifest.get("youtube_url", "")
+    soundcloud_url = manifest.get("soundcloud_url", "")
+
+    if not youtube_url:
+        print("❌ Missing youtube_url in manifest.json")
+        return False
+
+    # Extract YouTube video ID
+    import re
+    yt_match = re.search(r'(?:v=|youtu\.be/)([a-zA-Z0-9_-]{11})', youtube_url)
+    yt_id = yt_match.group(1) if yt_match else ""
+
+    # Extract SoundCloud embed (or use URL directly)
+    sc_embed = soundcloud_url
+
+    print(f"🔨 Building Deep Dive: {subject}")
+    print(f"   Title: {manifest['title']}")
+    print(f"   YouTube: {yt_id}")
+    print(f"   SoundCloud: {'✓' if soundcloud_url else '✗'}")
+
+    # Generate the Deep Dive HTML
+    slug = manifest['doi'].replace("/", "-").replace(".", "-")[:50]
+    output_path = DEEPDIVE_DIR / f"{subject}-{slug}-deep.html"
+
+    accent = {
+        "chemistry": "#10b981", "physics": "#3b82f6", "biology": "#22c55e",
+        "mathematics": "#8b5cf6", "engineering": "#f59e0b", "ai": "#06b6d4",
+        "agriculture": "#84cc16"
+    }.get(subject, "#10b981")
+
+    html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{manifest["title"]} | Deep Dive | The Beakers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {{
+            --bg: #0a0a0f;
+            --bg-card: #12121a;
+            --text: #f0f0f5;
+            --text-muted: #8888a0;
+            --accent: {accent};
+            --accent-glow: {accent}40;
+            --border: #2a2a3a;
+        }}
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }}
+        .bg-gradient {{
+            position: fixed; inset: 0; z-index: -1;
+            background: radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent);
+            animation: pulse 8s ease-in-out infinite alternate;
+        }}
+        @keyframes pulse {{ 0% {{ opacity: 0.5; }} 100% {{ opacity: 0.8; }} }}
+
+        header {{
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 1rem 2rem;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,15,0.8);
+            border-bottom: 1px solid var(--border);
+            display: flex; justify-content: space-between; align-items: center;
+        }}
+        .logo {{ font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: var(--text); text-decoration: none; }}
+        .logo span {{ color: var(--accent); }}
+
+        .hero {{
+            padding: 8rem 2rem 3rem;
+            max-width: 900px; margin: 0 auto; text-align: center;
+        }}
+        .badge {{
+            display: inline-block; padding: 0.4rem 1rem;
+            background: var(--accent-glow); border: 1px solid var(--accent);
+            border-radius: 100px; font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent);
+            margin-bottom: 1.5rem;
+        }}
+        h1 {{
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 400; line-height: 1.2; margin-bottom: 1rem;
+        }}
+        .meta {{ color: var(--text-muted); font-size: 0.9rem; }}
+
+        .content {{ max-width: 900px; margin: 0 auto; padding: 2rem; }}
+
+        .section {{
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }}
+        .section h2 {{
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem; color: var(--accent);
+            margin-bottom: 1.5rem;
+            display: flex; align-items: center; gap: 0.75rem;
+        }}
+        .section h2::before {{
+            content: attr(data-icon);
+            font-size: 1.2rem;
+        }}
+
+        .video-container {{
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 1rem;
+            overflow: hidden;
+        }}
+        .video-container iframe {{
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }}
+
+        .audio-container {{
+            border-radius: 1rem;
+            overflow: hidden;
+        }}
+        .audio-container iframe {{
+            width: 100%;
+            border: none;
+        }}
+
+        .tags {{
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            margin-top: 1rem;
+        }}
+        .tag {{
+            padding: 0.3rem 0.8rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }}
+
+        footer {{
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }}
+
+        @media (max-width: 768px) {{
+            header {{ padding: 1rem; }}
+            .hero {{ padding: 6rem 1rem 2rem; }}
+            .content {{ padding: 1rem; }}
+            .section {{ padding: 1.5rem; }}
+        }}
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <span class="badge">DEEP DIVE · {subject.upper()}</span>
+            <h1>{manifest["title"]}</h1>
+            <p class="meta">{manifest["venue"]} · {manifest["published"]}</p>
+        </section>
+
+        <section class="content">
+            <!-- VIDEO -->
+            <div class="section">
+                <h2 data-icon="🎬">Video Explainer</h2>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/{yt_id}" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- PODCAST -->
+            {"" if not soundcloud_url else f'''
+            <div class="section">
+                <h2 data-icon="🎧">Podcast</h2>
+                <div class="audio-container">
+                    <iframe width="100%" height="166" scrolling="no" frameborder="no"
+                        src="https://w.soundcloud.com/player/?url={soundcloud_url}&color=%23{accent[1:]}&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false"></iframe>
+                </div>
+            </div>
+            '''}
+
+            <!-- CURRICULUM CONNECTION -->
+            <div class="section">
+                <h2 data-icon="🎓">Curriculum Connection</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                    Connect this research to your coursework:
+                </p>
+                <div class="tags">
+                    {"".join(f'<span class="tag">{h}</span>' for h in (manifest.get("course_hooks") or []))}
+                    {"".join(f'<span class="tag">{h}</span>' for h in (manifest.get("skill_hooks") or []))}
+                </div>
+            </div>
+
+            <!-- SOURCE -->
+            <div class="section">
+                <h2 data-icon="📄">Source</h2>
+                <p style="color: var(--text-muted);">
+                    <strong>{manifest["title"]}</strong><br>
+                    {", ".join(manifest.get("authors", [])[:3])}{"..." if len(manifest.get("authors", [])) > 3 else ""}<br>
+                    <em>{manifest["venue"]}</em>, {manifest["published"]}<br>
+                    <a href="{manifest["url"]}" style="color: var(--accent);">DOI: {manifest["doi"]}</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>The Beakers — Research, Rewritten for Students</p>
+    </footer>
+</body>
+</html>'''
+
+    output_path.write_text(html)
+    print(f"\n✅ Deep Dive generated: {output_path}")
+    print(f"   View: https://thebeakers.com/deepdive/{output_path.name}")
+
+    return True
+
+
+def list_deep_status():
+    """Show status of all Deep folders"""
+    print("\n📋 DEEP DIVE STATUS")
+    print("=" * 60)
+
+    if not DEEP_DIR.exists():
+        print("   No Deep folders yet. Run weekly pipeline first.")
+        return
+
+    for subject_dir in sorted(DEEP_DIR.iterdir()):
+        if not subject_dir.is_dir():
+            continue
+
+        manifest_path = subject_dir / "manifest.json"
+        if manifest_path.exists():
+            with open(manifest_path) as f:
+                m = json.load(f)
+            status = m.get("status", "unknown")
+            title = m.get("title", "")[:40]
+            yt = "✓" if m.get("youtube_url") else "✗"
+            sc = "✓" if m.get("soundcloud_url") else "✗"
+            print(f"\n   [{subject_dir.name.upper()}] {status.upper()}")
+            print(f"   {title}...")
+            print(f"   YouTube: {yt}  SoundCloud: {sc}")
+        else:
+            print(f"\n   [{subject_dir.name.upper()}] NO MANIFEST")
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="The Beakers Weekly Pipeline")
     parser.add_argument("--subjects", nargs="+", help="Subjects to process (default: all)")
     parser.add_argument("--days", type=int, default=7, help="Lookback days (default: 7)")
+    parser.add_argument("--build-deep", metavar="SUBJECT", help="Build Deep Dive HTML from completed folder")
+    parser.add_argument("--status", action="store_true", help="Show status of Deep folders")
     args = parser.parse_args()
 
-    print("""
+    if args.status:
+        list_deep_status()
+    elif args.build_deep:
+        build_deep(args.build_deep)
+    else:
+        print("""
 ╔══════════════════════════════════════════════════════════════╗
 ║           THE BEAKERS - WEEKLY CONTENT PIPELINE              ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  Per Subject:                                                ║
-║    • 1 Deep candidate (YOU process with NotebookLM)          ║
+║    • 1 Deep candidate → data/deep/{subject}/                 ║
+║      (YOU process with NotebookLM)                           ║
 ║    • 5 Explain articles (automated)                          ║
 ║    • 10 Digest TL;DRs (automated)                            ║
 ║                                                              ║
 ║  Plus: 1 Education highlight per week                        ║
+║                                                              ║
+║  After NotebookLM:                                           ║
+║    python3 weekly_pipeline.py --build-deep chemistry         ║
 ╚══════════════════════════════════════════════════════════════╝
-    """)
-
-    run_weekly(args.subjects, args.days)
+        """)
+        run_weekly(args.subjects, args.days)
