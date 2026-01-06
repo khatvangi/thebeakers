@@ -179,7 +179,7 @@
         ];
 
         // Explainers (automated, from explain folder)
-        const EXPLAINERS = [{"file": "explain/chemistry-explain-10.1038-s41557-025-02038-w.html", "title": "Intralayer bidentate diammoniums for stable two-dimension...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02032-2.html", "title": "Bringing biocatalysis into teaching labs", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02027-z.html", "title": "Protecting skins of Au\u2013Cl can stabilize Au nanostructures", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02016-2.html", "title": "Unravelling gas evolution mechanisms in battery electrode...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02018-0.html", "title": "Direct enantioselective C(", "source": "Nature Chemistry"}];
+        const EXPLAINERS = [{"file": "explain/chemistry-explain-10.1038-s41557-025-02038-w.html", "title": "Intralayer bidentate diammoniums for stable two-dime...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02032-2.html", "title": "Bringing biocatalysis into teaching labs", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02027-z.html", "title": "Protecting skins of Au\u2013Cl can stabilize Au nanostruc...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02016-2.html", "title": "Unravelling gas evolution mechanisms in battery elec...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02018-0.html", "title": "Direct enantioselective C(", "source": "Nature Chemistry"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -206,7 +206,7 @@
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
             container.innerHTML = EXPLAINERS.map(e => `
                 <a href="${e.file}" class="explainer-card">
-                    <span class="explainer-badge">Visual Story</span>
+                    <span class="explainer-badge">Explain</span>
                     <h3>${e.title}</h3>
                     <span class="source">${e.source}</span>
                 </a>

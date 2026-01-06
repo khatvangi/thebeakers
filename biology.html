@@ -95,7 +95,7 @@
     <script>
         const SUBJECT = 'biology';
         const DEEPDIVES = [];
-        const EXPLAINERS = [{"file": "explain/biology-explain-10.1038-s41586-025-09901-3.html", "title": "Sunyaev\u2013Zeldovich detection of hot intracluster gas at re...", "source": "Nature"}, {"file": "explain/biology-10-1038-d41586-025-04114-0.html", "title": "Science in 2026: what to expect this year", "source": "Nature Chemistry"}, {"file": "explain/biology-10-1038-s41586-025-10090-2.html", "title": "Author Correction: Rewiring an olfactory circuit by alter...", "source": "Nature"}, {"file": "explain/biology-10-1038-s41586-025-10089-9.html", "title": "Author Correction: Repulsions instruct synaptic partner m...", "source": "Nature"}, {"file": "explain/biology-10-1038-d41586-025-04152-8.html", "title": "Pandemic PhDs: graduates anxious, but optimistic, about t...", "source": "Nature Chemistry"}];
+        const EXPLAINERS = [{"file": "explain/biology-explain-10.1038-s41586-025-09901-3.html", "title": "Sunyaev\u2013Zeldovich detection of hot intracluster gas ...", "source": "Nature"}, {"file": "explain/biology-10-1038-d41586-025-04114-0.html", "title": "Science in 2026: what to expect this year", "source": "Nature Chemistry"}, {"file": "explain/biology-10-1038-s41586-025-10090-2.html", "title": "Author Correction: Rewiring an olfactory circuit by ...", "source": "Nature"}, {"file": "explain/biology-10-1038-s41586-025-10089-9.html", "title": "Author Correction: Repulsions instruct synaptic part...", "source": "Nature"}, {"file": "explain/biology-10-1038-d41586-025-04152-8.html", "title": "Pandemic PhDs: graduates anxious, but optimistic, ab...", "source": "Nature Chemistry"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -106,7 +106,7 @@
         function renderExplainers() {
             const container = document.getElementById('explainer-content');
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Visual Story</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
+            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Explain</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
         }
         async function renderTLDRs() {
             const container = document.getElementById('tldr-content');

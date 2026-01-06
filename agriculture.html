@@ -95,7 +95,7 @@
     <script>
         const SUBJECT = 'agriculture';
         const DEEPDIVES = [];
-        const EXPLAINERS = [{"file": "explain/agriculture-explain-10.1038-s41467-025-67683-8.html", "title": "Harnessing strengthening-metastability synergy for extrem...", "source": "Nature Communications"}, {"file": "explain/agriculture-10-5281-zenodo-18133399.html", "title": "USD\u2013PYG and Agricultural Export Prices: An Econometric An...", "source": "Zenodo"}, {"file": "explain/agriculture-10-36713-epra25579.html", "title": "MICROBIAL AND SUSTAINABLE AGRICULTURE DEVELOPMENT IN INDIA", "source": "EPRA"}, {"file": "explain/agriculture-10-5281-zenodo-18137763.html", "title": "Measuring Agricultural Economic Resilience in Indonesia", "source": "Zenodo"}, {"file": "explain/agriculture-10-1126-science-adx2022?af=R.html", "title": "Postdomestication selection of MKK3 shaped seed dormancy ...", "source": "Science"}];
+        const EXPLAINERS = [{"file": "explain/agriculture-explain-10.1038-s41467-025-67683-8.html", "title": "Harnessing strengthening-metastability synergy for e...", "source": "Nature Communications"}, {"file": "explain/agriculture-10-5281-zenodo-18133399.html", "title": "USD\u2013PYG and Agricultural Export Prices: An Econometr...", "source": "Research Journal"}, {"file": "explain/agriculture-10-36713-epra25579.html", "title": "MICROBIAL AND SUSTAINABLE AGRICULTURE DEVELOPMENT IN...", "source": "Research Journal"}, {"file": "explain/agriculture-10-5281-zenodo-18137763.html", "title": "Measuring Agricultural Economic Resilience in Indonesia", "source": "Research Journal"}, {"file": "explain/agriculture-10-1126-science-adx2022?af=R.html", "title": "Postdomestication selection of MKK3 shaped seed dorm...", "source": "Research Journal"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -106,7 +106,7 @@
         function renderExplainers() {
             const container = document.getElementById('explainer-content');
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Visual Story</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
+            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Explain</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
         }
         async function renderTLDRs() {
             const container = document.getElementById('tldr-content');

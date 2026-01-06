@@ -95,7 +95,7 @@
     <script>
         const SUBJECT = 'engineering';
         const DEEPDIVES = [{"file": "deepdive/legged-locomotion-story.html", "title": "Legged Locomotion: From Animals to Robots", "desc": "How engineers learn from nature to build walking machines", "source": "IJRR", "tags": ["Diagrams", "Curriculum"]}];
-        const EXPLAINERS = [{"file": "explain/engineering-explain-10.1038-d41586-025-03982-w.html", "title": "How to reduce the environmental impact of wearable health...", "source": "Nature Chemistry"}, {"file": "explain/engineering-10-1126-scirobotics-adw2969?af=R.html", "title": "Deep learning\u2013based autonomous retinal vein cannulation i...", "source": "Science Robotics"}, {"file": "explain/engineering-10-1126-scirobotics-adv1818?af=R.html", "title": "Resilient odometry via hierarchical adaptation", "source": "Science Robotics"}, {"file": "explain/engineering-10-1126-scirobotics-adu8009?af=R.html", "title": "Microscopic robots that sense, think, act, and compute", "source": "Science Robotics"}, {"file": "explain/engineering-10-1038-d41586-025-03982-w.html", "title": "How to reduce the environmental impact of wearable health...", "source": "Nature Chemistry"}];
+        const EXPLAINERS = [{"file": "explain/engineering-explain-10.1038-d41586-025-03982-w.html", "title": "How to reduce the environmental impact of wearable h...", "source": "Nature Chemistry"}, {"file": "explain/engineering-10-1126-scirobotics-adw2969?af=R.html", "title": "Deep learning\u2013based autonomous retinal vein cannulat...", "source": "Research Journal"}, {"file": "explain/engineering-10-1126-scirobotics-adv1818?af=R.html", "title": "Resilient odometry via hierarchical adaptation", "source": "Research Journal"}, {"file": "explain/engineering-10-1126-scirobotics-adu8009?af=R.html", "title": "Microscopic robots that sense, think, act, and compute", "source": "Research Journal"}, {"file": "explain/engineering-10-1038-d41586-025-03982-w.html", "title": "How to reduce the environmental impact of wearable h...", "source": "Nature Chemistry"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -106,7 +106,7 @@
         function renderExplainers() {
             const container = document.getElementById('explainer-content');
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Visual Story</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
+            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Explain</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
         }
         async function renderTLDRs() {
             const container = document.getElementById('tldr-content');

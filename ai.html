@@ -95,7 +95,7 @@
     <script>
         const SUBJECT = 'ai';
         const DEEPDIVES = [];
-        const EXPLAINERS = [{"file": "explain/ai-explain-10.1038-s42256-025-01167-8.html", "title": "Learning intermediate physical states for inverse metasur...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01162-z.html", "title": "Current-diffusion model for metasurface structure discove...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01161-0.html", "title": "Inferring spatial single-cell-level interactions through ...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01170-z.html", "title": "Harnessing the power of single-cell large language models...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01166-9.html", "title": "Reusability report: Optimizing T count in general quantum...", "source": "Nature Machine Intelligence"}];
+        const EXPLAINERS = [{"file": "explain/ai-explain-10.1038-s42256-025-01167-8.html", "title": "Learning intermediate physical states for inverse me...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01162-z.html", "title": "Current-diffusion model for metasurface structure di...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01161-0.html", "title": "Inferring spatial single-cell-level interactions thr...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01170-z.html", "title": "Harnessing the power of single-cell large language m...", "source": "Nature Machine Intelligence"}, {"file": "explain/ai-10-1038-s42256-025-01166-9.html", "title": "Reusability report: Optimizing T count in general qu...", "source": "Nature Machine Intelligence"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -106,7 +106,7 @@
         function renderExplainers() {
             const container = document.getElementById('explainer-content');
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Visual Story</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
+            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Explain</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
         }
         async function renderTLDRs() {
             const container = document.getElementById('tldr-content');

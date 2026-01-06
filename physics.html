@@ -95,7 +95,7 @@
     <script>
         const SUBJECT = 'physics';
         const DEEPDIVES = [];
-        const EXPLAINERS = [{"file": "explain/physics-explain-10.1038-s41586-025-09864-5.html", "title": "A chiral fermionic valve driven by quantum geometry", "source": "Nature"}, {"file": "explain/physics-10-1038-s41567-025-03121-2.html", "title": "Two-dimensional non-equilibrium melting of charged colloids", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-s41567-025-03122-1.html", "title": "Geometry-driven asymmetric cell divisions pattern cell cy...", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-s41567-025-03136-9.html", "title": "Embryo geometry sets the tempo", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-d41586-025-04021-4.html", "title": "Highly efficient LED device built by stacking layers of l...", "source": "Nature Chemistry"}];
+        const EXPLAINERS = [{"file": "explain/physics-explain-10.1038-s41586-025-09864-5.html", "title": "A chiral fermionic valve driven by quantum geometry", "source": "Nature"}, {"file": "explain/physics-10-1038-s41567-025-03121-2.html", "title": "Two-dimensional non-equilibrium melting of charged c...", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-s41567-025-03122-1.html", "title": "Geometry-driven asymmetric cell divisions pattern ce...", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-s41567-025-03136-9.html", "title": "Embryo geometry sets the tempo", "source": "Nature Physics"}, {"file": "explain/physics-10-1038-d41586-025-04021-4.html", "title": "Highly efficient LED device built by stacking layers...", "source": "Nature Chemistry"}];
 
         function renderDeepDives() {
             const container = document.getElementById('deepdive-content');
@@ -106,7 +106,7 @@
         function renderExplainers() {
             const container = document.getElementById('explainer-content');
             document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Visual Story</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
+            container.innerHTML = EXPLAINERS.map(e => `<a href="${e.file}" class="explainer-card"><span class="explainer-badge">Explain</span><h3>${e.title}</h3><span class="source">${e.source}</span></a>`).join('');
         }
         async function renderTLDRs() {
             const container = document.getElementById('tldr-content');

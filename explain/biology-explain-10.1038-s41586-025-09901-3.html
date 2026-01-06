@@ -5,81 +5,167 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sunyaev–Zeldovich detection of hot intracluster gas at redshift 4.3 | The Beakers</title>
     <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: #e8e8e8;
-            line-height: 1.8;
-            min-height: 100vh;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
         }
+
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)),
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%2300ff88" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            padding: 80px 20px;
             text-align: center;
-            border-bottom: 3px solid #22c55e;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
         }
+
         .hero h1 {
-            font-size: 2.2em;
-            background: linear-gradient(90deg, #00ff88, #00d4ff, #ff6b9d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            max-width: 900px;
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
-        .hero .subtitle { font-size: 1.2em; color: #aaa; max-width: 700px; margin: 0 auto; }
-        .meta-info { display: flex; justify-content: center; gap: 20px; margin-top: 25px; flex-wrap: wrap; }
-        .meta-badge { background: rgba(0,255,136,0.1); border: 1px solid #22c55e; padding: 8px 20px; border-radius: 20px; font-size: 0.9em; }
-        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-        .chapter { margin-bottom: 50px; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 35px; border-left: 4px solid #22c55e; }
-        .chapter-number { font-size: 0.85em; color: #22c55e; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; }
-        .chapter h2 { font-size: 1.8em; color: #fff; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .chapter p { margin-bottom: 18px; font-size: 1.05em; color: #ccc; }
-        .diagram-container {
-            background: rgba(0,0,0,0.3); border-radius: 15px; padding: 25px; margin: 25px 0;
-            overflow: visible; position: relative; transition: all 0.3s ease; cursor: zoom-in;
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
         }
-        .diagram-container:hover { transform: scale(1.05); z-index: 100; box-shadow: 0 15px 50px rgba(0,255,136,0.3); }
-        .diagram-container.expanded {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1);
-            width: 95vw; max-width: 1200px; max-height: 90vh; overflow: auto; z-index: 1001;
-            cursor: zoom-out; padding: 40px; background: rgba(15, 52, 96, 0.98); border: 2px solid #22c55e;
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
         }
-        .diagram-container.expanded:hover { transform: translate(-50%, -50%) scale(1); }
-        .mermaid { display: flex; justify-content: center; }
-        .diagram-hint { text-align: center; font-size: 0.8em; color: #666; margin-top: 10px; opacity: 0; transition: opacity 0.3s; }
-        .diagram-container:hover .diagram-hint { opacity: 1; }
-        .diagram-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; }
-        .diagram-overlay.active { display: block; }
-        .key-insight {
-            background: linear-gradient(135deg, #ff6b9d20, #ff6b9d10);
-            border-left: 4px solid #ff6b9d; padding: 20px 25px; margin: 25px 0; border-radius: 0 15px 15px 0;
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
         }
-        .key-insight::before { content: '💡 Key Insight'; display: block; color: #ff6b9d; font-weight: bold; margin-bottom: 10px; }
-        .curriculum-section {
-            background: linear-gradient(135deg, #134e4a 0%, #115e59 100%);
-            border-radius: 20px; padding: 35px; margin: 50px 0; border: 2px solid #22c55e;
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
         }
-        .curriculum-badge { background: #22c55e; color: #0f172a; font-size: 0.75rem; font-weight: bold; padding: 6px 14px; border-radius: 20px; text-transform: uppercase; }
-        .curriculum-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
-        .curriculum-title { font-size: 1.6em; color: #fff; margin: 0; }
-        .curriculum-intro { color: #94a3b8; font-size: 1.05em; margin-bottom: 25px; }
-        .course-card { background: rgba(0,0,0,0.3); border-radius: 15px; padding: 20px; margin-bottom: 15px; border-left: 4px solid #00d4ff; }
-        .course-code { font-size: 0.85em; color: #00d4ff; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-        .course-name { font-size: 1.2em; color: #fff; margin: 6px 0 12px 0; }
-        .course-connection { color: #cbd5e1; line-height: 1.6; font-size: 0.95em; }
-        .course-concepts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-        .concept-tag { background: rgba(0,212,255,0.2); border: 1px solid #00d4ff; color: #00d4ff; padding: 4px 12px; border-radius: 12px; font-size: 0.8em; }
-        footer { text-align: center; padding: 35px; background: rgba(0,0,0,0.3); margin-top: 50px; }
-        footer p { color: #666; font-size: 0.9em; margin-bottom: 8px; }
-        footer a { color: #22c55e; text-decoration: none; }
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 1.6em; }
-            .chapter { padding: 20px; }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.8rem; }
+            .scene h2 { font-size: 1.4rem; }
+            .container { padding: 2rem 1rem; }
         }
     </style>
 </head>
@@ -87,112 +173,152 @@
     <div class="hero">
         <h1>Sunyaev–Zeldovich detection of hot intracluster gas at redshift 4.3</h1>
         <p class="subtitle">Research explained for undergraduate students</p>
-        <div class="meta-info">
-            <span class="meta-badge">Biology</span>
-            <span class="meta-badge">Journal</span>
-            <span class="meta-badge">Explain</span>
-        </div>
+        <p class="meta">Journal | <a href="https://doi.org/10.1038/s41586-025-09901-3">DOI: 10.1038/s41586-025-09901-3</a></p>
     </div>
 
     <div class="container">
-        
-        <div class="chapter">
-            <div class="chapter-number">Chapter 1</div>
-            <h2>The Promise</h2>
-            <p>Imagine being able to study the universe in ways that have never been possible before. The Sunyaev-Zeldovich effect is a phenomenon that allows us to do just that, by detecting the hot gas that fills the space between galaxy clusters. This research promises to reveal new insights into the formation and evolution of these massive structures, shedding light on some of the biggest questions in cosmology.</p>
+        <a href="/biology.html" class="back-link">&larr; Back to Biology</a>
 
-            <div class="diagram-container">
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 8</span>
+            <h2>The Challenge</h2>
+            <div class="scene-text">
+                <p>Astronomers have been studying galaxy clusters for decades, but there's still much to learn about these massive structures in space.</p>
+                <p>One of the biggest mysteries is what happens to hot gas within galaxy clusters. This gas can make up a huge amount of mass, but it's invisible and difficult to study.</p>
+                <p>Scientists need to figure out how this hot gas affects the behavior of galaxy clusters, so they can better understand how these clusters form and evolve.</p>
+            </div>
+            <div class="diagram-box">
                 <div class="mermaid">
-                    flowchart LR
-    A[Start] --> B[Hot Gas] --> C[Clustering] --> D[Universe]
+flowchart LR
+  A --> B
                 </div>
-                <div class="diagram-hint">🔍 Click to enlarge</div>
             </div>
         </div>
-        <div class="chapter">
-            <div class="chapter-number">Chapter 2</div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 8</span>
+            <h2>The Hypothesis</h2>
+            <div class="scene-text">
+                <p>Researchers proposed a way to study this hot gas using a technique called Sunyaev-Zeldovich detection.</p>
+                <p>This method uses the fact that light passing through hot gas is affected by the motion of the gas. By studying the changed light, scientists can infer the presence and properties of the hot gas.</p>
+                <p>The team hoped that if they could detect this effect, it would give them a way to map out the distribution of hot gas within galaxy clusters.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+  A --> B
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 8</span>
+            <h2>The Experiment</h2>
+            <div class="scene-text">
+                <p>To test their hypothesis, the researchers used a powerful telescope to observe a distant galaxy cluster.</p>
+                <p>They measured the light passing through this cluster and compared it to the light from a nearby star. By doing so, they were able to detect any changes in the light caused by the hot gas.</p>
+                <p>The team repeated this process for several other galaxy clusters to ensure their results weren't just a fluke.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+  A --> B
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 8</span>
             <h2>The Method</h2>
-            <p>So, how do scientists detect this hot gas? It's actually quite simple. The Sunyaev-Zeldovich effect is a result of the way that light scatters off the hot electrons in the intracluster gas. When this light reaches us on Earth, it appears shifted towards the red end of the spectrum, allowing us to infer its presence. Researchers used powerful telescopes and sophisticated data analysis techniques to detect this shift and pinpoint the location of the hot gas.</p>
-
-            <div class="diagram-container">
+            <div class="scene-text">
+                <p>To conduct the experiment, the researchers used advanced computer algorithms and machine learning techniques.</p>
+                <p>These tools allowed them to quickly analyze large amounts of data from the telescope observations and identify patterns in the light that were caused by the hot gas.</p>
+                <p>The team also had to develop new software to simulate how the Sunyaev-Zeldovich effect would look for different types of galaxy clusters.</p>
+            </div>
+            <div class="diagram-box">
                 <div class="mermaid">
-                    flowchart TB
-    A[Telescope] --> B[Data Analysis] --> C[Spectrum Shift] --> D[Hot Gas Detection]
+flowchart LR
+  A --> B
                 </div>
-                <div class="diagram-hint">🔍 Click to enlarge</div>
             </div>
         </div>
-        <div class="chapter">
-            <div class="chapter-number">Chapter 3</div>
-            <h2>Key Innovation</h2>
-            <p>One of the key innovations in this research is the use of a new technique called 'stacking'. By combining data from multiple observations, scientists were able to create a more precise map of the hot gas distribution. This allowed them to detect even fainter signals and push the boundaries of what's possible with current technology.</p>
 
-            <div class="diagram-container">
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 8</span>
+            <h2>The Results</h2>
+            <div class="scene-text">
+                <p>After analyzing their data, the researchers found that they could detect hot gas within a galaxy cluster at a distance of about 4.3 billion light-years away.</p>
+                <p>This was a major breakthrough because it showed that the Sunyaev-Zeldovich detection method worked even for distant galaxies.</p>
+                <p>The team also found that the amount of hot gas they detected varied depending on the type of galaxy cluster they were studying.</p>
+            </div>
+            <div class="diagram-box">
                 <div class="mermaid">
-                    flowchart LR
-    A[Multiple Observations] --> B[Data Stacking] --> C[Mapped Distribution] --> D[Advancements]
+flowchart LR
+  A --> B
                 </div>
-                <div class="diagram-hint">🔍 Click to enlarge</div>
+            </div>
+            <div class="highlight-box">
+                <strong>Key Finding:</strong> This discovery changes how we understand the field.
             </div>
         </div>
-        <div class="chapter">
-            <div class="chapter-number">Chapter 4</div>
-            <h2>Results</h2>
-            <p>The results of this research are nothing short of exciting. The team detected the hot intracluster gas at a redshift of 4.3, which is an astonishing 13 billion light-years away! This means that we're seeing it as it existed just 400 million years after the Big Bang. The data also revealed new insights into the structure and evolution of these massive galaxy clusters.</p>
 
-            <div class="diagram-container">
+        <div class="scene">
+            <span class="scene-number">Scene 6 of 8</span>
+            <h2>The Explanation</h2>
+            <div class="scene-text">
+                <p>So how does the Sunyaev-Zeldovich effect work? When light passes through hot gas, it is affected by the motion of the gas. This causes the light to be scattered in different directions.</p>
+                <p>By measuring this scattering, scientists can infer the presence and properties of the hot gas. It's like trying to find a hidden object in a crowded room - you need to look for clues that indicate where the object is located.</p>
+                <p>In this case, the clues are tiny changes in the light that can be detected with powerful telescopes.</p>
+            </div>
+            <div class="diagram-box">
                 <div class="mermaid">
-                    flowchart TB
-    A[Redshift] --> B[13 Billion Light-Years] --> C[Looking Back in Time] --> D[Insights]
+flowchart LR
+  A --> B
                 </div>
-                <div class="diagram-hint">🔍 Click to enlarge</div>
             </div>
         </div>
-        <div class="chapter">
-            <div class="chapter-number">Chapter 5</div>
-            <h2>Road Ahead</h2>
-            <p>So what's next for this research? Scientists are eager to build on these findings and explore the properties of hot intracluster gas in even greater detail. Future studies may also aim to detect similar effects at higher redshifts, potentially shedding light on the early universe itself. The possibilities are endless, and it's an exciting time for cosmology research.</p>
 
-            <div class="diagram-container">
+        <div class="scene">
+            <span class="scene-number">Scene 7 of 8</span>
+            <h2>The Achievement</h2>
+            <div class="scene-text">
+                <p>By successfully detecting hot gas within a galaxy cluster at such great distances, the researchers have made a major contribution to our understanding of the universe.</p>
+                <p>Their work has opened up new possibilities for studying galaxy clusters and has given scientists a powerful tool for exploring the cosmos.</p>
+                <p>This achievement is especially significant because it shows that even with advanced technology, scientists can still make surprising discoveries.</p>
+            </div>
+            <div class="diagram-box">
                 <div class="mermaid">
-                    flowchart LR
-    A[Future Research] --> B[Higher Redshifts] --> C[Early Universe Insights] --> D[Uncharted Territory]
+flowchart LR
+  A --> B
                 </div>
-                <div class="diagram-hint">🔍 Click to enlarge</div>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="curriculum-section">
-            <div class="curriculum-header">
-                <span class="curriculum-badge">The Beakers</span>
-                <h2 class="curriculum-title">Curriculum Connection</h2>
+        <div class="scene">
+            <span class="scene-number">Scene 8 of 8</span>
+            <h2>The Implication</h2>
+            <div class="scene-text">
+                <p>So what does this mean for our understanding of the universe? It means that we now have a way to study galaxy clusters in ways that were previously impossible.</p>
+                <p>This technique can help us understand how galaxies form and evolve, which is crucial for understanding the history of the universe.</p>
+                <p>The implications of this research are vast and exciting - it's just the beginning of a new era of exploration and discovery.</p>
             </div>
-            <p class="curriculum-intro">See how concepts from your courses apply to this research.</p>
-            
-            <div class="course-card">
-                <div class="course-code">BIOL 101</div>
-                <div class="course-name">Intro Biology</div>
-                <p class="course-connection">This research directly applies cellular processes concepts you learn in class. The methods and findings demonstrate real-world applications of your coursework.</p>
-                <div class="course-concepts"><span class="concept-tag">kinetics</span><span class="concept-tag">diffusion</span></div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+  A --> B
+                </div>
             </div>
-            <div class="course-card">
-                <div class="course-code">BIOL 301</div>
-                <div class="course-name">Molecular Biology</div>
-                <p class="course-connection">This research directly applies molecular mechanisms concepts you learn in class. The methods and findings demonstrate real-world applications of your coursework.</p>
-                <div class="course-concepts"><span class="concept-tag">kinetics</span><span class="concept-tag">diffusion</span></div>
+            <div class="highlight-box">
+                <strong>The Takeaway:</strong> This research opens new possibilities for future work.
             </div>
         </div>
+
     </div>
 
     <footer>
-        <p>Source: <a href="https://doi.org/10.1038/s41586-025-09901-3">Journal</a></p>
-        <p>DOI: 10.1038/s41586-025-09901-3</p>
-        <p style="margin-top: 15px;">Created for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p>Explain article for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Diagrams generated with Mermaid.js</p>
     </footer>
-
-    <div class="diagram-overlay" id="diagramOverlay"></div>
 
     <script>
         mermaid.initialize({
@@ -201,36 +327,12 @@
             themeVariables: {
                 primaryColor: '#22c55e',
                 primaryTextColor: '#fff',
-                lineColor: '#00d4ff',
-                secondaryColor: '#16213e',
-                background: '#1a1a2e'
+                primaryBorderColor: '#22c55e',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
             }
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const overlay = document.getElementById('diagramOverlay');
-            document.querySelectorAll('.diagram-container').forEach(d => {
-                d.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    if (this.classList.contains('expanded')) {
-                        this.classList.remove('expanded');
-                        overlay.classList.remove('active');
-                    } else {
-                        this.classList.add('expanded');
-                        overlay.classList.add('active');
-                    }
-                });
-            });
-            overlay.addEventListener('click', () => {
-                document.querySelector('.diagram-container.expanded')?.classList.remove('expanded');
-                overlay.classList.remove('active');
-            });
-            document.addEventListener('keydown', e => {
-                if (e.key === 'Escape') {
-                    document.querySelector('.diagram-container.expanded')?.classList.remove('expanded');
-                    overlay.classList.remove('active');
-                }
-            });
         });
     </script>
 </body>
