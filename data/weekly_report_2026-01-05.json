@@ -1,0 +1,165 @@
+{
+  "week": "2026-01-05",
+  "subjects": {
+    "chemistry": {
+      "deep_candidate": {
+        "title": "Electrochemistry lurks beneath the surface of thermocatalytic hydrogenations",
+        "doi": "10.1038/s41557-025-02024-2",
+        "folder": "/storage/thebeakers/data/deep/chemistry",
+        "manifest": "/storage/thebeakers/data/deep/chemistry/manifest.json",
+        "pdf": null
+      },
+      "explain": [
+        {
+          "title": "Intralayer bidentate diammoniums for stable two-dimensional perovskites",
+          "doi": "10.1038/s41557-025-02038-w",
+          "file": "/storage/thebeakers/deepdive/chemistry-10-1038-s41557-025-02038-w.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Direct enantioselective C(<i>sp</i><sup>3</sup>)\u2212H coupling of <i>N</i>-alkyl anilines via metallaphotoredox catalysis",
+          "doi": "10.1038/s41557-025-02018-0",
+          "file": "/storage/thebeakers/deepdive/chemistry-10-1038-s41557-025-02018-0.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Unravelling gas evolution mechanisms in battery electrode materials",
+          "doi": "10.1038/s41557-025-02016-2",
+          "file": "/storage/thebeakers/deepdive/chemistry-10-1038-s41557-025-02016-2.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Protecting skins of Au\u2013Cl can stabilize Au nanostructures",
+          "doi": "10.1038/s41557-025-02027-z",
+          "file": "/storage/thebeakers/deepdive/chemistry-10-1038-s41557-025-02027-z.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Bringing biocatalysis into teaching labs",
+          "doi": "10.1038/s41557-025-02032-2",
+          "file": "/storage/thebeakers/deepdive/chemistry-10-1038-s41557-025-02032-2.html",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ],
+      "digest": [
+        {
+          "title": "Biomimetic catalysis enables asymmetric Atherton\u2013Todd reaction",
+          "doi": "10.1038/s41557-025-02030-4",
+          "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02030-4\">doi:10.1038/s41557-025-02030-4</a></p>Chiral phosphorus(V) compounds are vital in t...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Global profiling of arginine reactivity and ligandability in the human proteome",
+          "doi": "10.1038/s41557-025-02012-6",
+          "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02012-6\">doi:10.1038/s41557-025-02012-6</a></p>The reactivity and ligandability of arginine ...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Palladium-catalyzed asymmetric migratory diarylation of unactivated directing-group-free internal alkenes",
+          "doi": "10.1038/s41467-025-68006-7",
+          "tldr": "<p>Nature Communications, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41467-025-68006-7\">doi:10.1038/s41467-025-68006-7</a></p>Enantioselective dicarbofunctionalizatio...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "De novo design of small molecule\u2013regulated protein oligomers",
+          "doi": "10.1126/science.ady6017?af=R",
+          "tldr": "Science, Volume 391, Issue 6780, January 2026. <br />",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "Molecular mechanism of substrate transport by human peroxisomal ABCD3",
+          "doi": "10.1073/pnas.2513928122?af=R",
+          "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificancePeroxisomes are involved in essential cellular metabolic processes that include fatty acid oxida...",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "[ASAP] Living Cell Surfacome Lysine Footprinting (LiFT) Captures Virus-Induced Conformational Dynamics and Uncovers Influenza A Virus Host Factors",
+          "doi": "10.1021/jacs.5c14196",
+          "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c14196/asset/images/medium/ja5c14196_0006.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "[ASAP] Development and Mechanism of Rh-Catalyzed Keto-(5 + 1 + 2) Reaction of Keto-Vinylcyclopropanes and CO, and Answering Why Rh-Catalyzed Keto-(5 + 2) Reaction of Keto-Vinylcyclopropanes Fails",
+          "doi": "10.1021/jacs.5c15273",
+          "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15273/asset/images/medium/ja5c15273_0009.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "[ASAP] Phosphonium Ionic Imine Cage with an Uncommon Tri24Di6 Topology for Selective Capture of Propyne in Propyne/Propylene Separation",
+          "doi": "10.1021/jacs.5c15864",
+          "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15864/asset/images/medium/ja5c15864_0005.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "[ASAP] Mechanistic Study of Cycloisomerization of 1,7-Allenenes and Guidance to Develop a [2 + 1 + 2] Reaction of 1,7-Allenenes with CO for Accessing cis- and trans-5/5 Skeletons",
+          "doi": "10.1021/jacs.5c17013",
+          "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c17013/asset/images/medium/ja5c17013_0014.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        },
+        {
+          "title": "[ASAP] Pnictogen Interaction Promotes Nitric Oxide (NO) Release via the NO2 Roaming Mechanism in 2-Nitropyridine",
+          "doi": "10.1021/jacs.5c20000",
+          "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c20000/asset/images/medium/ja5c20000_0004.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+          "course_hooks": [
+            "kinetics",
+            "diffusion"
+          ]
+        }
+      ]
+    }
+  },
+  "education": {
+    "type": "teaching_move",
+    "title": "Reversing the Order of Operations",
+    "misconception": "Students often incorrectly apply the order of operations (PEMDAS) when solving equations.",
+    "why_wrong": "This leads to errors in calculations and can be frustrating for students.",
+    "correct_model": "The correct application of PEMDAS: Parentheses, Exponents, Multiplication and Division (from left to right), Addition and Subtraction (from left to right).",
+    "classroom_move": "Write a simple equation on the board and ask students to solve it using the incorrect order of operations. Then, reveal the correct solution and have students work in pairs to solve another equation with the correct application of PEMDAS.",
+    "exit_questions": [
+      "What is the first step in applying PEMDAS?",
+      "Can you think of a scenario where the order of operations might not matter?"
+    ]
+  }
+}

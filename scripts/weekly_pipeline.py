@@ -46,6 +46,53 @@ SUBJECTS = {
     "agriculture": ["agriculture", "agronomy", "crop science"]
 }
 
+# High-impact journal RSS feeds (editors picks, most read, highlights)
+JOURNAL_FEEDS = {
+    # Nature family
+    "nature_highlights": "https://www.nature.com/nature.rss",
+    "nature_chem": "https://www.nature.com/nchem.rss",
+    "nature_phys": "https://www.nature.com/nphys.rss",
+    "nature_bio": "https://www.nature.com/nbt.rss",
+    "nature_comm": "https://www.nature.com/ncomms.rss",
+    "nat_machine_intel": "https://www.nature.com/natmachintell.rss",
+    # Science/AAAS
+    "science": "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=science",
+    "science_advances": "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=sciadv",
+    "science_robotics": "https://www.science.org/action/showFeed?type=etoc&feed=rss&jc=scirobotics",
+    # PNAS
+    "pnas": "https://www.pnas.org/rss/current.xml",
+    # Cell
+    "cell": "https://www.cell.com/cell/inpress.rss",
+    "cell_reports": "https://www.cell.com/cell-reports/inpress.rss",
+    # Chemistry specific
+    "jacs": "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=jacsat",
+    "angew_chem": "https://onlinelibrary.wiley.com/feed/15213773/most-recent",
+    "chem_rev": "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=chreay",
+    # Physics
+    "phys_rev_lett": "https://feeds.aps.org/rss/recent/prl.xml",
+    "phys_rev_x": "https://feeds.aps.org/rss/recent/prx.xml",
+    # Engineering
+    "ieee_spectrum": "https://spectrum.ieee.org/feeds/feed.rss",
+    # Math
+    "quanta": "https://api.quantamagazine.org/feed/",
+    # Agriculture/Bio
+    "plant_cell": "https://academic.oup.com/rss/site_5294/3092.xml",
+}
+
+# Map feeds to subjects
+FEED_SUBJECT_MAP = {
+    "nature_chem": "chemistry", "jacs": "chemistry", "angew_chem": "chemistry", "chem_rev": "chemistry",
+    "nature_phys": "physics", "phys_rev_lett": "physics", "phys_rev_x": "physics",
+    "nature_bio": "biology", "cell": "biology", "cell_reports": "biology", "plant_cell": "biology",
+    "quanta": "mathematics",
+    "ieee_spectrum": "engineering", "science_robotics": "engineering",
+    "nat_machine_intel": "ai",
+    "plant_cell": "agriculture",
+    # General feeds map to multiple
+    "nature_highlights": "all", "nature_comm": "all", "science": "all",
+    "science_advances": "all", "pnas": "all",
+}
+
 @dataclass
 class Article:
     id: str
@@ -67,6 +114,119 @@ class Article:
     route: str = ""  # indepth/digest/blurb/reject
     course_hooks: List[str] = None
     skill_hooks: List[str] = None
+
+import feedparser
+import re
+
+DOI_PATTERN = re.compile(r'\b10\.\d{4,9}/[^\s<>"]+')
+
+def fetch_journal_feeds(target_subject: str = None) -> List[Article]:
+    """Fetch articles from high-impact journal RSS feeds"""
+    articles = []
+
+    for feed_name, feed_url in JOURNAL_FEEDS.items():
+        feed_subject = FEED_SUBJECT_MAP.get(feed_name, "all")
+
+        # Skip if we're targeting a specific subject and this doesn't match
+        if target_subject and feed_subject != "all" and feed_subject != target_subject:
+            continue
+
+        print(f"   📡 {feed_name}...", end=" ")
+        try:
+            feed = feedparser.parse(feed_url)
+            count = 0
+
+            for entry in feed.entries[:15]:  # Top 15 per feed
+                title = entry.get("title", "").strip()
+                link = entry.get("link", "")
+                summary = entry.get("summary", entry.get("description", ""))[:1000]
+
+                # Extract DOI from link or content
+                doi = None
+                doi_match = DOI_PATTERN.search(link + " " + summary)
+                if doi_match:
+                    doi = doi_match.group().rstrip(".,;)")
+
+                if not doi and "doi.org" in link:
+                    doi = link.split("doi.org/")[-1]
+
+                if not title:
+                    continue
+
+                # Determine subject
+                subj = feed_subject if feed_subject != "all" else guess_subject(title + " " + summary)
+
+                articles.append(Article(
+                    id=f"rss:{feed_name}:{hash(title) % 100000}",
+                    title=title,
+                    abstract=summary,
+                    doi=doi or "",
+                    url=link,
+                    pdf_url=None,  # Will lookup via Unpaywall
+                    venue=feed_name.replace("_", " ").title(),
+                    published=entry.get("published", "")[:10],
+                    authors=[],
+                    subject=subj
+                ))
+                count += 1
+
+            print(f"{count} articles")
+        except Exception as e:
+            print(f"error: {e}")
+
+    return articles
+
+
+def guess_subject(text: str) -> str:
+    """Guess subject from text content"""
+    text = text.lower()
+    if any(w in text for w in ["chemical", "molecule", "synthesis", "catalyst", "reaction"]):
+        return "chemistry"
+    if any(w in text for w in ["quantum", "particle", "photon", "laser", "magnetic"]):
+        return "physics"
+    if any(w in text for w in ["cell", "gene", "protein", "dna", "rna", "genome", "cancer"]):
+        return "biology"
+    if any(w in text for w in ["neural", "machine learning", "ai ", "deep learning", "llm"]):
+        return "ai"
+    if any(w in text for w in ["robot", "engineer", "material", "device", "sensor"]):
+        return "engineering"
+    if any(w in text for w in ["theorem", "proof", "algebra", "topology", "equation"]):
+        return "mathematics"
+    if any(w in text for w in ["crop", "plant", "soil", "farm", "seed", "yield"]):
+        return "agriculture"
+    return "biology"  # Default
+
+
+def lookup_pdf_unpaywall(doi: str) -> Optional[str]:
+    """Get PDF URL from Unpaywall"""
+    if not doi:
+        return None
+    try:
+        url = f"https://api.unpaywall.org/v2/{doi}?email={OPENALEX_EMAIL}"
+        resp = requests.get(url, timeout=15)
+        if resp.status_code == 200:
+            data = resp.json()
+            if data.get("is_oa"):
+                best = data.get("best_oa_location") or {}
+                return best.get("url_for_pdf") or best.get("url")
+    except:
+        pass
+    return None
+
+
+def enrich_with_pdf(articles: List[Article]) -> List[Article]:
+    """Add PDF URLs via Unpaywall for articles with DOIs"""
+    print(f"   🔍 Looking up PDFs for {len(articles)} articles...")
+    found = 0
+    for article in articles:
+        if article.doi and not article.pdf_url:
+            pdf = lookup_pdf_unpaywall(article.doi)
+            if pdf:
+                article.pdf_url = pdf
+                found += 1
+    print(f"   ✅ Found {found} PDFs")
+    return articles
+
 
 def ollama_score(article: Article) -> Dict:
     """Score article using rubric via Ollama"""
@@ -659,10 +819,31 @@ def run_weekly(subjects: List[str] = None, days: int = 7):
         print(f"{'='*60}")
         concepts = SUBJECTS.get(subject, [subject])
 
-        # Fetch more articles to have good selection
-        print(f"   Fetching from OpenAlex...")
-        articles = fetch_openalex(subject, concepts, days, limit=100)
-        print(f"   Found {len(articles)} OA articles")
+        # Fetch from multiple sources - cast a wide net!
+        print(f"\n   📥 COLLECTING ARTICLES")
+
+        # 1. High-impact journal RSS feeds (Nature, Science, Cell, etc.)
+        print(f"   From journal RSS feeds:")
+        rss_articles = fetch_journal_feeds(subject)
+        rss_articles = [a for a in rss_articles if a.subject == subject]
+
+        # 2. OpenAlex OA articles
+        print(f"   From OpenAlex OA...")
+        oa_articles = fetch_openalex(subject, concepts, days, limit=50)
+
+        # Combine and dedupe by title
+        seen_titles = set()
+        articles = []
+        for a in rss_articles + oa_articles:
+            title_key = a.title.lower()[:50]
+            if title_key not in seen_titles:
+                seen_titles.add(title_key)
+                articles.append(a)
+
+        print(f"   📊 Total unique: {len(articles)} articles")
+
+        # Enrich with PDF URLs via Unpaywall
+        articles = enrich_with_pdf([a for a in articles if a.doi])
 
         if not articles:
             continue

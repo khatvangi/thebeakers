@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rss:nature_chem:60456",
+    "title": "Biomimetic catalysis enables asymmetric Atherton\u2013Todd reaction",
+    "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02030-4\">doi:10.1038/s41557-025-02030-4</a></p>Chiral phosphorus(V) compounds are vital in t...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41557-025-02030-4",
+    "venue": "Nature Chem",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:nature_chem:12659",
+    "title": "Global profiling of arginine reactivity and ligandability in the human proteome",
+    "tldr": "<p>Nature Chemistry, Published online: 02 January 2026; <a href=\"https://www.nature.com/articles/s41557-025-02012-6\">doi:10.1038/s41557-025-02012-6</a></p>The reactivity and ligandability of arginine ...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41557-025-02012-6",
+    "venue": "Nature Chem",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:nature_comm:31581",
+    "title": "Palladium-catalyzed asymmetric migratory diarylation of unactivated directing-group-free internal alkenes",
+    "tldr": "<p>Nature Communications, Published online: 05 January 2026; <a href=\"https://www.nature.com/articles/s41467-025-68006-7\">doi:10.1038/s41467-025-68006-7</a></p>Enantioselective dicarbofunctionalizatio...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.nature.com/articles/s41467-025-68006-7",
+    "venue": "Nature Comm",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:science:24521",
+    "title": "De novo design of small molecule\u2013regulated protein oligomers",
+    "tldr": "Science, Volume 391, Issue 6780, January 2026. <br />",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.science.org/doi/abs/10.1126/science.ady6017?af=R",
+    "venue": "Science",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:pnas:45874",
+    "title": "Molecular mechanism of substrate transport by human peroxisomal ABCD3",
+    "tldr": "Proceedings of the National Academy of Sciences, Volume 122, Issue 52, December 2025. <br />SignificancePeroxisomes are involved in essential cellular metabolic processes that include fatty acid oxida...",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "https://www.pnas.org/doi/abs/10.1073/pnas.2513928122?af=R",
+    "venue": "Pnas",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:jacs:34415",
+    "title": "[ASAP] Living Cell Surfacome Lysine Footprinting (LiFT) Captures Virus-Induced Conformational Dynamics and Uncovers Influenza A Virus Host Factors",
+    "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c14196/asset/images/medium/ja5c14196_0006.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://dx.doi.org/10.1021/jacs.5c14196",
+    "venue": "Jacs",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:jacs:8292",
+    "title": "[ASAP] Development and Mechanism of Rh-Catalyzed Keto-(5 + 1 + 2) Reaction of Keto-Vinylcyclopropanes and CO, and Answering Why Rh-Catalyzed Keto-(5 + 2) Reaction of Keto-Vinylcyclopropanes Fails",
+    "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15273/asset/images/medium/ja5c15273_0009.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://dx.doi.org/10.1021/jacs.5c15273",
+    "venue": "Jacs",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:jacs:69945",
+    "title": "[ASAP] Phosphonium Ionic Imine Cage with an Uncommon Tri24Di6 Topology for Selective Capture of Propyne in Propyne/Propylene Separation",
+    "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c15864/asset/images/medium/ja5c15864_0005.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://dx.doi.org/10.1021/jacs.5c15864",
+    "venue": "Jacs",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:jacs:88518",
+    "title": "[ASAP] Mechanistic Study of Cycloisomerization of 1,7-Allenenes and Guidance to Develop a [2 + 1 + 2] Reaction of 1,7-Allenenes with CO for Accessing cis- and trans-5/5 Skeletons",
+    "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c17013/asset/images/medium/ja5c17013_0014.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://dx.doi.org/10.1021/jacs.5c17013",
+    "venue": "Jacs",
+    "subject": "chemistry"
+  },
+  {
+    "id": "rss:jacs:13815",
+    "title": "[ASAP] Pnictogen Interaction Promotes Nitric Oxide (NO) Release via the NO2 Roaming Mechanism in 2-Nitropyridine",
+    "tldr": "<p><img alt=\"TOC Graphic\" src=\"https://pubs.acs.org/cms/10.1021/jacs.5c20000/asset/images/medium/ja5c20000_0004.gif\" /></p><div><cite>Journal of the American Chemical Society</cite></div><div>DOI: 10....",
+    "course_hooks": [
+      "kinetics",
+      "diffusion"
+    ],
+    "url": "http://dx.doi.org/10.1021/jacs.5c20000",
+    "venue": "Jacs",
+    "subject": "chemistry"
+  }
+]
