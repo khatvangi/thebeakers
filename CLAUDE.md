@@ -22,8 +22,8 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 | Purpose | File | Notes |
 |---------|------|-------|
 | Deep Dive | `deepdive/solar-cell-bromine.html` | Full NotebookLM treatment |
-| Visual Story | `/storage/napkin/examples/solar-cell/solar_cell_visual_story_v2.html` | Lucide icons, visual cards |
-| Explain Article | Use `generate_award_html()` in `scripts/weekly_pipeline.py` | 6 visual cards with icons |
+| Explain Article | `deepdive/legged-locomotion-story.html` | Chapters + Mermaid diagrams |
+| Explain Prompt | `/storage/napkin/prompts/explain-story.txt` | **USE THIS PROMPT** |
 
 ### Canonical Scripts (USE THESE)
 | Purpose | Script | Command |
@@ -34,20 +34,32 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 
 ### Rules
 1. **NEVER** create new HTML templates - copy existing ones
-2. **NEVER** change the visual card structure without explicit permission
-3. **NEVER** remove Lucide icons or change icon names
-4. **ALWAYS** use `generate_award_html()` for explain articles
+2. **NEVER** change the chapter structure without explicit permission
+3. **ALWAYS** use `/storage/napkin/prompts/explain-story.txt` prompt for explain articles
+4. **ALWAYS** copy styling from `deepdive/legged-locomotion-story.html`
 5. **ALWAYS** check existing code before writing new code
 6. When in doubt, ask: "Is there existing code for this?"
 
-### Explain Article Structure (6 Cards)
-Each explain article has exactly 6 visual cards with these Lucide icons:
-1. **The Discovery** - `lightbulb` icon (#f59e0b orange)
-2. **Why It Matters** - `target` icon (#10b981 green)
-3. **How It Works** - `git-branch` icon (#3b82f6 blue)
-4. **Connect to Coursework** - `graduation-cap` icon (#8b5cf6 purple)
-5. **Limitations** - `alert-triangle` icon (#ef4444 red)
-6. **Key Takeaway** - `bookmark` icon (#06b6d4 cyan)
+### Explain Article Structure (Chapter-Based)
+Each explain article has 5-7 chapters with Mermaid diagrams. See `/storage/napkin/prompts/explain-story.txt`.
+
+**Chapter Flow:**
+1. **The Problem/Promise** - Why this matters
+2. **Background/Evolution** - Historical context
+3. **The Method** - How it works (+ Mermaid diagram)
+4. **Key Innovation** - What's new (+ highlight-box)
+5. **Results** - What they found (+ key-insight)
+6. **Implications** - Why it matters
+7. **Road Ahead** - Future directions
+
+**Visual Elements:**
+- Mermaid diagrams (2-3 per article)
+- Key insight boxes (pink accent)
+- Highlight boxes (green/cyan gradient)
+- Comparison grids (for comparing methods)
+- Timeline (for historical evolution)
+
+**Reference:** `deepdive/legged-locomotion-story.html`
 
 ## Content Strategy
 
