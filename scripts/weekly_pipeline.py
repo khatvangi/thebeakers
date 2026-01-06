@@ -625,13 +625,23 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
 </html>'''
 
 
-def run_weekly(subjects: List[str] = None, days: int = 7, limit_per_subject: int = 30):
-    """Run the full weekly pipeline"""
+def run_weekly(subjects: List[str] = None, days: int = 7):
+    """
+    Run the full weekly pipeline
+
+    Per subject:
+    - 1 Deep candidate (for NotebookLM - manual)
+    - 5 Explain (automated detailed articles)
+    - 10 Digest (automated TL;DRs)
+
+    Plus 1 Education highlight per week
+    """
     subjects = subjects or list(SUBJECTS.keys())
 
     print(f"🧪 The Beakers Weekly Pipeline")
     print(f"   Subjects: {', '.join(subjects)}")
     print(f"   Lookback: {days} days")
+    print(f"\n   Output per subject: 1 Deep (manual) | 5 Explain | 10 Digest")
     print()
 
     # Ensure directories exist
@@ -639,27 +649,27 @@ def run_weekly(subjects: List[str] = None, days: int = 7, limit_per_subject: int
         d.mkdir(parents=True, exist_ok=True)
 
     week_of = datetime.now().strftime("%Y-%m-%d")
-    all_blurbs = []
+    weekly_report = {"week": week_of, "subjects": {}}
+    all_digests = []
 
     for subject in subjects:
-        print(f"\n📚 {subject.upper()}")
+        print(f"\n{'='*60}")
+        print(f"📚 {subject.upper()}")
+        print(f"{'='*60}")
         concepts = SUBJECTS.get(subject, [subject])
 
-        # Fetch articles
+        # Fetch more articles to have good selection
         print(f"   Fetching from OpenAlex...")
-        articles = fetch_openalex(subject, concepts, days, limit_per_subject)
+        articles = fetch_openalex(subject, concepts, days, limit=100)
         print(f"   Found {len(articles)} OA articles")
 
         if not articles:
             continue
 
-        # Score and route
-        indepth_candidates = []
-        digest_candidates = []
-        blurb_candidates = []
-
-        for i, article in enumerate(articles[:20]):  # Limit scoring
-            print(f"   Scoring {i+1}/{min(len(articles), 20)}: {article.title[:50]}...")
+        # Score all articles
+        scored = []
+        for i, article in enumerate(articles[:40]):  # Score top 40
+            print(f"   Scoring {i+1}/40: {article.title[:45]}...", end=" ")
 
             scores = ollama_score(article)
             article.S = scores.get("S", 0)
@@ -669,56 +679,175 @@ def run_weekly(subjects: List[str] = None, days: int = 7, limit_per_subject: int
             article.H = scores.get("H", 5)
             article.course_hooks = scores.get("course_hooks", [])
             article.skill_hooks = scores.get("skill_hooks", [])
-            article.route = route_article(article)
 
-            if article.route == "indepth":
-                indepth_candidates.append(article)
-            elif article.route == "digest":
-                digest_candidates.append(article)
-            elif article.route == "blurb":
-                blurb_candidates.append(article)
+            # Calculate composite score
+            composite = (article.S + article.E + article.T + article.M) - article.H
+            print(f"[{composite}]")
+            scored.append((composite, article))
 
-            print(f"      → {article.route} (S={article.S} E={article.E} T={article.T} M={article.M} H={article.H})")
+        # Sort by composite score
+        scored.sort(key=lambda x: x[0], reverse=True)
 
-        # Generate content
-        print(f"\n   Generating content...")
+        # Route: Top 1 = Deep candidate, Next 5 = Explain, Next 10 = Digest
+        deep_candidate = scored[0][1] if len(scored) > 0 else None
+        explain_articles = [a for _, a in scored[1:6]]  # 5 explain
+        digest_articles = [a for _, a in scored[6:16]]  # 10 digest
 
-        # 1 In-Depth (best candidate)
-        if indepth_candidates:
-            best = max(indepth_candidates, key=lambda a: a.S + a.E + a.T + a.M - a.H)
-            print(f"   📝 In-Depth: {best.title[:50]}...")
-            pdf_path = download_pdf(best)
-            output = generate_indepth(best, pdf_path)
-            print(f"      → {output}")
+        subject_report = {
+            "deep_candidate": None,
+            "explain": [],
+            "digest": []
+        }
 
-        # 3-5 Digest
-        for article in digest_candidates[:5]:
-            print(f"   📊 Digest: {article.title[:50]}...")
-            output = generate_digest(article)
-            print(f"      → {output}")
+        # === DEEP CANDIDATE (for NotebookLM - manual) ===
+        if deep_candidate:
+            print(f"\n   🎯 DEEP CANDIDATE (for NotebookLM):")
+            print(f"      Title: {deep_candidate.title}")
+            print(f"      DOI: {deep_candidate.doi}")
+            print(f"      PDF: {deep_candidate.pdf_url or 'Not available'}")
+            print(f"      Score: S={deep_candidate.S} E={deep_candidate.E} T={deep_candidate.T} M={deep_candidate.M} H={deep_candidate.H}")
 
-        # Blurbs (collect for index)
-        for article in blurb_candidates[:15]:
-            all_blurbs.append(generate_blurb(article))
+            # Download PDF for NotebookLM
+            pdf_path = download_pdf(deep_candidate)
+            if pdf_path:
+                print(f"      📥 PDF saved: {pdf_path}")
 
-        print(f"\n   ✅ {subject}: {len(indepth_candidates)} in-depth, {len(digest_candidates)} digest, {len(blurb_candidates)} blurbs")
+            subject_report["deep_candidate"] = {
+                "title": deep_candidate.title,
+                "doi": deep_candidate.doi,
+                "url": deep_candidate.url,
+                "pdf_url": deep_candidate.pdf_url,
+                "pdf_local": str(pdf_path) if pdf_path else None,
+                "scores": {"S": deep_candidate.S, "E": deep_candidate.E, "T": deep_candidate.T, "M": deep_candidate.M, "H": deep_candidate.H},
+                "course_hooks": deep_candidate.course_hooks
+            }
 
-    # Save blurbs index
-    blurbs_path = DATA_DIR / f"blurbs_{week_of}.json"
-    with open(blurbs_path, "w") as f:
-        json.dump(all_blurbs, f, indent=2)
-    print(f"\n📋 Saved {len(all_blurbs)} blurbs → {blurbs_path}")
+        # === EXPLAIN (5 automated detailed articles) ===
+        print(f"\n   📝 EXPLAIN (5 detailed articles):")
+        for i, article in enumerate(explain_articles, 1):
+            print(f"      {i}. {article.title[:50]}...")
+            output = generate_indepth(article, None)
+            print(f"         → {output}")
+            subject_report["explain"].append({
+                "title": article.title,
+                "doi": article.doi,
+                "file": output,
+                "course_hooks": article.course_hooks
+            })
 
-    print("\n🎉 Pipeline complete!")
-    return True
+        # === DIGEST (10 TL;DRs) ===
+        print(f"\n   📋 DIGEST (10 TL;DRs):")
+        for i, article in enumerate(digest_articles, 1):
+            print(f"      {i}. {article.title[:50]}...")
+            digest_data = generate_blurb(article)
+            digest_data["subject"] = subject
+            all_digests.append(digest_data)
+            subject_report["digest"].append({
+                "title": article.title,
+                "doi": article.doi,
+                "tldr": digest_data["tldr"],
+                "course_hooks": article.course_hooks
+            })
+
+        weekly_report["subjects"][subject] = subject_report
+        print(f"\n   ✅ {subject}: 1 deep candidate, {len(explain_articles)} explain, {len(digest_articles)} digest")
+
+    # === EDUCATION HIGHLIGHT (1 per week) ===
+    print(f"\n{'='*60}")
+    print(f"🎓 EDUCATION HIGHLIGHT")
+    print(f"{'='*60}")
+    edu_article = generate_education_highlight()
+    weekly_report["education"] = edu_article
+
+    # Save weekly report
+    report_path = DATA_DIR / f"weekly_report_{week_of}.json"
+    with open(report_path, "w") as f:
+        json.dump(weekly_report, f, indent=2)
+    print(f"\n📊 Weekly report → {report_path}")
+
+    # Save all digests
+    digests_path = DATA_DIR / f"digests_{week_of}.json"
+    with open(digests_path, "w") as f:
+        json.dump(all_digests, f, indent=2)
+    print(f"📋 All digests ({len(all_digests)}) → {digests_path}")
+
+    # Print summary for NotebookLM work
+    print(f"\n{'='*60}")
+    print(f"📌 DEEP CANDIDATES FOR NOTEBOOKLM:")
+    print(f"{'='*60}")
+    for subj, data in weekly_report["subjects"].items():
+        if data.get("deep_candidate"):
+            dc = data["deep_candidate"]
+            print(f"\n   [{subj.upper()}]")
+            print(f"   Title: {dc['title']}")
+            print(f"   PDF: {dc.get('pdf_local') or dc.get('pdf_url') or 'Find manually'}")
+
+    print(f"\n🎉 Pipeline complete!")
+    return weekly_report
+
+
+def generate_education_highlight() -> Dict:
+    """Generate weekly education highlight - a teaching move or misconception killer"""
+    prompt = """Generate an education highlight for STEM undergrads.
+
+Pick ONE of these formats:
+1. MISCONCEPTION KILLER: A common wrong belief and how to fix it
+2. TEACHING MOVE: A technique that makes a hard concept click
+3. SKILL BUILDER: A practice that improves scientific thinking
+
+Respond in JSON:
+{
+    "type": "misconception|teaching_move|skill",
+    "title": "Short catchy title",
+    "misconception": "What students wrongly believe (if applicable)",
+    "why_wrong": "Why it's wrong",
+    "correct_model": "The right way to think about it",
+    "classroom_move": "What to do in 10 minutes",
+    "exit_questions": ["Question 1?", "Question 2?"]
+}
+"""
+
+    try:
+        resp = requests.post(f"{OLLAMA_URL}/api/generate", json={
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False
+        }, timeout=120)
+
+        text = resp.json().get("response", "")
+        import re
+        match = re.search(r'\{[^{}]+\}', text, re.DOTALL)
+        if match:
+            return json.loads(match.group())
+    except Exception as e:
+        print(f"   Education highlight error: {e}")
+
+    return {
+        "type": "teaching_move",
+        "title": "Order of Magnitude Estimation",
+        "classroom_move": "Have students estimate before calculating",
+        "exit_questions": ["Is 10^6 closer to a million or billion?", "Estimate the number of cells in your body"]
+    }
 
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="The Beakers Weekly Pipeline")
-    parser.add_argument("--subjects", nargs="+", help="Subjects to process")
-    parser.add_argument("--days", type=int, default=7, help="Lookback days")
-    parser.add_argument("--limit", type=int, default=30, help="Articles per subject")
+    parser.add_argument("--subjects", nargs="+", help="Subjects to process (default: all)")
+    parser.add_argument("--days", type=int, default=7, help="Lookback days (default: 7)")
     args = parser.parse_args()
 
-    run_weekly(args.subjects, args.days, args.limit)
+    print("""
+╔══════════════════════════════════════════════════════════════╗
+║           THE BEAKERS - WEEKLY CONTENT PIPELINE              ║
+╠══════════════════════════════════════════════════════════════╣
+║  Per Subject:                                                ║
+║    • 1 Deep candidate (YOU process with NotebookLM)          ║
+║    • 5 Explain articles (automated)                          ║
+║    • 10 Digest TL;DRs (automated)                            ║
+║                                                              ║
+║  Plus: 1 Education highlight per week                        ║
+╚══════════════════════════════════════════════════════════════╝
+    """)
+
+    run_weekly(args.subjects, args.days)
