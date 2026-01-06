@@ -230,8 +230,8 @@
         <div class="hero-stats">
             
             <div class="hero-stat">
-                <div class="value">1e-06</div>
-                <div class="label">error_bound</div>
+                <div class="value">1</div>
+                <div class="label">problem</div>
             </div>
         </div>
     </div>
@@ -245,13 +245,13 @@
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #06b6d4;">INTRO</span>
-                    <h2>The Challenge of Mean Curvature Flow</h2>
+                    <h2>The Challenge</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">Mean curvature flow is a fundamental problem in mathematics and physics, but solving it analytically is difficult. Researchers need new methods to approximate solutions.</p>
+                    <p class="scene-content">We're trying to solve a complex problem in mathematics, specifically in the field of level set equations and mean curvature flow. Our goal is to approximate solutions using a finite difference scheme.</p>
                     
                 </div>
                 
@@ -261,21 +261,21 @@
         <div class="scene-section">
             <div class="section-header">
                 <div class="icon-box" style="background: linear-gradient(135deg, #3b82f6, #3b82f688);">
-                    <i data-lucide="flask-conical"></i>
+                    <i data-lucide="sun"></i>
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #3b82f6;">BACKGROUND</span>
-                    <h2>A Proposed Method: Crandall & Lions' Scheme</h2>
+                    <h2>The Current Method</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">In 1996, researchers Crandall and Lions proposed a finite difference scheme to approximate level set solutions. The scheme is monotone and consistent.</p>
+                    <p class="scene-content">A finite difference scheme was proposed by Crandall & Lions in 1996, but we need to analyze its performance and accuracy.</p>
                     <div class="stat-grid">
                 <div class="stat-item">
-                    <div class="value">Crandall-Lions</div>
-                    <div class="label">scheme_name</div>
+                    <div class="value">1</div>
+                    <div class="label">scheme</div>
                 </div></div>
                 </div>
                 
@@ -285,20 +285,20 @@
         <div class="scene-section">
             <div class="section-header">
                 <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
-                    <i data-lucide="chart"></i>
+                    <i data-lucide="zap"></i>
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
-                    <h2>Analyzing the Scheme's Performance</h2>
+                    <h2>The Goal</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">To analyze the scheme's performance, researchers derived an L[infin]-error bound. This shows how well the numerical solution approximates the viscosity solution.</p>
+                    <p class="scene-content">We want to derive an L[infin]-error bound between the numerical solution and the viscosity solution, which will help us understand the accuracy of our method.</p>
                     <div class="stat-grid">
                 <div class="stat-item">
-                    <div class="value">1e-06</div>
+                    <div class="value">0.14</div>
                     <div class="label">error_bound</div>
                 </div></div>
                 </div>
@@ -309,21 +309,45 @@
         <div class="scene-section">
             <div class="section-header">
                 <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
-                    <i data-lucide="spectrum"></i>
+                    <i data-lucide="flask-conical"></i>
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
-                    <h2>The Role of Regularization Parameter</h2>
+                    <h2>The Derivation</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">The regularization parameter plays a crucial role in the scheme's performance. Researchers need to carefully choose its value.</p>
+                    <p class="scene-content">We'll use mathematical analysis and computation to derive the L[infin]-error bound, which will involve relating space and time step sizes to the regularization parameter.</p>
                     <div class="stat-grid">
                 <div class="stat-item">
-                    <div class="value">[0, 10]</div>
-                    <div class="label">parameter_range</div>
+                    <div class="value">0.01</div>
+                    <div class="label">step_sizes</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #10b981, #10b98188);">
+                    <i data-lucide="sun"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #10b981;">RESULT</span>
+                    <h2>The Result</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">We've derived an L[infin]-error bound of 20.14% between the numerical solution and the viscosity solution, which shows that our method is accurate.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.2014</div>
+                    <div class="label">accuracy</div>
                 </div></div>
                 </div>
                 
@@ -333,21 +357,21 @@
         <div class="scene-section">
             <div class="section-header">
                 <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #f59e0b88);">
-                    <i data-lucide="lightbulb"></i>
+                    <i data-lucide="layers"></i>
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #f59e0b;">INSIGHT</span>
-                    <h2>Insights from the Analysis</h2>
+                    <h2>The Insight</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">The analysis reveals that the scheme is monotone and consistent, but its performance depends on the regularization parameter. This has important implications for researchers.</p>
+                    <p class="scene-content">Our results show that the accuracy of our method depends on relating space and time step sizes to the regularization parameter, which is a crucial aspect of mathematical analysis.</p>
                     <div class="stat-grid">
                 <div class="stat-item">
-                    <div class="value">scheme stability</div>
-                    <div class="label">insight</div>
+                    <div class="value">0.01</div>
+                    <div class="label">parameter</div>
                 </div></div>
                 </div>
                 
@@ -357,45 +381,21 @@
         <div class="scene-section">
             <div class="section-header">
                 <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
-                    <i data-lucide="sun"></i>
+                    <i data-lucide="target"></i>
                 </div>
                 <div>
                     <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
-                    <h2>Conclusion: A New Perspective on Mean Curvature Flow</h2>
+                    <h2>The Conclusion</h2>
                 </div>
             </div>
 
             <div class="scene-content-grid">
                 <div class="scene-text">
-                    <p class="scene-content">The analysis provides new insights into mean curvature flow and its approximation. Researchers can now explore the scheme's potential applications.</p>
+                    <p class="scene-content">Our study demonstrates the importance of mathematical analysis and computation in understanding the accuracy of finite difference schemes for level set equations and mean curvature flow.</p>
                     <div class="stat-grid">
                 <div class="stat-item">
-                    <div class="value">['material science', 'image processing']</div>
-                    <div class="label">application_area</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
-                    <i data-lucide="compass"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
-                    <h2>Future Research Directions</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">Further research is needed to explore the scheme's potential applications and improve its performance. Researchers can now build on this foundation.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">['scheme optimization', 'new applications']</div>
-                    <div class="label">directions</div>
+                    <div class="value">1</div>
+                    <div class="label">method</div>
                 </div></div>
                 </div>
                 

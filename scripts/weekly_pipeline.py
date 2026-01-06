@@ -546,8 +546,46 @@ def generate_blurb(article: Article) -> Dict:
         "subject": article.subject
     }
 
+def parse_sections(content: str) -> dict:
+    """Parse LLM output into separate sections"""
+    sections = {
+        "claim": "",
+        "why_matters": "",
+        "mechanism": "",
+        "curriculum": "",
+        "doubt": "",
+        "takeaway": ""
+    }
+
+    # Try to extract sections from markdown-style content
+    import re
+
+    # Pattern for numbered sections
+    patterns = [
+        (r'\*?\*?1\.?\s*ONE[- ]SENTENCE CLAIM\*?\*?:?\s*(.*?)(?=\*?\*?2\.|$)', 'claim'),
+        (r'\*?\*?2\.?\s*WHY IT MATTERS\*?\*?:?\s*(.*?)(?=\*?\*?3\.|$)', 'why_matters'),
+        (r'\*?\*?3\.?\s*THE MECHANISM\*?\*?:?\s*(.*?)(?=\*?\*?4\.|$)', 'mechanism'),
+        (r'\*?\*?4\.?\s*CURRICULUM BRIDGE\*?\*?:?\s*(.*?)(?=\*?\*?5\.|$)', 'curriculum'),
+        (r'\*?\*?5\.?\s*WHY TO DOUBT IT\*?\*?:?\s*(.*?)(?=\*?\*?6\.|$)', 'doubt'),
+        (r'\*?\*?6\.?\s*TAKEAWAY\*?\*?:?\s*(.*?)$', 'takeaway'),
+    ]
+
+    for pattern, key in patterns:
+        match = re.search(pattern, content, re.IGNORECASE | re.DOTALL)
+        if match:
+            sections[key] = match.group(1).strip()
+
+    # If parsing failed, use abstract as claim
+    if not sections["claim"] and not sections["why_matters"]:
+        sections["claim"] = content[:500] if len(content) > 500 else content
+
+    return sections
+
+
 def generate_award_html(article: Article, content: str, style: str) -> str:
-    """Generate award-winning HTML with animations"""
+    """Generate visual story HTML with separate cards like solar cell example"""
+
+    sections = parse_sections(content)
 
     accent = {
         "chemistry": "#10b981",
@@ -559,6 +597,45 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
         "agriculture": "#84cc16"
     }.get(article.subject, "#10b981")
 
+    # Section icons and colors
+    section_config = {
+        "claim": {"icon": "lightbulb", "color": "#f59e0b", "title": "The Discovery"},
+        "why_matters": {"icon": "target", "color": "#10b981", "title": "Why It Matters"},
+        "mechanism": {"icon": "git-branch", "color": "#3b82f6", "title": "How It Works"},
+        "curriculum": {"icon": "graduation-cap", "color": "#8b5cf6", "title": "Connect to Coursework"},
+        "doubt": {"icon": "alert-triangle", "color": "#ef4444", "title": "Limitations"},
+        "takeaway": {"icon": "bookmark", "color": "#06b6d4", "title": "Key Takeaway"}
+    }
+
+    # Build section cards HTML
+    section_cards = ""
+    for key, config in section_config.items():
+        text = sections.get(key, "").strip()
+        if text:
+            # Clean up markdown artifacts
+            text = text.replace("**", "").replace("*", "")
+            section_cards += f'''
+            <article class="visual-card" style="--card-accent: {config['color']};">
+                <div class="card-icon">
+                    <i data-lucide="{config['icon']}"></i>
+                </div>
+                <h3>{config['title']}</h3>
+                <p>{text}</p>
+            </article>'''
+
+    # If no sections parsed, create one card with all content
+    if not section_cards.strip():
+        clean_content = content.replace("**", "").replace("*", "")
+        paragraphs = [p.strip() for p in clean_content.split('\n\n') if p.strip()]
+        section_cards = f'''
+            <article class="visual-card" style="--card-accent: {accent};">
+                <div class="card-icon">
+                    <i data-lucide="file-text"></i>
+                </div>
+                <h3>Summary</h3>
+                {"".join(f"<p>{p}</p>" for p in paragraphs[:5])}
+            </article>'''
+
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -567,20 +644,20 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
     <title>{article.title} | The Beakers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {{
-            --bg: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-elevated: #1a1a24;
-            --text: #f0f0f5;
-            --text-muted: #8888a0;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-elevated: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
             --accent: {accent};
             --accent-glow: {accent}40;
-            --border: #2a2a3a;
+            --border: #334155;
         }}
 
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-
         html {{ scroll-behavior: smooth; }}
 
         body {{
@@ -588,35 +665,6 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }}
-
-        /* Animated gradient background */
-        .bg-gradient {{
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
-            pointer-events: none;
-            z-index: -1;
-            animation: pulse 8s ease-in-out infinite alternate;
-        }}
-
-        @keyframes pulse {{
-            0% {{ opacity: 0.5; transform: scale(1); }}
-            100% {{ opacity: 0.8; transform: scale(1.1); }}
-        }}
-
-        /* Grain texture */
-        .grain {{
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
         }}
 
         /* Header */
@@ -630,7 +678,7 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(20px);
-            background: rgba(10,10,15,0.8);
+            background: rgba(15,23,42,0.9);
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }}
@@ -638,12 +686,9 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
         .logo {{
             font-family: 'Instrument Serif', serif;
             font-size: 1.5rem;
-            font-weight: 400;
             color: var(--text);
             text-decoration: none;
-            letter-spacing: -0.02em;
         }}
-
         .logo span {{ color: var(--accent); }}
 
         nav a {{
@@ -651,22 +696,29 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
             text-decoration: none;
             margin-left: 2rem;
             font-size: 0.9rem;
-            transition: color 0.2s;
         }}
-
         nav a:hover {{ color: var(--accent); }}
 
         /* Hero */
         .hero {{
-            padding: 8rem 2rem 4rem;
-            max-width: 900px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg) 50%, rgba(59,130,246,0.1) 100%);
+            padding: 7rem 2rem 3rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }}
+
+        .hero::before {{
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }}
 
         .badge {{
             display: inline-block;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.25rem;
             background: var(--accent-glow);
             border: 1px solid var(--accent);
             border-radius: 100px;
@@ -676,95 +728,174 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
             letter-spacing: 0.1em;
             color: var(--accent);
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out;
+            position: relative;
         }}
 
-        h1 {{
+        .hero h1 {{
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+            line-height: 1.3;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
         }}
 
-        .meta {{
+        .hero-stats {{
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+        }}
+
+        .hero-stat {{
+            text-align: center;
+        }}
+        .hero-stat .value {{
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }}
+        .hero-stat .label {{
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
+            text-transform: uppercase;
         }}
 
-        .meta-item {{
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }}
-
-        /* Content */
-        .content {{
-            max-width: 720px;
+        /* Container */
+        .container {{
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }}
 
-        .card {{
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out 0.3s both;
-            transition: transform 0.3s, box-shadow 0.3s;
+        /* Section Headers */
+        .section-header {{
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.5rem;
         }}
 
-        .card:hover {{
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
+        .section-header .icon-box {{
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }}
-
-        .card h2 {{
+        .section-header .icon-box i {{
+            width: 24px;
+            height: 24px;
+            color: white;
+        }}
+        .section-header h2 {{
             font-family: 'Instrument Serif', serif;
             font-size: 1.5rem;
             font-weight: 400;
-            margin-bottom: 1rem;
-            color: var(--accent);
         }}
 
-        .card p {{
+        /* Visual Cards Grid */
+        .visual-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }}
+
+        .visual-card {{
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }}
+
+        .visual-card:hover {{
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            border-color: var(--card-accent, var(--accent));
+        }}
+
+        .visual-card .card-icon {{
+            width: 48px;
+            height: 48px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }}
+        .visual-card .card-icon i {{
+            width: 24px;
+            height: 24px;
+            color: var(--card-accent, var(--accent));
+        }}
+
+        .visual-card h3 {{
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }}
+
+        .visual-card p {{
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }}
 
-        .card p:last-child {{ margin-bottom: 0; }}
+        /* Curriculum Section */
+        .curriculum-section {{
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }}
 
-        /* Tags */
+        .curriculum-section h3 {{
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }}
+
         .tags {{
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1.5rem;
         }}
 
         .tag {{
-            padding: 0.3rem 0.8rem;
-            background: var(--bg-elevated);
+            padding: 0.4rem 1rem;
+            background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 100px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             transition: all 0.2s;
         }}
-
         .tag:hover {{
             border-color: var(--accent);
             color: var(--accent);
         }}
+        .tag.skill {{
+            border-color: var(--accent);
+            color: var(--accent);
+        }}
 
-        /* CTA Button */
+        /* CTA */
+        .cta-section {{
+            text-align: center;
+            margin-top: 2.5rem;
+        }}
+
         .cta {{
             display: inline-flex;
             align-items: center;
@@ -776,9 +907,7 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
             font-weight: 600;
             border-radius: 100px;
             transition: all 0.3s;
-            margin-top: 1rem;
         }}
-
         .cta:hover {{
             transform: scale(1.05);
             box-shadow: 0 0 30px var(--accent-glow);
@@ -787,39 +916,23 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
         /* Footer */
         footer {{
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid var(--border);
-            margin-top: 4rem;
+            margin-top: 3rem;
         }}
 
-        /* Animations */
-        @keyframes fadeInUp {{
-            from {{
-                opacity: 0;
-                transform: translateY(20px);
-            }}
-            to {{
-                opacity: 1;
-                transform: translateY(0);
-            }}
-        }}
-
-        /* Responsive */
         @media (max-width: 768px) {{
             header {{ padding: 1rem; }}
             nav a {{ margin-left: 1rem; font-size: 0.8rem; }}
-            .hero {{ padding: 6rem 1rem 2rem; }}
-            .content {{ padding: 1rem; }}
-            .card {{ padding: 1.5rem; }}
+            .hero {{ padding: 5rem 1rem 2rem; }}
+            .container {{ padding: 1rem; }}
+            .visual-grid {{ grid-template-columns: 1fr; }}
         }}
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="grain"></div>
-
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
         <nav>
@@ -828,43 +941,53 @@ def generate_award_html(article: Article, content: str, style: str) -> str:
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <span class="badge">{style.upper()} · {article.subject.upper()}</span>
-            <h1>{article.title}</h1>
-            <div class="meta">
-                <span class="meta-item">📅 {article.published}</span>
-                <span class="meta-item">📰 {article.venue}</span>
+    <section class="hero">
+        <span class="badge">{style.upper()} · {article.subject.upper()}</span>
+        <h1>{article.title}</h1>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">📅</div>
+                <div class="label">{article.published}</div>
             </div>
-        </section>
-
-        <section class="content">
-            <article class="card">
-                <h2>Summary</h2>
-                {"".join(f"<p>{p}</p>" for p in content.split(chr(10)+chr(10)) if p.strip())}
-            </article>
-
-            <article class="card">
-                <h2>Curriculum Connection</h2>
-                <p>Connect this research to your coursework:</p>
-                <div class="tags">
-                    {"".join(f'<span class="tag">{h}</span>' for h in (article.course_hooks or []))}
-                    {"".join(f'<span class="tag">{h}</span>' for h in (article.skill_hooks or []))}
-                </div>
-            </article>
-
-            <div style="text-align: center;">
-                <a href="{article.url}" class="cta" target="_blank">
-                    Read Original Paper →
-                </a>
+            <div class="hero-stat">
+                <div class="value">📰</div>
+                <div class="label">{article.venue}</div>
             </div>
-        </section>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="book-open"></i></div>
+            <h2>Research Breakdown</h2>
+        </div>
+
+        <div class="visual-grid">
+            {section_cards}
+        </div>
+
+        <div class="curriculum-section">
+            <h3><i data-lucide="graduation-cap" style="width:24px;height:24px;color:var(--accent);"></i> Curriculum Connection</h3>
+            <p style="color:var(--text-muted);margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div class="tags">
+                {"".join(f'<span class="tag">{h}</span>' for h in (article.course_hooks or []))}
+                {"".join(f'<span class="tag skill">{h}</span>' for h in (article.skill_hooks or []))}
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="{article.url}" class="cta" target="_blank">
+                Read Original Paper →
+            </a>
+        </div>
     </main>
 
     <footer>
         <p>The Beakers — Research, Rewritten for Students</p>
         <p style="margin-top: 0.5rem;">© {datetime.now().year} The Beakers</p>
     </footer>
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>'''
 

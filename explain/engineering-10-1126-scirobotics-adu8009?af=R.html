@@ -6,20 +6,20 @@
     <title>Microscopic robots that sense, think, act, and compute | The Beakers</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
-            --bg: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-elevated: #1a1a24;
-            --text: #f0f0f5;
-            --text-muted: #8888a0;
+            --bg: #0f172a;
+            --bg-card: #1e293b;
+            --bg-elevated: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
             --accent: #f59e0b;
             --accent-glow: #f59e0b40;
-            --border: #2a2a3a;
+            --border: #334155;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         html { scroll-behavior: smooth; }
 
         body {
@@ -27,35 +27,6 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Animated gradient background */
-        .bg-gradient {
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
-            pointer-events: none;
-            z-index: -1;
-            animation: pulse 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        /* Grain texture */
-        .grain {
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
         }
 
         /* Header */
@@ -69,7 +40,7 @@
             justify-content: space-between;
             align-items: center;
             backdrop-filter: blur(20px);
-            background: rgba(10,10,15,0.8);
+            background: rgba(15,23,42,0.9);
             border-bottom: 1px solid var(--border);
             z-index: 100;
         }
@@ -77,12 +48,9 @@
         .logo {
             font-family: 'Instrument Serif', serif;
             font-size: 1.5rem;
-            font-weight: 400;
             color: var(--text);
             text-decoration: none;
-            letter-spacing: -0.02em;
         }
-
         .logo span { color: var(--accent); }
 
         nav a {
@@ -90,22 +58,29 @@
             text-decoration: none;
             margin-left: 2rem;
             font-size: 0.9rem;
-            transition: color 0.2s;
         }
-
         nav a:hover { color: var(--accent); }
 
         /* Hero */
         .hero {
-            padding: 8rem 2rem 4rem;
-            max-width: 900px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg) 50%, rgba(59,130,246,0.1) 100%);
+            padding: 7rem 2rem 3rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
 
         .badge {
             display: inline-block;
-            padding: 0.4rem 1rem;
+            padding: 0.5rem 1.25rem;
             background: var(--accent-glow);
             border: 1px solid var(--accent);
             border-radius: 100px;
@@ -115,95 +90,174 @@
             letter-spacing: 0.1em;
             color: var(--accent);
             margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out;
+            position: relative;
         }
 
-        h1 {
+        .hero h1 {
             font-family: 'Instrument Serif', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
             font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+            line-height: 1.3;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
         }
 
-        .meta {
+        .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: 3rem;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .hero-stat .label {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
+            text-transform: uppercase;
         }
 
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Content */
-        .content {
-            max-width: 720px;
+        /* Container */
+        .container {
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out 0.3s both;
-            transition: transform 0.3s, box-shadow 0.3s;
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0 1.5rem;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
+        .section-header .icon-box {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .card h2 {
+        .section-header .icon-box i {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+        .section-header h2 {
             font-family: 'Instrument Serif', serif;
             font-size: 1.5rem;
             font-weight: 400;
-            margin-bottom: 1rem;
-            color: var(--accent);
         }
 
-        .card p {
+        /* Visual Cards Grid */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .visual-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .visual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            border-color: var(--card-accent, var(--accent));
+        }
+
+        .visual-card .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .visual-card .card-icon i {
+            width: 24px;
+            height: 24px;
+            color: var(--card-accent, var(--accent));
+        }
+
+        .visual-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .visual-card p {
             color: var(--text-muted);
-            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
 
-        .card p:last-child { margin-bottom: 0; }
+        /* Curriculum Section */
+        .curriculum-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
 
-        /* Tags */
+        .curriculum-section h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
         .tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-top: 1.5rem;
         }
 
         .tag {
-            padding: 0.3rem 0.8rem;
-            background: var(--bg-elevated);
+            padding: 0.4rem 1rem;
+            background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 100px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             transition: all 0.2s;
         }
-
         .tag:hover {
             border-color: var(--accent);
             color: var(--accent);
         }
+        .tag.skill {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
 
-        /* CTA Button */
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
         .cta {
             display: inline-flex;
             align-items: center;
@@ -215,9 +269,7 @@
             font-weight: 600;
             border-radius: 100px;
             transition: all 0.3s;
-            margin-top: 1rem;
         }
-
         .cta:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px var(--accent-glow);
@@ -226,39 +278,23 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 4rem 2rem;
+            padding: 3rem 2rem;
             color: var(--text-muted);
             font-size: 0.85rem;
             border-top: 1px solid var(--border);
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             header { padding: 1rem; }
             nav a { margin-left: 1rem; font-size: 0.8rem; }
-            .hero { padding: 6rem 1rem 2rem; }
-            .content { padding: 1rem; }
-            .card { padding: 1.5rem; }
+            .hero { padding: 5rem 1rem 2rem; }
+            .container { padding: 1rem; }
+            .visual-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="grain"></div>
-
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
         <nav>
@@ -267,42 +303,107 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <span class="badge">INDEPTH · ENGINEERING</span>
-            <h1>Microscopic robots that sense, think, act, and compute</h1>
-            <div class="meta">
-                <span class="meta-item">📅 </span>
-                <span class="meta-item">📰 Science Robotics</span>
+    <section class="hero">
+        <span class="badge">INDEPTH · ENGINEERING</span>
+        <h1>Microscopic robots that sense, think, act, and compute</h1>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">📅</div>
+                <div class="label"></div>
             </div>
-        </section>
+            <div class="hero-stat">
+                <div class="value">📰</div>
+                <div class="label">Science Robotics</div>
+            </div>
+        </div>
+    </section>
 
-        <section class="content">
-            <article class="card">
-                <h2>Summary</h2>
-                <p>**Microscopic Robots that Sense, Think, Act, and Compute**</p><p>**1. ONE-SENTENCE CLAIM:** Microscopic robots, also known as synthetic microswimmers or nanorobots, have been engineered to sense their environment, process information, and perform tasks at the molecular scale.</p><p>**2. WHY IT MATTERS:** The development of microscopic robots has far-reaching implications for fields such as medicine, environmental science, and biotechnology. These tiny machines can be used to detect diseases, monitor water quality, and even clean pollutants from surfaces, making them a promising solution for addressing some of humanity's most pressing problems.</p><p>**3. THE MECHANISM:**</p><p>A → **Sensing**: Microscopic robots are equipped with specialized sensors that allow them to detect changes in their environment, such as pH levels or temperature fluctuations. These sensors can be made of materials like DNA or proteins that respond to specific stimuli.</p><p>B → **Processing**: Once the robot detects a change, it processes the information using onboard computing systems that can perform complex calculations and make decisions based on the data received.</p><p>C → **Action**: The final step is for the robot to take action in response to the processed information. This could involve moving towards or away from a source of pollution, releasing therapeutic molecules, or even manipulating materials at the molecular level.</p><p>**4. CURRICULUM BRIDGE:**</p><p>The principles behind microscopic robots can be connected to undergraduate concepts in kinetics and diffusion. For example, the motion of microscopic robots is influenced by Brownian motion, which is a direct result of random collisions with surrounding particles. This phenomenon is closely related to diffusion, where particles move from an area of high concentration to one of low concentration. Understanding these fundamental principles can help students appreciate the complex interactions between microscopic robots and their environment.</p><p>**5. WHY TO DOUBT IT:** One limitation of current microscopic robot design is the limited amount of power available within the tiny robots. Most energy sources used in these devices are based on chemical reactions, which can be unreliable and difficult to control at the microscale. This limitation makes it challenging to create robots that can operate for extended periods without external intervention.</p><p>**6. TAKEAWAY:**</p><p>The development of microscopic robots represents a groundbreaking achievement in engineering and nanotechnology. As these tiny machines continue to advance, they will have the potential to revolutionize fields such as medicine, environmental science, and biotechnology by providing new tools for sensing, processing, and acting on information at the molecular scale.</p>
-            </article>
+    <main class="container">
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="book-open"></i></div>
+            <h2>Research Breakdown</h2>
+        </div>
 
-            <article class="card">
-                <h2>Curriculum Connection</h2>
-                <p>Connect this research to your coursework:</p>
-                <div class="tags">
-                    <span class="tag">kinetics</span><span class="tag">diffusion</span>
-                    <span class="tag">interpret rate law</span>
+        <div class="visual-grid">
+            
+            <article class="visual-card" style="--card-accent: #f59e0b;">
+                <div class="card-icon">
+                    <i data-lucide="lightbulb"></i>
                 </div>
+                <h3>The Discovery</h3>
+                <p>Researchers have successfully created microscopic robots that can sense their environment, think independently, act autonomously, and perform complex computations.</p>
             </article>
+            <article class="visual-card" style="--card-accent: #10b981;">
+                <div class="card-icon">
+                    <i data-lucide="target"></i>
+                </div>
+                <h3>Why It Matters</h3>
+                <p>(2-3 sentences)
+This breakthrough has significant implications for various fields, including medicine, environmental monitoring, and manufacturing. Microscopic robots can be used to navigate through the human body, detect diseases at an early stage, or monitor water quality in real-time. By enabling these robots to sense, think, act, and compute, we can develop more efficient and effective solutions to complex problems.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #3b82f6;">
+                <div class="card-icon">
+                    <i data-lucide="git-branch"></i>
+                </div>
+                <h3>How It Works</h3>
+                <p>(3 steps: A → B → C)
+The creation of microscopic robots involves three key steps:
 
-            <div style="text-align: center;">
-                <a href="https://www.science.org/doi/abs/10.1126/scirobotics.adu8009?af=R" class="cta" target="_blank">
-                    Read Original Paper →
-                </a>
+A. Sensing and Actuation: The first step is to equip these robots with sensors that can detect their environment, such as temperature, pH, or chemical composition. These sensors are connected to tiny actuators that allow the robots to move and interact with their surroundings.
+
+B. Signal Processing and Computation: The next step involves developing algorithms and computer systems that enable the robots to process and analyze the data from their sensors. This processing power allows the robots to make decisions, learn from their environment, and adapt to new situations.
+
+C. Autonomous Control and Navigation: Finally, the robots are equipped with navigation systems that enable them to move around and interact with their surroundings autonomously. These systems use a combination of sensors, algorithms, and programming to guide the robots through complex environments.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #8b5cf6;">
+                <div class="card-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <h3>Connect to Coursework</h3>
+                <p>(connect to undergrad concepts)
+This technology bridges several key concepts in undergraduate physics and engineering courses:
+
+ Kinetics: The study of motion and forces that enable microscopic robots to move and interact with their environment.
+ Diffusion: The concept of molecules spreading outwards from a source, which is essential for understanding how sensors and actuators work together.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #ef4444;">
+                <div class="card-icon">
+                    <i data-lucide="alert-triangle"></i>
+                </div>
+                <h3>Limitations</h3>
+                <p>(one limitation)
+One limitation of these microscopic robots is their limited power supply. Currently, they rely on batteries or other energy sources that may not be sufficient to sustain them for extended periods of time. This limits their potential applications in areas where prolonged operation is required.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #06b6d4;">
+                <div class="card-icon">
+                    <i data-lucide="bookmark"></i>
+                </div>
+                <h3>Key Takeaway</h3>
+                <p>The development of microscopic robots that sense, think, act, and compute opens up exciting possibilities for innovation and problem-solving. By understanding the mechanisms behind these tiny machines, we can begin to explore new frontiers in fields like medicine, environmental science, and engineering, and develop solutions that transform our world.</p>
+            </article>
+        </div>
+
+        <div class="curriculum-section">
+            <h3><i data-lucide="graduation-cap" style="width:24px;height:24px;color:var(--accent);"></i> Curriculum Connection</h3>
+            <p style="color:var(--text-muted);margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div class="tags">
+                <span class="tag">kinetics</span><span class="tag">diffusion</span>
+                <span class="tag skill">interpret rate law</span>
             </div>
-        </section>
+        </div>
+
+        <div class="cta-section">
+            <a href="https://www.science.org/doi/abs/10.1126/scirobotics.adu8009?af=R" class="cta" target="_blank">
+                Read Original Paper →
+            </a>
+        </div>
     </main>
 
     <footer>
         <p>The Beakers — Research, Rewritten for Students</p>
         <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
     </footer>
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>

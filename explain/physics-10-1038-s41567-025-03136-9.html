@@ -3,51 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embryo geometry sets the tempo</title>
+    <title>Embryo geometry sets the tempo | The Beakers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
-            --bg-dark: #0f172a;
+            --bg: #0f172a;
             --bg-card: #1e293b;
-            --bg-light: #334155;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --accent-green: #10b981;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --accent-orange: #f59e0b;
-            --accent-purple: #8b5cf6;
-            --accent-pink: #ec4899;
+            --bg-elevated: #334155;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-glow: #3b82f640;
+            --border: #334155;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
         }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(15,23,42,0.9);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+        .logo span { color: var(--accent); }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--accent); }
 
         /* Hero */
         .hero {
-            background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e1b4b 100%);
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(16,185,129,0.1) 0%, var(--bg) 50%, rgba(59,130,246,0.1) 100%);
+            padding: 7rem 2rem 3rem;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2310b981' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--accent-glow);
+            border: 1px solid var(--accent);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .hero .subtitle {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            font-weight: 400;
+            line-height: 1.3;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
         }
 
         .hero-stats {
@@ -55,405 +108,295 @@
             justify-content: center;
             gap: 3rem;
             flex-wrap: wrap;
+            position: relative;
         }
 
+        .hero-stat {
+            text-align: center;
+        }
         .hero-stat .value {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: var(--accent-orange);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
         }
-
         .hero-stat .label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
+            font-size: 0.8rem;
+            color: var(--text-muted);
             text-transform: uppercase;
         }
 
         /* Container */
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        /* Scene Sections */
-        .scene-section {
-            margin-bottom: 3rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--bg-light);
-        }
-
+        /* Section Headers */
         .section-header {
             display: flex;
             align-items: center;
             gap: 1rem;
-            margin-bottom: 1.5rem;
+            margin: 2.5rem 0 1.5rem;
         }
 
-        .icon-box {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+        .section-header .icon-box {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), #3b82f6);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-
-        .icon-box i {
-            width: 26px;
-            height: 26px;
+        .section-header .icon-box i {
+            width: 24px;
+            height: 24px;
             color: white;
         }
-
-        .scene-badge {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--bg-dark);
-            margin-bottom: 0.3rem;
-        }
-
         .section-header h2 {
-            font-size: 1.6rem;
-            color: var(--text-primary);
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
         }
 
-        /* Scene content grid */
-        .scene-content-grid {
+        /* Visual Cards Grid */
+        .visual-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        .scene-content-grid.has-figure {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        @media (max-width: 768px) {
-            .scene-content-grid.has-figure {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .scene-text {
+        .visual-card {
             background: var(--bg-card);
-            padding: 1.5rem;
             border-radius: 16px;
-            border: 1px solid var(--bg-light);
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         }
 
-        .scene-content {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
+        .visual-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+            border-color: var(--card-accent, var(--accent));
         }
 
-        /* Stats grid */
-        .stat-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        .visual-card .card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .visual-card .card-icon i {
+            width: 24px;
+            height: 24px;
+            color: var(--card-accent, var(--accent));
+        }
+
+        .visual-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .visual-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Curriculum Section */
+        .curriculum-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .curriculum-section h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
             gap: 0.75rem;
-            margin-top: 1.25rem;
         }
 
-        .stat-item {
-            background: var(--bg-dark);
-            padding: 0.75rem;
-            border-radius: 10px;
-            text-align: center;
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
-        .stat-item .value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--accent-orange);
-        }
-
-        .stat-item .label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-
-        /* Figures */
-        .scene-figure {
-            background: var(--bg-card);
-            padding: 1rem;
-            border-radius: 16px;
-            border: 1px solid var(--bg-light);
-        }
-
-        .scene-figure img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-
-        .figure-caption {
-            text-align: center;
+        .tag {
+            padding: 0.4rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
             font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-            font-style: italic;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+        .tag:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .tag.skill {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: var(--bg);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 100px;
+            transition: all 0.3s;
+        }
+        .cta:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
         }
 
-        footer a {
-            color: var(--accent-green);
-            text-decoration: none;
+        @media (max-width: 768px) {
+            header { padding: 1rem; }
+            nav a { margin-left: 1rem; font-size: 0.8rem; }
+            .hero { padding: 5rem 1rem 2rem; }
+            .container { padding: 1rem; }
+            .visual-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;backdrop-filter:blur(20px);background:rgba(15,23,42,0.9);border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
-        <a href="/" style="font-family:'Instrument Serif',serif;font-size:1.5rem;color:#e2e8f0;text-decoration:none;">The <span style="color:#10b981;">Beakers</span></a>
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
         <nav>
-            <a href="/chemistry.html" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Chemistry</a>
-            <a href="/deepdive/" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Deep Dives</a>
+            <a href="/physics.html">Physics</a>
+            <a href="/deepdive/">Deep Dives</a>
         </nav>
     </header>
-    <div style="height:70px;"></div>
-    
-    <div class="hero">
+
+    <section class="hero">
+        <span class="badge">INDEPTH · PHYSICS</span>
         <h1>Embryo geometry sets the tempo</h1>
-        <p class="subtitle">Visual Story</p>
         <div class="hero-stats">
-            
             <div class="hero-stat">
-                <div class="value">1</div>
-                <div class="label">rate law</div>
+                <div class="value">📅</div>
+                <div class="label"></div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">📰</div>
+                <div class="label">Nature Phys</div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="container">
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #06b6d4, #06b6d488);">
-                    <i data-lucide="layers"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #06b6d4;">INTRO</span>
-                    <h2>The Challenge of Cell Division</h2>
-                </div>
-            </div>
+    <main class="container">
+        <div class="section-header">
+            <div class="icon-box"><i data-lucide="book-open"></i></div>
+            <h2>Research Breakdown</h2>
+        </div>
 
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">In the world of cell biology, understanding how cells divide is crucial. But what if the geometry of the egg was influencing this process?</p>
-                    
+        <div class="visual-grid">
+            
+            <article class="visual-card" style="--card-accent: #f59e0b;">
+                <div class="card-icon">
+                    <i data-lucide="lightbulb"></i>
                 </div>
-                
+                <h3>The Discovery</h3>
+                <p>The geometry of the zebrafish egg regulates a gradient in cell size during successive cell divisions, influencing patterns of cell-cycle progression, genome activation, and cell-fate specification.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #10b981;">
+                <div class="card-icon">
+                    <i data-lucide="target"></i>
+                </div>
+                <h3>Why It Matters</h3>
+                <p>(2-3 sentences)
+Understanding how embryo geometry controls cellular behavior has far-reaching implications for developmental biology, as it may shed light on the intricate processes that govern embryogenesis. This phenomenon also has potential applications in regenerative medicine and tissue engineering, where controlling cellular growth and differentiation is crucial. Furthermore, studying this gradient can provide insights into the mechanisms driving cancer progression and metastasis.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #3b82f6;">
+                <div class="card-icon">
+                    <i data-lucide="git-branch"></i>
+                </div>
+                <h3>How It Works</h3>
+                <p>(3 steps: A → B → C)
+A. Initial Geometry: The zebrafish egg's geometry, determined by its initial shape and size, sets the stage for cellular behavior. The geometry of the egg influences how cells divide and expand during successive cell divisions.
+B. Cell Size Gradient Formation: As cells divide, their size increases due to anisotropic growth rates, leading to a gradient in cell size within the embryo. This gradient arises from differences in cell growth velocities along the axes of the embryo.
+C. Gradient-Specific Regulation: The cell-size gradient specifies patterns of cell-cycle progression, zygotic genome activation, and cell-fate specification by controlling the timing and coordination of cellular events. Cells closer to the center of the embryo tend to divide more slowly and differentiate into specific tissues.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #8b5cf6;">
+                <div class="card-icon">
+                    <i data-lucide="graduation-cap"></i>
+                </div>
+                <h3>Connect to Coursework</h3>
+                <p>(connect to undergrad concepts)
+This phenomenon connects to undergraduate courses in kinetics and diffusion, as it involves anisotropic growth rates and a spatial gradient in cell size. Students can relate this concept to their studies of chemical kinetics or transport phenomena, where spatial gradients and anisotropy play crucial roles.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #ef4444;">
+                <div class="card-icon">
+                    <i data-lucide="alert-triangle"></i>
+                </div>
+                <h3>Limitations</h3>
+                <p>(one limitation)
+While the geometry of the zebrafish egg significantly influences cellular behavior, there is still a need for further research to understand how this gradient interacts with other environmental cues and genetic pathways that regulate embryogenesis.</p>
+            </article>
+            <article class="visual-card" style="--card-accent: #06b6d4;">
+                <div class="card-icon">
+                    <i data-lucide="bookmark"></i>
+                </div>
+                <h3>Key Takeaway</h3>
+                <p>The geometry of the zebrafish egg regulates a spatial gradient in cell size during successive cell divisions, which specifies patterns of cell-cycle progression, genome activation, and cell-fate specification. This phenomenon highlights the intricate interactions between cellular behavior, environmental cues, and genetic pathways that govern embryogenesis, with potential applications in regenerative medicine and tissue engineering.</p>
+            </article>
+        </div>
+
+        <div class="curriculum-section">
+            <h3><i data-lucide="graduation-cap" style="width:24px;height:24px;color:var(--accent);"></i> Curriculum Connection</h3>
+            <p style="color:var(--text-muted);margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div class="tags">
+                <span class="tag">kinetics</span><span class="tag">diffusion</span>
+                <span class="tag skill">interpret rate law</span>
             </div>
         </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #3b82f6, #3b82f688);">
-                    <i data-lucide="sun"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #3b82f6;">BACKGROUND</span>
-                    <h2>The Zebrafish Egg: A Unique Geometry</h2>
-                </div>
-            </div>
 
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">Researchers discovered that the zebrafish egg has a unique geometry, which affects how cells divide.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">1.5</div>
-                    <div class="label">egg diameter</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
-                    <i data-lucide="bar chart"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
-                    <h2>Cell Size Gradient: A Key to Understanding Cell Division</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">By analyzing the geometry of the egg, researchers found a gradient in cell size upon successive cell divisions.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">0.5</div>
-                    <div class="label">cell size range</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
-                    <i data-lucide="clock"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
-                    <h2>Stereotyped Patterns of Cell-Cycle Progression</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">The gradient in cell size specified stereotyped patterns of cell-cycle progression, zygotic genome activation, and cell-fate specification.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">3</div>
-                    <div class="label">cell cycle stages</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #f59e0b88);">
-                    <i data-lucide="leaf"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #f59e0b;">INSIGHT</span>
-                    <h2>Insights into Cell Division and Development</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">Understanding the geometry of the zebrafish egg provides new insights into cell division and development.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">5</div>
-                    <div class="label">development stages</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #10b981, #10b98188);">
-                    <i data-lucide="calendar"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #10b981;">RESULT</span>
-                    <h2>Implications for Biomedical Research</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">The findings have implications for biomedical research, particularly in the fields of developmental biology and regenerative medicine.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">10</div>
-                    <div class="label">research timeline</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
-                    <i data-lucide="sun"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
-                    <h2>A New Perspective on Cell Division</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">The study offers a new perspective on cell division, highlighting the importance of geometry in this process.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">1</div>
-                    <div class="label">perspective shift</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="scene-section">
-            <div class="section-header">
-                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
-                    <i data-lucide="layers"></i>
-                </div>
-                <div>
-                    <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
-                    <h2>Future Directions for Research</h2>
-                </div>
-            </div>
-
-            <div class="scene-content-grid">
-                <div class="scene-text">
-                    <p class="scene-content">Future research directions include exploring the geometry of other egg types and its implications for developmental biology.</p>
-                    <div class="stat-grid">
-                <div class="stat-item">
-                    <div class="value">2</div>
-                    <div class="label">research directions</div>
-                </div></div>
-                </div>
-                
-            </div>
-        </div>
-        
-    </div>
-
-    
-    <div style="max-width:1100px;margin:0 auto;padding:2rem;">
-        <div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:2rem;margin-bottom:2rem;">
-            <h2 style="font-size:1.5rem;color:#10b981;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;">
-                <span>🎓</span> Curriculum Connection
-            </h2>
-            <p style="color:#94a3b8;margin-bottom:1rem;">Connect this research to your coursework:</p>
-            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-                <span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">kinetics</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">diffusion</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #10b981;border-radius:100px;font-size:0.8rem;color:#10b981;margin:0.25rem;">interpret rate law</span>
-            </div>
-        </div>
-        <div style="text-align:center;">
-            <a href="https://www.nature.com/articles/s41567-025-03136-9" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:#10b981;color:#0f172a;text-decoration:none;font-weight:600;border-radius:100px;">
+        <div class="cta-section">
+            <a href="https://www.nature.com/articles/s41567-025-03136-9" class="cta" target="_blank">
                 Read Original Paper →
             </a>
         </div>
-    </div>
-    
-    <footer style="text-align:center;padding:3rem 2rem;color:#94a3b8;font-size:0.85rem;border-top:1px solid #334155;">
-        <p>The Beakers — Research, Rewritten for Students</p>
-        <p style="margin-top:0.5rem;">© 2026 The Beakers</p>
-    </footer>
-    
+    </main>
 
-    <script>
-        lucide.createIcons();
-    </script>
+    <footer>
+        <p>The Beakers — Research, Rewritten for Students</p>
+        <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
+    </footer>
+
+    <script>lucide.createIcons();</script>
 </body>
 </html>

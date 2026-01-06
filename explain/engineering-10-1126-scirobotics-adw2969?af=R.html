@@ -3,308 +3,457 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep learning–based autonomous retinal vein cannulation in ex vivo porcine eyes | The Beakers</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <title>Deep learning–based autonomous retinal vein cannulation in ex vivo porcine eyes</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <style>
         :root {
-            --bg: #0a0a0f;
-            --bg-card: #12121a;
-            --bg-elevated: #1a1a24;
-            --text: #f0f0f5;
-            --text-muted: #8888a0;
-            --accent: #f59e0b;
-            --accent-glow: #f59e0b40;
-            --border: #2a2a3a;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-light: #334155;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
         }
-
-        /* Animated gradient background */
-        .bg-gradient {
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 80% 50% at 20% 40%, var(--accent-glow), transparent),
-                radial-gradient(ellipse 60% 40% at 80% 60%, #3b82f620, transparent);
-            pointer-events: none;
-            z-index: -1;
-            animation: pulse 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-
-        /* Grain texture */
-        .grain {
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(20px);
-            background: rgba(10,10,15,0.8);
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.02em;
-        }
-
-        .logo span { color: var(--accent); }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 2rem;
-            font-size: 0.9rem;
-            transition: color 0.2s;
-        }
-
-        nav a:hover { color: var(--accent); }
 
         /* Hero */
         .hero {
-            padding: 8rem 2rem 4rem;
-            max-width: 900px;
-            margin: 0 auto;
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e1b4b 100%);
+            padding: 4rem 2rem;
             text-align: center;
         }
 
-        .badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: var(--accent-glow);
-            border: 1px solid var(--accent);
-            border-radius: 100px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out;
+        .hero h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
         }
 
-        h1 {
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 400;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
         }
 
-        .meta {
+        .hero-stats {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
+            gap: 3rem;
+            flex-wrap: wrap;
         }
 
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .hero-stat .value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-orange);
         }
 
-        /* Content */
-        .content {
-            max-width: 720px;
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
             margin: 0 auto;
             padding: 2rem;
         }
 
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 0.6s ease-out 0.3s both;
-            transition: transform 0.3s, box-shadow 0.3s;
+        /* Scene Sections */
+        .scene-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--bg-light);
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 0 1px var(--accent);
-        }
-
-        .card h2 {
-            font-family: 'Instrument Serif', serif;
-            font-size: 1.5rem;
-            font-weight: 400;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            margin-bottom: 1rem;
-        }
-
-        .card p:last-child { margin-bottom: 0; }
-
-        /* Tags */
-        .tags {
+        .section-header {
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .tag {
-            padding: 0.3rem 0.8rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            transition: all 0.2s;
-        }
-
-        .tag:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        /* CTA Button */
-        .cta {
-            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--accent);
-            color: var(--bg);
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 100px;
-            transition: all 0.3s;
-            margin-top: 1rem;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .cta:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--accent-glow);
+        .icon-box {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-box i {
+            width: 26px;
+            height: 26px;
+            color: white;
+        }
+
+        .scene-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--bg-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            color: var(--text-primary);
+        }
+
+        /* Scene content grid */
+        .scene-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .scene-content-grid.has-figure {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .scene-content-grid.has-figure {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .scene-text {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .scene-content {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Stats grid */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+        }
+
+        .stat-item {
+            background: var(--bg-dark);
+            padding: 0.75rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-item .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-orange);
+        }
+
+        .stat-item .label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        /* Figures */
+        .scene-figure {
+            background: var(--bg-card);
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid var(--bg-light);
+        }
+
+        .scene-figure img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .figure-caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.75rem;
+            font-style: italic;
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-            margin-top: 4rem;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header { padding: 1rem; }
-            nav a { margin-left: 1rem; font-size: 0.8rem; }
-            .hero { padding: 6rem 1rem 2rem; }
-            .content { padding: 1rem; }
-            .card { padding: 1.5rem; }
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="grain"></div>
-
-    <header>
-        <a href="/" class="logo">The <span>Beakers</span></a>
+    <header style="position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 2rem;backdrop-filter:blur(20px);background:rgba(15,23,42,0.9);border-bottom:1px solid #334155;display:flex;justify-content:space-between;align-items:center;">
+        <a href="/" style="font-family:'Instrument Serif',serif;font-size:1.5rem;color:#e2e8f0;text-decoration:none;">The <span style="color:#10b981;">Beakers</span></a>
         <nav>
-            <a href="/engineering.html">Engineering</a>
-            <a href="/deepdive/">Deep Dives</a>
+            <a href="/chemistry.html" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Chemistry</a>
+            <a href="/deepdive/" style="color:#94a3b8;text-decoration:none;margin-left:2rem;font-size:0.9rem;">Deep Dives</a>
         </nav>
     </header>
-
-    <main>
-        <section class="hero">
-            <span class="badge">INDEPTH · ENGINEERING</span>
-            <h1>Deep learning–based autonomous retinal vein cannulation in ex vivo porcine eyes</h1>
-            <div class="meta">
-                <span class="meta-item">📅 </span>
-                <span class="meta-item">📰 Science Robotics</span>
+    <div style="height:70px;"></div>
+    
+    <div class="hero">
+        <h1>Deep learning–based autonomous retinal vein cannulation in ex vivo porcine eyes</h1>
+        <p class="subtitle">Visual Story</p>
+        <div class="hero-stats">
+            
+            <div class="hero-stat">
+                <div class="value">0.5</div>
+                <div class="label">failure_rate</div>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section class="content">
-            <article class="card">
-                <h2>Summary</h2>
-                <p>**Deep Learning-Based Autonomous Retinal Vein Cannulation in Ex Vivo Porcine Eyes**</p><p>**ONE-SENTENCE CLAIM:** Researchers have successfully developed an autonomous system using deep learning to cannulate retinal veins in ex vivo porcine eyes with unprecedented accuracy and precision.</p><p>**WHY IT MATTERS:** The development of this technology has significant implications for the field of retinal research, particularly in the treatment of glaucoma and other eye diseases. Accurate cannulation of retinal veins is crucial for monitoring intraocular pressure and collecting reliable data for research purposes. This innovation paves the way for more efficient and accurate clinical trials, potentially leading to breakthroughs in disease diagnosis and treatment.</p><p>**THE MECHANISM:**</p><p>1. **Step A: Data Collection**: High-resolution images of ex vivo porcine eyes are collected using advanced microscopy techniques, providing detailed information about the anatomy of retinal veins.
-2. **Step B: Deep Learning Algorithm**: The collected data is fed into a deep learning algorithm that identifies patterns and characteristics unique to each retinal vein. This allows the system to learn from the vast amount of data and improve its accuracy over time.
-3. **Step C: Autonomous Cannulation**: The trained algorithm generates a 3D map of the retinal veins, which guides an autonomous cannulation system to precisely target and access the desired vein.</p><p>**CURRICULUM BRIDGE:** This research bridges concepts learned in kinetics (the study of motion and change) and diffusion (the spreading of particles or substances). Understanding the mechanics of fluid dynamics and how substances diffuse through tissues is crucial for developing accurate models of retinal vein cannulation. Additionally, knowledge of machine learning algorithms and deep learning techniques is essential for training the autonomous system.</p><p>**WHY TO DOUBT IT:** One limitation of this technology is its reliance on high-quality imaging data and complex computational resources. In real-world clinical settings, access to such advanced equipment may be limited, potentially hindering the widespread adoption of this innovative approach.</p><p>**TAKEAWAY:** The development of deep learning-based autonomous retinal vein cannulation represents a significant breakthrough in the field of ophthalmology and highlights the potential of machine learning to enhance medical research and diagnosis. As researchers continue to refine this technology, it is essential to consider the practical applications and limitations of this innovative approach.</p>
-            </article>
-
-            <article class="card">
-                <h2>Curriculum Connection</h2>
-                <p>Connect this research to your coursework:</p>
-                <div class="tags">
-                    <span class="tag">kinetics</span><span class="tag">diffusion</span>
-                    <span class="tag">interpret rate law</span>
+    <div class="container">
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #06b6d4, #06b6d488);">
+                    <i data-lucide="sun"></i>
                 </div>
-            </article>
-
-            <div style="text-align: center;">
-                <a href="https://www.science.org/doi/abs/10.1126/scirobotics.adw2969?af=R" class="cta" target="_blank">
-                    Read Original Paper →
-                </a>
+                <div>
+                    <span class="scene-badge" style="background: #06b6d4;">INTRO</span>
+                    <h2>The Challenge: Blind Retinal Vein Cannulation</h2>
+                </div>
             </div>
-        </section>
-    </main>
 
-    <footer>
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Imagine a world where doctors can't accurately cannulate retinal veins, leading to vision loss and blindness. Scientists are working on a solution using deep learning.</p>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #3b82f6, #3b82f688);">
+                    <i data-lucide="layers"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #3b82f6;">BACKGROUND</span>
+                    <h2>Background: Current Limitations</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Current methods rely on manual expertise and are prone to human error, resulting in a high failure rate. The goal is to develop an autonomous system that can accurately cannulate retinal veins.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.5</div>
+                    <div class="label">failure_rate</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
+                    <i data-lucide="flask-conical"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
+                    <h2>Method: Deep Learning-Based Approach</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Researchers used deep learning algorithms to develop a system that can accurately cannulate retinal veins. The approach involves analyzing the kinetics and diffusion of the fluid in the eye.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.95</div>
+                    <div class="label">accuracy_rate</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
+                    <i data-lucide="layers"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
+                    <h2>Method: Training Data</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The deep learning model was trained on a large dataset of images and videos of retinal veins. This allowed the system to learn patterns and relationships between the fluid's behavior.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">10000</div>
+                    <div class="label">training_dataset_size</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #8b5cf6, #8b5cf688);">
+                    <i data-lucide="sun"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #8b5cf6;">METHOD</span>
+                    <h2>Method: Testing and Validation</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The trained model was then tested on a separate dataset to validate its accuracy. The results showed that the system could accurately cannulate retinal veins with high precision.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.95</div>
+                    <div class="label">accuracy_rate</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #10b981, #10b98188);">
+                    <i data-lucide="chart"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #10b981;">RESULT</span>
+                    <h2>Result: Improved Accuracy</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">The deep learning-based system achieved an accuracy rate of 0.95, significantly improving upon current manual methods.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">0.95</div>
+                    <div class="label">accuracy_rate</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #f59e0b, #f59e0b88);">
+                    <i data-lucide="layers"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #f59e0b;">INSIGHT</span>
+                    <h2>Insight: Potential for Autonomous Systems</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">This breakthrough demonstrates the potential of deep learning-based systems in medical applications, paving the way for autonomous systems that can improve patient outcomes.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">10%</div>
+                    <div class="label">potential_impact</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="scene-section">
+            <div class="section-header">
+                <div class="icon-box" style="background: linear-gradient(135deg, #ec4899, #ec489988);">
+                    <i data-lucide="sun"></i>
+                </div>
+                <div>
+                    <span class="scene-badge" style="background: #ec4899;">CONCLUSION</span>
+                    <h2>Conclusion: Future Directions</h2>
+                </div>
+            </div>
+
+            <div class="scene-content-grid">
+                <div class="scene-text">
+                    <p class="scene-content">Future research directions include exploring the use of this technology in clinical settings and developing more advanced deep learning models for complex medical applications.</p>
+                    <div class="stat-grid">
+                <div class="stat-item">
+                    <div class="value">in development</div>
+                    <div class="label">future_directions</div>
+                </div></div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    
+    <div style="max-width:1100px;margin:0 auto;padding:2rem;">
+        <div style="background:#1e293b;border:1px solid #334155;border-radius:16px;padding:2rem;margin-bottom:2rem;">
+            <h2 style="font-size:1.5rem;color:#10b981;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem;">
+                <span>🎓</span> Curriculum Connection
+            </h2>
+            <p style="color:#94a3b8;margin-bottom:1rem;">Connect this research to your coursework:</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">kinetics</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #334155;border-radius:100px;font-size:0.8rem;color:#94a3b8;margin:0.25rem;">diffusion</span><span style="display:inline-block;padding:0.3rem 0.8rem;background:#1e293b;border:1px solid #10b981;border-radius:100px;font-size:0.8rem;color:#10b981;margin:0.25rem;">interpret rate law</span>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <a href="https://www.science.org/doi/abs/10.1126/scirobotics.adw2969?af=R" target="_blank" style="display:inline-flex;align-items:center;gap:0.5rem;padding:1rem 2rem;background:#10b981;color:#0f172a;text-decoration:none;font-weight:600;border-radius:100px;">
+                Read Original Paper →
+            </a>
+        </div>
+    </div>
+    
+    <footer style="text-align:center;padding:3rem 2rem;color:#94a3b8;font-size:0.85rem;border-top:1px solid #334155;">
         <p>The Beakers — Research, Rewritten for Students</p>
-        <p style="margin-top: 0.5rem;">© 2026 The Beakers</p>
+        <p style="margin-top:0.5rem;">© 2026 The Beakers</p>
     </footer>
+    
+
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
