@@ -18,48 +18,62 @@ STEM research rewritten for undergraduate students. Cutting-edge research transl
 
 **CRITICAL: Always use existing scripts and templates. Never create new ones from scratch.**
 
-### Canonical Templates (COPY THESE EXACTLY)
-| Purpose | File | Notes |
-|---------|------|-------|
+### Canonical Templates (LOCKED - DO NOT MODIFY)
+| Purpose | File | Best For |
+|---------|------|----------|
 | Deep Dive | `deepdive/solar-cell-bromine.html` | Full NotebookLM treatment |
-| Explain Article | `deepdive/legged-locomotion-story.html` | Chapters + Mermaid diagrams |
-| Explain Prompt | `/storage/napkin/prompts/explain-story.txt` | **USE THIS PROMPT** |
+| **Explain Visual** | `deepdive/solar-cell-bromine-visual.html` | Quick overview, data-heavy, comparisons |
+| **Explain Story** | `deepdive/solar-cell-bromine-story.html` | Complex concepts, step-by-step |
+
+### Canonical Prompts (LOCKED - DO NOT MODIFY)
+| Format | Prompt File |
+|--------|-------------|
+| Visual Summary | `/storage/napkin/prompts/explain-visual.txt` |
+| Detailed Story | `/storage/napkin/prompts/explain-story.txt` |
 
 ### Canonical Scripts (USE THESE)
 | Purpose | Script | Command |
 |---------|--------|---------|
 | Weekly pipeline | `scripts/weekly_pipeline.py` | `python scripts/weekly_pipeline.py` |
-| Visual stories | `/storage/napkin/src/visual_story.py` | `generate_story_scenes()`, `generate_visual_story_html()` |
+| Explain generator | `/storage/napkin/src/explain_generator.py` | Import and use functions |
 | Feed collection | `scripts/feed_collector.py` | `python scripts/feed_collector.py` |
 
 ### Rules
-1. **NEVER** create new HTML templates - copy existing ones
-2. **NEVER** change the chapter structure without explicit permission
-3. **ALWAYS** use `/storage/napkin/prompts/explain-story.txt` prompt for explain articles
-4. **ALWAYS** copy styling from `deepdive/legged-locomotion-story.html`
+1. **NEVER** create new HTML templates - copy solar-cell-bromine-*.html
+2. **NEVER** modify the locked templates or prompts
+3. **ALWAYS** use one of the two explain formats (Visual or Story)
+4. **ALWAYS** copy CSS/styling exactly from the canonical templates
 5. **ALWAYS** check existing code before writing new code
 6. When in doubt, ask: "Is there existing code for this?"
 
-### Explain Article Structure (Chapter-Based)
-Each explain article has 5-7 chapters with Mermaid diagrams. See `/storage/napkin/prompts/explain-story.txt`.
+### Explain Format: Visual Summary
+Quick visual overview with cards, grids, progress bars. NO Mermaid.
 
-**Chapter Flow:**
-1. **The Problem/Promise** - Why this matters
-2. **Background/Evolution** - Historical context
-3. **The Method** - How it works (+ Mermaid diagram)
-4. **Key Innovation** - What's new (+ highlight-box)
-5. **Results** - What they found (+ key-insight)
-6. **Implications** - Why it matters
-7. **Road Ahead** - Future directions
+**Structure (from solar-cell-bromine-visual.html):**
+1. Hero with 3 key stats
+2. The Challenge (3 visual cards)
+3. The Research Question (flow diagram)
+4. The Comparison (molecule-comparison cards)
+5. Why It Works (mechanism-grid, 4 cards)
+6. Results Timeline (progress bars)
+7. Key Insight Box
 
-**Visual Elements:**
-- Mermaid diagrams (2-3 per article)
-- Key insight boxes (pink accent)
-- Highlight boxes (green/cyan gradient)
-- Comparison grids (for comparing methods)
-- Timeline (for historical evolution)
+**Visual Elements:** Lucide icons, visual-card grid, comparison cards, mechanism-grid, timeline-bars, insight-box
 
-**Reference:** `deepdive/legged-locomotion-story.html`
+### Explain Format: Detailed Story
+8-scene narrative with Mermaid diagrams.
+
+**Structure (from solar-cell-bromine-story.html):**
+1. The Challenge (mindmap)
+2. The Hypothesis (flowchart)
+3. The Experiment (flowchart)
+4. The Method (flowchart)
+5. The Surprise/Results (flowchart + stats-grid + highlight-box)
+6. The Explanation (mindmap)
+7. The Achievement (timeline + highlight-box)
+8. The Implication (flowchart + takeaway highlight-box)
+
+**Visual Elements:** Mermaid diagrams (mindmap, flowchart, timeline), highlight-box, stats-grid
 
 ## Content Strategy
 
