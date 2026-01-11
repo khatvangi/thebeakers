@@ -13,6 +13,12 @@
     <meta property="og:description" content="Cutting-edge STEM research, rewritten for undergraduate minds.">
     <meta property="og:image" content="https://thebeakers.com/logo.png">
 
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Beakers — Research, Rewritten for Students">
+    <meta name="twitter:description" content="Cutting-edge STEM research, rewritten for undergraduate minds.">
+    <meta name="twitter:image" content="https://thebeakers.com/logo.png">
+
     <!-- Analytics: Plausible (enable when configured) -->
     <!-- <script defer data-domain="thebeakers.com" src="https://plausible.io/js/script.js"></script> -->
     <script defer src="/public/js/analytics.js"></script>
@@ -44,6 +50,15 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
 
         html {
             scroll-behavior: smooth;

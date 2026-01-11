@@ -79,3 +79,19 @@ window.trackSubscribe = function(cadence) {
         window.beakersTrack('subscribe', { cadence });
     }
 };
+
+window.trackDOIClick = function(doi, title) {
+    if (window.beakersTrack) {
+        window.beakersTrack('doi_click', { doi, title });
+    }
+};
+
+// auto-track outbound DOI clicks
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href*="doi.org"]');
+    if (link && window.beakersTrack) {
+        const doi = link.href.replace(/^https?:\/\/doi\.org\//, '');
+        const title = link.textContent.trim().slice(0, 50);
+        window.beakersTrack('doi_click', { doi, title });
+    }
+}, { passive: true });
