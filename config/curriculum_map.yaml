@@ -1,0 +1,590 @@
+# curriculum_map.yaml - controlled vocabulary for Stage 3 curriculum hooks
+# maps research topics to undergraduate courses, prereqs, and misconceptions
+
+disciplines:
+
+  biology:
+    courses:
+      intro_biology:
+        name: "Introduction to Biology"
+        level: freshman
+        topics:
+          - cell_structure
+          - dna_replication
+          - protein_synthesis
+          - photosynthesis
+          - cellular_respiration
+          - mitosis_meiosis
+          - mendelian_genetics
+          - evolution_natural_selection
+        prereqs: []
+
+      cell_biology:
+        name: "Cell Biology"
+        level: sophomore
+        topics:
+          - membrane_transport
+          - signal_transduction
+          - cytoskeleton
+          - organelle_function
+          - cell_cycle_regulation
+          - apoptosis
+        prereqs: [intro_biology]
+
+      molecular_biology:
+        name: "Molecular Biology"
+        level: sophomore
+        topics:
+          - gene_expression
+          - transcription_regulation
+          - rna_processing
+          - crispr_gene_editing
+          - epigenetics
+          - dna_repair
+        prereqs: [intro_biology, general_chemistry]
+
+      genetics:
+        name: "Genetics"
+        level: sophomore
+        topics:
+          - inheritance_patterns
+          - linkage_mapping
+          - population_genetics
+          - quantitative_genetics
+          - genomics
+          - genetic_disorders
+        prereqs: [intro_biology]
+
+      biochemistry:
+        name: "Biochemistry"
+        level: junior
+        topics:
+          - enzyme_kinetics
+          - metabolic_pathways
+          - protein_structure
+          - lipid_metabolism
+          - carbohydrate_metabolism
+          - bioenergetics
+        prereqs: [organic_chemistry, cell_biology]
+
+      neuroscience:
+        name: "Neuroscience"
+        level: junior
+        topics:
+          - action_potentials
+          - synaptic_transmission
+          - neural_circuits
+          - sensory_systems
+          - motor_control
+          - learning_memory
+          - neuroplasticity
+        prereqs: [cell_biology, intro_physics]
+
+    misconceptions:
+      - id: genes_are_destiny
+        topic: mendelian_genetics
+        wrong: "genes completely determine traits"
+        correct: "genes interact with environment; most traits are polygenic"
+      - id: evolution_is_progress
+        topic: evolution_natural_selection
+        wrong: "evolution moves toward 'higher' forms"
+        correct: "evolution is adaptation to environment, not progress"
+      - id: dna_is_blueprint
+        topic: gene_expression
+        wrong: "DNA is a blueprint that directly makes proteins"
+        correct: "DNA is transcribed to RNA, which is translated to protein; regulation is complex"
+
+  chemistry:
+    courses:
+      general_chemistry:
+        name: "General Chemistry"
+        level: freshman
+        topics:
+          - atomic_structure
+          - periodic_trends
+          - chemical_bonding
+          - stoichiometry
+          - thermochemistry
+          - equilibrium
+          - acids_bases
+          - redox_reactions
+          - kinetics_intro
+        prereqs: []
+
+      organic_chemistry:
+        name: "Organic Chemistry"
+        level: sophomore
+        topics:
+          - functional_groups
+          - stereochemistry
+          - reaction_mechanisms
+          - substitution_elimination
+          - addition_reactions
+          - carbonyl_chemistry
+          - aromatic_chemistry
+          - synthesis_design
+        prereqs: [general_chemistry]
+
+      physical_chemistry:
+        name: "Physical Chemistry"
+        level: junior
+        topics:
+          - thermodynamics
+          - quantum_mechanics
+          - spectroscopy
+          - statistical_mechanics
+          - kinetics_advanced
+          - electrochemistry
+        prereqs: [general_chemistry, calculus_2, intro_physics]
+
+      analytical_chemistry:
+        name: "Analytical Chemistry"
+        level: sophomore
+        topics:
+          - spectroscopic_methods
+          - chromatography
+          - electroanalysis
+          - mass_spectrometry
+          - data_analysis
+          - calibration
+        prereqs: [general_chemistry]
+
+      inorganic_chemistry:
+        name: "Inorganic Chemistry"
+        level: junior
+        topics:
+          - coordination_chemistry
+          - crystal_field_theory
+          - organometallic
+          - bioinorganic
+          - solid_state
+          - catalysis
+        prereqs: [general_chemistry, organic_chemistry]
+
+      materials_chemistry:
+        name: "Materials Chemistry"
+        level: junior
+        topics:
+          - crystal_structures
+          - polymers
+          - semiconductors
+          - nanomaterials
+          - surfaces_interfaces
+          - energy_materials
+        prereqs: [physical_chemistry]
+
+    misconceptions:
+      - id: electrons_orbit
+        topic: atomic_structure
+        wrong: "electrons orbit the nucleus like planets"
+        correct: "electrons exist in probability clouds (orbitals)"
+      - id: bonds_are_sticks
+        topic: chemical_bonding
+        wrong: "bonds are physical connections between atoms"
+        correct: "bonds are shared electron density between nuclei"
+      - id: equilibrium_is_static
+        topic: equilibrium
+        wrong: "at equilibrium, reactions stop"
+        correct: "at equilibrium, forward and reverse rates are equal"
+
+  physics:
+    courses:
+      intro_physics:
+        name: "Introduction to Physics"
+        level: freshman
+        topics:
+          - kinematics
+          - newtons_laws
+          - work_energy
+          - momentum
+          - rotational_motion
+          - oscillations
+          - waves
+          - thermodynamics_intro
+        prereqs: [calculus_1]
+
+      electromagnetism:
+        name: "Electricity and Magnetism"
+        level: sophomore
+        topics:
+          - electric_fields
+          - gauss_law
+          - electric_potential
+          - capacitance
+          - current_resistance
+          - magnetic_fields
+          - induction
+          - maxwell_equations
+        prereqs: [intro_physics, calculus_2]
+
+      quantum_mechanics:
+        name: "Quantum Mechanics"
+        level: junior
+        topics:
+          - wave_particle_duality
+          - schrodinger_equation
+          - uncertainty_principle
+          - hydrogen_atom
+          - angular_momentum
+          - spin
+          - perturbation_theory
+          - quantum_entanglement
+        prereqs: [electromagnetism, differential_equations]
+
+      statistical_mechanics:
+        name: "Statistical Mechanics"
+        level: junior
+        topics:
+          - ensemble_theory
+          - partition_functions
+          - boltzmann_distribution
+          - fermi_dirac
+          - bose_einstein
+          - phase_transitions
+        prereqs: [thermodynamics_intro, quantum_mechanics]
+
+      solid_state:
+        name: "Solid State Physics"
+        level: senior
+        topics:
+          - crystal_lattices
+          - band_theory
+          - semiconductors
+          - superconductivity
+          - magnetism
+          - optical_properties
+        prereqs: [quantum_mechanics, statistical_mechanics]
+
+    misconceptions:
+      - id: heavier_falls_faster
+        topic: kinematics
+        wrong: "heavier objects fall faster"
+        correct: "in vacuum, all objects fall at same rate; air resistance differs"
+      - id: force_causes_motion
+        topic: newtons_laws
+        wrong: "objects need force to keep moving"
+        correct: "force causes acceleration; objects at rest or moving stay that way (inertia)"
+      - id: quantum_is_random
+        topic: schrodinger_equation
+        wrong: "quantum mechanics is just randomness"
+        correct: "QM is deterministic wave evolution; measurement outcomes are probabilistic"
+
+  ai:
+    courses:
+      intro_programming:
+        name: "Introduction to Programming"
+        level: freshman
+        topics:
+          - variables_types
+          - control_flow
+          - functions
+          - data_structures_basic
+          - algorithms_intro
+          - debugging
+        prereqs: []
+
+      data_structures:
+        name: "Data Structures"
+        level: sophomore
+        topics:
+          - arrays_lists
+          - trees_graphs
+          - hash_tables
+          - heaps
+          - sorting_searching
+          - complexity_analysis
+        prereqs: [intro_programming]
+
+      machine_learning:
+        name: "Machine Learning"
+        level: junior
+        topics:
+          - supervised_learning
+          - unsupervised_learning
+          - regression
+          - classification
+          - neural_networks_intro
+          - overfitting_regularization
+          - cross_validation
+          - feature_engineering
+        prereqs: [data_structures, linear_algebra, probability_stats]
+
+      deep_learning:
+        name: "Deep Learning"
+        level: senior
+        topics:
+          - backpropagation
+          - convolutional_networks
+          - recurrent_networks
+          - transformers
+          - attention_mechanisms
+          - generative_models
+          - transfer_learning
+        prereqs: [machine_learning]
+
+      natural_language_processing:
+        name: "Natural Language Processing"
+        level: senior
+        topics:
+          - tokenization
+          - word_embeddings
+          - sequence_models
+          - language_models
+          - named_entity_recognition
+          - machine_translation
+          - question_answering
+        prereqs: [machine_learning]
+
+      computer_vision:
+        name: "Computer Vision"
+        level: senior
+        topics:
+          - image_filtering
+          - edge_detection
+          - feature_extraction
+          - object_detection
+          - segmentation
+          - image_generation
+        prereqs: [machine_learning, linear_algebra]
+
+      reinforcement_learning:
+        name: "Reinforcement Learning"
+        level: senior
+        topics:
+          - markov_decision_processes
+          - q_learning
+          - policy_gradient
+          - actor_critic
+          - exploration_exploitation
+          - multi_agent
+        prereqs: [machine_learning, probability_stats]
+
+    misconceptions:
+      - id: ai_thinks_like_humans
+        topic: neural_networks_intro
+        wrong: "neural networks think like brains"
+        correct: "neural networks are mathematical function approximators; very different from biological cognition"
+      - id: more_data_always_better
+        topic: overfitting_regularization
+        wrong: "more data always improves models"
+        correct: "data quality matters; biased or noisy data can hurt; diminishing returns exist"
+      - id: deep_learning_solves_all
+        topic: supervised_learning
+        wrong: "deep learning is always the best approach"
+        correct: "simpler models often work better with less data; interpretability matters"
+
+  engineering:
+    courses:
+      statics:
+        name: "Engineering Statics"
+        level: sophomore
+        topics:
+          - force_vectors
+          - equilibrium
+          - trusses
+          - frames_machines
+          - centroids
+          - moments_of_inertia
+        prereqs: [intro_physics, calculus_1]
+
+      dynamics:
+        name: "Engineering Dynamics"
+        level: sophomore
+        topics:
+          - kinematics_particles
+          - kinetics_particles
+          - work_energy_particles
+          - rigid_body_kinematics
+          - rigid_body_kinetics
+          - vibrations
+        prereqs: [statics]
+
+      thermodynamics:
+        name: "Engineering Thermodynamics"
+        level: sophomore
+        topics:
+          - first_law
+          - second_law
+          - entropy
+          - cycles
+          - refrigeration
+          - combustion
+        prereqs: [intro_physics, calculus_2]
+
+      fluid_mechanics:
+        name: "Fluid Mechanics"
+        level: junior
+        topics:
+          - fluid_statics
+          - bernoulli
+          - viscous_flow
+          - boundary_layers
+          - turbulence
+          - pipe_flow
+          - drag_lift
+        prereqs: [dynamics, thermodynamics]
+
+      materials_science:
+        name: "Materials Science"
+        level: sophomore
+        topics:
+          - atomic_bonding
+          - crystal_structures_eng
+          - defects
+          - mechanical_properties
+          - phase_diagrams
+          - failure_analysis
+        prereqs: [general_chemistry, intro_physics]
+
+      control_systems:
+        name: "Control Systems"
+        level: junior
+        topics:
+          - transfer_functions
+          - feedback_control
+          - stability_analysis
+          - pid_control
+          - root_locus
+          - frequency_response
+          - state_space
+        prereqs: [differential_equations, dynamics]
+
+      robotics:
+        name: "Robotics"
+        level: senior
+        topics:
+          - kinematics_robotics
+          - dynamics_robotics
+          - path_planning
+          - sensors_actuators
+          - manipulation
+          - locomotion
+        prereqs: [control_systems, linear_algebra]
+
+    misconceptions:
+      - id: stress_equals_force
+        topic: mechanical_properties
+        wrong: "stress and force are the same"
+        correct: "stress is force per unit area; same force creates different stress in different geometries"
+      - id: efficiency_above_100
+        topic: second_law
+        wrong: "we can achieve >100% efficiency with better design"
+        correct: "second law sets fundamental limits; heat engines cannot exceed Carnot efficiency"
+      - id: stronger_is_better
+        topic: materials_science
+        wrong: "stronger materials are always better"
+        correct: "materials involve tradeoffs: strength vs ductility, weight, cost, corrosion resistance"
+
+  mathematics:
+    courses:
+      calculus_1:
+        name: "Calculus I"
+        level: freshman
+        topics:
+          - limits
+          - derivatives
+          - chain_rule
+          - optimization
+          - integration_intro
+          - fundamental_theorem
+        prereqs: []
+
+      calculus_2:
+        name: "Calculus II"
+        level: freshman
+        topics:
+          - integration_techniques
+          - sequences_series
+          - taylor_series
+          - parametric_equations
+          - polar_coordinates
+        prereqs: [calculus_1]
+
+      linear_algebra:
+        name: "Linear Algebra"
+        level: sophomore
+        topics:
+          - vectors_matrices
+          - systems_of_equations
+          - determinants
+          - eigenvalues_eigenvectors
+          - vector_spaces
+          - linear_transformations
+          - orthogonality
+        prereqs: [calculus_1]
+
+      differential_equations:
+        name: "Differential Equations"
+        level: sophomore
+        topics:
+          - first_order_odes
+          - second_order_odes
+          - systems_of_odes
+          - laplace_transforms
+          - series_solutions
+          - numerical_methods
+        prereqs: [calculus_2, linear_algebra]
+
+      probability_stats:
+        name: "Probability and Statistics"
+        level: sophomore
+        topics:
+          - probability_basics
+          - random_variables
+          - distributions
+          - expectation_variance
+          - central_limit_theorem
+          - hypothesis_testing
+          - regression_basics
+        prereqs: [calculus_2]
+
+      real_analysis:
+        name: "Real Analysis"
+        level: junior
+        topics:
+          - sequences_series_rigorous
+          - continuity_rigorous
+          - differentiation_rigorous
+          - riemann_integration
+          - metric_spaces
+        prereqs: [calculus_2]
+
+      abstract_algebra:
+        name: "Abstract Algebra"
+        level: junior
+        topics:
+          - groups
+          - rings
+          - fields
+          - homomorphisms
+          - quotient_structures
+        prereqs: [linear_algebra]
+
+    misconceptions:
+      - id: infinity_is_number
+        topic: limits
+        wrong: "infinity is a number you can do arithmetic with"
+        correct: "infinity is a concept describing unbounded growth; requires careful limit definitions"
+      - id: derivative_is_slope
+        topic: derivatives
+        wrong: "the derivative IS the slope of the tangent line"
+        correct: "the derivative EQUALS the slope at a point; it's a function measuring rate of change"
+      - id: correlation_causation
+        topic: regression_basics
+        wrong: "correlation implies causation"
+        correct: "correlation measures association; causation requires controlled experiments or careful analysis"
+
+# boundary types for Stage 3 curriculum_connections
+boundary_types:
+  - prerequisite   # students need this concept first
+  - extends        # paper extends what's taught in course
+  - applies        # paper applies course concept to new domain
+  - challenges     # paper challenges or refines course concept
+  - analogous      # concept is analogous to course topic
+
+# difficulty levels
+levels:
+  - freshman
+  - sophomore
+  - junior
+  - senior

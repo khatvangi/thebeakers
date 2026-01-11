@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO: populated by JS from story-data.json -->
+    <title id="page-title">The Beakers — Research, Rewritten for Students</title>
+    <meta name="description" id="meta-description" content="Cutting-edge STEM research, rewritten for undergraduate students.">
+    <link rel="canonical" id="canonical-url" href="https://thebeakers.com/">
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="The Beakers">
+    <meta property="og:title" id="og-title" content="The Beakers">
+    <meta property="og:description" id="og-description" content="Research, rewritten for students">
+    <meta property="og:url" id="og-url" content="https://thebeakers.com/">
+    <meta property="og:image" content="https://thebeakers.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" id="twitter-title" content="The Beakers">
+    <meta name="twitter:description" id="twitter-description" content="Research, rewritten for students">
+    <meta name="twitter:image" content="https://thebeakers.com/og-image.png">
+
+    <!-- JSON-LD (populated by JS) -->
+    <script type="application/ld+json" id="json-ld">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Loading...",
+        "publisher": {
+            "@type": "Organization",
+            "name": "The Beakers",
+            "url": "https://thebeakers.com"
+        }
+    }
+    </script>
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Analytics: Plausible (enable when configured) -->
+    <!-- <script defer data-domain="thebeakers.com" src="https://plausible.io/js/script.js"></script> -->
+    <script defer src="/public/js/analytics.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        /* critical: prevent layout shift for title */
+        .article-header h1 { min-height: 3rem; }
+        .article-hook { min-height: 1.5rem; }
+    </style>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-highlight: #1a2744;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-teal: #14b8a6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* accessibility: respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* accessibility: focus states */
+        :focus-visible {
+            outline: 2px solid var(--accent-teal);
+            outline-offset: 2px;
+        }
+        a:focus-visible, button:focus-visible, .quiz-option:focus-visible {
+            outline: 2px solid var(--accent-teal);
+            outline-offset: 2px;
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* header */
+        header {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+
+        /* main layout with study rail */
+        .page-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        @media (max-width: 1024px) {
+            .page-layout { grid-template-columns: 1fr; }
+            .study-rail { display: none; }
+        }
+
+        /* article content */
+        .article-content { max-width: 800px; }
+        .article-header { margin-bottom: 2rem; }
+        .discipline-tag {
+            display: inline-block;
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--accent-green);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
+        .article-header h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+        .article-hook {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        .meta-bar {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .difficulty-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .difficulty-badge.intro { background: var(--accent-green); color: white; }
+        .difficulty-badge.intermediate { background: var(--accent-blue); color: white; }
+        .difficulty-badge.advanced { background: var(--accent-purple); color: white; }
+
+        /* content sections */
+        .section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+        }
+        .section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-bottom: 1rem;
+        }
+        .section p { color: var(--text-secondary); margin-bottom: 0.75rem; }
+
+        /* claim markers in text */
+        .claim-ref {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            border-radius: 50%;
+            cursor: pointer;
+            vertical-align: super;
+            margin: 0 2px;
+        }
+        .claim-ref:hover { background: var(--accent-blue); }
+
+        /* claim ledger */
+        .claim-ledger {
+            background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(59,130,246,0.05));
+            border: 1px solid var(--accent-purple);
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+        .claim-ledger-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(139,92,246,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .claim-ledger-header h3 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-purple);
+        }
+        .claim-ledger-toggle {
+            font-size: 1.2rem;
+            color: var(--accent-purple);
+        }
+        .claim-ledger-body {
+            padding: 1rem 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .claim-ledger.open .claim-ledger-body { max-height: 1000px; }
+        .claim-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(139,92,246,0.2);
+            display: flex;
+            gap: 0.75rem;
+        }
+        .claim-item:last-child { border-bottom: none; }
+        .claim-id {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .claim-content { flex: 1; }
+        .claim-text { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+        .claim-evidence {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .evidence-tag {
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.6rem;
+        }
+        .evidence-tag.empirical { background: rgba(16,185,129,0.2); color: var(--accent-green); }
+        .evidence-tag.computed { background: rgba(59,130,246,0.2); color: var(--accent-blue); }
+        .evidence-tag.cited { background: rgba(245,158,11,0.2); color: var(--accent-orange); }
+        .evidence-tag.inferred { background: rgba(100,116,139,0.2); color: var(--text-light); }
+
+        /* curriculum connection */
+        .curriculum-section {
+            background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(59,130,246,0.1));
+            border: 2px solid var(--accent-purple);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+        .curriculum-section::before {
+            content: 'CURRICULUM CONNECTION';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+        }
+        .curriculum-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(139,92,246,0.2);
+        }
+        .curriculum-item:last-child { border-bottom: none; }
+        .curriculum-course {
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+        .curriculum-level {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            background: var(--bg-card);
+            margin-left: 0.5rem;
+        }
+        .curriculum-type {
+            font-size: 0.7rem;
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+        }
+        .curriculum-boundary {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding-left: 1rem;
+            border-left: 2px solid var(--accent-orange);
+            margin-top: 0.5rem;
+        }
+        .curriculum-boundary::before {
+            content: 'Boundary: ';
+            color: var(--accent-orange);
+            font-weight: 600;
+        }
+
+        /* quiz block */
+        .quiz-section {
+            background: var(--bg-card);
+            border: 2px solid var(--accent-teal);
+            border-radius: 16px;
+            margin: 2rem 0;
+            overflow: hidden;
+        }
+        .quiz-header {
+            background: var(--accent-teal);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .quiz-body { padding: 1.5rem; }
+        .quiz-progress {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .quiz-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-dark);
+        }
+        .quiz-dot.current { background: var(--accent-teal); }
+        .quiz-dot.correct { background: var(--accent-green); }
+        .quiz-dot.incorrect { background: var(--accent-red); }
+        .quiz-question {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+        .quiz-options { display: flex; flex-direction: column; gap: 0.75rem; }
+        .quiz-option {
+            padding: 1rem 1.25rem;
+            background: var(--bg-highlight);
+            border: 2px solid var(--border-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            font-size: 0.95rem;
+        }
+        .quiz-option:hover { border-color: var(--accent-teal); color: var(--text-primary); }
+        .quiz-option.selected { border-color: var(--accent-blue); background: rgba(59,130,246,0.1); }
+        .quiz-option.correct { border-color: var(--accent-green); background: rgba(16,185,129,0.1); }
+        .quiz-option.incorrect { border-color: var(--accent-red); background: rgba(239,68,68,0.1); }
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            display: none;
+        }
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: rgba(16,185,129,0.1); border-left: 3px solid var(--accent-green); }
+        .quiz-feedback.incorrect { background: rgba(239,68,68,0.1); border-left: 3px solid var(--accent-red); }
+        .quiz-feedback h4 { font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .quiz-feedback p { font-size: 0.85rem; color: var(--text-secondary); }
+        .quiz-feedback .anti-hallucination {
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--accent-orange);
+            font-style: italic;
+        }
+        .quiz-nav {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .quiz-btn {
+            padding: 0.6rem 1.25rem;
+            background: var(--accent-teal);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .quiz-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* study rail (right sidebar) */
+        .study-rail {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+        .rail-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .rail-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-bottom: 0.75rem;
+        }
+        .rail-list { list-style: none; }
+        .rail-list li {
+            padding: 0.4rem 0;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .rail-list li:last-child { border-bottom: none; }
+        .rail-list a { color: var(--accent-blue); text-decoration: none; }
+        .rail-list a:hover { text-decoration: underline; }
+        .claim-mini {
+            display: inline-flex;
+            width: 16px;
+            height: 16px;
+            background: var(--accent-purple);
+            color: white;
+            font-size: 0.55rem;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.4rem;
+        }
+
+        /* provenance footer */
+        .provenance {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+        .provenance-title {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        .provenance-item { margin: 0.25rem 0; }
+        .provenance-item strong { color: var(--text-secondary); }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-dark);
+        }
+
+        /* reading progress indicator */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .progress-bar { transition: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress-bar" aria-hidden="true"></div>
+    <header>
+        <a href="/" class="logo">The Beakers</a>
+        <a href="javascript:history.back()" class="back-link">← Back</a>
+    </header>
+
+    <div class="page-layout">
+        <main class="article-content">
+            <div class="article-header">
+                <span class="discipline-tag" id="discipline">Loading...</span>
+                <h1 id="title">Loading article...</h1>
+                <p class="article-hook" id="hook"></p>
+                <div class="meta-bar">
+                    <span class="difficulty-badge" id="difficulty"></span>
+                    <span id="date"></span>
+                    <span id="source"></span>
+                </div>
+            </div>
+
+            <!-- panels render here -->
+            <div id="panels-container"></div>
+
+            <!-- claim ledger -->
+            <div class="claim-ledger" id="claim-ledger">
+                <div class="claim-ledger-header" tabindex="0" role="button"
+                     aria-expanded="false" aria-controls="claims-container"
+                     onclick="toggleClaimLedger()"
+                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleClaimLedger();}">
+                    <h3>Evidence Ledger</h3>
+                    <span class="claim-ledger-toggle" aria-hidden="true">+</span>
+                </div>
+                <div class="claim-ledger-body" id="claims-container"></div>
+            </div>
+
+            <!-- curriculum connections -->
+            <div class="curriculum-section" id="curriculum-section" style="display:none;">
+                <div id="curriculum-container"></div>
+            </div>
+
+            <!-- quiz -->
+            <div class="quiz-section" id="quiz-section" style="display:none;">
+                <div class="quiz-header">Test Your Understanding</div>
+                <div class="quiz-body">
+                    <div class="quiz-progress" id="quiz-progress"></div>
+                    <div class="quiz-question" id="quiz-question"></div>
+                    <div class="quiz-options" id="quiz-options"></div>
+                    <div class="quiz-feedback" id="quiz-feedback">
+                        <h4 id="feedback-title"></h4>
+                        <p id="feedback-text"></p>
+                        <p class="anti-hallucination" id="feedback-anti"></p>
+                    </div>
+                    <div class="quiz-nav">
+                        <button class="quiz-btn" id="prev-btn" onclick="prevQuestion()" disabled>Previous</button>
+                        <button class="quiz-btn" id="next-btn" onclick="nextQuestion()">Next</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- provenance -->
+            <div class="provenance" id="provenance">
+                <div class="provenance-title">Provenance</div>
+                <div class="provenance-item"><strong>Original:</strong> <a id="prov-url" href="#" target="_blank"></a></div>
+                <div class="provenance-item"><strong>Schema:</strong> <span id="prov-schema">v3</span></div>
+                <div class="provenance-item"><strong>Pipeline:</strong> <span id="prov-pipeline">TheBeakers Stage 1-4</span></div>
+                <div class="provenance-item"><strong>Generated:</strong> <span id="prov-date"></span></div>
+            </div>
+        </main>
+
+        <!-- study rail -->
+        <aside class="study-rail">
+            <div class="rail-section">
+                <div class="rail-title">On This Page</div>
+                <ul class="rail-list" id="rail-toc"></ul>
+            </div>
+            <div class="rail-section">
+                <div class="rail-title">Key Claims</div>
+                <ul class="rail-list" id="rail-claims"></ul>
+            </div>
+            <div class="rail-section" id="rail-curriculum" style="display:none;">
+                <div class="rail-title">Course Links</div>
+                <ul class="rail-list" id="rail-courses"></ul>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        <p><strong>The Beakers</strong> — Research, Rewritten for Students</p>
+    </footer>
+
+    <script>
+        // state
+        let storyData = null;
+        let currentQuestion = 0;
+        let answers = [];
+
+        // load story-data.json from url param
+        async function loadStoryData() {
+            const params = new URLSearchParams(window.location.search);
+            const path = params.get('story');
+            if (!path) {
+                document.getElementById('title').textContent = 'No story specified';
+                return;
+            }
+            try {
+                const resp = await fetch(path);
+                if (!resp.ok) throw new Error('Not found');
+                storyData = await resp.json();
+                render();
+            } catch (e) {
+                document.getElementById('title').textContent = 'Failed to load: ' + e.message;
+            }
+        }
+
+        function render() {
+            // header - handle both v3 schema and legacy formats
+            const meta = storyData.paper_metadata || {};
+            document.getElementById('discipline').textContent = storyData.discipline || meta.journal || 'research';
+            document.getElementById('title').textContent = meta.title || storyData.title || 'Untitled';
+            document.getElementById('hook').textContent = storyData.research_question?.text || '';
+            document.getElementById('difficulty').textContent = storyData.difficulty || 'intermediate';
+            document.getElementById('difficulty').className = 'difficulty-badge ' + (storyData.difficulty || 'intermediate');
+            document.getElementById('date').textContent = meta.year || storyData.publication_date || '';
+            document.getElementById('source').textContent = meta.journal || storyData.source || '';
+
+            // seo
+            updateSEO();
+            // panels
+            renderPanels();
+            // claims
+            renderClaimLedger();
+            // curriculum
+            renderCurriculum();
+            // quiz
+            renderQuiz();
+            // provenance
+            renderProvenance();
+            // rail
+            renderStudyRail();
+        }
+
+        function renderPanels() {
+            const container = document.getElementById('panels-container');
+            // handle both panels[] (Stage 2+) and story[] (Stage 1) formats
+            const panels = storyData.panels || [];
+            const story = storyData.story || [];
+
+            if (panels.length > 0) {
+                // Stage 2+ format with panels
+                container.innerHTML = panels.map((p, i) => `
+                    <div class="section" id="panel-${p.id || i}">
+                        <div class="section-title">${p.label || 'Section ' + (i+1)}</div>
+                        ${p.narrative ? `<p>${insertClaimRefs(p.narrative, p.claim_ids || [])}</p>` : ''}
+                        ${p.key_insight ? `<p><strong>Key insight:</strong> ${p.key_insight}</p>` : ''}
+                    </div>
+                `).join('');
+            } else if (story.length > 0) {
+                // Stage 1 format with story paragraphs
+                container.innerHTML = story.map((para, i) => `
+                    <div class="section" id="section-${i}">
+                        <p>${insertClaimRefs(para.text, para.supporting_claim_ids || [])}</p>
+                    </div>
+                `).join('');
+            }
+
+            // also render structured_content if present (rules, etc.)
+            const sc = storyData.structured_content;
+            if (sc && sc.items) {
+                const scHtml = `
+                    <div class="section">
+                        <div class="section-title">${sc.section_title || sc.content_type || 'Content'}</div>
+                        ${sc.items.map(item => `
+                            <div style="margin-bottom: 1rem;">
+                                <strong>${item.number ? item.number + '. ' : ''}${item.title || ''}</strong>
+                                <p style="margin-top: 0.25rem; color: var(--text-secondary);">${item.summary || ''}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                container.innerHTML += scHtml;
+            }
+        }
+
+        function insertClaimRefs(text, claimIds) {
+            // add claim reference markers at end
+            if (!claimIds.length) return text;
+            const refs = claimIds.map(id => `<span class="claim-ref" onclick="highlightClaim('${id}')">${id.replace('C','')}</span>`).join('');
+            return text + ' ' + refs;
+        }
+
+        function renderClaimLedger() {
+            const claims = storyData.claim_ledger || [];
+            const container = document.getElementById('claims-container');
+            container.innerHTML = claims.map(c => {
+                // v3 uses 'type' (QUOTE/PARAPHRASE/COMPUTED), map to display
+                const claimType = (c.type || c.evidence_type || 'inferred').toLowerCase();
+                const typeMap = { quote: 'cited', paraphrase: 'inferred', computed: 'computed' };
+                const displayType = typeMap[claimType] || claimType;
+                return `
+                    <div class="claim-item" id="claim-${c.id}">
+                        <span class="claim-id">${c.id.replace('C','')}</span>
+                        <div class="claim-content">
+                            <div class="claim-text">${c.claim}</div>
+                            <div class="claim-evidence">
+                                <span class="evidence-tag ${displayType}">${displayType}</span>
+                                ${c.pointers?.length ? `<span>§${c.pointers[0]}</span>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function renderCurriculum() {
+            const connections = storyData.curriculum_connections || [];
+            if (!connections.length) return;
+            document.getElementById('curriculum-section').style.display = 'block';
+            const container = document.getElementById('curriculum-container');
+            container.innerHTML = connections.map(c => `
+                <div class="curriculum-item">
+                    <div class="curriculum-course">
+                        ${c.concept}
+                        <span class="curriculum-level">${c.level || 'intermediate'}</span>
+                    </div>
+                    <div class="curriculum-type">${c.connection_type || 'applies'} (${c.subject || 'general'})</div>
+                    ${c.boundary ? `<div class="curriculum-boundary">${c.boundary}</div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function renderQuiz() {
+            const quiz = storyData.quiz || [];
+            if (!quiz.length) return;
+            document.getElementById('quiz-section').style.display = 'block';
+            answers = new Array(quiz.length).fill(null);
+            renderQuestion(0);
+            // progress dots
+            const progress = document.getElementById('quiz-progress');
+            progress.innerHTML = quiz.map((_, i) => `<span class="quiz-dot" id="dot-${i}"></span>`).join('');
+        }
+
+        function renderQuestion(idx) {
+            const quiz = storyData.quiz || [];
+            if (idx < 0 || idx >= quiz.length) return;
+            currentQuestion = idx;
+            const q = quiz[idx];
+
+            document.getElementById('quiz-question').textContent = q.prompt;
+            const options = document.getElementById('quiz-options');
+            options.innerHTML = (q.options || []).map((opt, i) => `
+                <div class="quiz-option" data-index="${i}" tabindex="0" role="button"
+                     onclick="selectOption(${i})"
+                     onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectOption(${i});}"
+                     aria-label="Option ${i+1}: ${opt}">${opt}</div>
+            `).join('');
+
+            // restore selection
+            if (answers[idx] !== null) {
+                const opts = options.querySelectorAll('.quiz-option');
+                opts.forEach((o, i) => {
+                    if (i === answers[idx]) o.classList.add('selected');
+                    if (i === q.correct_index) o.classList.add('correct');
+                    else if (i === answers[idx]) o.classList.add('incorrect');
+                });
+                showFeedback(q, answers[idx] === q.correct_index);
+            } else {
+                hideFeedback();
+            }
+
+            // update progress dots
+            document.querySelectorAll('.quiz-dot').forEach((d, i) => {
+                d.className = 'quiz-dot';
+                if (i === idx) d.classList.add('current');
+                else if (answers[i] !== null) {
+                    d.classList.add(answers[i] === quiz[i].correct_index ? 'correct' : 'incorrect');
+                }
+            });
+
+            // nav buttons
+            document.getElementById('prev-btn').disabled = idx === 0;
+            document.getElementById('next-btn').textContent = idx === quiz.length - 1 ? 'Finish' : 'Next';
+        }
+
+        function selectOption(optIdx) {
+            const quiz = storyData.quiz || [];
+            const q = quiz[currentQuestion];
+            answers[currentQuestion] = optIdx;
+
+            const opts = document.querySelectorAll('.quiz-option');
+            opts.forEach((o, i) => {
+                o.classList.remove('selected', 'correct', 'incorrect');
+                if (i === optIdx) o.classList.add('selected');
+                if (i === q.correct_index) o.classList.add('correct');
+                else if (i === optIdx) o.classList.add('incorrect');
+            });
+
+            showFeedback(q, optIdx === q.correct_index);
+            // update dot
+            const dot = document.getElementById(`dot-${currentQuestion}`);
+            dot.className = 'quiz-dot ' + (optIdx === q.correct_index ? 'correct' : 'incorrect');
+        }
+
+        function showFeedback(q, isCorrect) {
+            const fb = document.getElementById('quiz-feedback');
+            fb.className = 'quiz-feedback show ' + (isCorrect ? 'correct' : 'incorrect');
+            document.getElementById('feedback-title').textContent = isCorrect ? 'Correct!' : 'Not quite.';
+            document.getElementById('feedback-text').textContent = q.justification || '';
+            document.getElementById('feedback-anti').textContent = q.anti_hallucination || '';
+        }
+
+        function hideFeedback() {
+            document.getElementById('quiz-feedback').className = 'quiz-feedback';
+        }
+
+        function nextQuestion() {
+            const quiz = storyData.quiz || [];
+            if (currentQuestion < quiz.length - 1) {
+                renderQuestion(currentQuestion + 1);
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                renderQuestion(currentQuestion - 1);
+            }
+        }
+
+        function renderProvenance() {
+            const meta = storyData.paper_metadata || {};
+            const url = meta.url || meta.doi ? `https://doi.org/${meta.doi}` : storyData.original_url || '#';
+            document.getElementById('prov-url').href = url;
+            document.getElementById('prov-url').textContent = url.length > 60 ? url.substring(0,60) + '...' : url;
+            document.getElementById('prov-schema').textContent = storyData.schema_version || 'v3';
+            document.getElementById('prov-date').textContent = storyData.generated_at || meta.year || '';
+        }
+
+        function renderStudyRail() {
+            // toc from panels or story
+            const panels = storyData.panels || [];
+            const story = storyData.story || [];
+            const toc = document.getElementById('rail-toc');
+
+            if (panels.length > 0) {
+                toc.innerHTML = panels.map((p, i) => `
+                    <li><a href="#panel-${p.id || i}">${p.label || 'Section ' + (i+1)}</a></li>
+                `).join('');
+            } else if (story.length > 0) {
+                toc.innerHTML = story.map((_, i) => `
+                    <li><a href="#section-${i}">Section ${i+1}</a></li>
+                `).join('');
+            }
+
+            // claims
+            const claims = storyData.claim_ledger || [];
+            const claimsList = document.getElementById('rail-claims');
+            claimsList.innerHTML = claims.slice(0, 8).map(c => `
+                <li><span class="claim-mini">${c.id.replace('C','')}</span>${c.claim.substring(0,40)}...</li>
+            `).join('');
+
+            // curriculum
+            const connections = storyData.curriculum_connections || [];
+            if (connections.length) {
+                document.getElementById('rail-curriculum').style.display = 'block';
+                const courses = document.getElementById('rail-courses');
+                courses.innerHTML = connections.slice(0, 5).map(c => `
+                    <li>${c.concept} (${c.subject})</li>
+                `).join('');
+            }
+        }
+
+        function toggleClaimLedger() {
+            const ledger = document.getElementById('claim-ledger');
+            const header = ledger.querySelector('.claim-ledger-header');
+            ledger.classList.toggle('open');
+            const isOpen = ledger.classList.contains('open');
+            const toggle = ledger.querySelector('.claim-ledger-toggle');
+            toggle.textContent = isOpen ? '−' : '+';
+            header.setAttribute('aria-expanded', isOpen);
+        }
+
+        function highlightClaim(claimId) {
+            const el = document.getElementById('claim-' + claimId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                el.style.background = 'rgba(139,92,246,0.3)';
+                setTimeout(() => el.style.background = '', 1500);
+            }
+            // open ledger if closed
+            const ledger = document.getElementById('claim-ledger');
+            if (!ledger.classList.contains('open')) toggleClaimLedger();
+        }
+
+        // seo population
+        function updateSEO() {
+            const meta = storyData.paper_metadata || {};
+            const title = meta.title || storyData.title || 'Research Article';
+            const desc = storyData.research_question?.text || storyData.hook || 'Research, rewritten for students';
+            const url = window.location.href;
+            const doi = meta.doi || '';
+
+            // update title
+            document.getElementById('page-title').textContent = `${title} — The Beakers`;
+            document.title = `${title} — The Beakers`;
+
+            // update meta description
+            document.getElementById('meta-description').content = desc.substring(0, 160);
+
+            // update canonical
+            document.getElementById('canonical-url').href = url;
+
+            // update OpenGraph
+            document.getElementById('og-title').content = title;
+            document.getElementById('og-description').content = desc.substring(0, 200);
+            document.getElementById('og-url').content = url;
+
+            // update Twitter
+            document.getElementById('twitter-title').content = title;
+            document.getElementById('twitter-description').content = desc.substring(0, 200);
+
+            // update JSON-LD
+            const jsonLd = {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": title,
+                "description": desc,
+                "datePublished": meta.year ? `${meta.year}-01-01` : new Date().toISOString().split('T')[0],
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "The Beakers",
+                    "url": "https://thebeakers.com"
+                },
+                "mainEntityOfPage": url
+            };
+            if (doi) jsonLd.sameAs = `https://doi.org/${doi}`;
+            document.getElementById('json-ld').textContent = JSON.stringify(jsonLd, null, 2);
+        }
+
+        // reading progress
+        function updateProgress() {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+        window.addEventListener('scroll', updateProgress, { passive: true });
+
+        // init
+        loadStoryData();
+    </script>
+</body>
+</html>

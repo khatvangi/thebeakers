@@ -1,0 +1,16 @@
+# /etc/systemd/system/thebeakers-daily.timer
+# triggers daily digest at 6 AM
+
+[Unit]
+Description=TheBeakers Daily Digest Timer
+
+[Timer]
+# run at 6 AM every day
+OnCalendar=*-*-* 06:00:00
+# run missed jobs on startup
+Persistent=true
+# randomize start by up to 15 minutes to avoid thundering herd
+RandomizedDelaySec=900
+
+[Install]
+WantedBy=timers.target

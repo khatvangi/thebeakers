@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topics — The Beakers</title>
+    <meta name="description" content="Browse research by discipline: Biology, Chemistry, Physics, AI, Engineering, Mathematics.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --bg-surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: #334155;
+            --accent-teal: #14b8a6;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; }
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-decoration: none;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav { display: flex; gap: 1.5rem; }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--accent-teal); }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .topic-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        .topic-card:hover { border-color: var(--accent-teal); transform: translateY(-2px); }
+        .topic-card.biology::before { background: var(--accent-green); }
+        .topic-card.chemistry::before { background: var(--accent-green); }
+        .topic-card.physics::before { background: var(--accent-blue); }
+        .topic-card.ai::before { background: var(--accent-blue); }
+        .topic-card.engineering::before { background: var(--accent-orange); }
+        .topic-card.mathematics::before { background: var(--accent-purple); }
+        .topic-card.agriculture::before { background: var(--accent-green); }
+        .topic-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .topic-card h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .topic-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+        .topic-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The Beakers</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/issues/">Issues</a>
+            <a href="/topics/">Topics</a>
+            <a href="/search/">Search</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Topics</h1>
+        <p class="subtitle">Explore research by discipline</p>
+
+        <div class="topics-grid">
+            <a href="/biology.html" class="topic-card biology">
+                <div class="topic-icon">🧬</div>
+                <h2>Biology</h2>
+                <p class="topic-desc">Cells, genes, organisms, and the mechanisms of life</p>
+                <span class="topic-count" data-discipline="biology">— articles</span>
+            </a>
+
+            <a href="/chemistry.html" class="topic-card chemistry">
+                <div class="topic-icon">⚗️</div>
+                <h2>Chemistry</h2>
+                <p class="topic-desc">Molecules, reactions, and the building blocks of matter</p>
+                <span class="topic-count" data-discipline="chemistry">— articles</span>
+            </a>
+
+            <a href="/physics.html" class="topic-card physics">
+                <div class="topic-icon">⚛️</div>
+                <h2>Physics</h2>
+                <p class="topic-desc">Forces, particles, and the fundamental laws of the universe</p>
+                <span class="topic-count" data-discipline="physics">— articles</span>
+            </a>
+
+            <a href="/ai.html" class="topic-card ai">
+                <div class="topic-icon">🤖</div>
+                <h2>Artificial Intelligence</h2>
+                <p class="topic-desc">Machine learning, neural networks, and intelligent systems</p>
+                <span class="topic-count" data-discipline="ai">— articles</span>
+            </a>
+
+            <a href="/engineering.html" class="topic-card engineering">
+                <div class="topic-icon">⚙️</div>
+                <h2>Engineering</h2>
+                <p class="topic-desc">Design, systems, and solutions to real-world problems</p>
+                <span class="topic-count" data-discipline="engineering">— articles</span>
+            </a>
+
+            <a href="/mathematics.html" class="topic-card mathematics">
+                <div class="topic-icon">📐</div>
+                <h2>Mathematics</h2>
+                <p class="topic-desc">Patterns, proofs, and the language of science</p>
+                <span class="topic-count" data-discipline="mathematics">— articles</span>
+            </a>
+
+            <a href="/agriculture.html" class="topic-card agriculture">
+                <div class="topic-icon">🌱</div>
+                <h2>Agriculture</h2>
+                <p class="topic-desc">Crops, soil, and sustainable food systems</p>
+                <span class="topic-count" data-discipline="agriculture">— articles</span>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>The Beakers</strong> — Research, Rewritten for Students</p>
+    </footer>
+
+    <script>
+        // load article counts
+        fetch('/data/articles-index.json')
+            .then(r => r.json())
+            .then(data => {
+                const counts = {};
+                (data.articles || []).forEach(a => {
+                    counts[a.discipline] = (counts[a.discipline] || 0) + 1;
+                });
+                document.querySelectorAll('.topic-count').forEach(el => {
+                    const d = el.dataset.discipline;
+                    el.textContent = `${counts[d] || 0} articles`;
+                });
+            })
+            .catch(() => {});
+    </script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search — The Beakers</title>
+    <meta name="description" content="Search research articles by keyword.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --bg-surface: #1e293b;
+            --bg-elevated: #1a2744;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: #334155;
+            --accent-teal: #14b8a6;
+            --accent-blue: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; }
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-decoration: none;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav { display: flex; gap: 1.5rem; }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--accent-teal); }
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .search-box {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            padding-left: 3rem;
+            background: var(--bg-surface);
+            border: 2px solid var(--border-subtle);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+        }
+        .search-input::placeholder { color: var(--text-muted); }
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+        .search-hint {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+        .results-count {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        .results { display: flex; flex-direction: column; gap: 1rem; }
+        .result-card {
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+        .result-card:hover { border-color: var(--accent-teal); }
+        .result-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .discipline-tag {
+            background: var(--bg-base);
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .result-card h2 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+        }
+        .result-hook {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        mark {
+            background: rgba(20, 184, 166, 0.3);
+            color: var(--text-primary);
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The Beakers</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/issues/">Issues</a>
+            <a href="/topics/">Topics</a>
+            <a href="/search/">Search</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Search</h1>
+
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-input" id="search-input"
+                   placeholder="Search articles..." autofocus>
+        </div>
+
+        <p class="search-hint">Search by title, topic, or keyword</p>
+
+        <div id="results-container"></div>
+    </main>
+
+    <footer>
+        <p><strong>The Beakers</strong> — Research, Rewritten for Students</p>
+    </footer>
+
+    <script>
+        let allArticles = [];
+
+        async function loadArticles() {
+            try {
+                const resp = await fetch('/data/articles-index.json');
+                const data = await resp.json();
+                allArticles = data.articles || [];
+            } catch (e) {
+                console.error('Failed to load articles:', e);
+            }
+        }
+
+        function search(query) {
+            if (!query || query.length < 2) {
+                return [];
+            }
+
+            const q = query.toLowerCase();
+            return allArticles.filter(a => {
+                const text = `${a.headline} ${a.hook} ${a.discipline} ${a.source}`.toLowerCase();
+                return text.includes(q);
+            });
+        }
+
+        function highlight(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        function renderResults(results, query) {
+            const container = document.getElementById('results-container');
+
+            if (!query || query.length < 2) {
+                container.innerHTML = '<div class="empty-state">Type at least 2 characters to search</div>';
+                return;
+            }
+
+            if (results.length === 0) {
+                container.innerHTML = `<div class="empty-state">No results for "${query}"</div>`;
+                return;
+            }
+
+            container.innerHTML = `
+                <p class="results-count">${results.length} result${results.length !== 1 ? 's' : ''}</p>
+                <div class="results">
+                    ${results.map(a => `
+                        <a href="/article.html?article=${a.discipline}/${a.filename.replace('.json','')}" class="result-card">
+                            <div class="result-meta">
+                                <span class="discipline-tag">${a.discipline}</span>
+                                <span>${a.date || ''}</span>
+                            </div>
+                            <h2>${highlight(a.headline, query)}</h2>
+                            <p class="result-hook">${highlight(a.hook, query)}</p>
+                        </a>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // debounce search
+        let timeout;
+        document.getElementById('search-input').addEventListener('input', e => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                const query = e.target.value.trim();
+                const results = search(query);
+                renderResults(results, query);
+            }, 200);
+        });
+
+        // handle URL param
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q) {
+            document.getElementById('search-input').value = q;
+        }
+
+        loadArticles().then(() => {
+            if (q) {
+                const results = search(q);
+                renderResults(results, q);
+            } else {
+                renderResults([], '');
+            }
+        });
+    </script>
+</body>
+</html>

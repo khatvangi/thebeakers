@@ -1,0 +1,20 @@
+# /etc/systemd/system/thebeakers-weekly.service
+# weekly deep dive pipeline service
+
+[Unit]
+Description=TheBeakers Weekly Deep Dive Pipeline
+After=network.target
+
+[Service]
+Type=oneshot
+User=kiran
+WorkingDirectory=/storage/thebeakers
+ExecStart=/usr/bin/python3 /storage/thebeakers/scripts/weekly_pipeline.py
+StandardOutput=append:/storage/thebeakers/logs/weekly-deepdive.log
+StandardError=append:/storage/thebeakers/logs/weekly-deepdive.log
+TimeoutStartSec=3600
+# memory limit (6GB for deeper processing)
+MemoryMax=6G
+
+[Install]
+WantedBy=multi-user.target

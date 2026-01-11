@@ -1,0 +1,21 @@
+# /etc/systemd/system/thebeakers-daily.service
+# daily digest pipeline service
+# runs: feed collection, triage, selection, rendering
+
+[Unit]
+Description=TheBeakers Daily Digest Pipeline
+After=network.target listmonk.service
+
+[Service]
+Type=oneshot
+User=kiran
+WorkingDirectory=/storage/thebeakers
+ExecStart=/usr/bin/python3 /storage/thebeakers/scripts/run_daily_digest.py
+StandardOutput=append:/storage/thebeakers/logs/daily-digest.log
+StandardError=append:/storage/thebeakers/logs/daily-digest.log
+TimeoutStartSec=1800
+# memory limit (4GB)
+MemoryMax=4G
+
+[Install]
+WantedBy=multi-user.target

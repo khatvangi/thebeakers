@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Issues — The Beakers</title>
+    <meta name="description" content="Browse all research articles, sorted by date.">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0f172a;
+            --bg-surface: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-subtle: #334155;
+            --accent-teal: #14b8a6;
+            --accent-blue: #3b82f6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; }
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            text-decoration: none;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        nav { display: flex; gap: 1.5rem; }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        nav a:hover { color: var(--accent-teal); }
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            padding: 0.4rem 0.9rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            border-color: var(--accent-teal);
+            color: var(--accent-teal);
+        }
+        .article-list { display: flex; flex-direction: column; gap: 1rem; }
+        .article-card {
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: border-color 0.2s;
+        }
+        .article-card:hover { border-color: var(--accent-teal); }
+        .article-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .discipline-tag {
+            background: var(--bg-base);
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .article-card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            line-height: 1.4;
+        }
+        .article-hook {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-subtle);
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The Beakers</a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/issues/">Issues</a>
+            <a href="/topics/">Topics</a>
+            <a href="/search/">Search</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>All Issues</h1>
+        <p class="subtitle">Research articles, newest first</p>
+
+        <div class="filters" id="filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="biology">Biology</button>
+            <button class="filter-btn" data-filter="chemistry">Chemistry</button>
+            <button class="filter-btn" data-filter="physics">Physics</button>
+            <button class="filter-btn" data-filter="ai">AI</button>
+            <button class="filter-btn" data-filter="engineering">Engineering</button>
+            <button class="filter-btn" data-filter="mathematics">Math</button>
+            <button class="filter-btn" data-filter="agriculture">Agriculture</button>
+        </div>
+
+        <div class="article-list" id="article-list">
+            <div class="empty-state">Loading articles...</div>
+        </div>
+    </main>
+
+    <footer>
+        <p><strong>The Beakers</strong> — Research, Rewritten for Students</p>
+    </footer>
+
+    <script>
+        let allArticles = [];
+        let currentFilter = 'all';
+
+        async function loadArticles() {
+            try {
+                const resp = await fetch('/data/articles-index.json');
+                const data = await resp.json();
+                allArticles = data.articles || [];
+                renderArticles();
+            } catch (e) {
+                document.getElementById('article-list').innerHTML =
+                    '<div class="empty-state">Failed to load articles</div>';
+            }
+        }
+
+        function renderArticles() {
+            const filtered = currentFilter === 'all'
+                ? allArticles
+                : allArticles.filter(a => a.discipline === currentFilter);
+
+            const list = document.getElementById('article-list');
+
+            if (filtered.length === 0) {
+                list.innerHTML = '<div class="empty-state">No articles found</div>';
+                return;
+            }
+
+            list.innerHTML = filtered.map(a => `
+                <a href="/article.html?article=${a.discipline}/${a.filename.replace('.json','')}" class="article-card">
+                    <div class="article-meta">
+                        <span class="discipline-tag">${a.discipline}</span>
+                        <span>${a.date || ''}</span>
+                        <span>${a.source || ''}</span>
+                    </div>
+                    <h2>${a.headline}</h2>
+                    <p class="article-hook">${a.hook}</p>
+                </a>
+            `).join('');
+        }
+
+        // filter buttons
+        document.getElementById('filters').addEventListener('click', e => {
+            if (e.target.classList.contains('filter-btn')) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentFilter = e.target.dataset.filter;
+                renderArticles();
+            }
+        });
+
+        loadArticles();
+    </script>
+</body>
+</html>

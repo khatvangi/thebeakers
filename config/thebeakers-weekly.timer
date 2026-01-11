@@ -1,0 +1,16 @@
+# /etc/systemd/system/thebeakers-weekly.timer
+# triggers weekly deep dive on Sundays
+
+[Unit]
+Description=TheBeakers Weekly Deep Dive Timer
+
+[Timer]
+# run at 8 AM every Sunday
+OnCalendar=Sun *-*-* 08:00:00
+# run missed jobs on startup
+Persistent=true
+# randomize start
+RandomizedDelaySec=1800
+
+[Install]
+WantedBy=timers.target

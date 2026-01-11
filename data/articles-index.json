@@ -1,0 +1,146 @@
+{
+  "generated": "2026-01-10T20:23:24.249012",
+  "count": 14,
+  "articles": [
+    {
+      "discipline": "biology",
+      "filename": "20260103-chiral-currents-without-magnets-how-quantum-geomet.json",
+      "headline": "Chiral Currents Without Magnets: How Quantum Geometry Shapes Tomorrow's Electronics",
+      "hook": "Imagine controlling electron flow without magnets—this breakthrough could redefine how we design electronics, just like the principles you're learning in your physics classes.",
+      "difficulty": "**SOPHOMORE**  \nThis research builds on foundational concepts in quantum mechanics, solid-state physics, and materials science, which are typically covered in sophomore-level courses.",
+      "source": "Nature",
+      "date": "2026-01-03",
+      "url": "/articles/biology/20260103-chiral-currents-without-magnets-how-quantum-geomet"
+    },
+    {
+      "discipline": "biology",
+      "filename": "20260103-2026-science-forecast-ai-breakthroughs-gene-editin.json",
+      "headline": "2026 Science Forecast: AI Breakthroughs, Gene Editing, and Policy Shifts You Can’t Ignore",
+      "hook": "As future scientists, you’ll shape the next decade of innovation—here’s how AI and gene editing are already changing the game.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research requires foundational knowledge in chemistry, biology, and physics—areas you’re already studying. Understanding AI’s thermodynamic limits or CRISPR’s enzyme-like behavior ties directly to your courses.",
+      "source": "Nature",
+      "date": "2026-01-03",
+      "url": "/articles/biology/20260103-2026-science-forecast-ai-breakthroughs-gene-editin"
+    },
+    {
+      "discipline": "chemistry",
+      "filename": "20260103-unlocking-cancer-s-weak-link-new-peptides-target-g.json",
+      "headline": "Unlocking Cancer's Weak Link: New Peptides Target GSK3β with ATP-Mimicry",
+      "hook": "Imagine designing a drug that outsmarts cancer by mimicking ATP—this research does just that, offering a blueprint for smarter therapies.",
+      "difficulty": "Sophomore (requires foundational chemistry, biochemistry, and organic chemistry knowledge).",
+      "source": "ACS Publications",
+      "date": "2026-01-03",
+      "url": "/articles/chemistry/20260103-unlocking-cancer-s-weak-link-new-peptides-target-g"
+    },
+    {
+      "discipline": "chemistry",
+      "filename": "20260103-bromine-beats-fluorine-how-computer-modeling-boost.json",
+      "headline": "Bromine Beats Fluorine: How Computer Modeling Boosts Solar Cell Efficiency",
+      "hook": "If you're building the future of renewable energy, this research shows how computer modeling can outsmart chemistry to power the next generation of solar cells.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, physical chemistry, and materials science) to grasp the computational methods and molecular design concepts.",
+      "source": "Journal of the American Chemical Society",
+      "date": "2026-01-03",
+      "url": "/articles/chemistry/20260103-bromine-beats-fluorine-how-computer-modeling-boost"
+    },
+    {
+      "discipline": "physics",
+      "filename": "20260103-unlocking-string-theory-s-hidden-geometry-a-new-to.json",
+      "headline": "Unlocking String Theory's Hidden Geometry: A New Tool for Understanding Quantum Forces",
+      "hook": "Imagine if you could visualize the invisible forces that shape the universe—this research turns that vision into reality, bridging abstract math with real-world physics.",
+      "difficulty": "Sophomore (requires intro-level major courses in physics and math)",
+      "source": "Physical Review Letters",
+      "date": "2026-01-03",
+      "url": "/articles/physics/20260103-unlocking-string-theory-s-hidden-geometry-a-new-to"
+    },
+    {
+      "discipline": "physics",
+      "filename": "20260103-revolutionizing-quantum-control-a-faster-way-to-sh.json",
+      "headline": "Revolutionizing Quantum Control: A Faster Way to Shield Quantum Systems from Noise",
+      "hook": "If you're studying quantum computing, this breakthrough could redefine how you protect qubits from interference, making your future projects more efficient and reliable.",
+      "difficulty": "Sophomore (requires intro-level major courses in physics, engineering, or mathematics).",
+      "source": "Physical Review Letters",
+      "date": "2026-01-03",
+      "url": "/articles/physics/20260103-revolutionizing-quantum-control-a-faster-way-to-sh"
+    },
+    {
+      "discipline": "ai",
+      "filename": "20260103-quantum-circuits-just-got-smarter-alphatensor-quan.json",
+      "headline": "Quantum Circuits Just Got Smarter: AlphaTensor-Quantum Cuts T-Count Without Retraining",
+      "hook": "Why should an undergrad care about this? If you’re studying computer science or physics, this breakthrough could shape the future of quantum computing—making circuits faster, cheaper, and more scalable than ever before.",
+      "difficulty": "Sophomore-level, requiring foundational knowledge in quantum mechanics, machine learning, and linear algebra.",
+      "source": "Nature Machine Intelligence",
+      "date": "2026-01-03",
+      "url": "/articles/ai/20260103-quantum-circuits-just-got-smarter-alphatensor-quan"
+    },
+    {
+      "discipline": "ai",
+      "filename": "20260103-how-ai-is-revolutionizing-metasurface-design-a-bri.json",
+      "headline": "How AI is Revolutionizing Metasurface Design: A Bridge Between Theory and Innovation",
+      "hook": "Imagine designing materials that manipulate light with the precision of a nanoscale engineer—this research is making it possible, using AI to solve problems you’ll encounter in your physics or materials science courses.",
+      "difficulty": "Sophomore-level (requires foundational knowledge of physics, math, and computer science).",
+      "source": "Nature Machine Intelligence",
+      "date": "2026-01-03",
+      "url": "/articles/ai/20260103-how-ai-is-revolutionizing-metasurface-design-a-bri"
+    },
+    {
+      "discipline": "engineering",
+      "filename": "20260103-watch-a-robot-evolve-how-ai-mimics-natural-selecti.json",
+      "headline": "Watch a Robot Evolve: How AI Mimics Natural Selection in Real Time",
+      "hook": "Imagine if your robot could adapt on its own—like a living organism. This research shows how AI can mimic evolution, revolutionizing robotics and AI.",
+      "difficulty": "Sophomore-level, as it requires foundational knowledge in computer science, biology, and mathematics.",
+      "source": "IEEE Spectrum",
+      "date": "2026-01-03",
+      "url": "/articles/engineering/20260103-watch-a-robot-evolve-how-ai-mimics-natural-selecti"
+    },
+    {
+      "discipline": "engineering",
+      "filename": "20260103-jacob-s-ladder-how-sparks-turned-into-scientific-b.json",
+      "headline": "Jacob’s Ladder: How Sparks Turned into Scientific Breakthroughs",
+      "hook": "Ever wondered why lightning crackles or why arc welders wear special gear? This research reveals the science behind those sparks—and how it could revolutionize energy storage.",
+      "difficulty": "Sophomore (requires foundational knowledge in chemistry, physics, and engineering).",
+      "source": "IEEE Spectrum",
+      "date": "2026-01-03",
+      "url": "/articles/engineering/20260103-jacob-s-ladder-how-sparks-turned-into-scientific-b"
+    },
+    {
+      "discipline": "mathematics",
+      "filename": "20260103-unlocking-hidden-symmetries-a-breakthrough-in-numb.json",
+      "headline": "Unlocking Hidden Symmetries: A Breakthrough in Number Theory for Future Mathematicians",
+      "hook": "Imagine if you could predict the behavior of numbers with the same precision as a calculator—this research does just that, bridging abstract math to real-world problems like cryptography and physics.",
+      "difficulty": "**JUNIOR**: Needs upper-division background (physical chem, advanced algebra) to grasp automorphic forms and representation theory.",
+      "source": "Annals of Mathematics",
+      "date": "2026-01-03",
+      "url": "/articles/mathematics/20260103-unlocking-hidden-symmetries-a-breakthrough-in-numb"
+    },
+    {
+      "discipline": "mathematics",
+      "filename": "20260103-unlocking-hidden-patterns-in-number-theory-how-mod.json",
+      "headline": "Unlocking Hidden Patterns in Number Theory: How Modular Curves Reveal New Mathematical Structures",
+      "hook": "Understanding these patterns could revolutionize cryptography, which is crucial for secure online transactions you use every day.",
+      "difficulty": "SOPHOMORE: This research builds on advanced calculus, algebraic structures, and number theory—topics you’re studying now.",
+      "source": "Annals of Mathematics",
+      "date": "2026-01-03",
+      "url": "/articles/mathematics/20260103-unlocking-hidden-patterns-in-number-theory-how-mod"
+    },
+    {
+      "discipline": "agriculture",
+      "filename": "20260103-revolutionizing-crop-resilience-how-this-study-co.json",
+      "headline": "\"Revolutionizing Crop Resilience: How This Study Could Feed the World in 2050\"",
+      "hook": "Why should an undergrad care about this? If you’re studying biology, chemistry, or environmental science, this research shows how your classroom knowledge can directly tackle global food insecurity—by engineering crops that thrive in extreme climates.",
+      "difficulty": "**Sophomore**: Needs intro-level major courses (organic, biochem, etc.)  \nThis research combines genetics, ecology, and data science—topics you’re just starting to explore in your sophomore year. While some concepts (like CRISPR) are advanced, the study’s focus on real-world applications ties directly to your coursework in biology, chemistry, and environmental science.",
+      "source": "Agronomy Journal",
+      "date": "2026-01-03",
+      "url": "/articles/agriculture/20260103-revolutionizing-crop-resilience-how-this-study-co"
+    },
+    {
+      "discipline": "agriculture",
+      "filename": "20260103-how-cover-crops-supercharge-soil-health-a-breakthr.json",
+      "headline": "How Cover Crops Supercharge Soil Health: A Breakthrough for Sustainable Farming",
+      "hook": "If you're studying agriculture or environmental science, this research could reshape how you approach soil health and sustainable farming—without a single plow.",
+      "difficulty": "Sophomore (requires intro-level courses in agronomy, chemistry, and biology).",
+      "source": "Agronomy Journal",
+      "date": "2026-01-03",
+      "url": "/articles/agriculture/20260103-how-cover-crops-supercharge-soil-health-a-breakthr"
+    }
+  ]
+}

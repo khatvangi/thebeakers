@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe — The Beakers</title>
+    <meta name="description" content="Get research summaries delivered to your inbox. Free, no paywall.">
+
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --accent-green: #10b981;
+            --accent-teal: #14b8a6;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 2rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        main {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .free-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .label-hint {
+            font-weight: 400;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        input[type="email"],
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .radio-option:hover {
+            border-color: var(--text-light);
+        }
+
+        .radio-option.selected {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .radio-option input[type="radio"] {
+            margin-top: 0.2rem;
+        }
+
+        .radio-content {
+            flex: 1;
+        }
+
+        .radio-title {
+            font-weight: 600;
+            display: block;
+        }
+
+        .radio-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-dark);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .checkbox-option:hover {
+            border-color: var(--text-light);
+        }
+
+        .checkbox-option.selected {
+            border-color: var(--accent-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            accent-color: var(--accent-green);
+        }
+
+        .consent-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .consent-group input {
+            margin-top: 0.25rem;
+        }
+
+        .consent-group a {
+            color: var(--accent-blue);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-teal));
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            display: none;
+        }
+
+        .status.success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid var(--accent-green);
+            display: block;
+        }
+
+        .status.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid #ef4444;
+            display: block;
+        }
+
+        /* honeypot - hidden from humans */
+        .hp-field { position: absolute; left: -9999px; }
+
+        @media (max-width: 600px) {
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The Beakers</a>
+    </header>
+
+    <main>
+        <span class="free-badge">Always Free</span>
+        <h1>Subscribe</h1>
+        <p class="subtitle">Research summaries delivered to your inbox. No paywall, ever.</p>
+
+        <form id="subscribe-form">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required placeholder="you@university.edu">
+            </div>
+
+            <!-- honeypot -->
+            <input type="text" name="website" class="hp-field" tabindex="-1" autocomplete="off">
+
+            <div class="form-group">
+                <label>How often? <span class="label-hint">(pick one)</span></label>
+                <div class="radio-group">
+                    <label class="radio-option selected">
+                        <input type="radio" name="cadence" value="daily" checked>
+                        <div class="radio-content">
+                            <span class="radio-title">Daily Digest</span>
+                            <span class="radio-desc">5-15 quick summaries every morning</span>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="cadence" value="bi_daily">
+                        <div class="radio-content">
+                            <span class="radio-title">Every Other Day</span>
+                            <span class="radio-desc">Same content, less email</span>
+                        </div>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="cadence" value="weekly">
+                        <div class="radio-content">
+                            <span class="radio-title">Weekly Deep Dives Only</span>
+                            <span class="radio-desc">In-depth articles with audio/video</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Subjects <span class="label-hint">(select all that interest you)</span></label>
+                <div class="checkbox-group">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="biology">
+                        Biology
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="chemistry">
+                        Chemistry
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="physics">
+                        Physics
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="math">
+                        Mathematics
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="tech_cs">
+                        AI & CS
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="subjects" value="engineering">
+                        Engineering
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group consent-group">
+                <input type="checkbox" id="consent" name="consent" required>
+                <label for="consent">
+                    I agree to receive emails from The Beakers. Unsubscribe anytime.
+                </label>
+            </div>
+
+            <button type="submit" id="submit-btn">Subscribe</button>
+
+            <div id="status" class="status"></div>
+        </form>
+    </main>
+
+    <script src="subscribe.js"></script>
+</body>
+</html>
