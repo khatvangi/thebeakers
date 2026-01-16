@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chemistry — The Beakers</title>
-    <meta name="description" content="Chemistry research rewritten for undergraduate students. Deep dives, explainers, and quick summaries.">
+    <meta name="description" content="Chemistry research and education for undergraduate students. Deep dives, visual stories, and curriculum topics.">
     <meta property="og:title" content="Chemistry — The Beakers">
     <meta property="og:image" content="https://thebeakers.com/chemistry.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -13,6 +13,7 @@
         :root {
             --bg-dark: #0f172a;
             --bg-card: #1e293b;
+            --bg-card-hover: #2d3a4f;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --text-light: #64748b;
@@ -21,101 +22,159 @@
             --accent-blue: #3b82f6;
             --accent-purple: #8b5cf6;
             --accent-orange: #f59e0b;
+            --accent-cyan: #06b6d4;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.6; }
 
+        /* header */
         header { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
         .logo { font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: var(--text-primary); text-decoration: none; }
         .logo span { color: var(--accent-green); }
-        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; transition: color 0.2s; }
         nav a:hover { color: var(--accent-green); }
 
-        .hero { text-align: center; padding: 3rem 2rem; max-width: 900px; margin: 0 auto; }
-        .hero h1 { font-family: 'Instrument Serif', serif; font-size: 3rem; font-weight: 400; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
-        .hero-icon { width: 64px; height: 64px; border-radius: 12px; }
-        .hero p { color: var(--text-secondary); font-size: 1.1rem; }
+        /* hero */
+        .hero { text-align: center; padding: 2rem 2rem 1rem; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-weight: 400; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+        .hero-icon { width: 56px; height: 56px; border-radius: 12px; }
+        .hero p { color: var(--text-secondary); font-size: 1rem; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem 4rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem 4rem; }
 
-        /* Section Headers */
-        .section { margin-bottom: 3rem; }
+        /* carousel section */
+        .carousel-section { margin-bottom: 3rem; }
         .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-dark); }
         .section-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
         .section-header h2 { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; }
-        .section-count { margin-left: auto; font-size: 0.8rem; color: var(--text-light); }
 
-        /* Deep Dive - Featured Card */
-        .deepdive-card {
+        /* carousel */
+        .carousel-container { position: relative; overflow: hidden; border-radius: 16px; }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-slide {
+            min-width: 100%;
             background: linear-gradient(135deg, #064e3b 0%, var(--bg-card) 100%);
             border: 2px solid var(--accent-green);
-            border-radius: 20px;
-            padding: 2.5rem;
+            border-radius: 16px;
+            padding: 2rem;
             text-decoration: none;
             color: inherit;
             display: block;
-            transition: all 0.3s;
             position: relative;
             overflow: hidden;
         }
-        .deepdive-card::before {
+        .carousel-slide::before {
             content: '';
             position: absolute;
             top: 0; right: 0;
             width: 200px; height: 200px;
             background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%);
         }
-        .deepdive-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(16,185,129,0.2); }
+        .carousel-slide:hover { box-shadow: 0 20px 40px rgba(16,185,129,0.2); }
         .deepdive-badge { display: inline-block; background: var(--accent-green); color: var(--bg-dark); font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
-        .deepdive-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.75rem; }
-        .deepdive-card .desc { color: var(--text-secondary); font-size: 1rem; margin-bottom: 1rem; }
-        .deepdive-card .meta { font-size: 0.85rem; color: var(--text-light); display: flex; gap: 1.5rem; flex-wrap: wrap; }
-        .deepdive-empty { background: var(--bg-card); border: 1px dashed var(--border-dark); border-radius: 16px; padding: 2rem; text-align: center; color: var(--text-light); }
+        .carousel-slide h3 { font-family: 'Instrument Serif', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.75rem; }
+        .carousel-slide .desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+        .carousel-slide .meta { font-size: 0.8rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
 
-        /* Explainer Cards Grid */
-        .explainer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
-        .explainer-card {
+        /* carousel controls */
+        .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1rem; }
+        .carousel-btn { background: var(--bg-card); border: 1px solid var(--border-dark); color: var(--text-primary); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .carousel-btn:hover { background: var(--accent-green); border-color: var(--accent-green); color: var(--bg-dark); }
+        .carousel-dots { display: flex; gap: 0.5rem; }
+        .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-dark); cursor: pointer; transition: all 0.2s; }
+        .carousel-dot.active { background: var(--accent-green); }
+
+        /* two-column layout */
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+        @media (max-width: 900px) { .two-column { grid-template-columns: 1fr; } }
+
+        .column { min-width: 0; }
+        .column-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border-dark); }
+        .column-header h2 { font-family: 'Instrument Serif', serif; font-size: 1.3rem; font-weight: 400; }
+        .column-count { margin-left: auto; font-size: 0.75rem; color: var(--text-light); }
+
+        /* noteworthy cards (research) */
+        .noteworthy-grid { display: flex; flex-direction: column; gap: 1rem; }
+        .noteworthy-card {
             background: var(--bg-card);
             border: 1px solid var(--border-dark);
-            border-radius: 14px;
-            padding: 1.5rem;
+            border-radius: 12px;
+            padding: 1.25rem;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s;
             display: block;
         }
-        .explainer-card:hover { transform: translateY(-2px); border-color: var(--accent-blue); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-        .explainer-badge { display: inline-block; background: var(--accent-blue); color: white; font-size: 0.65rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.5rem; }
-        .explainer-card h3 { font-family: 'Instrument Serif', serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; line-height: 1.3; }
-        .explainer-card .source { font-size: 0.8rem; color: var(--text-light); }
+        .noteworthy-card:hover { transform: translateX(4px); border-color: var(--accent-orange); background: var(--bg-card-hover); }
+        .noteworthy-badge { display: inline-block; background: var(--accent-orange); color: var(--bg-dark); font-size: 0.6rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .noteworthy-subfield { display: inline-block; background: var(--bg-dark); color: var(--text-secondary); font-size: 0.6rem; font-weight: 600; padding: 0.2rem 0.5rem; border-radius: 6px; margin-left: 0.5rem; }
+        .noteworthy-card h3 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.4rem; line-height: 1.4; }
+        .noteworthy-card .tldr { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 0.5rem; }
+        .noteworthy-card .source { font-size: 0.75rem; color: var(--text-light); }
 
-        /* TL;DR List */
-        .tldr-list { display: flex; flex-direction: column; gap: 0.75rem; }
-        .tldr-item {
+        /* i want to know section */
+        .curriculum-section { margin-bottom: 1.5rem; }
+        .curriculum-dropdown { margin-bottom: 0.75rem; }
+        .dropdown-header {
             background: var(--bg-card);
             border: 1px solid var(--border-dark);
             border-radius: 10px;
-            padding: 1rem 1.25rem;
+            padding: 0.9rem 1.1rem;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 1rem;
+            transition: all 0.2s;
+        }
+        .dropdown-header:hover { border-color: var(--accent-cyan); }
+        .dropdown-header.open { border-color: var(--accent-cyan); border-radius: 10px 10px 0 0; }
+        .dropdown-title { font-weight: 600; font-size: 0.9rem; }
+        .dropdown-arrow { color: var(--text-light); transition: transform 0.2s; font-size: 0.8rem; }
+        .dropdown-header.open .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-content {
+            background: var(--bg-card);
+            border: 1px solid var(--accent-cyan);
+            border-top: none;
+            border-radius: 0 0 10px 10px;
+            padding: 0.5rem;
+            display: none;
+        }
+        .dropdown-content.open { display: block; }
+        .topic-link {
+            display: block;
+            padding: 0.6rem 0.9rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            transition: all 0.15s;
+        }
+        .topic-link:hover { background: var(--bg-dark); color: var(--accent-cyan); }
+
+        /* education cards */
+        .education-header { margin-top: 1.5rem; margin-bottom: 1rem; font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+        .education-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+        .education-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 1rem;
             text-decoration: none;
             color: inherit;
             transition: all 0.2s;
+            display: block;
         }
-        .tldr-item:hover { border-color: var(--accent-purple); background: #252d3d; }
-        
-        
-        .tldr-badge { background: var(--accent-purple); color: white; font-size: 0.6rem; font-weight: 600; padding: 0.15rem 0.4rem; border-radius: 4px; text-transform: uppercase; }
+        .education-card:hover { border-color: var(--accent-cyan); background: var(--bg-card-hover); }
+        .education-badge { display: inline-block; background: var(--accent-cyan); color: var(--bg-dark); font-size: 0.6rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .education-card h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; line-height: 1.4; }
+        .education-card .source { font-size: 0.75rem; color: var(--text-light); }
 
         footer { text-align: center; padding: 2rem; color: var(--text-light); font-size: 0.85rem; border-top: 1px solid var(--border-dark); }
 
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
-            .deepdive-card { padding: 1.5rem; }
-            .deepdive-card h3 { font-size: 1.4rem; }
-            .explainer-grid { grid-template-columns: 1fr; }
+            .carousel-slide { padding: 1.5rem; }
+            .carousel-slide h3 { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -131,39 +190,49 @@
 
     <section class="hero">
         <h1><img src="chemistry.png" alt="" class="hero-icon"> Chemistry</h1>
-        <p>The science of matter and its transformations. Research explained for undergraduates.</p>
+        <p>The science of matter and its transformations. Research and education for undergraduates.</p>
     </section>
 
     <main class="container">
-        <!-- Deep Dives -->
-        <section class="section" id="deepdives">
+        <!-- deep dive carousel -->
+        <section class="carousel-section">
             <div class="section-header">
                 <div class="section-icon" style="background: #10b98120; color: #10b981;">🔬</div>
                 <h2>Deep Dives</h2>
-                <span class="section-count" id="deepdive-count">1 article</span>
             </div>
-            <div id="deepdive-content"></div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track"></div>
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-btn" id="prev-btn">‹</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
+                <button class="carousel-btn" id="next-btn">›</button>
+            </div>
         </section>
 
-        <!-- Explainers -->
-        <section class="section" id="explainers">
-            <div class="section-header">
-                <div class="section-icon" style="background: #3b82f620; color: #3b82f6;">📖</div>
-                <h2>Explainers</h2>
-                <span class="section-count" id="explainer-count">5 articles</span>
+        <!-- two-column layout -->
+        <div class="two-column">
+            <!-- left: noteworthy (research) -->
+            <div class="column">
+                <div class="column-header">
+                    <div class="section-icon" style="background: #f59e0b20; color: #f59e0b;">📰</div>
+                    <h2>Noteworthy</h2>
+                    <span class="column-count" id="noteworthy-count">15 articles</span>
+                </div>
+                <div class="noteworthy-grid" id="noteworthy-content"></div>
             </div>
-            <div class="explainer-grid" id="explainer-content"></div>
-        </section>
 
-        <!-- TL;DRs -->
-        <section class="section" id="tldrs">
-            <div class="section-header">
-                <div class="section-icon" style="background: #8b5cf620; color: #8b5cf6;">⚡</div>
-                <h2>TL;DRs</h2>
-                <span class="section-count" id="tldr-count">10 articles</span>
+            <!-- right: i want to know (education) -->
+            <div class="column">
+                <div class="column-header">
+                    <div class="section-icon" style="background: #06b6d420; color: #06b6d4;">🎓</div>
+                    <h2>I Want to Know</h2>
+                </div>
+                <div class="curriculum-section" id="curriculum-content"></div>
+                <div class="education-header">Educational Articles</div>
+                <div class="education-grid" id="education-content"></div>
             </div>
-            <div class="tldr-list" id="tldr-content"></div>
-        </section>
+        </div>
     </main>
 
     <footer>
@@ -173,23 +242,77 @@
     <script>
         const SUBJECT = 'chemistry';
 
-        // Deep Dives (manual, from deepdive folder)
+        // deep dives data
         const DEEPDIVES = [
-            { file: 'deepdive/solar-cell-bromine.html', title: 'Solar Cells: The Bromine Revolution', desc: 'How halogen atoms boost perovskite solar cell efficiency to 20%', source: 'Nature Communications', tags: ['Podcast', 'Video', 'Quiz'] }
+            { file: 'deepdive/solar-cell-bromine.html', title: 'Solar Cells: The Bromine Revolution', desc: 'How halogen atoms boost perovskite solar cell efficiency to 20%', source: 'Nature Communications', tags: ['Podcast', 'Video', 'Quiz'] },
+            { file: 'deepdive/solar-cell-bromine-visual.html', title: 'Bromine Solar Cells: Visual Summary', desc: 'Quick visual overview of the bromine breakthrough in solar technology', source: 'Nature Communications', tags: ['Visual'] },
+            { file: 'deepdive/solar-cell-bromine-story.html', title: 'The Bromine Story', desc: 'A narrative journey through perovskite solar cell innovation', source: 'Nature Communications', tags: ['Story'] }
         ];
 
-        // Explainers (automated, from explain folder)
-        const EXPLAINERS = [{"file": "explain/chemistry-explain-10.1038-s41557-025-02038-w.html", "title": "Intralayer bidentate diammoniums for stable two-dime...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02032-2.html", "title": "Bringing biocatalysis into teaching labs", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02027-z.html", "title": "Protecting skins of Au\u2013Cl can stabilize Au nanostruc...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02016-2.html", "title": "Unravelling gas evolution mechanisms in battery elec...", "source": "Nature Chemistry"}, {"file": "explain/chemistry-10-1038-s41557-025-02018-0.html", "title": "Direct enantioselective C(", "source": "Nature Chemistry"}];
+        // curriculum topics by subfield
+        const CURRICULUM = {
+            'Organic Chemistry': [
+                { topic: 'SN1 & SN2 Reactions', url: '#sn-reactions' },
+                { topic: 'Elimination Reactions', url: '#elimination' },
+                { topic: 'Aromatic Chemistry', url: '#aromatic' },
+                { topic: 'Stereochemistry', url: '#stereochemistry' },
+                { topic: 'Carbonyl Chemistry', url: '#carbonyl' }
+            ],
+            'Inorganic Chemistry': [
+                { topic: 'Crystal Field Theory', url: '#crystal-field' },
+                { topic: 'Coordination Compounds', url: '#coordination' },
+                { topic: 'Main Group Chemistry', url: '#main-group' },
+                { topic: 'Organometallics', url: '#organometallics' }
+            ],
+            'Physical Chemistry': [
+                { topic: 'Thermodynamics', url: '#thermodynamics' },
+                { topic: 'Chemical Kinetics', url: '#kinetics' },
+                { topic: 'Quantum Chemistry', url: '#quantum' },
+                { topic: 'Spectroscopy', url: '#spectroscopy' }
+            ],
+            'Analytical Chemistry': [
+                { topic: 'Chromatography', url: '#chromatography' },
+                { topic: 'Mass Spectrometry', url: '#mass-spec' },
+                { topic: 'Electrochemistry', url: '#electrochemistry' },
+                { topic: 'Titrations', url: '#titrations' }
+            ],
+            'Biochemistry': [
+                { topic: 'Enzyme Kinetics', url: '#enzyme-kinetics' },
+                { topic: 'Metabolism', url: '#metabolism' },
+                { topic: 'Protein Structure', url: '#protein-structure' },
+                { topic: 'Nucleic Acids', url: '#nucleic-acids' }
+            ]
+        };
 
-        function renderDeepDives() {
-            const container = document.getElementById('deepdive-content');
+        // noteworthy research articles (visual stories) - organized by subfield
+        const NOTEWORTHY = [
+            { file: 'explain/chemistry-explain-10.1038-s41557-025-02038-w.html', title: 'Stable Two-Dimensional Perovskites', tldr: 'New diammonium molecules create stable 2D perovskites for solar cells', source: 'Nature Chemistry', subfield: 'Physical' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02027-z.html', title: 'Gold-Chloride Protective Skins', tldr: 'Au-Cl bonds stabilize gold nanostructures for catalysis', source: 'Nature Chemistry', subfield: 'Inorganic' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02016-2.html', title: 'Battery Gas Evolution Mechanisms', tldr: 'Understanding gas formation in battery electrodes improves safety', source: 'Nature Chemistry', subfield: 'Physical' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02018-0.html', title: 'Enantioselective C-H Activation', tldr: 'Direct C-H functionalization with high selectivity', source: 'Nature Chemistry', subfield: 'Organic' },
+            { file: 'explain/chemistry-10-1038-s41557-025-02032-2.html', title: 'Biocatalysis in Teaching Labs', tldr: 'Bringing enzyme chemistry to undergraduate education', source: 'Nature Chemistry', subfield: 'Biochemistry' }
+        ];
+
+        // education articles
+        const EDUCATION = [
+            { file: 'explain/chemistry-10-1038-s41557-025-02032-2.html', title: 'Biocatalysis in Teaching Labs', source: 'Nature Chemistry' }
+        ];
+
+        // carousel functionality
+        let currentSlide = 0;
+        let autoPlayInterval;
+
+        function renderCarousel() {
+            const track = document.getElementById('carousel-track');
+            const dots = document.getElementById('carousel-dots');
+
             if (DEEPDIVES.length === 0) {
-                container.innerHTML = '<div class="deepdive-empty">Deep dive coming soon...</div>';
+                track.innerHTML = '<div class="carousel-slide"><p style="color: var(--text-light);">Deep dives coming soon...</p></div>';
                 return;
             }
-            const d = DEEPDIVES[0];
-            container.innerHTML = `
-                <a href="${d.file}" class="deepdive-card">
+
+            track.innerHTML = DEEPDIVES.map(d => `
+                <a href="${d.file}" class="carousel-slide">
                     <span class="deepdive-badge">Deep Dive</span>
                     <h3>${d.title}</h3>
                     <p class="desc">${d.desc}</p>
@@ -198,43 +321,104 @@
                         ${d.tags ? d.tags.map(t => `<span>✓ ${t}</span>`).join('') : ''}
                     </div>
                 </a>
-            `;
+            `).join('');
+
+            dots.innerHTML = DEEPDIVES.map((_, i) => `
+                <div class="carousel-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>
+            `).join('');
+
+            // dot click handlers
+            dots.querySelectorAll('.carousel-dot').forEach(dot => {
+                dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index)));
+            });
+
+            startAutoPlay();
         }
 
-        function renderExplainers() {
-            const container = document.getElementById('explainer-content');
-            document.getElementById('explainer-count').textContent = `${EXPLAINERS.length} articles`;
-            container.innerHTML = EXPLAINERS.map(e => `
-                <a href="${e.file}" class="explainer-card">
-                    <span class="explainer-badge">Explain</span>
+        function goToSlide(index) {
+            currentSlide = index;
+            if (currentSlide >= DEEPDIVES.length) currentSlide = 0;
+            if (currentSlide < 0) currentSlide = DEEPDIVES.length - 1;
+
+            document.getElementById('carousel-track').style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        function nextSlide() { goToSlide(currentSlide + 1); }
+        function prevSlide() { goToSlide(currentSlide - 1); }
+
+        function startAutoPlay() {
+            stopAutoPlay();
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+        }
+
+        document.getElementById('next-btn').addEventListener('click', () => { nextSlide(); startAutoPlay(); });
+        document.getElementById('prev-btn').addEventListener('click', () => { prevSlide(); startAutoPlay(); });
+
+        // curriculum dropdowns
+        function renderCurriculum() {
+            const container = document.getElementById('curriculum-content');
+            container.innerHTML = Object.entries(CURRICULUM).map(([subfield, topics]) => `
+                <div class="curriculum-dropdown">
+                    <div class="dropdown-header" onclick="toggleDropdown(this)">
+                        <span class="dropdown-title">${subfield}</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </div>
+                    <div class="dropdown-content">
+                        ${topics.map(t => `<a href="${t.url}" class="topic-link">${t.topic}</a>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleDropdown(header) {
+            header.classList.toggle('open');
+            header.nextElementSibling.classList.toggle('open');
+        }
+
+        // noteworthy articles
+        function renderNoteworthy() {
+            const container = document.getElementById('noteworthy-content');
+            document.getElementById('noteworthy-count').textContent = `${NOTEWORTHY.length} articles`;
+            container.innerHTML = NOTEWORTHY.map(n => `
+                <a href="${n.file}" class="noteworthy-card">
+                    <span class="noteworthy-badge">Research</span>
+                    <span class="noteworthy-subfield">${n.subfield}</span>
+                    <h3>${n.title}</h3>
+                    <p class="tldr">${n.tldr}</p>
+                    <span class="source">${n.source}</span>
+                </a>
+            `).join('');
+        }
+
+        // education articles
+        function renderEducation() {
+            const container = document.getElementById('education-content');
+            if (EDUCATION.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-light); font-size: 0.85rem;">Educational articles coming soon...</p>';
+                return;
+            }
+            container.innerHTML = EDUCATION.map(e => `
+                <a href="${e.file}" class="education-card">
+                    <span class="education-badge">Education</span>
                     <h3>${e.title}</h3>
                     <span class="source">${e.source}</span>
                 </a>
             `).join('');
         }
 
-        async function renderTLDRs() {
-            const container = document.getElementById('tldr-content');
-            try {
-                const res = await fetch('data/digests_2026-01-05.json');
-                const all = await res.json();
-                const tldrs = all.filter(d => d.subject === SUBJECT).slice(0, 10);
-                document.getElementById('tldr-count').textContent = `${tldrs.length} articles`;
-                container.innerHTML = tldrs.map(t => `
-                    <a href="${t.url}" target="_blank" class="tldr-item">
-                        <span class="tldr-badge">TL;DR</span>
-                        <h4>${t.title.replace(/\[ASAP\]\s*/g, '')}</h4>
-                        <span class="venue">${t.venue}</span>
-                    </a>
-                `).join('');
-            } catch(e) {
-                container.innerHTML = '<p style="color: var(--text-light);">Loading...</p>';
-            }
-        }
-
-        renderDeepDives();
-        renderExplainers();
-        renderTLDRs();
+        // initialize
+        renderCarousel();
+        renderCurriculum();
+        renderNoteworthy();
+        renderEducation();
     </script>
 </body>
 </html>
