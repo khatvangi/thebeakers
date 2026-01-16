@@ -29,19 +29,19 @@
         .section-header h2 { font-family: 'Instrument Serif', serif; font-size: 1.4rem; font-weight: 400; }
         .carousel-container { position: relative; overflow: hidden; border-radius: 16px; }
         .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
-        .carousel-slide { min-width: 100%; background: linear-gradient(135deg, #064e3b 0%, var(--bg-card) 100%); border: 2px solid var(--accent-green); border-radius: 16px; padding: 2rem; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
-        .carousel-slide::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%); }
-        .carousel-slide:hover { box-shadow: 0 20px 40px rgba(16,185,129,0.2); }
-        .deepdive-badge { display: inline-block; background: var(--accent-green); color: var(--bg-dark); font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
+        .carousel-slide { min-width: 100%; background: linear-gradient(135deg, #134e4a 0%, var(--bg-card) 100%); border: 2px solid #14b8a6; border-radius: 16px; padding: 2rem; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
+        .carousel-slide::before { content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: radial-gradient(circle, rgba(20,184,166,0.15) 0%, transparent 70%); }
+        .carousel-slide:hover { box-shadow: 0 20px 40px rgba(20,184,166,0.2); }
+        .deepdive-badge { display: inline-block; background: #14b8a6; color: var(--bg-dark); font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.75rem; border-radius: 20px; text-transform: uppercase; margin-bottom: 1rem; }
         .carousel-slide h3 { font-family: 'Instrument Serif', serif; font-size: 1.6rem; font-weight: 400; margin-bottom: 0.75rem; }
         .carousel-slide .desc { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
         .carousel-slide .meta { font-size: 0.8rem; color: var(--text-light); display: flex; gap: 1rem; flex-wrap: wrap; }
         .carousel-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1rem; }
         .carousel-btn { background: var(--bg-card); border: 1px solid var(--border-dark); color: var(--text-primary); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
-        .carousel-btn:hover { background: var(--accent-green); border-color: var(--accent-green); color: var(--bg-dark); }
+        .carousel-btn:hover { background: #14b8a6; border-color: #14b8a6; color: var(--bg-dark); }
         .carousel-dots { display: flex; gap: 0.5rem; }
         .carousel-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border-dark); cursor: pointer; transition: all 0.2s; }
-        .carousel-dot.active { background: var(--accent-green); }
+        .carousel-dot.active { background: #14b8a6; }
         .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
         @media (max-width: 900px) { .two-column { grid-template-columns: 1fr; } }
         .column { min-width: 0; }
@@ -91,7 +91,7 @@
     <main class="container">
         <section class="carousel-section">
             <div class="section-header">
-                <div class="section-icon" style="background: #10b98120; color: #10b981;">🧬</div>
+                <div class="section-icon" style="background: #14b8a620; color: #14b8a6;">🧬</div>
                 <h2>Deep Dives</h2>
             </div>
             <div class="carousel-container"><div class="carousel-track" id="carousel-track"></div></div>
