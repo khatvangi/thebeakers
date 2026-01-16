@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="mathematics.html">Math</a><a href="engineering.html">Engineering</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="mathematics.html">Math</a><a href="engineering.html">Engineering</a></nav>
     </header>
     <section class="hero">
         <h1><img src="ai.png" alt="" class="hero-icon"> Artificial Intelligence</h1>
@@ -124,37 +125,37 @@
     <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
     <script>
         const DEEPDIVES = [];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Machine Learning': [
-                { topic: 'Linear Regression', url: '#regression' },
-                { topic: 'Classification', url: '#classification' },
-                { topic: 'Clustering', url: '#clustering' },
-                { topic: 'SVMs', url: '#svms' }
+                { topic: 'Supervised Learning', url: '#topic-supervised' },
+                { topic: 'Unsupervised Learning', url: '#topic-unsupervised' },
+                { topic: 'Model Evaluation', url: '#topic-evaluation' },
+                { topic: 'Feature Engineering', url: '#topic-features' },
             ],
             'Deep Learning': [
-                { topic: 'Neural Networks', url: '#neural-networks' },
-                { topic: 'CNNs', url: '#cnns' },
-                { topic: 'RNNs & LSTMs', url: '#rnns' },
-                { topic: 'Transformers', url: '#transformers' }
+                { topic: 'Neural Networks', url: '#topic-neural-nets' },
+                { topic: 'CNNs', url: '#topic-cnns' },
+                { topic: 'RNNs & Transformers', url: '#topic-sequence-models' },
+                { topic: 'Generative Models', url: '#topic-generative' },
             ],
             'Natural Language Processing': [
-                { topic: 'Tokenization', url: '#tokenization' },
-                { topic: 'Word Embeddings', url: '#embeddings' },
-                { topic: 'Language Models', url: '#language-models' },
-                { topic: 'Attention Mechanism', url: '#attention' }
+                { topic: 'Text Processing', url: '#topic-text-processing' },
+                { topic: 'Word Embeddings', url: '#topic-embeddings' },
+                { topic: 'Language Models', url: '#topic-language-models' },
+                { topic: 'NLP Applications', url: '#topic-nlp-apps' },
             ],
             'Computer Vision': [
-                { topic: 'Image Processing', url: '#image-processing' },
-                { topic: 'Object Detection', url: '#object-detection' },
-                { topic: 'Segmentation', url: '#segmentation' },
-                { topic: 'GANs', url: '#gans' }
+                { topic: 'Image Processing', url: '#topic-image-processing' },
+                { topic: 'Object Detection', url: '#topic-object-detection' },
+                { topic: 'Segmentation', url: '#topic-segmentation' },
+                { topic: 'Visual Recognition', url: '#topic-recognition' },
             ],
             'Reinforcement Learning': [
-                { topic: 'MDPs', url: '#mdps' },
-                { topic: 'Q-Learning', url: '#q-learning' },
-                { topic: 'Policy Gradients', url: '#policy-gradients' },
-                { topic: 'Actor-Critic', url: '#actor-critic' }
-            ]
+                { topic: 'MDPs', url: '#topic-mdps' },
+                { topic: 'Value Methods', url: '#topic-value-methods' },
+                { topic: 'Policy Methods', url: '#topic-policy-methods' },
+                { topic: 'Applications', url: '#topic-rl-applications' },
+            ],
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

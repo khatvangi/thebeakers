@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="chemistry.html">Chemistry</a><a href="physics.html">Physics</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="chemistry.html">Chemistry</a><a href="physics.html">Physics</a></nav>
     </header>
     <section class="hero">
         <h1><img src="biology.png" alt="" class="hero-icon"> Biology</h1>
@@ -124,37 +125,37 @@
     <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
     <script>
         const DEEPDIVES = [];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Molecular Biology': [
-                { topic: 'DNA Replication', url: '#dna-replication' },
-                { topic: 'Transcription', url: '#transcription' },
-                { topic: 'Translation', url: '#translation' },
-                { topic: 'Gene Regulation', url: '#gene-regulation' }
+                { topic: 'DNA Replication', url: '#topic-dna-replication' },
+                { topic: 'Transcription', url: '#topic-transcription' },
+                { topic: 'Translation', url: '#topic-translation' },
+                { topic: 'Gene Regulation', url: '#topic-gene-regulation' },
             ],
             'Cell Biology': [
-                { topic: 'Cell Cycle', url: '#cell-cycle' },
-                { topic: 'Membrane Transport', url: '#membrane-transport' },
-                { topic: 'Organelles', url: '#organelles' },
-                { topic: 'Cell Signaling', url: '#cell-signaling' }
+                { topic: 'Cell Structure', url: '#topic-cell-structure' },
+                { topic: 'Cell Cycle', url: '#topic-cell-cycle' },
+                { topic: 'Membrane Transport', url: '#topic-membrane-transport' },
+                { topic: 'Cell Signaling', url: '#topic-cell-signaling' },
             ],
             'Genetics': [
-                { topic: 'Mendelian Genetics', url: '#mendelian' },
-                { topic: 'Gene Expression', url: '#gene-expression' },
-                { topic: 'CRISPR & Gene Editing', url: '#crispr' },
-                { topic: 'Population Genetics', url: '#population-genetics' }
+                { topic: 'Mendelian Genetics', url: '#topic-mendelian' },
+                { topic: 'Linkage & Mapping', url: '#topic-linkage' },
+                { topic: 'Population Genetics', url: '#topic-pop-genetics' },
+                { topic: 'Mutations', url: '#topic-mutations' },
+            ],
+            'Biochemistry': [
+                { topic: 'Enzyme Kinetics', url: '#topic-enzyme-kinetics' },
+                { topic: 'Metabolism', url: '#topic-metabolism' },
+                { topic: 'Protein Structure', url: '#topic-protein-structure' },
+                { topic: 'Lipids & Membranes', url: '#topic-lipids' },
             ],
             'Ecology': [
-                { topic: 'Population Dynamics', url: '#population-dynamics' },
-                { topic: 'Food Webs', url: '#food-webs' },
-                { topic: 'Biodiversity', url: '#biodiversity' },
-                { topic: 'Ecosystem Services', url: '#ecosystem-services' }
+                { topic: 'Population Dynamics', url: '#topic-pop-dynamics' },
+                { topic: 'Community Ecology', url: '#topic-community' },
+                { topic: 'Ecosystem Ecology', url: '#topic-ecosystem' },
+                { topic: 'Conservation Biology', url: '#topic-conservation' },
             ],
-            'Physiology': [
-                { topic: 'Nervous System', url: '#nervous-system' },
-                { topic: 'Cardiovascular System', url: '#cardiovascular' },
-                { topic: 'Homeostasis', url: '#homeostasis' },
-                { topic: 'Endocrine System', url: '#endocrine' }
-            ]
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

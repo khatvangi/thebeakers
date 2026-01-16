@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Explorer — The Beakers</title>
+    <meta name="description" content="Interactive knowledge graph connecting curriculum topics to textbooks and research.">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #2d3a4f;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-light: #64748b;
+            --border-dark: #334155;
+            --freshman: #10b981;
+            --sophomore: #f59e0b;
+            --junior: #ef4444;
+            --book: #3b82f6;
+            --edge-prerequisite: #8b5cf6;
+            --edge-related: #06b6d4;
+            --edge-covers: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-dark);
+        }
+        .logo { font-family: 'Instrument Serif', serif; font-size: 1.3rem; color: var(--text-primary); text-decoration: none; }
+        .logo span { color: #10b981; }
+
+        /* controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .discipline-select {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .discipline-select:hover { border-color: var(--sophomore); }
+
+        .search-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            width: 200px;
+        }
+        .search-box::placeholder { color: var(--text-light); }
+        .search-box:focus { outline: none; border-color: var(--sophomore); }
+
+        /* graph container */
+        #graph-container {
+            width: 100%;
+            height: 100vh;
+            padding-top: 60px;
+        }
+
+        /* tooltip */
+        .tooltip {
+            position: absolute;
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            border-radius: 10px;
+            padding: 1rem;
+            max-width: 300px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 200;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .tooltip.visible { opacity: 1; }
+        .tooltip h3 { font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .tooltip .type { font-size: 0.7rem; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.3rem; }
+        .tooltip .meta { font-size: 0.8rem; color: var(--text-secondary); }
+        .tooltip .keywords { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; }
+        .tooltip .difficulty {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.3rem;
+        }
+        .tooltip .difficulty.freshman { background: var(--freshman); color: var(--bg-dark); }
+        .tooltip .difficulty.sophomore { background: var(--sophomore); color: var(--bg-dark); }
+        .tooltip .difficulty.junior { background: var(--junior); color: white; }
+
+        /* legend */
+        .legend {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            z-index: 100;
+        }
+        .legend h4 { font-size: 0.75rem; color: var(--text-light); margin-bottom: 0.75rem; text-transform: uppercase; }
+        .legend-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem; font-size: 0.8rem; }
+        .legend-circle { width: 12px; height: 12px; border-radius: 50%; }
+        .legend-line { width: 20px; height: 2px; }
+
+        /* info panel */
+        .info-panel {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            width: 320px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1.25rem;
+            z-index: 100;
+            display: none;
+        }
+        .info-panel.visible { display: block; }
+        .info-panel h3 { font-family: 'Instrument Serif', serif; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .info-panel .close-btn {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        .info-panel .close-btn:hover { color: var(--text-primary); }
+        .info-section { margin-top: 1rem; }
+        .info-section h4 { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; margin-bottom: 0.5rem; }
+        .info-section ul { list-style: none; }
+        .info-section li {
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--border-dark);
+            cursor: pointer;
+        }
+        .info-section li:hover { color: var(--sophomore); }
+        .info-section li:last-child { border-bottom: none; }
+
+        /* research input */
+        .research-panel {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--border-dark);
+            border-radius: 12px;
+            padding: 1rem;
+            z-index: 100;
+            width: 350px;
+        }
+        .research-panel h4 { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.5rem; }
+        .research-panel textarea {
+            width: 100%;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-dark);
+            color: var(--text-primary);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            resize: none;
+            height: 80px;
+        }
+        .research-panel textarea:focus { outline: none; border-color: var(--sophomore); }
+        .research-panel button {
+            margin-top: 0.5rem;
+            background: var(--sophomore);
+            color: var(--bg-dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .research-panel button:hover { background: #d97706; }
+
+        /* zoom controls */
+        .zoom-controls {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(30, 41, 59, 0.95);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 0.5rem;
+        }
+        .zoom-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dark);
+            color: var(--text-primary);
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .zoom-btn:hover { background: var(--bg-card-hover); border-color: var(--sophomore); }
+
+        /* loading */
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-dark);
+            border-top-color: var(--sophomore);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="logo">The <span>Beakers</span></a>
+        <nav style="display: flex; gap: 1.5rem; margin-right: auto; margin-left: 2rem;">
+            <a href="/" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;">Home</a>
+            <a href="/chemistry.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;">Chemistry</a>
+            <a href="/physics.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;">Physics</a>
+            <a href="/biology.html" style="color: var(--text-secondary); text-decoration: none; font-size: 0.85rem;">Biology</a>
+        </nav>
+        <div class="controls">
+            <select class="discipline-select" id="discipline-select">
+                <option value="chemistry">Chemistry</option>
+                <option value="physics">Physics</option>
+                <option value="biology">Biology</option>
+                <option value="mathematics">Mathematics</option>
+                <option value="engineering">Engineering</option>
+                <option value="ai">Artificial Intelligence</option>
+                <option value="agriculture">Agriculture</option>
+            </select>
+            <input type="text" class="search-box" id="search-box" placeholder="Search topics...">
+        </div>
+    </header>
+
+    <div id="graph-container">
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading knowledge graph...</p>
+        </div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <div class="legend">
+        <h4>Nodes</h4>
+        <div class="legend-item"><div class="legend-circle" style="background: var(--freshman)"></div> Freshman Topic</div>
+        <div class="legend-item"><div class="legend-circle" style="background: var(--sophomore)"></div> Sophomore Topic</div>
+        <div class="legend-item"><div class="legend-circle" style="background: var(--junior)"></div> Junior Topic</div>
+        <div class="legend-item"><div class="legend-circle" style="background: var(--book); opacity: 0.7"></div> Textbook</div>
+        <h4 style="margin-top: 1rem;">Edges</h4>
+        <div class="legend-item"><div class="legend-line" style="background: var(--edge-prerequisite)"></div> Prerequisite</div>
+        <div class="legend-item"><div class="legend-line" style="background: var(--edge-related)"></div> Related</div>
+        <div class="legend-item"><div class="legend-line" style="background: var(--edge-covers); opacity: 0.5"></div> Covers</div>
+    </div>
+
+    <div class="info-panel" id="info-panel">
+        <button class="close-btn" onclick="closeInfoPanel()">×</button>
+        <h3 id="info-title">Topic Name</h3>
+        <div class="info-section" id="info-content"></div>
+    </div>
+
+    <div class="research-panel">
+        <h4>Connect Research Paper</h4>
+        <textarea id="research-input" placeholder="Paste paper title and abstract..."></textarea>
+        <button onclick="connectResearch()">Find Connections</button>
+    </div>
+
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()">+</button>
+        <button class="zoom-btn" onclick="zoomOut()">−</button>
+        <button class="zoom-btn" onclick="resetZoom()">⟲</button>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        let graph = null;
+        let simulation = null;
+        let svg = null;
+        let g = null;
+        let zoom = null;
+        let currentDiscipline = 'chemistry';
+
+        // colors
+        const colors = {
+            freshman: '#10b981',
+            sophomore: '#f59e0b',
+            junior: '#ef4444',
+            book: '#3b82f6',
+            prerequisite: '#8b5cf6',
+            related: '#06b6d4',
+            covers: '#64748b',
+        };
+
+        // load graph data
+        async function loadGraph(discipline) {
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch(`../data/graphs/${discipline}_graph.json`);
+                if (!response.ok) throw new Error('Graph not found');
+                graph = await response.json();
+                renderGraph();
+            } catch (e) {
+                console.error('Error loading graph:', e);
+                document.getElementById('loading').innerHTML = `
+                    <p>Graph not available for ${discipline}.</p>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">Run: python scripts/knowledge_graph_builder.py ${discipline}</p>
+                `;
+            }
+        }
+
+        // render graph with D3
+        function renderGraph() {
+            document.getElementById('loading').style.display = 'none';
+
+            // clear existing
+            d3.select('#graph-container svg').remove();
+
+            const container = document.getElementById('graph-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // create SVG
+            svg = d3.select('#graph-container')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height);
+
+            // zoom behavior
+            zoom = d3.zoom()
+                .scaleExtent([0.1, 4])
+                .on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                });
+
+            svg.call(zoom);
+
+            g = svg.append('g');
+
+            // prepare data
+            const nodes = graph.nodes.map(d => ({...d}));
+            const edges = graph.edges.map(d => ({...d}));
+
+            // create simulation
+            simulation = d3.forceSimulation(nodes)
+                .force('link', d3.forceLink(edges)
+                    .id(d => d.id)
+                    .distance(d => d.type === 'covers' ? 80 : 120)
+                    .strength(d => d.type === 'covers' ? 0.3 : 0.5))
+                .force('charge', d3.forceManyBody()
+                    .strength(d => d.type === 'topic' ? -300 : -100))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('collision', d3.forceCollide()
+                    .radius(d => d.type === 'topic' ? 40 : 20));
+
+            // draw edges
+            const link = g.append('g')
+                .attr('class', 'links')
+                .selectAll('line')
+                .data(edges)
+                .join('line')
+                .attr('stroke', d => colors[d.type] || '#64748b')
+                .attr('stroke-opacity', d => d.type === 'covers' ? 0.2 : 0.5)
+                .attr('stroke-width', d => d.type === 'prerequisite' ? 2 : 1);
+
+            // draw nodes
+            const node = g.append('g')
+                .attr('class', 'nodes')
+                .selectAll('g')
+                .data(nodes)
+                .join('g')
+                .attr('class', 'node')
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended));
+
+            // node circles
+            node.append('circle')
+                .attr('r', d => d.type === 'topic' ? 20 : 8)
+                .attr('fill', d => {
+                    if (d.type === 'book') return colors.book;
+                    return colors[d.difficulty] || colors.sophomore;
+                })
+                .attr('fill-opacity', d => d.type === 'book' ? 0.6 : 0.9)
+                .attr('stroke', d => d.type === 'topic' ? '#fff' : 'none')
+                .attr('stroke-width', 2);
+
+            // node labels (topics only)
+            node.filter(d => d.type === 'topic')
+                .append('text')
+                .text(d => d.label.length > 15 ? d.label.substring(0, 12) + '...' : d.label)
+                .attr('font-size', '10px')
+                .attr('fill', '#fff')
+                .attr('text-anchor', 'middle')
+                .attr('dy', 35);
+
+            // interactions
+            node.on('mouseover', showTooltip)
+                .on('mouseout', hideTooltip)
+                .on('click', showInfoPanel);
+
+            // tick
+            simulation.on('tick', () => {
+                link
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+
+                node.attr('transform', d => `translate(${d.x},${d.y})`);
+            });
+        }
+
+        // drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // tooltip
+        function showTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            let html = `<div class="type">${d.type}</div>`;
+            html += `<h3>${d.label}</h3>`;
+
+            if (d.type === 'topic') {
+                html += `<div class="meta">${d.subfield} • ${d.level}</div>`;
+                html += `<span class="difficulty ${d.difficulty}">${d.difficulty}</span>`;
+                if (d.keywords && d.keywords.length) {
+                    html += `<div class="keywords">Keywords: ${d.keywords.join(', ')}</div>`;
+                }
+            } else {
+                const connectedTopics = graph.edges
+                    .filter(e => e.target === d.id || e.target.id === d.id)
+                    .length;
+                html += `<div class="meta">Connected to ${connectedTopics} topics</div>`;
+            }
+
+            tooltip.innerHTML = html;
+            tooltip.style.left = (event.pageX + 15) + 'px';
+            tooltip.style.top = (event.pageY + 15) + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        // info panel
+        function showInfoPanel(event, d) {
+            const panel = document.getElementById('info-panel');
+            const title = document.getElementById('info-title');
+            const content = document.getElementById('info-content');
+
+            title.textContent = d.label;
+
+            let html = '';
+
+            if (d.type === 'topic') {
+                html += `<p style="color: var(--text-secondary); margin-bottom: 1rem;">${d.subfield} • ${d.level}</p>`;
+
+                // find connected books
+                const books = graph.edges
+                    .filter(e => (e.source === d.id || e.source.id === d.id) && e.type === 'covers')
+                    .map(e => {
+                        const bookId = typeof e.target === 'object' ? e.target.id : e.target;
+                        const book = graph.nodes.find(n => n.id === bookId);
+                        return book ? { ...book, weight: e.weight } : null;
+                    })
+                    .filter(b => b)
+                    .sort((a, b) => b.weight - a.weight);
+
+                if (books.length) {
+                    html += `<h4>Related Textbooks (${books.length})</h4><ul>`;
+                    books.slice(0, 10).forEach(b => {
+                        html += `<li onclick="highlightNode('${b.id}')">${b.label} <span style="color: var(--text-light)">(${Math.round(b.weight * 100)}%)</span></li>`;
+                    });
+                    html += '</ul>';
+                }
+
+                // find prerequisites
+                const prereqs = graph.edges
+                    .filter(e => (e.target === d.id || e.target.id === d.id) && e.type === 'prerequisite')
+                    .map(e => {
+                        const topicId = typeof e.source === 'object' ? e.source.id : e.source;
+                        return graph.nodes.find(n => n.id === topicId);
+                    })
+                    .filter(t => t);
+
+                if (prereqs.length) {
+                    html += `<h4>Prerequisites</h4><ul>`;
+                    prereqs.forEach(t => {
+                        html += `<li onclick="highlightNode('${t.id}')">${t.label}</li>`;
+                    });
+                    html += '</ul>';
+                }
+
+                // find related topics
+                const related = graph.edges
+                    .filter(e => ((e.source === d.id || e.source.id === d.id) || (e.target === d.id || e.target.id === d.id)) && e.type === 'related')
+                    .map(e => {
+                        const otherId = (e.source === d.id || e.source.id === d.id)
+                            ? (typeof e.target === 'object' ? e.target.id : e.target)
+                            : (typeof e.source === 'object' ? e.source.id : e.source);
+                        return graph.nodes.find(n => n.id === otherId);
+                    })
+                    .filter(t => t);
+
+                if (related.length) {
+                    html += `<h4>Related Topics</h4><ul>`;
+                    related.forEach(t => {
+                        html += `<li onclick="highlightNode('${t.id}')">${t.label}</li>`;
+                    });
+                    html += '</ul>';
+                }
+
+            } else {
+                // book info
+                const topics = graph.edges
+                    .filter(e => (e.target === d.id || e.target.id === d.id) && e.type === 'covers')
+                    .map(e => {
+                        const topicId = typeof e.source === 'object' ? e.source.id : e.source;
+                        const topic = graph.nodes.find(n => n.id === topicId);
+                        return topic ? { ...topic, weight: e.weight } : null;
+                    })
+                    .filter(t => t)
+                    .sort((a, b) => b.weight - a.weight);
+
+                if (topics.length) {
+                    html += `<h4>Covers Topics (${topics.length})</h4><ul>`;
+                    topics.forEach(t => {
+                        html += `<li onclick="highlightNode('${t.id}')">${t.label} <span style="color: var(--text-light)">(${Math.round(t.weight * 100)}%)</span></li>`;
+                    });
+                    html += '</ul>';
+                }
+            }
+
+            content.innerHTML = html;
+            panel.classList.add('visible');
+
+            // highlight node and connections
+            highlightNode(d.id);
+        }
+
+        function closeInfoPanel() {
+            document.getElementById('info-panel').classList.remove('visible');
+            resetHighlight();
+        }
+
+        function highlightNode(nodeId) {
+            // dim all nodes and edges
+            d3.selectAll('.nodes circle').attr('opacity', 0.2);
+            d3.selectAll('.nodes text').attr('opacity', 0.2);
+            d3.selectAll('.links line').attr('opacity', 0.05);
+
+            // find connected nodes
+            const connectedIds = new Set([nodeId]);
+            graph.edges.forEach(e => {
+                const sourceId = typeof e.source === 'object' ? e.source.id : e.source;
+                const targetId = typeof e.target === 'object' ? e.target.id : e.target;
+                if (sourceId === nodeId) connectedIds.add(targetId);
+                if (targetId === nodeId) connectedIds.add(sourceId);
+            });
+
+            // highlight connected nodes
+            d3.selectAll('.nodes g').each(function(d) {
+                if (connectedIds.has(d.id)) {
+                    d3.select(this).select('circle').attr('opacity', 1);
+                    d3.select(this).select('text').attr('opacity', 1);
+                }
+            });
+
+            // highlight connected edges
+            d3.selectAll('.links line').each(function(e) {
+                const sourceId = typeof e.source === 'object' ? e.source.id : e.source;
+                const targetId = typeof e.target === 'object' ? e.target.id : e.target;
+                if (sourceId === nodeId || targetId === nodeId) {
+                    d3.select(this).attr('opacity', 0.8).attr('stroke-width', 3);
+                }
+            });
+        }
+
+        function resetHighlight() {
+            d3.selectAll('.nodes circle').attr('opacity', d => d.type === 'book' ? 0.6 : 0.9);
+            d3.selectAll('.nodes text').attr('opacity', 1);
+            d3.selectAll('.links line')
+                .attr('opacity', d => d.type === 'covers' ? 0.2 : 0.5)
+                .attr('stroke-width', d => d.type === 'prerequisite' ? 2 : 1);
+        }
+
+        // zoom controls
+        function zoomIn() {
+            svg.transition().call(zoom.scaleBy, 1.5);
+        }
+
+        function zoomOut() {
+            svg.transition().call(zoom.scaleBy, 0.67);
+        }
+
+        function resetZoom() {
+            svg.transition().call(zoom.transform, d3.zoomIdentity);
+        }
+
+        // search
+        document.getElementById('search-box').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (!query) {
+                resetHighlight();
+                return;
+            }
+
+            const matchedIds = new Set();
+            graph.nodes.forEach(n => {
+                if (n.label.toLowerCase().includes(query)) {
+                    matchedIds.add(n.id);
+                }
+                if (n.keywords && n.keywords.some(k => k.toLowerCase().includes(query))) {
+                    matchedIds.add(n.id);
+                }
+            });
+
+            if (matchedIds.size === 0) {
+                resetHighlight();
+                return;
+            }
+
+            // dim all
+            d3.selectAll('.nodes circle').attr('opacity', 0.1);
+            d3.selectAll('.nodes text').attr('opacity', 0.1);
+            d3.selectAll('.links line').attr('opacity', 0.02);
+
+            // highlight matches
+            d3.selectAll('.nodes g').each(function(d) {
+                if (matchedIds.has(d.id)) {
+                    d3.select(this).select('circle').attr('opacity', 1);
+                    d3.select(this).select('text').attr('opacity', 1);
+                }
+            });
+        });
+
+        // discipline change
+        document.getElementById('discipline-select').addEventListener('change', (e) => {
+            currentDiscipline = e.target.value;
+            loadGraph(currentDiscipline);
+            closeInfoPanel();
+        });
+
+        // connect research paper
+        function connectResearch() {
+            const input = document.getElementById('research-input').value;
+            if (!input.trim()) return;
+
+            const words = input.toLowerCase().split(/\s+/);
+
+            // find topics with keyword matches
+            const scores = {};
+            graph.nodes.filter(n => n.type === 'topic').forEach(topic => {
+                let score = 0;
+
+                // check label match
+                const labelWords = topic.label.toLowerCase().split(/\s+/);
+                labelWords.forEach(lw => {
+                    if (words.includes(lw)) score += 2;
+                });
+
+                // check keyword match
+                if (topic.keywords) {
+                    topic.keywords.forEach(kw => {
+                        const kwWords = kw.toLowerCase().split(/\s+/);
+                        kwWords.forEach(k => {
+                            if (words.includes(k)) score += 1;
+                        });
+                    });
+                }
+
+                if (score > 0) {
+                    scores[topic.id] = score;
+                }
+            });
+
+            // highlight matches
+            const matchedIds = Object.keys(scores);
+            if (matchedIds.length === 0) {
+                alert('No matching topics found. Try different keywords.');
+                return;
+            }
+
+            // dim all
+            d3.selectAll('.nodes circle').attr('opacity', 0.1);
+            d3.selectAll('.nodes text').attr('opacity', 0.1);
+            d3.selectAll('.links line').attr('opacity', 0.02);
+
+            // highlight matches with intensity based on score
+            const maxScore = Math.max(...Object.values(scores));
+            d3.selectAll('.nodes g').each(function(d) {
+                if (scores[d.id]) {
+                    const intensity = 0.4 + (scores[d.id] / maxScore) * 0.6;
+                    d3.select(this).select('circle')
+                        .attr('opacity', intensity)
+                        .attr('stroke', '#fff')
+                        .attr('stroke-width', 4);
+                    d3.select(this).select('text').attr('opacity', 1);
+                }
+            });
+
+            // highlight edges between matched topics
+            d3.selectAll('.links line').each(function(e) {
+                const sourceId = typeof e.source === 'object' ? e.source.id : e.source;
+                const targetId = typeof e.target === 'object' ? e.target.id : e.target;
+                if (scores[sourceId] && scores[targetId]) {
+                    d3.select(this).attr('opacity', 0.6).attr('stroke-width', 2);
+                }
+            });
+
+            // show results
+            const sortedMatches = matchedIds
+                .sort((a, b) => scores[b] - scores[a])
+                .slice(0, 5)
+                .map(id => graph.nodes.find(n => n.id === id));
+
+            const panel = document.getElementById('info-panel');
+            const title = document.getElementById('info-title');
+            const content = document.getElementById('info-content');
+
+            title.textContent = 'Research Connections';
+            let html = `<p style="color: var(--text-secondary); margin-bottom: 1rem;">Found ${matchedIds.length} matching topics</p>`;
+            html += '<h4>Top Matches</h4><ul>';
+            sortedMatches.forEach(t => {
+                html += `<li onclick="highlightNode('${t.id}')">${t.label} <span style="color: var(--text-light)">(${t.subfield})</span></li>`;
+            });
+            html += '</ul>';
+
+            content.innerHTML = html;
+            panel.classList.add('visible');
+        }
+
+        // init
+        loadGraph(currentDiscipline);
+
+        // resize handler
+        window.addEventListener('resize', () => {
+            if (graph) renderGraph();
+        });
+    </script>
+</body>
+</html>

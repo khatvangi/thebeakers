@@ -1,0 +1,2158 @@
+{
+  "discipline": "mathematics",
+  "meta": {
+    "name": "Mathematics",
+    "icon": "\u2211",
+    "color": "#a855f7"
+  },
+  "nodes": [
+    {
+      "id": "topic-limits",
+      "type": "topic",
+      "label": "Limits & Continuity",
+      "subfield": "Calculus",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "epsilon-delta",
+        "L'Hopital",
+        "squeeze theorem"
+      ]
+    },
+    {
+      "id": "topic-differentiation",
+      "type": "topic",
+      "label": "Differentiation",
+      "subfield": "Calculus",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "chain rule",
+        "implicit",
+        "related rates"
+      ]
+    },
+    {
+      "id": "topic-integration",
+      "type": "topic",
+      "label": "Integration",
+      "subfield": "Calculus",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "fundamental theorem",
+        "substitution",
+        "parts"
+      ]
+    },
+    {
+      "id": "topic-series",
+      "type": "topic",
+      "label": "Series & Sequences",
+      "subfield": "Calculus",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "convergence",
+        "Taylor",
+        "power series"
+      ]
+    },
+    {
+      "id": "topic-vectors-matrices",
+      "type": "topic",
+      "label": "Vectors & Matrices",
+      "subfield": "Linear Algebra",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "dot product",
+        "cross product",
+        "matrix multiplication"
+      ]
+    },
+    {
+      "id": "topic-linear-systems",
+      "type": "topic",
+      "label": "Linear Systems",
+      "subfield": "Linear Algebra",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "Gaussian elimination",
+        "rank",
+        "null space"
+      ]
+    },
+    {
+      "id": "topic-eigen",
+      "type": "topic",
+      "label": "Eigenvalues & Eigenvectors",
+      "subfield": "Linear Algebra",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "diagonalization",
+        "characteristic polynomial"
+      ]
+    },
+    {
+      "id": "topic-transformations",
+      "type": "topic",
+      "label": "Linear Transformations",
+      "subfield": "Linear Algebra",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "kernel",
+        "image",
+        "change of basis"
+      ]
+    },
+    {
+      "id": "topic-first-order-ode",
+      "type": "topic",
+      "label": "First-Order ODEs",
+      "subfield": "Differential Equations",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "separable",
+        "linear",
+        "exact",
+        "integrating factor"
+      ]
+    },
+    {
+      "id": "topic-second-order-ode",
+      "type": "topic",
+      "label": "Second-Order ODEs",
+      "subfield": "Differential Equations",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "homogeneous",
+        "particular solution",
+        "variation of parameters"
+      ]
+    },
+    {
+      "id": "topic-systems-ode",
+      "type": "topic",
+      "label": "Systems of ODEs",
+      "subfield": "Differential Equations",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "phase plane",
+        "stability",
+        "equilibrium"
+      ]
+    },
+    {
+      "id": "topic-pdes-intro",
+      "type": "topic",
+      "label": "PDEs Introduction",
+      "subfield": "Differential Equations",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "heat equation",
+        "wave equation",
+        "separation of variables"
+      ]
+    },
+    {
+      "id": "topic-probability",
+      "type": "topic",
+      "label": "Probability Basics",
+      "subfield": "Probability & Statistics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "conditional",
+        "Bayes theorem",
+        "independence"
+      ]
+    },
+    {
+      "id": "topic-distributions",
+      "type": "topic",
+      "label": "Distributions",
+      "subfield": "Probability & Statistics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "normal",
+        "binomial",
+        "Poisson",
+        "exponential"
+      ]
+    },
+    {
+      "id": "topic-inference",
+      "type": "topic",
+      "label": "Statistical Inference",
+      "subfield": "Probability & Statistics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "confidence interval",
+        "hypothesis testing",
+        "p-value"
+      ]
+    },
+    {
+      "id": "topic-regression",
+      "type": "topic",
+      "label": "Regression",
+      "subfield": "Probability & Statistics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "linear regression",
+        "correlation",
+        "least squares"
+      ]
+    },
+    {
+      "id": "topic-logic-proofs",
+      "type": "topic",
+      "label": "Logic & Proofs",
+      "subfield": "Discrete Mathematics",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "propositional",
+        "predicate",
+        "induction",
+        "contradiction"
+      ]
+    },
+    {
+      "id": "topic-set-theory",
+      "type": "topic",
+      "label": "Set Theory",
+      "subfield": "Discrete Mathematics",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "union",
+        "intersection",
+        "cardinality",
+        "power set"
+      ]
+    },
+    {
+      "id": "topic-combinatorics",
+      "type": "topic",
+      "label": "Combinatorics",
+      "subfield": "Discrete Mathematics",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "permutations",
+        "combinations",
+        "binomial coefficients"
+      ]
+    },
+    {
+      "id": "topic-graph-theory",
+      "type": "topic",
+      "label": "Graph Theory",
+      "subfield": "Discrete Mathematics",
+      "difficulty": "sophomore",
+      "level": "200",
+      "keywords": [
+        "paths",
+        "trees",
+        "Euler",
+        "coloring"
+      ]
+    },
+    {
+      "id": "book-introduction-to-mathematical-analysis-i-lafferrier",
+      "type": "book",
+      "label": "Introduction To Mathematical Analysis I Lafferriere Laffe...",
+      "pdf_name": "introduction_to_mathematical_analysis_i_lafferriere_lafferriere_and_nguyen.pdf",
+      "topics": [
+        "topic-limits"
+      ]
+    },
+    {
+      "id": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "book",
+      "label": "(Graduate Texts In Mathematics) Saunders Mac Lane Categor...",
+      "pdf_name": "(Graduate Texts in Mathematics) Saunders Mac Lane - Categories for the Working Mathematician-Springer (1998).pdf",
+      "topics": [
+        "topic-limits",
+        "topic-vectors-matrices",
+        "topic-eigen",
+        "topic-logic-proofs",
+        "topic-set-theory",
+        "topic-combinatorics",
+        "topic-graph-theory"
+      ]
+    },
+    {
+      "id": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "book",
+      "label": "Angelo Bassi Sheldon Goldstein Roderich Tumulka Nino Zang...",
+      "pdf_name": "angelo_bassi_sheldon_goldstein_roderich_tumulka_nino_zanghi_physics_and_the_nature_of_reality_essays_in_memory_of_detlef.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-vectors-matrices",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro",
+        "topic-probability",
+        "topic-distributions",
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-exercises-analysis",
+      "type": "book",
+      "label": "Exercises Analysis",
+      "pdf_name": "exercises_analysis.pdf",
+      "topics": [
+        "topic-limits"
+      ]
+    },
+    {
+      "id": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "book",
+      "label": "Basic And Applied Thermodynamics By P K Nag Z Lib Org",
+      "pdf_name": "basic_and_applied_thermodynamics_by_p_k_nag_z_lib_org.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-partial-differential-equations-walet",
+      "type": "book",
+      "label": "Partial Differential Equations Walet",
+      "pdf_name": "partial_differential_equations_walet.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-mathematical-analysis-zakon",
+      "type": "book",
+      "label": "Mathematical Analysis Zakon",
+      "pdf_name": "mathematical_analysis_zakon.pdf",
+      "topics": [
+        "topic-limits"
+      ]
+    },
+    {
+      "id": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "book",
+      "label": "Axiomatic Design Advances And Applications Nam Pyo Suh",
+      "pdf_name": "axiomatic_design_advances_and_applications_nam_pyo_suh.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-vectors-matrices",
+        "topic-eigen",
+        "topic-probability",
+        "topic-distributions",
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-calculus-openstax",
+      "type": "book",
+      "label": "Calculus Openstax",
+      "pdf_name": "calculus_openstax.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-second-order-ode"
+      ]
+    },
+    {
+      "id": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "book",
+      "label": "(Undergraduate Texts In Mathematics) D.R. Owen A First Co...",
+      "pdf_name": "(Undergraduate Texts in Mathematics) D.R. Owen - A First Course in the Mathematical Foundations of Thermodynamics-Springer (1983).pdf",
+      "topics": [
+        "topic-limits",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-complex-variables-with-applications-orloff",
+      "type": "book",
+      "label": "Complex Variables With Applications Orloff",
+      "pdf_name": "complex_variables_with_applications_orloff.pdf",
+      "topics": [
+        "topic-limits"
+      ]
+    },
+    {
+      "id": "book-elementary-differential-equations-with-boundary-va",
+      "type": "book",
+      "label": "Elementary Differential Equations With Boundary Value Pro...",
+      "pdf_name": "elementary_differential_equations_with_boundary_value_problems_trench.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-introduction-to-real-analysis-trench",
+      "type": "book",
+      "label": "Introduction To Real Analysis Trench",
+      "pdf_name": "introduction_to_real_analysis_trench.pdf",
+      "topics": [
+        "topic-limits",
+        "topic-first-order-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-supplemental-modules-calculus",
+      "type": "book",
+      "label": "Supplemental Modules Calculus",
+      "pdf_name": "supplemental_modules_calculus.pdf",
+      "topics": [
+        "topic-limits"
+      ]
+    },
+    {
+      "id": "book-introduction-to-the-modeling-and-analysis-of-compl",
+      "type": "book",
+      "label": "Introduction To The Modeling And Analysis Of Complex Syst...",
+      "pdf_name": "introduction_to_the_modeling_and_analysis_of_complex_systems_sayama.pdf",
+      "topics": [
+        "topic-differentiation"
+      ]
+    },
+    {
+      "id": "book-functions-defined-by-improper-integrals-trench",
+      "type": "book",
+      "label": "Functions Defined By Improper Integrals Trench",
+      "pdf_name": "functions_defined_by_improper_integrals_trench.pdf",
+      "topics": [
+        "topic-integration"
+      ]
+    },
+    {
+      "id": "book-calculus-guichard",
+      "type": "book",
+      "label": "Calculus Guichard",
+      "pdf_name": "calculus_guichard.pdf",
+      "topics": [
+        "topic-integration"
+      ]
+    },
+    {
+      "id": "book-real-analysis-boman-and-rogers",
+      "type": "book",
+      "label": "Real Analysis Boman And Rogers",
+      "pdf_name": "real_analysis_boman_and_rogers.pdf",
+      "topics": [
+        "topic-series"
+      ]
+    },
+    {
+      "id": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "book",
+      "label": "Fundamentals Of Matrix Algebra Hartman",
+      "pdf_name": "fundamentals_of_matrix_algebra_hartman.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-eigen",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-linear-algebra-waldron-cherney-and-denton",
+      "type": "book",
+      "label": "Linear Algebra Waldron Cherney And Denton",
+      "pdf_name": "linear_algebra_waldron_cherney_and_denton.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-eigen",
+        "topic-systems-ode",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-matrix-algebra-with-computational-applications-col",
+      "type": "book",
+      "label": "Matrix Algebra With Computational Applications Colbry",
+      "pdf_name": "matrix_algebra_with_computational_applications_colbry.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-linear-systems",
+        "topic-systems-ode",
+        "topic-regression"
+      ]
+    },
+    {
+      "id": "book-introduction-to-matrix-algebra-kaw",
+      "type": "book",
+      "label": "Introduction To Matrix Algebra Kaw",
+      "pdf_name": "introduction_to_matrix_algebra_kaw.pdf",
+      "topics": [
+        "topic-vectors-matrices"
+      ]
+    },
+    {
+      "id": "book-linear-algebra-with-applications-nicholson",
+      "type": "book",
+      "label": "Linear Algebra With Applications Nicholson",
+      "pdf_name": "linear_algebra_with_applications_nicholson.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-linear-systems",
+        "topic-eigen",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-interactive-linear-algebra-margalit-and-rabinoff",
+      "type": "book",
+      "label": "Interactive Linear Algebra Margalit And Rabinoff",
+      "pdf_name": "interactive_linear_algebra_margalit_and_rabinoff.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-eigen",
+        "topic-systems-ode",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-a-first-course-in-linear-algebra-kuttler",
+      "type": "book",
+      "label": "A First Course In Linear Algebra Kuttler",
+      "pdf_name": "a_first_course_in_linear_algebra_kuttler.pdf",
+      "topics": [
+        "topic-vectors-matrices"
+      ]
+    },
+    {
+      "id": "book-understanding-linear-algebra-austin",
+      "type": "book",
+      "label": "Understanding Linear Algebra Austin",
+      "pdf_name": "understanding_linear_algebra_austin.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-precalculus-stitz-zeager",
+      "type": "book",
+      "label": "Precalculus Stitz Zeager",
+      "pdf_name": "precalculus_stitz_zeager.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-precalculus-1e-openstax",
+      "type": "book",
+      "label": "Precalculus 1E Openstax",
+      "pdf_name": "precalculus_1e_openstax.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-linear-systems",
+        "topic-second-order-ode"
+      ]
+    },
+    {
+      "id": "book-matrix-analysis-cox",
+      "type": "book",
+      "label": "Matrix Analysis Cox",
+      "pdf_name": "matrix_analysis_cox.pdf",
+      "topics": [
+        "topic-vectors-matrices",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-linear-algebra-schilling-nachtergaele-and-lankham",
+      "type": "book",
+      "label": "Linear Algebra Schilling Nachtergaele And Lankham",
+      "pdf_name": "linear_algebra_schilling_nachtergaele_and_lankham.pdf",
+      "topics": [
+        "topic-eigen"
+      ]
+    },
+    {
+      "id": "book-differential-equations-chasnov",
+      "type": "book",
+      "label": "Differential Equations Chasnov",
+      "pdf_name": "differential_equations_chasnov.pdf",
+      "topics": [
+        "topic-eigen",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-numerically-solving-ordinary-differential-equation",
+      "type": "book",
+      "label": "Numerically Solving Ordinary Differential Equations Brorson",
+      "pdf_name": "numerically_solving_ordinary_differential_equations_brorson.pdf",
+      "topics": [
+        "topic-eigen",
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-a-first-course-in-differential-equations-for-scien",
+      "type": "book",
+      "label": "A First Course In Differential Equations For Scientists A...",
+      "pdf_name": "a_first_course_in_differential_equations_for_scientists_and_engineers_herman.pdf",
+      "topics": [
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-introduction-to-partial-differential-equations-her",
+      "type": "book",
+      "label": "Introduction To Partial Differential Equations Herman",
+      "pdf_name": "introduction_to_partial_differential_equations_herman.pdf",
+      "topics": [
+        "topic-first-order-ode",
+        "topic-second-order-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-partial-differential-equations-miersemann",
+      "type": "book",
+      "label": "Partial Differential Equations Miersemann",
+      "pdf_name": "partial_differential_equations_miersemann.pdf",
+      "topics": [
+        "topic-second-order-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-physical-modeling-in-matlab-downey",
+      "type": "book",
+      "label": "Physical Modeling In Matlab Downey",
+      "pdf_name": "physical_modeling_in_matlab_downey.pdf",
+      "topics": [
+        "topic-second-order-ode",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-ordinary-differential-equations-wiggins",
+      "type": "book",
+      "label": "Ordinary Differential Equations Wiggins",
+      "pdf_name": "ordinary_differential_equations_wiggins.pdf",
+      "topics": [
+        "topic-second-order-ode",
+        "topic-systems-ode"
+      ]
+    },
+    {
+      "id": "book-topics-in-thermodynamics-of-solutions-and-liquid-m",
+      "type": "book",
+      "label": "Topics In Thermodynamics Of Solutions And Liquid Mixtures",
+      "pdf_name": "topics_in_thermodynamics_of_solutions_and_liquid_mixtures.pdf",
+      "topics": [
+        "topic-second-order-ode",
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-differential-equations-for-engineers-lebl",
+      "type": "book",
+      "label": "Differential Equations For Engineers Lebl",
+      "pdf_name": "differential_equations_for_engineers_lebl.pdf",
+      "topics": [
+        "topic-pdes-intro"
+      ]
+    },
+    {
+      "id": "book-foundations-in-statistical-reasoning-kaslik",
+      "type": "book",
+      "label": "Foundations In Statistical Reasoning Kaslik",
+      "pdf_name": "foundations_in_statistical_reasoning_kaslik.pdf",
+      "topics": [
+        "topic-probability",
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-introductory-statistics-1e-openstax",
+      "type": "book",
+      "label": "Introductory Statistics 1E Openstax",
+      "pdf_name": "introductory_statistics_1e_openstax.pdf",
+      "topics": [
+        "topic-probability",
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-introductory-statistics-2e-openstax",
+      "type": "book",
+      "label": "Introductory Statistics 2E Openstax",
+      "pdf_name": "introductory_statistics_2e_openstax.pdf",
+      "topics": [
+        "topic-probability",
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-math-for-liberal-art-students-2e-diaz",
+      "type": "book",
+      "label": "Math For Liberal Art Students 2E Diaz",
+      "pdf_name": "math_for_liberal_art_students_2e_diaz.pdf",
+      "topics": [
+        "topic-distributions"
+      ]
+    },
+    {
+      "id": "book-mostly-harmless-statistics-webb",
+      "type": "book",
+      "label": "Mostly Harmless Statistics Webb",
+      "pdf_name": "mostly_harmless_statistics_webb.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-introductory-statistics-hannah-seidler-wright",
+      "type": "book",
+      "label": "Introductory Statistics Hannah Seidler Wright",
+      "pdf_name": "introductory_statistics_hannah_seidler_wright.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-introduction-to-statistics-in-the-psychological-sc",
+      "type": "book",
+      "label": "Introduction To Statistics In The Psychological Sciences ...",
+      "pdf_name": "introduction_to_statistics_in_the_psychological_sciences_cote_gordon_randell_and_marvin.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-lies-damned-lies-or-statistics-how-to-tell-the-tru",
+      "type": "book",
+      "label": "Lies Damned Lies Or Statistics How To Tell The Truth With...",
+      "pdf_name": "lies_damned_lies_or_statistics_how_to_tell_the_truth_with_statistics_poritz.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-intermediate-statistics-with-r-greenwood",
+      "type": "book",
+      "label": "Intermediate Statistics With R Greenwood",
+      "pdf_name": "intermediate_statistics_with_r_greenwood.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-statistics-for-research-students-fein-gilmour-mach",
+      "type": "book",
+      "label": "Statistics For Research Students Fein Gilmour Machin And ...",
+      "pdf_name": "statistics_for_research_students_fein_gilmour_machin_and_liam_hendry.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-an-introduction-to-psychological-statistics-foster",
+      "type": "book",
+      "label": "An Introduction To Psychological Statistics Foster Et Al",
+      "pdf_name": "an_introduction_to_psychological_statistics_foster_et_al.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-a-scientific-search-for-altruism-do-we-only-care-a",
+      "type": "book",
+      "label": "A Scientific Search For Altruism Do We Only Care About Ou...",
+      "pdf_name": "a_scientific_search_for_altruism_do_we_only_care_about_ourselves_c_daniel_batson_z_library.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-business-statistics-openstax",
+      "type": "book",
+      "label": "Business Statistics Openstax",
+      "pdf_name": "business_statistics_openstax.pdf",
+      "topics": [
+        "topic-inference",
+        "topic-regression"
+      ]
+    },
+    {
+      "id": "book-balog-kati-beardman-stephanie-loar-brian-schiffer-",
+      "type": "book",
+      "label": "Balog Kati Beardman Stephanie Loar Brian Schiffer Stephen...",
+      "pdf_name": "balog_kati_beardman_stephanie_loar_brian_schiffer_stephen_r_consciousness_and_meaning_selected_essays_oxford_university_.pdf",
+      "topics": [
+        "topic-inference",
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-introductory-statistics-lane",
+      "type": "book",
+      "label": "Introductory Statistics Lane",
+      "pdf_name": "introductory_statistics_lane.pdf",
+      "topics": [
+        "topic-inference"
+      ]
+    },
+    {
+      "id": "book-book-linear-regression-using-r-an-introduction-to-",
+      "type": "book",
+      "label": "Book Linear Regression Using R An Introduction To Data Mo...",
+      "pdf_name": "book_linear_regression_using_r_an_introduction_to_data_modeling_lilja.pdf",
+      "topics": [
+        "topic-regression"
+      ]
+    },
+    {
+      "id": "book-an-introduction-to-proof-via-inquiry-based-learnin",
+      "type": "book",
+      "label": "An Introduction To Proof Via Inquiry Based Learning Ernst",
+      "pdf_name": "an_introduction_to_proof_via_inquiry_based_learning_ernst.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-discrete-mathematics-levin",
+      "type": "book",
+      "label": "Discrete Mathematics Levin",
+      "pdf_name": "discrete_mathematics_levin.pdf",
+      "topics": [
+        "topic-logic-proofs",
+        "topic-set-theory",
+        "topic-combinatorics",
+        "topic-graph-theory"
+      ]
+    },
+    {
+      "id": "book-accounting-finance-sustainability-governance-and-f",
+      "type": "book",
+      "label": "Accounting Finance Sustainability Governance And Fraud Th...",
+      "pdf_name": "accounting_finance_sustainability_governance_and_fraud_theory_and_application_muharrem_klc_sezer_bozkus_kahyaoglu_algori.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-friendly-introduction-to-mathematical-logic-leary-",
+      "type": "book",
+      "label": "Friendly Introduction To Mathematical Logic Leary Kristia...",
+      "pdf_name": "friendly_introduction_to_mathematical_logic_leary_kristiansen.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-advances-in-consciousness-research-daniel-d-hutto-",
+      "type": "book",
+      "label": "Advances In Consciousness Research Daniel D Hutto Beyond ...",
+      "pdf_name": "advances_in_consciousness_research_daniel_d_hutto_beyond_physicalism_john_benjamins_publishing_company_2000.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-discrete-mathematics-for-computer-science-fitch",
+      "type": "book",
+      "label": "Discrete Mathematics For Computer Science Fitch",
+      "pdf_name": "discrete_mathematics_for_computer_science_fitch.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-transition-to-higher-mathematics-dumas-and-mccarth",
+      "type": "book",
+      "label": "Transition To Higher Mathematics Dumas And Mccarthy",
+      "pdf_name": "transition_to_higher_mathematics_dumas_and_mccarthy.pdf",
+      "topics": [
+        "topic-logic-proofs"
+      ]
+    },
+    {
+      "id": "book-elementary-foundations-an-introduction-to-topics-i",
+      "type": "book",
+      "label": "Elementary Foundations An Introduction To Topics In Discr...",
+      "pdf_name": "elementary_foundations_an_introduction_to_topics_in_discrete_mathematics_sylvestre.pdf",
+      "topics": [
+        "topic-set-theory",
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-combinatorics-discrete-mathematics-levin",
+      "type": "book",
+      "label": "Combinatorics Discrete Mathematics Levin",
+      "pdf_name": "combinatorics_discrete_mathematics_levin.pdf",
+      "topics": [
+        "topic-set-theory",
+        "topic-combinatorics",
+        "topic-graph-theory"
+      ]
+    },
+    {
+      "id": "book-applied-discrete-structures-doerr-and-levasseur",
+      "type": "book",
+      "label": "Applied Discrete Structures Doerr And Levasseur",
+      "pdf_name": "applied_discrete_structures_doerr_and_levasseur.pdf",
+      "topics": [
+        "topic-set-theory"
+      ]
+    },
+    {
+      "id": "book-advanced-algebra",
+      "type": "book",
+      "label": "Advanced Algebra",
+      "pdf_name": "advanced_algebra.pdf",
+      "topics": [
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-combinatorics-morris",
+      "type": "book",
+      "label": "Combinatorics Morris",
+      "pdf_name": "combinatorics_morris.pdf",
+      "topics": [
+        "topic-combinatorics",
+        "topic-graph-theory"
+      ]
+    },
+    {
+      "id": "book-elementary-algebra-arnold",
+      "type": "book",
+      "label": "Elementary Algebra Arnold",
+      "pdf_name": "elementary_algebra_arnold.pdf",
+      "topics": [
+        "topic-combinatorics",
+        "topic-graph-theory"
+      ]
+    },
+    {
+      "id": "book-precalculus-tradler-and-carley",
+      "type": "book",
+      "label": "Precalculus Tradler And Carley",
+      "pdf_name": "precalculus_tradler_and_carley.pdf",
+      "topics": [
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-combinatorics-through-guided-discovery-bogart",
+      "type": "book",
+      "label": "Combinatorics Through Guided Discovery Bogart",
+      "pdf_name": "combinatorics_through_guided_discovery_bogart.pdf",
+      "topics": [
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-intermediate-algebra-for-science-technology-engine",
+      "type": "book",
+      "label": "Intermediate Algebra For Science Technology Engineering A...",
+      "pdf_name": "intermediate_algebra_for_science_technology_engineering_and_mathematics_diaz.pdf",
+      "topics": [
+        "topic-combinatorics"
+      ]
+    },
+    {
+      "id": "book-combinatorics-and-graph-theory-guichard",
+      "type": "book",
+      "label": "Combinatorics And Graph Theory Guichard",
+      "pdf_name": "combinatorics_and_graph_theory_guichard.pdf",
+      "topics": [
+        "topic-graph-theory"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "topic-limits",
+      "target": "book-introduction-to-mathematical-analysis-i-lafferrier",
+      "type": "covers",
+      "weight": 0.631
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.629
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.598
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-exercises-analysis",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.58
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.573
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-mathematical-analysis-zakon",
+      "type": "covers",
+      "weight": 0.569
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-calculus-openstax",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-complex-variables-with-applications-orloff",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-introduction-to-real-analysis-trench",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-limits",
+      "target": "book-supplemental-modules-calculus",
+      "type": "covers",
+      "weight": 0.55
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "book-introduction-to-the-modeling-and-analysis-of-compl",
+      "type": "covers",
+      "weight": 0.55
+    },
+    {
+      "source": "topic-integration",
+      "target": "book-functions-defined-by-improper-integrals-trench",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-integration",
+      "target": "book-calculus-guichard",
+      "type": "covers",
+      "weight": 0.558
+    },
+    {
+      "source": "topic-series",
+      "target": "book-real-analysis-boman-and-rogers",
+      "type": "covers",
+      "weight": 0.622
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "covers",
+      "weight": 0.665
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-linear-algebra-waldron-cherney-and-denton",
+      "type": "covers",
+      "weight": 0.632
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-matrix-algebra-with-computational-applications-col",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-introduction-to-matrix-algebra-kaw",
+      "type": "covers",
+      "weight": 0.599
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.598
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.596
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-linear-algebra-with-applications-nicholson",
+      "type": "covers",
+      "weight": 0.589
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-interactive-linear-algebra-margalit-and-rabinoff",
+      "type": "covers",
+      "weight": 0.577
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.576
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-a-first-course-in-linear-algebra-kuttler",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-understanding-linear-algebra-austin",
+      "type": "covers",
+      "weight": 0.564
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-precalculus-stitz-zeager",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-precalculus-1e-openstax",
+      "type": "covers",
+      "weight": 0.553
+    },
+    {
+      "source": "topic-vectors-matrices",
+      "target": "book-matrix-analysis-cox",
+      "type": "covers",
+      "weight": 0.551
+    },
+    {
+      "source": "topic-linear-systems",
+      "target": "book-precalculus-1e-openstax",
+      "type": "covers",
+      "weight": 0.599
+    },
+    {
+      "source": "topic-linear-systems",
+      "target": "book-matrix-algebra-with-computational-applications-col",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-linear-systems",
+      "target": "book-linear-algebra-with-applications-nicholson",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-interactive-linear-algebra-margalit-and-rabinoff",
+      "type": "covers",
+      "weight": 0.635
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-linear-algebra-waldron-cherney-and-denton",
+      "type": "covers",
+      "weight": 0.628
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "covers",
+      "weight": 0.586
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-linear-algebra-with-applications-nicholson",
+      "type": "covers",
+      "weight": 0.584
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-linear-algebra-schilling-nachtergaele-and-lankham",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-numerically-solving-ordinary-differential-equation",
+      "type": "covers",
+      "weight": 0.558
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-eigen",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.655
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-a-first-course-in-differential-equations-for-scien",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.603
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.588
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.564
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.562
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-numerically-solving-ordinary-differential-equation",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-introduction-to-real-analysis-trench",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-introduction-to-partial-differential-equations-her",
+      "type": "covers",
+      "weight": 0.553
+    },
+    {
+      "source": "topic-first-order-ode",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.552
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-a-first-course-in-differential-equations-for-scien",
+      "type": "covers",
+      "weight": 0.668
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.657
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.627
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-introduction-to-partial-differential-equations-her",
+      "type": "covers",
+      "weight": 0.617
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-partial-differential-equations-miersemann",
+      "type": "covers",
+      "weight": 0.602
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.6
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.596
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.591
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-numerically-solving-ordinary-differential-equation",
+      "type": "covers",
+      "weight": 0.588
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-physical-modeling-in-matlab-downey",
+      "type": "covers",
+      "weight": 0.581
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-calculus-openstax",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-ordinary-differential-equations-wiggins",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-topics-in-thermodynamics-of-solutions-and-liquid-m",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-precalculus-1e-openstax",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-second-order-ode",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.634
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-ordinary-differential-equations-wiggins",
+      "type": "covers",
+      "weight": 0.63
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.61
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-matrix-analysis-cox",
+      "type": "covers",
+      "weight": 0.602
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-interactive-linear-algebra-margalit-and-rabinoff",
+      "type": "covers",
+      "weight": 0.599
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.599
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-matrix-algebra-with-computational-applications-col",
+      "type": "covers",
+      "weight": 0.593
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-linear-algebra-waldron-cherney-and-denton",
+      "type": "covers",
+      "weight": 0.589
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-numerically-solving-ordinary-differential-equation",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-understanding-linear-algebra-austin",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-physical-modeling-in-matlab-downey",
+      "type": "covers",
+      "weight": 0.582
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-linear-algebra-with-applications-nicholson",
+      "type": "covers",
+      "weight": 0.579
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.568
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-systems-ode",
+      "target": "book-a-first-course-in-differential-equations-for-scien",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.754
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-introduction-to-partial-differential-equations-her",
+      "type": "covers",
+      "weight": 0.677
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-partial-differential-equations-miersemann",
+      "type": "covers",
+      "weight": 0.672
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.644
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-differential-equations-for-engineers-lebl",
+      "type": "covers",
+      "weight": 0.619
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.617
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.612
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.608
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.595
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-topics-in-thermodynamics-of-solutions-and-liquid-m",
+      "type": "covers",
+      "weight": 0.594
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-numerically-solving-ordinary-differential-equation",
+      "type": "covers",
+      "weight": 0.584
+    },
+    {
+      "source": "topic-pdes-intro",
+      "target": "book-introduction-to-real-analysis-trench",
+      "type": "covers",
+      "weight": 0.579
+    },
+    {
+      "source": "topic-probability",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.636
+    },
+    {
+      "source": "topic-probability",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.574
+    },
+    {
+      "source": "topic-probability",
+      "target": "book-foundations-in-statistical-reasoning-kaslik",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-probability",
+      "target": "book-introductory-statistics-1e-openstax",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-probability",
+      "target": "book-introductory-statistics-2e-openstax",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-distributions",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.691
+    },
+    {
+      "source": "topic-distributions",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-distributions",
+      "target": "book-math-for-liberal-art-students-2e-diaz",
+      "type": "covers",
+      "weight": 0.564
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-mostly-harmless-statistics-webb",
+      "type": "covers",
+      "weight": 0.64
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-foundations-in-statistical-reasoning-kaslik",
+      "type": "covers",
+      "weight": 0.638
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-introductory-statistics-hannah-seidler-wright",
+      "type": "covers",
+      "weight": 0.615
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-introduction-to-statistics-in-the-psychological-sc",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-lies-damned-lies-or-statistics-how-to-tell-the-tru",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-intermediate-statistics-with-r-greenwood",
+      "type": "covers",
+      "weight": 0.581
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-statistics-for-research-students-fein-gilmour-mach",
+      "type": "covers",
+      "weight": 0.581
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-an-introduction-to-psychological-statistics-foster",
+      "type": "covers",
+      "weight": 0.58
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-a-scientific-search-for-altruism-do-we-only-care-a",
+      "type": "covers",
+      "weight": 0.574
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-introductory-statistics-1e-openstax",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-business-statistics-openstax",
+      "type": "covers",
+      "weight": 0.57
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-balog-kati-beardman-stephanie-loar-brian-schiffer-",
+      "type": "covers",
+      "weight": 0.57
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-introductory-statistics-2e-openstax",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-inference",
+      "target": "book-introductory-statistics-lane",
+      "type": "covers",
+      "weight": 0.565
+    },
+    {
+      "source": "topic-regression",
+      "target": "book-book-linear-regression-using-r-an-introduction-to-",
+      "type": "covers",
+      "weight": 0.61
+    },
+    {
+      "source": "topic-regression",
+      "target": "book-business-statistics-openstax",
+      "type": "covers",
+      "weight": 0.609
+    },
+    {
+      "source": "topic-regression",
+      "target": "book-matrix-algebra-with-computational-applications-col",
+      "type": "covers",
+      "weight": 0.593
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-an-introduction-to-proof-via-inquiry-based-learnin",
+      "type": "covers",
+      "weight": 0.647
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.64
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-balog-kati-beardman-stephanie-loar-brian-schiffer-",
+      "type": "covers",
+      "weight": 0.62
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-accounting-finance-sustainability-governance-and-f",
+      "type": "covers",
+      "weight": 0.619
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-friendly-introduction-to-mathematical-logic-leary-",
+      "type": "covers",
+      "weight": 0.608
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-advances-in-consciousness-research-daniel-d-hutto-",
+      "type": "covers",
+      "weight": 0.599
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.574
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-discrete-mathematics-for-computer-science-fitch",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-logic-proofs",
+      "target": "book-transition-to-higher-mathematics-dumas-and-mccarth",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-set-theory",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.583
+    },
+    {
+      "source": "topic-set-theory",
+      "target": "book-elementary-foundations-an-introduction-to-topics-i",
+      "type": "covers",
+      "weight": 0.581
+    },
+    {
+      "source": "topic-set-theory",
+      "target": "book-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-set-theory",
+      "target": "book-combinatorics-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-set-theory",
+      "target": "book-applied-discrete-structures-doerr-and-levasseur",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-elementary-foundations-an-introduction-to-topics-i",
+      "type": "covers",
+      "weight": 0.662
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-advanced-algebra",
+      "type": "covers",
+      "weight": 0.645
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-combinatorics-morris",
+      "type": "covers",
+      "weight": 0.632
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-precalculus-stitz-zeager",
+      "type": "covers",
+      "weight": 0.6
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-elementary-algebra-arnold",
+      "type": "covers",
+      "weight": 0.594
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-combinatorics-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-interactive-linear-algebra-margalit-and-rabinoff",
+      "type": "covers",
+      "weight": 0.581
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.577
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-linear-algebra-waldron-cherney-and-denton",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-precalculus-tradler-and-carley",
+      "type": "covers",
+      "weight": 0.57
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-combinatorics-through-guided-discovery-bogart",
+      "type": "covers",
+      "weight": 0.564
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-intermediate-algebra-for-science-technology-engine",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-combinatorics",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.673
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-elementary-algebra-arnold",
+      "type": "covers",
+      "weight": 0.596
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-combinatorics-and-graph-theory-guichard",
+      "type": "covers",
+      "weight": 0.584
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-combinatorics-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-combinatorics-morris",
+      "type": "covers",
+      "weight": 0.568
+    },
+    {
+      "source": "topic-graph-theory",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-vectors-matrices",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-vectors-matrices",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-linear-systems",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-linear-systems",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-eigen",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-eigen",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-transformations",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-transformations",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-first-order-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-first-order-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-second-order-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-second-order-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-systems-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-systems-ode",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-pdes-intro",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-pdes-intro",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-probability",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-probability",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-distributions",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-distributions",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-inference",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-inference",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-regression",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-regression",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-logic-proofs",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-logic-proofs",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-set-theory",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-set-theory",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-combinatorics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-combinatorics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-limits",
+      "target": "topic-graph-theory",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-differentiation",
+      "target": "topic-graph-theory",
+      "type": "prerequisite",
+      "weight": 0.7
+    }
+  ],
+  "stats": {
+    "topics": 20,
+    "books": 72,
+    "edges": 190,
+    "prerequisite_edges": 32,
+    "related_edges": 0,
+    "covers_edges": 158
+  }
+}

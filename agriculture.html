@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="biology.html">Biology</a><a href="chemistry.html">Chemistry</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="biology.html">Biology</a><a href="chemistry.html">Chemistry</a></nav>
     </header>
     <section class="hero">
         <h1><img src="agriculture.png" alt="" class="hero-icon"> Agriculture</h1>
@@ -124,37 +125,37 @@
     <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
     <script>
         const DEEPDIVES = [];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Crop Science': [
-                { topic: 'Plant Breeding', url: '#plant-breeding' },
-                { topic: 'Crop Physiology', url: '#crop-physiology' },
-                { topic: 'Yield Optimization', url: '#yield' },
-                { topic: 'Seed Science', url: '#seed-science' }
+                { topic: 'Plant Physiology', url: '#topic-plant-physiology' },
+                { topic: 'Crop Breeding', url: '#topic-crop-breeding' },
+                { topic: 'Crop Production', url: '#topic-crop-production' },
+                { topic: 'Seed Science', url: '#topic-seed-science' },
             ],
             'Soil Science': [
-                { topic: 'Soil Chemistry', url: '#soil-chemistry' },
-                { topic: 'Soil Microbiology', url: '#soil-microbiology' },
-                { topic: 'Fertility Management', url: '#fertility' },
-                { topic: 'Soil Physics', url: '#soil-physics' }
+                { topic: 'Soil Chemistry', url: '#topic-soil-chemistry' },
+                { topic: 'Soil Physics', url: '#topic-soil-physics' },
+                { topic: 'Soil Biology', url: '#topic-soil-biology' },
+                { topic: 'Soil Fertility', url: '#topic-soil-fertility' },
             ],
-            'Plant Pathology': [
-                { topic: 'Disease Identification', url: '#disease-id' },
-                { topic: 'Pest Management', url: '#pest-management' },
-                { topic: 'IPM Strategies', url: '#ipm' },
-                { topic: 'Plant Immunity', url: '#plant-immunity' }
+            'Plant Protection': [
+                { topic: 'Plant Pathology', url: '#topic-pathology' },
+                { topic: 'Entomology', url: '#topic-entomology' },
+                { topic: 'Weed Science', url: '#topic-weeds' },
+                { topic: 'IPM', url: '#topic-ipm' },
             ],
             'Agricultural Biotechnology': [
-                { topic: 'GMOs', url: '#gmos' },
-                { topic: 'Molecular Markers', url: '#molecular-markers' },
-                { topic: 'Gene Editing', url: '#gene-editing' },
-                { topic: 'Tissue Culture', url: '#tissue-culture' }
+                { topic: 'Genetic Engineering', url: '#topic-genetic-engineering' },
+                { topic: 'Molecular Markers', url: '#topic-molecular-markers' },
+                { topic: 'Tissue Culture', url: '#topic-tissue-culture' },
+                { topic: 'Bioinformatics', url: '#topic-ag-bioinformatics' },
             ],
             'Sustainable Agriculture': [
-                { topic: 'Organic Farming', url: '#organic' },
-                { topic: 'Conservation Practices', url: '#conservation' },
-                { topic: 'Climate Adaptation', url: '#climate' },
-                { topic: 'Agroecology', url: '#agroecology' }
-            ]
+                { topic: 'Organic Farming', url: '#topic-organic' },
+                { topic: 'Agroecology', url: '#topic-agroecology' },
+                { topic: 'Climate Adaptation', url: '#topic-climate-adaptation' },
+                { topic: 'Precision Agriculture', url: '#topic-precision-ag' },
+            ],
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

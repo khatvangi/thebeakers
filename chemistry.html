@@ -183,6 +183,7 @@
         <a href="/" class="logo">The <span>Beakers</span></a>
         <nav>
             <a href="/">Home</a>
+            <a href="/explore/">Explore</a>
             <a href="physics.html">Physics</a>
             <a href="biology.html">Biology</a>
         </nav>
@@ -250,38 +251,39 @@
         ];
 
         // curriculum topics by subfield
-        const CURRICULUM = {
-            'Organic Chemistry': [
-                { topic: 'SN1 & SN2 Reactions', url: '#sn-reactions' },
-                { topic: 'Elimination Reactions', url: '#elimination' },
-                { topic: 'Aromatic Chemistry', url: '#aromatic' },
-                { topic: 'Stereochemistry', url: '#stereochemistry' },
-                { topic: 'Carbonyl Chemistry', url: '#carbonyl' }
+                const CURRICULUM = {
+            'General Chemistry': [
+                { topic: 'Atomic Structure', url: '#topic-atomic-structure' },
+                { topic: 'Chemical Bonding', url: '#topic-chemical-bonding' },
+                { topic: 'Stoichiometry', url: '#topic-stoichiometry' },
+                { topic: 'Acids & Bases', url: '#topic-acids-bases' },
+                { topic: 'Thermochemistry', url: '#topic-thermochemistry' },
             ],
-            'Inorganic Chemistry': [
-                { topic: 'Crystal Field Theory', url: '#crystal-field' },
-                { topic: 'Coordination Compounds', url: '#coordination' },
-                { topic: 'Main Group Chemistry', url: '#main-group' },
-                { topic: 'Organometallics', url: '#organometallics' }
+            'Organic Chemistry': [
+                { topic: 'SN1 & SN2 Reactions', url: '#topic-sn-reactions' },
+                { topic: 'Elimination Reactions', url: '#topic-elimination' },
+                { topic: 'Carbonyl Chemistry', url: '#topic-carbonyl' },
+                { topic: 'Aromatic Reactions', url: '#topic-aromatic' },
+                { topic: 'Stereochemistry', url: '#topic-stereochemistry' },
             ],
             'Physical Chemistry': [
-                { topic: 'Thermodynamics', url: '#thermodynamics' },
-                { topic: 'Chemical Kinetics', url: '#kinetics' },
-                { topic: 'Quantum Chemistry', url: '#quantum' },
-                { topic: 'Spectroscopy', url: '#spectroscopy' }
+                { topic: 'Chemical Kinetics', url: '#topic-kinetics' },
+                { topic: 'Thermodynamics', url: '#topic-thermodynamics' },
+                { topic: 'Quantum Chemistry', url: '#topic-quantum-chem' },
+                { topic: 'Spectroscopy', url: '#topic-spectroscopy' },
             ],
             'Analytical Chemistry': [
-                { topic: 'Chromatography', url: '#chromatography' },
-                { topic: 'Mass Spectrometry', url: '#mass-spec' },
-                { topic: 'Electrochemistry', url: '#electrochemistry' },
-                { topic: 'Titrations', url: '#titrations' }
+                { topic: 'Chromatography', url: '#topic-chromatography' },
+                { topic: 'Electrochemistry', url: '#topic-electrochemistry' },
+                { topic: 'Mass Spectrometry', url: '#topic-mass-spec' },
+                { topic: 'Statistical Analysis', url: '#topic-stats' },
             ],
-            'Biochemistry': [
-                { topic: 'Enzyme Kinetics', url: '#enzyme-kinetics' },
-                { topic: 'Metabolism', url: '#metabolism' },
-                { topic: 'Protein Structure', url: '#protein-structure' },
-                { topic: 'Nucleic Acids', url: '#nucleic-acids' }
-            ]
+            'Inorganic Chemistry': [
+                { topic: 'Coordination Chemistry', url: '#topic-coordination' },
+                { topic: 'Organometallics', url: '#topic-organometallics' },
+                { topic: 'Bioinorganic Chemistry', url: '#topic-bioinorganic' },
+                { topic: 'Solid State', url: '#topic-solid-state' },
+            ],
         };
 
         // noteworthy research articles (visual stories) - organized by subfield

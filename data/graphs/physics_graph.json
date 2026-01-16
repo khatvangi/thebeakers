@@ -1,0 +1,1248 @@
+{
+  "discipline": "physics",
+  "meta": {
+    "name": "Physics",
+    "icon": "\u269b\ufe0f",
+    "color": "#0ea5e9"
+  },
+  "nodes": [
+    {
+      "id": "topic-newtons-laws",
+      "type": "topic",
+      "label": "Newton's Laws",
+      "subfield": "Classical Mechanics",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "force",
+        "acceleration",
+        "free body diagram"
+      ]
+    },
+    {
+      "id": "topic-energy-work",
+      "type": "topic",
+      "label": "Energy & Work",
+      "subfield": "Classical Mechanics",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "kinetic",
+        "potential",
+        "conservation",
+        "power"
+      ]
+    },
+    {
+      "id": "topic-rotational",
+      "type": "topic",
+      "label": "Rotational Motion",
+      "subfield": "Classical Mechanics",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "torque",
+        "angular momentum",
+        "moment of inertia"
+      ]
+    },
+    {
+      "id": "topic-oscillations",
+      "type": "topic",
+      "label": "Oscillations & Waves",
+      "subfield": "Classical Mechanics",
+      "difficulty": "freshman",
+      "level": "100-200",
+      "keywords": [
+        "harmonic motion",
+        "frequency",
+        "resonance"
+      ]
+    },
+    {
+      "id": "topic-electric-fields",
+      "type": "topic",
+      "label": "Electric Fields",
+      "subfield": "Electromagnetism",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Coulomb",
+        "Gauss law",
+        "potential"
+      ]
+    },
+    {
+      "id": "topic-magnetic-fields",
+      "type": "topic",
+      "label": "Magnetic Fields",
+      "subfield": "Electromagnetism",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Biot-Savart",
+        "Ampere",
+        "Lorentz force"
+      ]
+    },
+    {
+      "id": "topic-maxwell",
+      "type": "topic",
+      "label": "Maxwell's Equations",
+      "subfield": "Electromagnetism",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "electromagnetic waves",
+        "Faraday",
+        "displacement current"
+      ]
+    },
+    {
+      "id": "topic-circuits",
+      "type": "topic",
+      "label": "Circuits",
+      "subfield": "Electromagnetism",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Kirchhoff",
+        "RC",
+        "RL",
+        "impedance"
+      ]
+    },
+    {
+      "id": "topic-wave-particle",
+      "type": "topic",
+      "label": "Wave-Particle Duality",
+      "subfield": "Quantum Mechanics",
+      "difficulty": "junior",
+      "level": "300-400",
+      "keywords": [
+        "de Broglie",
+        "photoelectric",
+        "Compton"
+      ]
+    },
+    {
+      "id": "topic-schrodinger",
+      "type": "topic",
+      "label": "Schr\u00f6dinger Equation",
+      "subfield": "Quantum Mechanics",
+      "difficulty": "junior",
+      "level": "300-400",
+      "keywords": [
+        "wave function",
+        "probability",
+        "operators"
+      ]
+    },
+    {
+      "id": "topic-hydrogen-atom",
+      "type": "topic",
+      "label": "Hydrogen Atom",
+      "subfield": "Quantum Mechanics",
+      "difficulty": "junior",
+      "level": "300-400",
+      "keywords": [
+        "quantum numbers",
+        "orbitals",
+        "selection rules"
+      ]
+    },
+    {
+      "id": "topic-spin",
+      "type": "topic",
+      "label": "Spin & Statistics",
+      "subfield": "Quantum Mechanics",
+      "difficulty": "junior",
+      "level": "300-400",
+      "keywords": [
+        "fermions",
+        "bosons",
+        "Pauli exclusion"
+      ]
+    },
+    {
+      "id": "topic-thermo-laws",
+      "type": "topic",
+      "label": "Laws of Thermodynamics",
+      "subfield": "Thermodynamics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "zeroth",
+        "first",
+        "second",
+        "third law"
+      ]
+    },
+    {
+      "id": "topic-entropy",
+      "type": "topic",
+      "label": "Entropy",
+      "subfield": "Thermodynamics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "disorder",
+        "reversibility",
+        "Carnot"
+      ]
+    },
+    {
+      "id": "topic-stat-mech",
+      "type": "topic",
+      "label": "Statistical Mechanics",
+      "subfield": "Thermodynamics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Boltzmann",
+        "partition function",
+        "ensembles"
+      ]
+    },
+    {
+      "id": "topic-phase-transitions",
+      "type": "topic",
+      "label": "Phase Transitions",
+      "subfield": "Thermodynamics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "critical point",
+        "latent heat",
+        "order parameter"
+      ]
+    },
+    {
+      "id": "topic-geometric-optics",
+      "type": "topic",
+      "label": "Geometric Optics",
+      "subfield": "Optics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "reflection",
+        "refraction",
+        "lenses",
+        "mirrors"
+      ]
+    },
+    {
+      "id": "topic-wave-optics",
+      "type": "topic",
+      "label": "Wave Optics",
+      "subfield": "Optics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "interference",
+        "diffraction",
+        "polarization"
+      ]
+    },
+    {
+      "id": "topic-lasers",
+      "type": "topic",
+      "label": "Lasers",
+      "subfield": "Optics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "stimulated emission",
+        "population inversion",
+        "coherence"
+      ]
+    },
+    {
+      "id": "topic-optical-instruments",
+      "type": "topic",
+      "label": "Optical Instruments",
+      "subfield": "Optics",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "microscope",
+        "telescope",
+        "spectrometer"
+      ]
+    },
+    {
+      "id": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "book",
+      "label": "Basic And Applied Thermodynamics By P K Nag Z Lib Org",
+      "pdf_name": "basic_and_applied_thermodynamics_by_p_k_nag_z_lib_org.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-energy-work",
+        "topic-rotational",
+        "topic-electric-fields",
+        "topic-magnetic-fields",
+        "topic-maxwell",
+        "topic-hydrogen-atom",
+        "topic-thermo-laws",
+        "topic-entropy",
+        "topic-stat-mech",
+        "topic-phase-transitions"
+      ]
+    },
+    {
+      "id": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "book",
+      "label": "Angelo Bassi Sheldon Goldstein Roderich Tumulka Nino Zang...",
+      "pdf_name": "angelo_bassi_sheldon_goldstein_roderich_tumulka_nino_zanghi_physics_and_the_nature_of_reality_essays_in_memory_of_detlef.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-rotational",
+        "topic-oscillations",
+        "topic-electric-fields",
+        "topic-magnetic-fields",
+        "topic-maxwell",
+        "topic-wave-particle",
+        "topic-schrodinger",
+        "topic-hydrogen-atom",
+        "topic-spin",
+        "topic-entropy",
+        "topic-stat-mech"
+      ]
+    },
+    {
+      "id": "book-physical-modeling-in-matlab-downey",
+      "type": "book",
+      "label": "Physical Modeling In Matlab Downey",
+      "pdf_name": "physical_modeling_in_matlab_downey.pdf",
+      "topics": [
+        "topic-newtons-laws"
+      ]
+    },
+    {
+      "id": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "book",
+      "label": "(Undergraduate Texts In Mathematics) D.R. Owen A First Co...",
+      "pdf_name": "(Undergraduate Texts in Mathematics) D.R. Owen - A First Course in the Mathematical Foundations of Thermodynamics-Springer (1983).pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-energy-work",
+        "topic-thermo-laws",
+        "topic-entropy",
+        "topic-stat-mech",
+        "topic-phase-transitions"
+      ]
+    },
+    {
+      "id": "book-calculus-openstax",
+      "type": "book",
+      "label": "Calculus Openstax",
+      "pdf_name": "calculus_openstax.pdf",
+      "topics": [
+        "topic-newtons-laws"
+      ]
+    },
+    {
+      "id": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "book",
+      "label": "Axiomatic Design Advances And Applications Nam Pyo Suh",
+      "pdf_name": "axiomatic_design_advances_and_applications_nam_pyo_suh.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-rotational",
+        "topic-oscillations",
+        "topic-thermo-laws",
+        "topic-stat-mech"
+      ]
+    },
+    {
+      "id": "book-quantum-mechanics-in-chemistry-simons-and-nichols",
+      "type": "book",
+      "label": "Quantum Mechanics In Chemistry Simons And Nichols",
+      "pdf_name": "quantum_mechanics_in_chemistry_simons_and_nichols.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "book",
+      "label": "Non Equilibrium Statistical Mechanics Cao",
+      "pdf_name": "non_equilibrium_statistical_mechanics_cao.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-oscillations",
+        "topic-stat-mech"
+      ]
+    },
+    {
+      "id": "book-organic-chemistry-morsch-et-al",
+      "type": "book",
+      "label": "Organic Chemistry Morsch Et Al",
+      "pdf_name": "organic_chemistry_morsch_et_al.pdf",
+      "topics": [
+        "topic-newtons-laws"
+      ]
+    },
+    {
+      "id": "book-partial-differential-equations-walet",
+      "type": "book",
+      "label": "Partial Differential Equations Walet",
+      "pdf_name": "partial_differential_equations_walet.pdf",
+      "topics": [
+        "topic-newtons-laws",
+        "topic-maxwell",
+        "topic-wave-particle"
+      ]
+    },
+    {
+      "id": "book-exercises-analysis",
+      "type": "book",
+      "label": "Exercises Analysis",
+      "pdf_name": "exercises_analysis.pdf",
+      "topics": [
+        "topic-newtons-laws"
+      ]
+    },
+    {
+      "id": "book-arthur-s-reber-frantisek-baluska-william-miller-th",
+      "type": "book",
+      "label": "Arthur S Reber Frantisek Baluska William Miller The Senti...",
+      "pdf_name": "arthur_s_reber_frantisek_baluska_william_miller_the_sentient_cell_the_cellular_foundations_of_consciousness_oxford_unive.pdf",
+      "topics": [
+        "topic-oscillations",
+        "topic-electric-fields",
+        "topic-entropy"
+      ]
+    },
+    {
+      "id": "book-vector-calculus-corral",
+      "type": "book",
+      "label": "Vector Calculus Corral",
+      "pdf_name": "vector_calculus_corral.pdf",
+      "topics": [
+        "topic-magnetic-fields"
+      ]
+    },
+    {
+      "id": "book-the-live-textbook-of-physical-chemistry-peverati",
+      "type": "book",
+      "label": "The Live Textbook Of Physical Chemistry Peverati",
+      "pdf_name": "the_live_textbook_of_physical_chemistry_peverati.pdf",
+      "topics": [
+        "topic-schrodinger",
+        "topic-hydrogen-atom",
+        "topic-spin",
+        "topic-thermo-laws"
+      ]
+    },
+    {
+      "id": "book-an-introduction-to-the-electronic-structure-of-ato",
+      "type": "book",
+      "label": "An Introduction To The Electronic Structure Of Atoms And ...",
+      "pdf_name": "an_introduction_to_the_electronic_structure_of_atoms_and_molecules_bader.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-quantum-chemistry-blinder",
+      "type": "book",
+      "label": "Quantum Chemistry Blinder",
+      "pdf_name": "quantum_chemistry_blinder.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-quantum-chemistry-with-applications-in-spectroscop",
+      "type": "book",
+      "label": "Quantum Chemistry With Applications In Spectroscopy Fleming",
+      "pdf_name": "quantum_chemistry_with_applications_in_spectroscopy_fleming.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-introduction-to-inorganic-chemistry-wikibook",
+      "type": "book",
+      "label": "Introduction To Inorganic Chemistry Wikibook",
+      "pdf_name": "introduction_to_inorganic_chemistry_wikibook.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-advanced-theoretical-chemistry-simons",
+      "type": "book",
+      "label": "Advanced Theoretical Chemistry Simons",
+      "pdf_name": "advanced_theoretical_chemistry_simons.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-inorganic-coordination-chemistry-landskron",
+      "type": "book",
+      "label": "Inorganic Coordination Chemistry Landskron",
+      "pdf_name": "inorganic_coordination_chemistry_landskron.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-43393448",
+      "type": "book",
+      "label": "43393448",
+      "pdf_name": "43393448.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-free-energy-1e-snee",
+      "type": "book",
+      "label": "Free Energy 1E Snee",
+      "pdf_name": "free_energy_1e_snee.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-advances-in-consciousness-research-daniel-d-hutto-",
+      "type": "book",
+      "label": "Advances In Consciousness Research Daniel D Hutto Beyond ...",
+      "pdf_name": "advances_in_consciousness_research_daniel_d_hutto_beyond_physicalism_john_benjamins_publishing_company_2000.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-introductory-chemistry-ck-12",
+      "type": "book",
+      "label": "Introductory Chemistry Ck 12",
+      "pdf_name": "introductory_chemistry_ck_12.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-supplemental-modules-physical-and-theoretical-chem",
+      "type": "book",
+      "label": "Supplemental Modules Physical And Theoretical Chemistry",
+      "pdf_name": "supplemental_modules_physical_and_theoretical_chemistry.pdf",
+      "topics": [
+        "topic-hydrogen-atom"
+      ]
+    },
+    {
+      "id": "book-applied-geometric-algebra-tisza",
+      "type": "book",
+      "label": "Applied Geometric Algebra Tisza",
+      "pdf_name": "applied_geometric_algebra_tisza.pdf",
+      "topics": [
+        "topic-spin"
+      ]
+    },
+    {
+      "id": "book-thermodynamics-and-chemical-equilibrium-ellgen",
+      "type": "book",
+      "label": "Thermodynamics And Chemical Equilibrium Ellgen",
+      "pdf_name": "thermodynamics_and_chemical_equilibrium_ellgen.pdf",
+      "topics": [
+        "topic-spin",
+        "topic-thermo-laws",
+        "topic-stat-mech"
+      ]
+    },
+    {
+      "id": "book-statistical-thermodynamics-jeschke",
+      "type": "book",
+      "label": "Statistical Thermodynamics Jeschke",
+      "pdf_name": "statistical_thermodynamics_jeschke.pdf",
+      "topics": [
+        "topic-stat-mech"
+      ]
+    },
+    {
+      "id": "book-balog-kati-beardman-stephanie-loar-brian-schiffer-",
+      "type": "book",
+      "label": "Balog Kati Beardman Stephanie Loar Brian Schiffer Stephen...",
+      "pdf_name": "balog_kati_beardman_stephanie_loar_brian_schiffer_stephen_r_consciousness_and_meaning_selected_essays_oxford_university_.pdf",
+      "topics": [
+        "topic-geometric-optics"
+      ]
+    },
+    {
+      "id": "book-nonlinear-and-two-dimensional-spectroscopy-tokmako",
+      "type": "book",
+      "label": "Nonlinear And Two Dimensional Spectroscopy Tokmakoff",
+      "pdf_name": "nonlinear_and_two_dimensional_spectroscopy_tokmakoff.pdf",
+      "topics": [
+        "topic-lasers",
+        "topic-optical-instruments"
+      ]
+    },
+    {
+      "id": "book-instrumental-analysis-libretexts",
+      "type": "book",
+      "label": "Instrumental Analysis Libretexts",
+      "pdf_name": "instrumental_analysis_libretexts.pdf",
+      "topics": [
+        "topic-optical-instruments"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.74
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.621
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-physical-modeling-in-matlab-downey",
+      "type": "covers",
+      "weight": 0.617
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.597
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-calculus-openstax",
+      "type": "covers",
+      "weight": 0.594
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.589
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-quantum-mechanics-in-chemistry-simons-and-nichols",
+      "type": "covers",
+      "weight": 0.584
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.579
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-organic-chemistry-morsch-et-al",
+      "type": "covers",
+      "weight": 0.578
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.577
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "book-exercises-analysis",
+      "type": "covers",
+      "weight": 0.575
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.64
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-rotational",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.614
+    },
+    {
+      "source": "topic-rotational",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-rotational",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.551
+    },
+    {
+      "source": "topic-oscillations",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.605
+    },
+    {
+      "source": "topic-oscillations",
+      "target": "book-arthur-s-reber-frantisek-baluska-william-miller-th",
+      "type": "covers",
+      "weight": 0.573
+    },
+    {
+      "source": "topic-oscillations",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-oscillations",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.551
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.601
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.591
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "book-arthur-s-reber-frantisek-baluska-william-miller-th",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.641
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.573
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "book-vector-calculus-corral",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-maxwell",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.615
+    },
+    {
+      "source": "topic-maxwell",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.594
+    },
+    {
+      "source": "topic-maxwell",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-wave-particle",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.602
+    },
+    {
+      "source": "topic-wave-particle",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-schrodinger",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.67
+    },
+    {
+      "source": "topic-schrodinger",
+      "target": "book-the-live-textbook-of-physical-chemistry-peverati",
+      "type": "covers",
+      "weight": 0.568
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-an-introduction-to-the-electronic-structure-of-ato",
+      "type": "covers",
+      "weight": 0.67
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-quantum-chemistry-blinder",
+      "type": "covers",
+      "weight": 0.647
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-the-live-textbook-of-physical-chemistry-peverati",
+      "type": "covers",
+      "weight": 0.635
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-quantum-chemistry-with-applications-in-spectroscop",
+      "type": "covers",
+      "weight": 0.631
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-quantum-mechanics-in-chemistry-simons-and-nichols",
+      "type": "covers",
+      "weight": 0.601
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-introduction-to-inorganic-chemistry-wikibook",
+      "type": "covers",
+      "weight": 0.597
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-advanced-theoretical-chemistry-simons",
+      "type": "covers",
+      "weight": 0.595
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.592
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-inorganic-coordination-chemistry-landskron",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-43393448",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.584
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-free-energy-1e-snee",
+      "type": "covers",
+      "weight": 0.583
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-advances-in-consciousness-research-daniel-d-hutto-",
+      "type": "covers",
+      "weight": 0.58
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-introductory-chemistry-ck-12",
+      "type": "covers",
+      "weight": 0.577
+    },
+    {
+      "source": "topic-hydrogen-atom",
+      "target": "book-supplemental-modules-physical-and-theoretical-chem",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-spin",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.589
+    },
+    {
+      "source": "topic-spin",
+      "target": "book-the-live-textbook-of-physical-chemistry-peverati",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-spin",
+      "target": "book-applied-geometric-algebra-tisza",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-spin",
+      "target": "book-thermodynamics-and-chemical-equilibrium-ellgen",
+      "type": "covers",
+      "weight": 0.551
+    },
+    {
+      "source": "topic-thermo-laws",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.851
+    },
+    {
+      "source": "topic-thermo-laws",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.743
+    },
+    {
+      "source": "topic-thermo-laws",
+      "target": "book-the-live-textbook-of-physical-chemistry-peverati",
+      "type": "covers",
+      "weight": 0.685
+    },
+    {
+      "source": "topic-thermo-laws",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.672
+    },
+    {
+      "source": "topic-thermo-laws",
+      "target": "book-thermodynamics-and-chemical-equilibrium-ellgen",
+      "type": "covers",
+      "weight": 0.671
+    },
+    {
+      "source": "topic-entropy",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.72
+    },
+    {
+      "source": "topic-entropy",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.64
+    },
+    {
+      "source": "topic-entropy",
+      "target": "book-arthur-s-reber-frantisek-baluska-william-miller-th",
+      "type": "covers",
+      "weight": 0.624
+    },
+    {
+      "source": "topic-entropy",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.616
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.681
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-statistical-thermodynamics-jeschke",
+      "type": "covers",
+      "weight": 0.651
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-thermodynamics-and-chemical-equilibrium-ellgen",
+      "type": "covers",
+      "weight": 0.636
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.634
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.615
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-stat-mech",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-phase-transitions",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.654
+    },
+    {
+      "source": "topic-phase-transitions",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.632
+    },
+    {
+      "source": "topic-geometric-optics",
+      "target": "book-balog-kati-beardman-stephanie-loar-brian-schiffer-",
+      "type": "covers",
+      "weight": 0.574
+    },
+    {
+      "source": "topic-lasers",
+      "target": "book-nonlinear-and-two-dimensional-spectroscopy-tokmako",
+      "type": "covers",
+      "weight": 0.576
+    },
+    {
+      "source": "topic-optical-instruments",
+      "target": "book-instrumental-analysis-libretexts",
+      "type": "covers",
+      "weight": 0.65
+    },
+    {
+      "source": "topic-optical-instruments",
+      "target": "book-nonlinear-and-two-dimensional-spectroscopy-tokmako",
+      "type": "covers",
+      "weight": 0.608
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-electric-fields",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-electric-fields",
+      "type": "prerequisite",
+      "weight": 0.75
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-magnetic-fields",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-magnetic-fields",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-maxwell",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-maxwell",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-circuits",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-circuits",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-thermo-laws",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-thermo-laws",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-entropy",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-entropy",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-stat-mech",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-stat-mech",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-phase-transitions",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-phase-transitions",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-geometric-optics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-geometric-optics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-wave-optics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-wave-optics",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-lasers",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-lasers",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-newtons-laws",
+      "target": "topic-optical-instruments",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-optical-instruments",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "topic-wave-particle",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "topic-wave-particle",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "topic-schrodinger",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "topic-schrodinger",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "topic-hydrogen-atom",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "topic-hydrogen-atom",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-electric-fields",
+      "target": "topic-spin",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-magnetic-fields",
+      "target": "topic-spin",
+      "type": "prerequisite",
+      "weight": 0.7
+    },
+    {
+      "source": "topic-energy-work",
+      "target": "topic-electric-fields",
+      "type": "related",
+      "weight": 0.583
+    }
+  ],
+  "stats": {
+    "topics": 20,
+    "books": 31,
+    "edges": 107,
+    "prerequisite_edges": 32,
+    "related_edges": 1,
+    "covers_edges": 74
+  }
+}

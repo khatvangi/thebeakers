@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="chemistry.html">Chemistry</a><a href="biology.html">Biology</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="chemistry.html">Chemistry</a><a href="biology.html">Biology</a></nav>
     </header>
     <section class="hero">
         <h1><img src="physics.png" alt="" class="hero-icon"> Physics</h1>
@@ -124,37 +125,37 @@
     <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
     <script>
         const DEEPDIVES = [];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Classical Mechanics': [
-                { topic: "Newton's Laws", url: '#newtons-laws' },
-                { topic: 'Lagrangian Mechanics', url: '#lagrangian' },
-                { topic: 'Oscillations & Waves', url: '#oscillations' },
-                { topic: 'Rotational Motion', url: '#rotational' }
+                { topic: 'Newton's Laws', url: '#topic-newtons-laws' },
+                { topic: 'Energy & Work', url: '#topic-energy-work' },
+                { topic: 'Rotational Motion', url: '#topic-rotational' },
+                { topic: 'Oscillations & Waves', url: '#topic-oscillations' },
             ],
             'Electromagnetism': [
-                { topic: "Maxwell's Equations", url: '#maxwell' },
-                { topic: 'Circuit Analysis', url: '#circuits' },
-                { topic: 'Electromagnetic Waves', url: '#em-waves' },
-                { topic: 'Electrostatics', url: '#electrostatics' }
+                { topic: 'Electric Fields', url: '#topic-electric-fields' },
+                { topic: 'Magnetic Fields', url: '#topic-magnetic-fields' },
+                { topic: 'Maxwell's Equations', url: '#topic-maxwell' },
+                { topic: 'Circuits', url: '#topic-circuits' },
             ],
             'Quantum Mechanics': [
-                { topic: 'Wave Functions', url: '#wave-functions' },
-                { topic: 'Schrödinger Equation', url: '#schrodinger' },
-                { topic: 'Operators & Observables', url: '#operators' },
-                { topic: 'Hydrogen Atom', url: '#hydrogen' }
+                { topic: 'Wave-Particle Duality', url: '#topic-wave-particle' },
+                { topic: 'Schrödinger Equation', url: '#topic-schrodinger' },
+                { topic: 'Hydrogen Atom', url: '#topic-hydrogen-atom' },
+                { topic: 'Spin & Statistics', url: '#topic-spin' },
             ],
             'Thermodynamics': [
-                { topic: 'Laws of Thermodynamics', url: '#thermo-laws' },
-                { topic: 'Entropy', url: '#entropy' },
-                { topic: 'Statistical Mechanics', url: '#stat-mech' },
-                { topic: 'Phase Transitions', url: '#phase-transitions' }
+                { topic: 'Laws of Thermodynamics', url: '#topic-thermo-laws' },
+                { topic: 'Entropy', url: '#topic-entropy' },
+                { topic: 'Statistical Mechanics', url: '#topic-stat-mech' },
+                { topic: 'Phase Transitions', url: '#topic-phase-transitions' },
             ],
             'Optics': [
-                { topic: 'Interference', url: '#interference' },
-                { topic: 'Diffraction', url: '#diffraction' },
-                { topic: 'Polarization', url: '#polarization' },
-                { topic: 'Lasers', url: '#lasers' }
-            ]
+                { topic: 'Geometric Optics', url: '#topic-geometric-optics' },
+                { topic: 'Wave Optics', url: '#topic-wave-optics' },
+                { topic: 'Lasers', url: '#topic-lasers' },
+                { topic: 'Optical Instruments', url: '#topic-optical-instruments' },
+            ],
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

@@ -1,0 +1,423 @@
+{
+  "chemistry": {
+    "name": "Chemistry",
+    "icon": "🔬",
+    "color": "#f59e0b",
+    "subfields": {
+      "General Chemistry": {
+        "level": "100-200",
+        "difficulty": "freshman",
+        "topics": [
+          {"name": "Atomic Structure", "slug": "atomic-structure", "keywords": ["electron configuration", "orbitals", "quantum numbers"]},
+          {"name": "Chemical Bonding", "slug": "chemical-bonding", "keywords": ["ionic", "covalent", "lewis structures", "VSEPR"]},
+          {"name": "Stoichiometry", "slug": "stoichiometry", "keywords": ["mole", "limiting reagent", "yield", "molarity"]},
+          {"name": "Acids & Bases", "slug": "acids-bases", "keywords": ["pH", "pKa", "buffer", "titration"]},
+          {"name": "Thermochemistry", "slug": "thermochemistry", "keywords": ["enthalpy", "hess law", "calorimetry"]}
+        ]
+      },
+      "Organic Chemistry": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "SN1 & SN2 Reactions", "slug": "sn-reactions", "keywords": ["nucleophilic substitution", "leaving group", "stereochemistry"]},
+          {"name": "Elimination Reactions", "slug": "elimination", "keywords": ["E1", "E2", "Zaitsev", "Hofmann"]},
+          {"name": "Carbonyl Chemistry", "slug": "carbonyl", "keywords": ["aldehyde", "ketone", "nucleophilic addition", "enolate"]},
+          {"name": "Aromatic Reactions", "slug": "aromatic", "keywords": ["electrophilic substitution", "benzene", "directing groups"]},
+          {"name": "Stereochemistry", "slug": "stereochemistry", "keywords": ["chirality", "enantiomers", "R/S configuration"]}
+        ]
+      },
+      "Physical Chemistry": {
+        "level": "300",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Chemical Kinetics", "slug": "kinetics", "keywords": ["rate law", "activation energy", "Arrhenius", "half-life"]},
+          {"name": "Thermodynamics", "slug": "thermodynamics", "keywords": ["entropy", "Gibbs free energy", "equilibrium constant"]},
+          {"name": "Quantum Chemistry", "slug": "quantum-chem", "keywords": ["wave function", "Schrodinger", "particle in box"]},
+          {"name": "Spectroscopy", "slug": "spectroscopy", "keywords": ["UV-Vis", "IR", "NMR", "selection rules"]}
+        ]
+      },
+      "Analytical Chemistry": {
+        "level": "300",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Chromatography", "slug": "chromatography", "keywords": ["HPLC", "GC", "retention time", "resolution"]},
+          {"name": "Electrochemistry", "slug": "electrochemistry", "keywords": ["redox", "Nernst equation", "voltammetry"]},
+          {"name": "Mass Spectrometry", "slug": "mass-spec", "keywords": ["m/z", "fragmentation", "molecular ion"]},
+          {"name": "Statistical Analysis", "slug": "stats", "keywords": ["standard deviation", "confidence interval", "t-test"]}
+        ]
+      },
+      "Inorganic Chemistry": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Coordination Chemistry", "slug": "coordination", "keywords": ["ligand", "crystal field", "spectrochemical series"]},
+          {"name": "Organometallics", "slug": "organometallics", "keywords": ["18-electron rule", "oxidative addition", "catalysis"]},
+          {"name": "Bioinorganic Chemistry", "slug": "bioinorganic", "keywords": ["metalloenzymes", "hemoglobin", "electron transfer"]},
+          {"name": "Solid State", "slug": "solid-state", "keywords": ["crystal structures", "band theory", "semiconductors"]}
+        ]
+      }
+    }
+  },
+  "physics": {
+    "name": "Physics",
+    "icon": "⚛️",
+    "color": "#0ea5e9",
+    "subfields": {
+      "Classical Mechanics": {
+        "level": "100-200",
+        "difficulty": "freshman",
+        "topics": [
+          {"name": "Newton's Laws", "slug": "newtons-laws", "keywords": ["force", "acceleration", "free body diagram"]},
+          {"name": "Energy & Work", "slug": "energy-work", "keywords": ["kinetic", "potential", "conservation", "power"]},
+          {"name": "Rotational Motion", "slug": "rotational", "keywords": ["torque", "angular momentum", "moment of inertia"]},
+          {"name": "Oscillations & Waves", "slug": "oscillations", "keywords": ["harmonic motion", "frequency", "resonance"]}
+        ]
+      },
+      "Electromagnetism": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Electric Fields", "slug": "electric-fields", "keywords": ["Coulomb", "Gauss law", "potential"]},
+          {"name": "Magnetic Fields", "slug": "magnetic-fields", "keywords": ["Biot-Savart", "Ampere", "Lorentz force"]},
+          {"name": "Maxwell's Equations", "slug": "maxwell", "keywords": ["electromagnetic waves", "Faraday", "displacement current"]},
+          {"name": "Circuits", "slug": "circuits", "keywords": ["Kirchhoff", "RC", "RL", "impedance"]}
+        ]
+      },
+      "Quantum Mechanics": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Wave-Particle Duality", "slug": "wave-particle", "keywords": ["de Broglie", "photoelectric", "Compton"]},
+          {"name": "Schrödinger Equation", "slug": "schrodinger", "keywords": ["wave function", "probability", "operators"]},
+          {"name": "Hydrogen Atom", "slug": "hydrogen-atom", "keywords": ["quantum numbers", "orbitals", "selection rules"]},
+          {"name": "Spin & Statistics", "slug": "spin", "keywords": ["fermions", "bosons", "Pauli exclusion"]}
+        ]
+      },
+      "Thermodynamics": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Laws of Thermodynamics", "slug": "thermo-laws", "keywords": ["zeroth", "first", "second", "third law"]},
+          {"name": "Entropy", "slug": "entropy", "keywords": ["disorder", "reversibility", "Carnot"]},
+          {"name": "Statistical Mechanics", "slug": "stat-mech", "keywords": ["Boltzmann", "partition function", "ensembles"]},
+          {"name": "Phase Transitions", "slug": "phase-transitions", "keywords": ["critical point", "latent heat", "order parameter"]}
+        ]
+      },
+      "Optics": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Geometric Optics", "slug": "geometric-optics", "keywords": ["reflection", "refraction", "lenses", "mirrors"]},
+          {"name": "Wave Optics", "slug": "wave-optics", "keywords": ["interference", "diffraction", "polarization"]},
+          {"name": "Lasers", "slug": "lasers", "keywords": ["stimulated emission", "population inversion", "coherence"]},
+          {"name": "Optical Instruments", "slug": "optical-instruments", "keywords": ["microscope", "telescope", "spectrometer"]}
+        ]
+      }
+    }
+  },
+  "biology": {
+    "name": "Biology",
+    "icon": "🧬",
+    "color": "#14b8a6",
+    "subfields": {
+      "Molecular Biology": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "DNA Replication", "slug": "dna-replication", "keywords": ["helicase", "polymerase", "Okazaki fragments"]},
+          {"name": "Transcription", "slug": "transcription", "keywords": ["RNA polymerase", "promoter", "termination"]},
+          {"name": "Translation", "slug": "translation", "keywords": ["ribosome", "tRNA", "codon", "amino acid"]},
+          {"name": "Gene Regulation", "slug": "gene-regulation", "keywords": ["operon", "enhancer", "epigenetics"]}
+        ]
+      },
+      "Cell Biology": {
+        "level": "100-200",
+        "difficulty": "freshman",
+        "topics": [
+          {"name": "Cell Structure", "slug": "cell-structure", "keywords": ["organelles", "membrane", "cytoskeleton"]},
+          {"name": "Cell Cycle", "slug": "cell-cycle", "keywords": ["mitosis", "meiosis", "checkpoints", "apoptosis"]},
+          {"name": "Membrane Transport", "slug": "membrane-transport", "keywords": ["diffusion", "active transport", "channels"]},
+          {"name": "Cell Signaling", "slug": "cell-signaling", "keywords": ["receptors", "second messengers", "kinases"]}
+        ]
+      },
+      "Genetics": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Mendelian Genetics", "slug": "mendelian", "keywords": ["dominant", "recessive", "Punnett square"]},
+          {"name": "Linkage & Mapping", "slug": "linkage", "keywords": ["recombination", "crossing over", "genetic maps"]},
+          {"name": "Population Genetics", "slug": "pop-genetics", "keywords": ["Hardy-Weinberg", "genetic drift", "selection"]},
+          {"name": "Mutations", "slug": "mutations", "keywords": ["point mutation", "frameshift", "chromosomal"]}
+        ]
+      },
+      "Biochemistry": {
+        "level": "300",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Enzyme Kinetics", "slug": "enzyme-kinetics", "keywords": ["Michaelis-Menten", "Vmax", "Km", "inhibition"]},
+          {"name": "Metabolism", "slug": "metabolism", "keywords": ["glycolysis", "citric acid cycle", "oxidative phosphorylation"]},
+          {"name": "Protein Structure", "slug": "protein-structure", "keywords": ["primary", "secondary", "tertiary", "folding"]},
+          {"name": "Lipids & Membranes", "slug": "lipids", "keywords": ["phospholipids", "cholesterol", "membrane fluidity"]}
+        ]
+      },
+      "Ecology": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Population Dynamics", "slug": "pop-dynamics", "keywords": ["carrying capacity", "logistic growth", "competition"]},
+          {"name": "Community Ecology", "slug": "community", "keywords": ["food webs", "keystone species", "succession"]},
+          {"name": "Ecosystem Ecology", "slug": "ecosystem", "keywords": ["energy flow", "nutrient cycling", "trophic levels"]},
+          {"name": "Conservation Biology", "slug": "conservation", "keywords": ["biodiversity", "extinction", "habitat fragmentation"]}
+        ]
+      }
+    }
+  },
+  "mathematics": {
+    "name": "Mathematics",
+    "icon": "∑",
+    "color": "#a855f7",
+    "subfields": {
+      "Calculus": {
+        "level": "100-200",
+        "difficulty": "freshman",
+        "topics": [
+          {"name": "Limits & Continuity", "slug": "limits", "keywords": ["epsilon-delta", "L'Hopital", "squeeze theorem"]},
+          {"name": "Differentiation", "slug": "differentiation", "keywords": ["chain rule", "implicit", "related rates"]},
+          {"name": "Integration", "slug": "integration", "keywords": ["fundamental theorem", "substitution", "parts"]},
+          {"name": "Series & Sequences", "slug": "series", "keywords": ["convergence", "Taylor", "power series"]}
+        ]
+      },
+      "Linear Algebra": {
+        "level": "200",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Vectors & Matrices", "slug": "vectors-matrices", "keywords": ["dot product", "cross product", "matrix multiplication"]},
+          {"name": "Linear Systems", "slug": "linear-systems", "keywords": ["Gaussian elimination", "rank", "null space"]},
+          {"name": "Eigenvalues & Eigenvectors", "slug": "eigen", "keywords": ["diagonalization", "characteristic polynomial"]},
+          {"name": "Linear Transformations", "slug": "transformations", "keywords": ["kernel", "image", "change of basis"]}
+        ]
+      },
+      "Differential Equations": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "First-Order ODEs", "slug": "first-order-ode", "keywords": ["separable", "linear", "exact", "integrating factor"]},
+          {"name": "Second-Order ODEs", "slug": "second-order-ode", "keywords": ["homogeneous", "particular solution", "variation of parameters"]},
+          {"name": "Systems of ODEs", "slug": "systems-ode", "keywords": ["phase plane", "stability", "equilibrium"]},
+          {"name": "PDEs Introduction", "slug": "pdes-intro", "keywords": ["heat equation", "wave equation", "separation of variables"]}
+        ]
+      },
+      "Probability & Statistics": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Probability Basics", "slug": "probability", "keywords": ["conditional", "Bayes theorem", "independence"]},
+          {"name": "Distributions", "slug": "distributions", "keywords": ["normal", "binomial", "Poisson", "exponential"]},
+          {"name": "Statistical Inference", "slug": "inference", "keywords": ["confidence interval", "hypothesis testing", "p-value"]},
+          {"name": "Regression", "slug": "regression", "keywords": ["linear regression", "correlation", "least squares"]}
+        ]
+      },
+      "Discrete Mathematics": {
+        "level": "200",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Logic & Proofs", "slug": "logic-proofs", "keywords": ["propositional", "predicate", "induction", "contradiction"]},
+          {"name": "Set Theory", "slug": "set-theory", "keywords": ["union", "intersection", "cardinality", "power set"]},
+          {"name": "Combinatorics", "slug": "combinatorics", "keywords": ["permutations", "combinations", "binomial coefficients"]},
+          {"name": "Graph Theory", "slug": "graph-theory", "keywords": ["paths", "trees", "Euler", "coloring"]}
+        ]
+      }
+    }
+  },
+  "engineering": {
+    "name": "Engineering",
+    "icon": "⚙️",
+    "color": "#f43f5e",
+    "subfields": {
+      "Mechanical Engineering": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Statics", "slug": "statics", "keywords": ["equilibrium", "free body diagram", "moments", "trusses"]},
+          {"name": "Dynamics", "slug": "dynamics", "keywords": ["kinematics", "Newton's laws", "work-energy", "impulse"]},
+          {"name": "Fluid Mechanics", "slug": "fluids", "keywords": ["Bernoulli", "Reynolds number", "viscosity", "drag"]},
+          {"name": "Heat Transfer", "slug": "heat-transfer", "keywords": ["conduction", "convection", "radiation", "fins"]}
+        ]
+      },
+      "Electrical Engineering": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Circuit Analysis", "slug": "circuits", "keywords": ["Ohm's law", "Kirchhoff", "Thevenin", "Norton"]},
+          {"name": "Signals & Systems", "slug": "signals", "keywords": ["Fourier", "Laplace", "transfer function", "convolution"]},
+          {"name": "Electronics", "slug": "electronics", "keywords": ["diodes", "transistors", "amplifiers", "op-amps"]},
+          {"name": "Control Systems", "slug": "control", "keywords": ["feedback", "stability", "PID", "root locus"]}
+        ]
+      },
+      "Civil Engineering": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Structural Analysis", "slug": "structures", "keywords": ["stress", "strain", "bending", "shear"]},
+          {"name": "Materials", "slug": "materials", "keywords": ["concrete", "steel", "composites", "fatigue"]},
+          {"name": "Geotechnical", "slug": "geotechnical", "keywords": ["soil mechanics", "foundations", "retaining walls"]},
+          {"name": "Transportation", "slug": "transportation", "keywords": ["traffic flow", "highway design", "pavements"]}
+        ]
+      },
+      "Chemical Engineering": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Mass & Energy Balances", "slug": "balances", "keywords": ["steady state", "recycle", "bypass"]},
+          {"name": "Reaction Engineering", "slug": "reaction-eng", "keywords": ["CSTR", "PFR", "conversion", "selectivity"]},
+          {"name": "Separations", "slug": "separations", "keywords": ["distillation", "extraction", "absorption"]},
+          {"name": "Process Control", "slug": "process-control", "keywords": ["feedback", "feedforward", "tuning"]}
+        ]
+      },
+      "Computer Engineering": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Digital Logic", "slug": "digital-logic", "keywords": ["gates", "Boolean algebra", "flip-flops", "FSM"]},
+          {"name": "Computer Architecture", "slug": "architecture", "keywords": ["CPU", "memory hierarchy", "pipelining"]},
+          {"name": "Embedded Systems", "slug": "embedded", "keywords": ["microcontrollers", "interrupts", "real-time"]},
+          {"name": "Computer Networks", "slug": "networks", "keywords": ["TCP/IP", "routing", "protocols"]}
+        ]
+      }
+    }
+  },
+  "ai": {
+    "name": "Artificial Intelligence",
+    "icon": "🤖",
+    "color": "#06b6d4",
+    "subfields": {
+      "Machine Learning": {
+        "level": "300",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Supervised Learning", "slug": "supervised", "keywords": ["regression", "classification", "bias-variance"]},
+          {"name": "Unsupervised Learning", "slug": "unsupervised", "keywords": ["clustering", "dimensionality reduction", "PCA"]},
+          {"name": "Model Evaluation", "slug": "evaluation", "keywords": ["cross-validation", "precision", "recall", "ROC"]},
+          {"name": "Feature Engineering", "slug": "features", "keywords": ["normalization", "encoding", "selection"]}
+        ]
+      },
+      "Deep Learning": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Neural Networks", "slug": "neural-nets", "keywords": ["perceptron", "backpropagation", "activation functions"]},
+          {"name": "CNNs", "slug": "cnns", "keywords": ["convolution", "pooling", "image classification"]},
+          {"name": "RNNs & Transformers", "slug": "sequence-models", "keywords": ["LSTM", "attention", "self-attention"]},
+          {"name": "Generative Models", "slug": "generative", "keywords": ["GANs", "VAEs", "diffusion models"]}
+        ]
+      },
+      "Natural Language Processing": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Text Processing", "slug": "text-processing", "keywords": ["tokenization", "stemming", "TF-IDF"]},
+          {"name": "Word Embeddings", "slug": "embeddings", "keywords": ["Word2Vec", "GloVe", "contextual embeddings"]},
+          {"name": "Language Models", "slug": "language-models", "keywords": ["n-grams", "BERT", "GPT", "fine-tuning"]},
+          {"name": "NLP Applications", "slug": "nlp-apps", "keywords": ["sentiment", "NER", "question answering"]}
+        ]
+      },
+      "Computer Vision": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Image Processing", "slug": "image-processing", "keywords": ["filtering", "edge detection", "histogram"]},
+          {"name": "Object Detection", "slug": "object-detection", "keywords": ["YOLO", "R-CNN", "bounding boxes"]},
+          {"name": "Segmentation", "slug": "segmentation", "keywords": ["semantic", "instance", "U-Net"]},
+          {"name": "Visual Recognition", "slug": "recognition", "keywords": ["face recognition", "pose estimation"]}
+        ]
+      },
+      "Reinforcement Learning": {
+        "level": "400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "MDPs", "slug": "mdps", "keywords": ["states", "actions", "rewards", "policy"]},
+          {"name": "Value Methods", "slug": "value-methods", "keywords": ["Q-learning", "SARSA", "DQN"]},
+          {"name": "Policy Methods", "slug": "policy-methods", "keywords": ["policy gradient", "actor-critic", "PPO"]},
+          {"name": "Applications", "slug": "rl-applications", "keywords": ["games", "robotics", "recommendation"]}
+        ]
+      }
+    }
+  },
+  "agriculture": {
+    "name": "Agriculture",
+    "icon": "🌾",
+    "color": "#84cc16",
+    "subfields": {
+      "Crop Science": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Plant Physiology", "slug": "plant-physiology", "keywords": ["photosynthesis", "transpiration", "hormones"]},
+          {"name": "Crop Breeding", "slug": "crop-breeding", "keywords": ["selection", "hybridization", "heterosis"]},
+          {"name": "Crop Production", "slug": "crop-production", "keywords": ["irrigation", "fertilization", "tillage"]},
+          {"name": "Seed Science", "slug": "seed-science", "keywords": ["germination", "dormancy", "viability"]}
+        ]
+      },
+      "Soil Science": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Soil Chemistry", "slug": "soil-chemistry", "keywords": ["pH", "CEC", "nutrient availability"]},
+          {"name": "Soil Physics", "slug": "soil-physics", "keywords": ["texture", "structure", "water movement"]},
+          {"name": "Soil Biology", "slug": "soil-biology", "keywords": ["microbiome", "nitrogen fixation", "decomposition"]},
+          {"name": "Soil Fertility", "slug": "soil-fertility", "keywords": ["macronutrients", "micronutrients", "fertilizers"]}
+        ]
+      },
+      "Plant Protection": {
+        "level": "200-300",
+        "difficulty": "sophomore",
+        "topics": [
+          {"name": "Plant Pathology", "slug": "pathology", "keywords": ["fungi", "bacteria", "viruses", "disease cycle"]},
+          {"name": "Entomology", "slug": "entomology", "keywords": ["insect pests", "life cycles", "damage"]},
+          {"name": "Weed Science", "slug": "weeds", "keywords": ["competition", "herbicides", "management"]},
+          {"name": "IPM", "slug": "ipm", "keywords": ["integrated pest management", "biological control", "thresholds"]}
+        ]
+      },
+      "Agricultural Biotechnology": {
+        "level": "300-400",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Genetic Engineering", "slug": "genetic-engineering", "keywords": ["transformation", "CRISPR", "Bt crops"]},
+          {"name": "Molecular Markers", "slug": "molecular-markers", "keywords": ["SSR", "SNP", "QTL mapping"]},
+          {"name": "Tissue Culture", "slug": "tissue-culture", "keywords": ["micropropagation", "somatic embryogenesis"]},
+          {"name": "Bioinformatics", "slug": "ag-bioinformatics", "keywords": ["genomics", "transcriptomics", "databases"]}
+        ]
+      },
+      "Sustainable Agriculture": {
+        "level": "300",
+        "difficulty": "junior",
+        "topics": [
+          {"name": "Organic Farming", "slug": "organic", "keywords": ["certification", "practices", "inputs"]},
+          {"name": "Agroecology", "slug": "agroecology", "keywords": ["biodiversity", "ecosystem services", "polyculture"]},
+          {"name": "Climate Adaptation", "slug": "climate-adaptation", "keywords": ["drought tolerance", "resilience", "carbon"]},
+          {"name": "Precision Agriculture", "slug": "precision-ag", "keywords": ["GPS", "sensors", "variable rate"]}
+        ]
+      }
+    }
+  },
+  "_meta": {
+    "version": "1.0",
+    "last_updated": "2026-01-16",
+    "total_disciplines": 7,
+    "total_subfields": 35,
+    "total_topics": 140,
+    "education_article_criteria": {
+      "types": [
+        {"id": "new-understanding", "name": "New Understanding", "description": "Novel way to grasp a concept"},
+        {"id": "simple-experiment", "name": "Simple Experiment", "description": "Hands-on demo for classroom"},
+        {"id": "misconception", "name": "Common Misconception", "description": "What students easily miss"},
+        {"id": "teaching-innovation", "name": "Teaching Innovation", "description": "Pedagogical approaches"}
+      ],
+      "keywords": [
+        "new way to understand", "simple experiment", "hands-on", "students struggle",
+        "common misconception", "teaching strategy", "active learning", "visualization",
+        "demonstration", "inquiry-based", "conceptual understanding", "problem-based"
+      ]
+    }
+  }
+}

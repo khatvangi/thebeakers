@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="physics.html">Physics</a><a href="ai.html">AI</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="physics.html">Physics</a><a href="ai.html">AI</a></nav>
     </header>
     <section class="hero">
         <h1><img src="engineering.png" alt="" class="hero-icon"> Engineering</h1>
@@ -127,37 +128,37 @@
             { file: 'deepdive/legged-locomotion-story.html', title: 'Legged Locomotion: A Survey', desc: 'How robots learn to walk, run, and adapt to terrain', source: 'IJRR 2025', tags: ['Story'] },
             { file: 'deepdive/legged-locomotion-visual.html', title: 'Legged Robots: Visual Summary', desc: 'Key concepts in robot locomotion at a glance', source: 'IJRR 2025', tags: ['Visual'] }
         ];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Mechanical Engineering': [
-                { topic: 'Statics & Dynamics', url: '#statics' },
-                { topic: 'Fluid Mechanics', url: '#fluid-mechanics' },
-                { topic: 'Heat Transfer', url: '#heat-transfer' },
-                { topic: 'Machine Design', url: '#machine-design' }
+                { topic: 'Statics', url: '#topic-statics' },
+                { topic: 'Dynamics', url: '#topic-dynamics' },
+                { topic: 'Fluid Mechanics', url: '#topic-fluids' },
+                { topic: 'Heat Transfer', url: '#topic-heat-transfer' },
             ],
             'Electrical Engineering': [
-                { topic: 'Circuit Analysis', url: '#circuits' },
-                { topic: 'Signals & Systems', url: '#signals' },
-                { topic: 'Control Systems', url: '#control' },
-                { topic: 'Power Electronics', url: '#power' }
+                { topic: 'Circuit Analysis', url: '#topic-circuits' },
+                { topic: 'Signals & Systems', url: '#topic-signals' },
+                { topic: 'Electronics', url: '#topic-electronics' },
+                { topic: 'Control Systems', url: '#topic-control' },
             ],
             'Civil Engineering': [
-                { topic: 'Structural Analysis', url: '#structures' },
-                { topic: 'Materials Science', url: '#materials' },
-                { topic: 'Geotechnical Engineering', url: '#geotechnical' },
-                { topic: 'Transportation', url: '#transportation' }
+                { topic: 'Structural Analysis', url: '#topic-structures' },
+                { topic: 'Materials', url: '#topic-materials' },
+                { topic: 'Geotechnical', url: '#topic-geotechnical' },
+                { topic: 'Transportation', url: '#topic-transportation' },
             ],
             'Chemical Engineering': [
-                { topic: 'Reaction Engineering', url: '#reaction-engineering' },
-                { topic: 'Separation Processes', url: '#separations' },
-                { topic: 'Transport Phenomena', url: '#transport' },
-                { topic: 'Process Control', url: '#process-control' }
+                { topic: 'Mass & Energy Balances', url: '#topic-balances' },
+                { topic: 'Reaction Engineering', url: '#topic-reaction-eng' },
+                { topic: 'Separations', url: '#topic-separations' },
+                { topic: 'Process Control', url: '#topic-process-control' },
             ],
             'Computer Engineering': [
-                { topic: 'Digital Logic', url: '#digital-logic' },
-                { topic: 'Computer Architecture', url: '#architecture' },
-                { topic: 'Embedded Systems', url: '#embedded' },
-                { topic: 'VLSI Design', url: '#vlsi' }
-            ]
+                { topic: 'Digital Logic', url: '#topic-digital-logic' },
+                { topic: 'Computer Architecture', url: '#topic-architecture' },
+                { topic: 'Embedded Systems', url: '#topic-embedded' },
+                { topic: 'Computer Networks', url: '#topic-networks' },
+            ],
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

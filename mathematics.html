@@ -82,7 +82,8 @@
 <body>
     <header>
         <a href="/" class="logo">The <span>Beakers</span></a>
-        <nav><a href="/">Home</a><a href="physics.html">Physics</a><a href="ai.html">AI</a></nav>
+        <nav><a href="/">Home</a>
+            <a href="/explore/">Explore</a><a href="physics.html">Physics</a><a href="ai.html">AI</a></nav>
     </header>
     <section class="hero">
         <h1><img src="mathematics.png" alt="" class="hero-icon"> Mathematics</h1>
@@ -124,37 +125,37 @@
     <footer><p>The Beakers — Research, Rewritten for Students</p></footer>
     <script>
         const DEEPDIVES = [];
-        const CURRICULUM = {
+                const CURRICULUM = {
             'Calculus': [
-                { topic: 'Limits & Continuity', url: '#limits' },
-                { topic: 'Derivatives', url: '#derivatives' },
-                { topic: 'Integrals', url: '#integrals' },
-                { topic: 'Series & Sequences', url: '#series' }
+                { topic: 'Limits & Continuity', url: '#topic-limits' },
+                { topic: 'Differentiation', url: '#topic-differentiation' },
+                { topic: 'Integration', url: '#topic-integration' },
+                { topic: 'Series & Sequences', url: '#topic-series' },
             ],
             'Linear Algebra': [
-                { topic: 'Matrices & Determinants', url: '#matrices' },
-                { topic: 'Eigenvalues & Eigenvectors', url: '#eigenvalues' },
-                { topic: 'Vector Spaces', url: '#vector-spaces' },
-                { topic: 'Linear Transformations', url: '#linear-transformations' }
-            ],
-            'Probability & Statistics': [
-                { topic: 'Distributions', url: '#distributions' },
-                { topic: 'Hypothesis Testing', url: '#hypothesis-testing' },
-                { topic: 'Bayesian Methods', url: '#bayesian' },
-                { topic: 'Regression', url: '#regression' }
+                { topic: 'Vectors & Matrices', url: '#topic-vectors-matrices' },
+                { topic: 'Linear Systems', url: '#topic-linear-systems' },
+                { topic: 'Eigenvalues & Eigenvectors', url: '#topic-eigen' },
+                { topic: 'Linear Transformations', url: '#topic-transformations' },
             ],
             'Differential Equations': [
-                { topic: 'ODEs', url: '#odes' },
-                { topic: 'PDEs', url: '#pdes' },
-                { topic: 'Laplace Transform', url: '#laplace' },
-                { topic: 'Fourier Series', url: '#fourier' }
+                { topic: 'First-Order ODEs', url: '#topic-first-order-ode' },
+                { topic: 'Second-Order ODEs', url: '#topic-second-order-ode' },
+                { topic: 'Systems of ODEs', url: '#topic-systems-ode' },
+                { topic: 'PDEs Introduction', url: '#topic-pdes-intro' },
+            ],
+            'Probability & Statistics': [
+                { topic: 'Probability Basics', url: '#topic-probability' },
+                { topic: 'Distributions', url: '#topic-distributions' },
+                { topic: 'Statistical Inference', url: '#topic-inference' },
+                { topic: 'Regression', url: '#topic-regression' },
             ],
             'Discrete Mathematics': [
-                { topic: 'Graph Theory', url: '#graph-theory' },
-                { topic: 'Combinatorics', url: '#combinatorics' },
-                { topic: 'Logic & Proofs', url: '#logic' },
-                { topic: 'Number Theory', url: '#number-theory' }
-            ]
+                { topic: 'Logic & Proofs', url: '#topic-logic-proofs' },
+                { topic: 'Set Theory', url: '#topic-set-theory' },
+                { topic: 'Combinatorics', url: '#topic-combinatorics' },
+                { topic: 'Graph Theory', url: '#topic-graph-theory' },
+            ],
         };
         const NOTEWORTHY = [];
         const EDUCATION = [];

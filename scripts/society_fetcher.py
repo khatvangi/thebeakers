@@ -20,12 +20,58 @@ import requests
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Optional, Dict, List
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 
 # paths
 DB_PATH = Path(__file__).parent.parent / "data" / "articles.db"
 PAPERS_DIR = Path(__file__).parent.parent / "data" / "papers"
 CACHE_DIR = Path(__file__).parent.parent / "cache" / "society"
+CURRICULUM_PATH = Path(__file__).parent.parent / "data" / "curriculum.json"
+
+# education article classification patterns
+# based on pedagogical criteria from curriculum.json
+EDUCATION_PATTERNS = {
+    "new-understanding": [
+        r"new way to (understand|teach|explain)",
+        r"novel approach to teaching",
+        r"alternative (explanation|perspective|method)",
+        r"reconceptualiz",
+        r"fresh perspective",
+        r"intuitive (understanding|approach)",
+    ],
+    "simple-experiment": [
+        r"simple experiment",
+        r"hands-on",
+        r"demonstration",
+        r"laboratory (activity|exercise)",
+        r"low-cost experiment",
+        r"classroom (experiment|demonstration|activity)",
+        r"(easy|quick) to (perform|set up)",
+        r"DIY",
+    ],
+    "misconception": [
+        r"misconception",
+        r"students (struggle|fail|difficulty|confuse)",
+        r"common (error|mistake)",
+        r"wrong (belief|assumption)",
+        r"learning difficult",
+        r"conceptual (barrier|challenge|difficulty)",
+        r"misunderstand",
+    ],
+    "teaching-innovation": [
+        r"active learning",
+        r"inquiry-based",
+        r"problem-based learning",
+        r"flipped classroom",
+        r"peer instruction",
+        r"collaborative learning",
+        r"game-based",
+        r"simulation",
+        r"virtual (lab|laboratory)",
+        r"online learning",
+        r"pedagogical",
+    ],
+}
 
 # api keys from environment
 SEMANTIC_SCHOLAR_KEY = os.environ.get("SEMANTIC_SCHOLAR_API_KEY", "")
@@ -121,6 +167,55 @@ class Paper:
     pub_date: str
     pdf_url: Optional[str] = None
     is_oa: bool = True
+    education_tags: List[str] = field(default_factory=list)  # for education papers: new-understanding, simple-experiment, misconception, teaching-innovation
+    curriculum_topics: List[str] = field(default_factory=list)  # matched curriculum topics from curriculum.json
+
+
+def classify_education_article(title: str, abstract: str) -> List[str]:
+    """classify education article by pedagogical type using pattern matching"""
+
+    text = f"{title} {abstract}".lower()
+    tags = []
+
+    for tag_type, patterns in EDUCATION_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, text, re.IGNORECASE):
+                tags.append(tag_type)
+                break  # found one match for this type, move to next
+
+    return tags
+
+
+def match_curriculum_topics(title: str, abstract: str, discipline: str) -> List[str]:
+    """match paper to curriculum topics based on keywords"""
+
+    if not CURRICULUM_PATH.exists():
+        return []
+
+    try:
+        with open(CURRICULUM_PATH) as f:
+            curriculum = json.load(f)
+    except:
+        return []
+
+    if discipline not in curriculum:
+        return []
+
+    text = f"{title} {abstract}".lower()
+    matched_topics = []
+
+    for subfield_name, subfield_data in curriculum[discipline].get("subfields", {}).items():
+        for topic in subfield_data.get("topics", []):
+            topic_name = topic["name"]
+            keywords = topic.get("keywords", [])
+
+            # check if any keyword matches
+            for keyword in keywords:
+                if keyword.lower() in text:
+                    matched_topics.append(f"{subfield_name}: {topic_name}")
+                    break
+
+    return matched_topics[:5]  # limit to top 5 matches
 
 
 def fetch_crossref_by_issn(issn: str, limit: int = 5, days_back: int = 90) -> List[Dict]:
@@ -192,6 +287,14 @@ def crossref_to_paper(item: Dict, journal_info: Dict, discipline: str, paper_typ
             pdf_url = link.get("URL")
             break
 
+    # classify education articles by pedagogical type
+    education_tags = []
+    if paper_type == "education":
+        education_tags = classify_education_article(title, abstract)
+
+    # match curriculum topics (for both research and education)
+    curriculum_topics = match_curriculum_topics(title, abstract, discipline)
+
     return Paper(
         doi=doi,
         title=title,
@@ -203,7 +306,9 @@ def crossref_to_paper(item: Dict, journal_info: Dict, discipline: str, paper_typ
         abstract=abstract,
         pub_date=pub_date,
         pdf_url=pdf_url,
-        is_oa=journal_info.get("oa", False)
+        is_oa=journal_info.get("oa", False),
+        education_tags=education_tags,
+        curriculum_topics=curriculum_topics
     )
 
 
@@ -269,7 +374,7 @@ def save_to_db(papers: List[Paper]):
     conn = sqlite3.connect(DB_PATH)
     cur = conn.cursor()
 
-    # ensure table exists
+    # ensure table exists with education/curriculum fields
     cur.execute("""
         CREATE TABLE IF NOT EXISTS society_papers (
             doi TEXT PRIMARY KEY,
@@ -283,17 +388,29 @@ def save_to_db(papers: List[Paper]):
             pub_date TEXT,
             pdf_url TEXT,
             is_oa INTEGER,
+            education_tags TEXT,
+            curriculum_topics TEXT,
             pdf_downloaded INTEGER DEFAULT 0,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )
     """)
 
+    # add columns if they don't exist (for existing databases)
+    try:
+        cur.execute("ALTER TABLE society_papers ADD COLUMN education_tags TEXT")
+    except sqlite3.OperationalError:
+        pass  # column already exists
+    try:
+        cur.execute("ALTER TABLE society_papers ADD COLUMN curriculum_topics TEXT")
+    except sqlite3.OperationalError:
+        pass  # column already exists
+
     for paper in papers:
         cur.execute("""
             INSERT OR REPLACE INTO society_papers
             (doi, title, authors, journal, publisher, discipline, paper_type,
-             abstract, pub_date, pdf_url, is_oa)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+             abstract, pub_date, pdf_url, is_oa, education_tags, curriculum_topics)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             paper.doi,
             paper.title,
@@ -305,7 +422,9 @@ def save_to_db(papers: List[Paper]):
             paper.abstract,
             paper.pub_date,
             paper.pdf_url,
-            1 if paper.is_oa else 0
+            1 if paper.is_oa else 0,
+            json.dumps(paper.education_tags),
+            json.dumps(paper.curriculum_topics)
         ))
 
     conn.commit()
@@ -335,6 +454,8 @@ def fetch_discipline(discipline: str, download_pdfs: bool = True) -> List[Paper]
             if paper:
                 papers.append(paper)
                 print(f"      + {paper.title[:60]}...")
+                if paper.curriculum_topics:
+                    print(f"        curriculum: {', '.join(paper.curriculum_topics[:2])}")
 
         if len(papers) >= 3:
             break
@@ -350,6 +471,10 @@ def fetch_discipline(discipline: str, download_pdfs: bool = True) -> List[Paper]
             if paper:
                 papers.append(paper)
                 print(f"      + {paper.title[:60]}...")
+                if paper.education_tags:
+                    print(f"        tags: {', '.join(paper.education_tags)}")
+                if paper.curriculum_topics:
+                    print(f"        curriculum: {', '.join(paper.curriculum_topics[:2])}")
 
     # download PDFs
     if download_pdfs:

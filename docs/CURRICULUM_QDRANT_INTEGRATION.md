@@ -212,17 +212,61 @@ results = search_questions(concept_id="kinetics", difficulty="sophomore", k=5)
 
 ---
 
-## TODO: Populate Quiz Bank
+## Quiz Generation (IMPLEMENTED)
 
-Current status: `quizzes_questions` collection is empty (0 points).
+Quiz generation is now automated via `scripts/quiz_generator.py`.
 
-Need to:
-1. Generate questions from LibreTexts content
-2. Map to CURRICULUM_HOOKS
-3. Assign difficulty levels
-4. Upsert to Qdrant
+### Commands
+```bash
+# generate quizzes for a specific topic
+QUIZ_LLM_MODEL="qwen3:latest" python scripts/quiz_generator.py chemistry kinetics
 
-This can be automated or curated manually.
+# generate for entire discipline
+python scripts/quiz_generator.py chemistry
+
+# check question counts
+python scripts/quiz_generator.py --count
+```
+
+### Current Status
+- `quizzes_questions` collection: 5+ questions (growing)
+- Uses Ollama LLM (qwen3 recommended) for question generation
+- Queries Qdrant chunks_text for context
+- Stores questions with difficulty level and curriculum tags
+
+---
+
+## Knowledge Graph Explorer
+
+Interactive D3.js visualization at `/explore/`.
+
+### Graph Data
+```
+data/graphs/
+├── chemistry_graph.json    (22 topics, 91 books, 294 edges)
+├── physics_graph.json      (20 topics, 31 books, 107 edges)
+├── biology_graph.json      (20 topics, 68 books, 188 edges)
+├── mathematics_graph.json  (20 topics, 72 books, 190 edges)
+├── engineering_graph.json  (20 topics, 35 books, 75 edges)
+├── ai_graph.json           (20 topics, 25 books, 56 edges)
+└── agriculture_graph.json  (20 topics, 68 books, 195 edges)
+
+TOTAL: 142 topics, 390 books, 1,105 edges
+```
+
+### Build/Rebuild
+```bash
+python scripts/knowledge_graph_builder.py              # all disciplines
+python scripts/knowledge_graph_builder.py chemistry    # one discipline
+python scripts/knowledge_graph_builder.py --stats      # show statistics
+```
+
+### Edge Types
+| Type | Description |
+|------|-------------|
+| `covers` | Topic → Book (from Qdrant similarity) |
+| `prerequisite` | Freshman → Sophomore → Junior topics |
+| `related` | Topics with keyword overlap |
 
 ---
 

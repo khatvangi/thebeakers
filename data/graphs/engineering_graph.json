@@ -1,0 +1,1096 @@
+{
+  "discipline": "engineering",
+  "meta": {
+    "name": "Engineering",
+    "icon": "\u2699\ufe0f",
+    "color": "#f43f5e"
+  },
+  "nodes": [
+    {
+      "id": "topic-statics",
+      "type": "topic",
+      "label": "Statics",
+      "subfield": "Mechanical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "equilibrium",
+        "free body diagram",
+        "moments",
+        "trusses"
+      ]
+    },
+    {
+      "id": "topic-dynamics",
+      "type": "topic",
+      "label": "Dynamics",
+      "subfield": "Mechanical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "kinematics",
+        "Newton's laws",
+        "work-energy",
+        "impulse"
+      ]
+    },
+    {
+      "id": "topic-fluids",
+      "type": "topic",
+      "label": "Fluid Mechanics",
+      "subfield": "Mechanical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Bernoulli",
+        "Reynolds number",
+        "viscosity",
+        "drag"
+      ]
+    },
+    {
+      "id": "topic-heat-transfer",
+      "type": "topic",
+      "label": "Heat Transfer",
+      "subfield": "Mechanical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "conduction",
+        "convection",
+        "radiation",
+        "fins"
+      ]
+    },
+    {
+      "id": "topic-circuits",
+      "type": "topic",
+      "label": "Circuit Analysis",
+      "subfield": "Electrical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Ohm's law",
+        "Kirchhoff",
+        "Thevenin",
+        "Norton"
+      ]
+    },
+    {
+      "id": "topic-signals",
+      "type": "topic",
+      "label": "Signals & Systems",
+      "subfield": "Electrical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "Fourier",
+        "Laplace",
+        "transfer function",
+        "convolution"
+      ]
+    },
+    {
+      "id": "topic-electronics",
+      "type": "topic",
+      "label": "Electronics",
+      "subfield": "Electrical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "diodes",
+        "transistors",
+        "amplifiers",
+        "op-amps"
+      ]
+    },
+    {
+      "id": "topic-control",
+      "type": "topic",
+      "label": "Control Systems",
+      "subfield": "Electrical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "feedback",
+        "stability",
+        "PID",
+        "root locus"
+      ]
+    },
+    {
+      "id": "topic-structures",
+      "type": "topic",
+      "label": "Structural Analysis",
+      "subfield": "Civil Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "stress",
+        "strain",
+        "bending",
+        "shear"
+      ]
+    },
+    {
+      "id": "topic-materials",
+      "type": "topic",
+      "label": "Materials",
+      "subfield": "Civil Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "concrete",
+        "steel",
+        "composites",
+        "fatigue"
+      ]
+    },
+    {
+      "id": "topic-geotechnical",
+      "type": "topic",
+      "label": "Geotechnical",
+      "subfield": "Civil Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "soil mechanics",
+        "foundations",
+        "retaining walls"
+      ]
+    },
+    {
+      "id": "topic-transportation",
+      "type": "topic",
+      "label": "Transportation",
+      "subfield": "Civil Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "traffic flow",
+        "highway design",
+        "pavements"
+      ]
+    },
+    {
+      "id": "topic-balances",
+      "type": "topic",
+      "label": "Mass & Energy Balances",
+      "subfield": "Chemical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "steady state",
+        "recycle",
+        "bypass"
+      ]
+    },
+    {
+      "id": "topic-reaction-eng",
+      "type": "topic",
+      "label": "Reaction Engineering",
+      "subfield": "Chemical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "CSTR",
+        "PFR",
+        "conversion",
+        "selectivity"
+      ]
+    },
+    {
+      "id": "topic-separations",
+      "type": "topic",
+      "label": "Separations",
+      "subfield": "Chemical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "distillation",
+        "extraction",
+        "absorption"
+      ]
+    },
+    {
+      "id": "topic-process-control",
+      "type": "topic",
+      "label": "Process Control",
+      "subfield": "Chemical Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "feedback",
+        "feedforward",
+        "tuning"
+      ]
+    },
+    {
+      "id": "topic-digital-logic",
+      "type": "topic",
+      "label": "Digital Logic",
+      "subfield": "Computer Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "gates",
+        "Boolean algebra",
+        "flip-flops",
+        "FSM"
+      ]
+    },
+    {
+      "id": "topic-architecture",
+      "type": "topic",
+      "label": "Computer Architecture",
+      "subfield": "Computer Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "CPU",
+        "memory hierarchy",
+        "pipelining"
+      ]
+    },
+    {
+      "id": "topic-embedded",
+      "type": "topic",
+      "label": "Embedded Systems",
+      "subfield": "Computer Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "microcontrollers",
+        "interrupts",
+        "real-time"
+      ]
+    },
+    {
+      "id": "topic-networks",
+      "type": "topic",
+      "label": "Computer Networks",
+      "subfield": "Computer Engineering",
+      "difficulty": "sophomore",
+      "level": "200-300",
+      "keywords": [
+        "TCP/IP",
+        "routing",
+        "protocols"
+      ]
+    },
+    {
+      "id": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "book",
+      "label": "Angelo Bassi Sheldon Goldstein Roderich Tumulka Nino Zang...",
+      "pdf_name": "angelo_bassi_sheldon_goldstein_roderich_tumulka_nino_zanghi_physics_and_the_nature_of_reality_essays_in_memory_of_detlef.pdf",
+      "topics": [
+        "topic-statics",
+        "topic-dynamics",
+        "topic-fluids",
+        "topic-electronics",
+        "topic-geotechnical",
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "book",
+      "label": "Non Equilibrium Statistical Mechanics Cao",
+      "pdf_name": "non_equilibrium_statistical_mechanics_cao.pdf",
+      "topics": [
+        "topic-statics",
+        "topic-fluids",
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "book",
+      "label": "Basic And Applied Thermodynamics By P K Nag Z Lib Org",
+      "pdf_name": "basic_and_applied_thermodynamics_by_p_k_nag_z_lib_org.pdf",
+      "topics": [
+        "topic-statics",
+        "topic-dynamics",
+        "topic-fluids",
+        "topic-heat-transfer",
+        "topic-circuits",
+        "topic-signals",
+        "topic-electronics",
+        "topic-materials",
+        "topic-balances",
+        "topic-reaction-eng",
+        "topic-separations",
+        "topic-process-control"
+      ]
+    },
+    {
+      "id": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "book",
+      "label": "(Undergraduate Texts In Mathematics) D.R. Owen A First Co...",
+      "pdf_name": "(Undergraduate Texts in Mathematics) D.R. Owen - A First Course in the Mathematical Foundations of Thermodynamics-Springer (1983).pdf",
+      "topics": [
+        "topic-statics",
+        "topic-dynamics",
+        "topic-fluids",
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-partial-differential-equations-walet",
+      "type": "book",
+      "label": "Partial Differential Equations Walet",
+      "pdf_name": "partial_differential_equations_walet.pdf",
+      "topics": [
+        "topic-dynamics",
+        "topic-fluids"
+      ]
+    },
+    {
+      "id": "book-water-131-advanced-water-mathematics-alvord",
+      "type": "book",
+      "label": "Water 131 Advanced Water Mathematics Alvord",
+      "pdf_name": "water_131_advanced_water_mathematics_alvord.pdf",
+      "topics": [
+        "topic-fluids"
+      ]
+    },
+    {
+      "id": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "book",
+      "label": "Axiomatic Design Advances And Applications Nam Pyo Suh",
+      "pdf_name": "axiomatic_design_advances_and_applications_nam_pyo_suh.pdf",
+      "topics": [
+        "topic-circuits",
+        "topic-electronics",
+        "topic-control",
+        "topic-structures",
+        "topic-materials",
+        "topic-geotechnical",
+        "topic-transportation",
+        "topic-reaction-eng",
+        "topic-separations",
+        "topic-digital-logic",
+        "topic-architecture"
+      ]
+    },
+    {
+      "id": "book-instrumental-analysis-libretexts",
+      "type": "book",
+      "label": "Instrumental Analysis Libretexts",
+      "pdf_name": "instrumental_analysis_libretexts.pdf",
+      "topics": [
+        "topic-circuits",
+        "topic-electronics",
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-complex-variables-with-applications-orloff",
+      "type": "book",
+      "label": "Complex Variables With Applications Orloff",
+      "pdf_name": "complex_variables_with_applications_orloff.pdf",
+      "topics": [
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-differential-equations-for-engineers-lebl",
+      "type": "book",
+      "label": "Differential Equations For Engineers Lebl",
+      "pdf_name": "differential_equations_for_engineers_lebl.pdf",
+      "topics": [
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-differential-equations-chasnov",
+      "type": "book",
+      "label": "Differential Equations Chasnov",
+      "pdf_name": "differential_equations_chasnov.pdf",
+      "topics": [
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-elementary-differential-equations-with-boundary-va",
+      "type": "book",
+      "label": "Elementary Differential Equations With Boundary Value Pro...",
+      "pdf_name": "elementary_differential_equations_with_boundary_value_problems_trench.pdf",
+      "topics": [
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-partial-differential-equations-miersemann",
+      "type": "book",
+      "label": "Partial Differential Equations Miersemann",
+      "pdf_name": "partial_differential_equations_miersemann.pdf",
+      "topics": [
+        "topic-signals"
+      ]
+    },
+    {
+      "id": "book-ha-et-al-2025-learning-based-legged-locomotion-sta",
+      "type": "book",
+      "label": "Ha Et Al 2025 Learning Based Legged Locomotion State Of T...",
+      "pdf_name": "ha-et-al-2025-learning-based-legged-locomotion-state-of-the-art-and-future-perspectives.pdf",
+      "topics": [
+        "topic-control",
+        "topic-process-control",
+        "topic-digital-logic",
+        "topic-architecture"
+      ]
+    },
+    {
+      "id": "book-one-tiny-atom-one-giant-leap-for-solar-cells",
+      "type": "book",
+      "label": "One Tiny Atom, One Giant Leap For Solar Cells",
+      "pdf_name": "One Tiny Atom, One Giant Leap for Solar Cells.pdf",
+      "topics": [
+        "topic-reaction-eng"
+      ]
+    },
+    {
+      "id": "book-summary",
+      "type": "book",
+      "label": "Summary",
+      "pdf_name": "summary.pdf",
+      "topics": [
+        "topic-reaction-eng"
+      ]
+    },
+    {
+      "id": "book-43393448",
+      "type": "book",
+      "label": "43393448",
+      "pdf_name": "43393448.pdf",
+      "topics": [
+        "topic-reaction-eng",
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-analytical-chemistry-2-1-harvey",
+      "type": "book",
+      "label": "Analytical Chemistry 2 1 Harvey",
+      "pdf_name": "analytical_chemistry_2_1_harvey.pdf",
+      "topics": [
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-fermentation-in-food-chemistry-graham",
+      "type": "book",
+      "label": "Fermentation In Food Chemistry Graham",
+      "pdf_name": "fermentation_in_food_chemistry_graham.pdf",
+      "topics": [
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-molecular-and-atomic-spectroscopy-wenzel",
+      "type": "book",
+      "label": "Molecular And Atomic Spectroscopy Wenzel",
+      "pdf_name": "molecular_and_atomic_spectroscopy_wenzel.pdf",
+      "topics": [
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-supplemental-modules-physical-and-theoretical-chem",
+      "type": "book",
+      "label": "Supplemental Modules Physical And Theoretical Chemistry",
+      "pdf_name": "supplemental_modules_physical_and_theoretical_chemistry.pdf",
+      "topics": [
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-advances-in-consciousness-research-steven-m-miller",
+      "type": "book",
+      "label": "Advances In Consciousness Research Steven M Miller The Co...",
+      "pdf_name": "advances_in_consciousness_research_steven_m_miller_the_constitution_of_phenomenal_consciousness_toward_a_science_and_the.pdf",
+      "topics": [
+        "topic-separations",
+        "topic-process-control"
+      ]
+    },
+    {
+      "id": "book-topics-in-thermodynamics-of-solutions-and-liquid-m",
+      "type": "book",
+      "label": "Topics In Thermodynamics Of Solutions And Liquid Mixtures",
+      "pdf_name": "topics_in_thermodynamics_of_solutions_and_liquid_mixtures.pdf",
+      "topics": [
+        "topic-separations"
+      ]
+    },
+    {
+      "id": "book-discrete-mathematics-for-computer-science-fitch",
+      "type": "book",
+      "label": "Discrete Mathematics For Computer Science Fitch",
+      "pdf_name": "discrete_mathematics_for_computer_science_fitch.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-transition-to-higher-mathematics-dumas-and-mccarth",
+      "type": "book",
+      "label": "Transition To Higher Mathematics Dumas And Mccarthy",
+      "pdf_name": "transition_to_higher_mathematics_dumas_and_mccarthy.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-friendly-introduction-to-mathematical-logic-leary-",
+      "type": "book",
+      "label": "Friendly Introduction To Mathematical Logic Leary Kristia...",
+      "pdf_name": "friendly_introduction_to_mathematical_logic_leary_kristiansen.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "book",
+      "label": "(Graduate Texts In Mathematics) Saunders Mac Lane Categor...",
+      "pdf_name": "(Graduate Texts in Mathematics) Saunders Mac Lane - Categories for the Working Mathematician-Springer (1998).pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-arithmetic",
+      "type": "book",
+      "label": "Arithmetic",
+      "pdf_name": "arithmetic.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-a-spiral-workbook-for-discrete-mathematics-kwong",
+      "type": "book",
+      "label": "A Spiral Workbook For Discrete Mathematics Kwong",
+      "pdf_name": "a_spiral_workbook_for_discrete_mathematics_kwong.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "book",
+      "label": "Fundamentals Of Matrix Algebra Hartman",
+      "pdf_name": "fundamentals_of_matrix_algebra_hartman.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-supplemental-modules-algebra",
+      "type": "book",
+      "label": "Supplemental Modules Algebra",
+      "pdf_name": "supplemental_modules_algebra.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-matrix-algebra-with-computational-applications-col",
+      "type": "book",
+      "label": "Matrix Algebra With Computational Applications Colbry",
+      "pdf_name": "matrix_algebra_with_computational_applications_colbry.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-accounting-finance-sustainability-governance-and-f",
+      "type": "book",
+      "label": "Accounting Finance Sustainability Governance And Fraud Th...",
+      "pdf_name": "accounting_finance_sustainability_governance_and_fraud_theory_and_application_muharrem_klc_sezer_bozkus_kahyaoglu_algori.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-first-semester-abstract-algebra-a-structural-appro",
+      "type": "book",
+      "label": "First Semester Abstract Algebra A Structural Approach Sklar",
+      "pdf_name": "first_semester_abstract_algebra_a_structural_approach_sklar.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    },
+    {
+      "id": "book-discrete-mathematics-levin",
+      "type": "book",
+      "label": "Discrete Mathematics Levin",
+      "pdf_name": "discrete_mathematics_levin.pdf",
+      "topics": [
+        "topic-digital-logic"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "topic-statics",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.574
+    },
+    {
+      "source": "topic-statics",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.573
+    },
+    {
+      "source": "topic-statics",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.572
+    },
+    {
+      "source": "topic-statics",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.568
+    },
+    {
+      "source": "topic-dynamics",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.723
+    },
+    {
+      "source": "topic-dynamics",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.639
+    },
+    {
+      "source": "topic-dynamics",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.633
+    },
+    {
+      "source": "topic-dynamics",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.629
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.674
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.654
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-partial-differential-equations-walet",
+      "type": "covers",
+      "weight": 0.571
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-fluids",
+      "target": "book-water-131-advanced-water-mathematics-alvord",
+      "type": "covers",
+      "weight": 0.555
+    },
+    {
+      "source": "topic-heat-transfer",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.774
+    },
+    {
+      "source": "topic-circuits",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-circuits",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.579
+    },
+    {
+      "source": "topic-circuits",
+      "target": "book-instrumental-analysis-libretexts",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-complex-variables-with-applications-orloff",
+      "type": "covers",
+      "weight": 0.608
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-differential-equations-for-engineers-lebl",
+      "type": "covers",
+      "weight": 0.592
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.577
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-differential-equations-chasnov",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-elementary-differential-equations-with-boundary-va",
+      "type": "covers",
+      "weight": 0.562
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-partial-differential-equations-miersemann",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-signals",
+      "target": "book-non-equilibrium-statistical-mechanics-cao",
+      "type": "covers",
+      "weight": 0.552
+    },
+    {
+      "source": "topic-electronics",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-electronics",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-electronics",
+      "target": "book-instrumental-analysis-libretexts",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-electronics",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-control",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.591
+    },
+    {
+      "source": "topic-control",
+      "target": "book-ha-et-al-2025-learning-based-legged-locomotion-sta",
+      "type": "covers",
+      "weight": 0.557
+    },
+    {
+      "source": "topic-structures",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-materials",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.585
+    },
+    {
+      "source": "topic-materials",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.556
+    },
+    {
+      "source": "topic-geotechnical",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.568
+    },
+    {
+      "source": "topic-geotechnical",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-transportation",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.569
+    },
+    {
+      "source": "topic-balances",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.62
+    },
+    {
+      "source": "topic-reaction-eng",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.611
+    },
+    {
+      "source": "topic-reaction-eng",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.565
+    },
+    {
+      "source": "topic-reaction-eng",
+      "target": "book-one-tiny-atom-one-giant-leap-for-solar-cells",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-reaction-eng",
+      "target": "book-summary",
+      "type": "covers",
+      "weight": 0.56
+    },
+    {
+      "source": "topic-reaction-eng",
+      "target": "book-43393448",
+      "type": "covers",
+      "weight": 0.555
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.632
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-undergraduate-texts-in-mathematics-d-r-owen-a-firs",
+      "type": "covers",
+      "weight": 0.573
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-instrumental-analysis-libretexts",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-analytical-chemistry-2-1-harvey",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.562
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-fermentation-in-food-chemistry-graham",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-43393448",
+      "type": "covers",
+      "weight": 0.559
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-molecular-and-atomic-spectroscopy-wenzel",
+      "type": "covers",
+      "weight": 0.555
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-supplemental-modules-physical-and-theoretical-chem",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-advances-in-consciousness-research-steven-m-miller",
+      "type": "covers",
+      "weight": 0.553
+    },
+    {
+      "source": "topic-separations",
+      "target": "book-topics-in-thermodynamics-of-solutions-and-liquid-m",
+      "type": "covers",
+      "weight": 0.552
+    },
+    {
+      "source": "topic-process-control",
+      "target": "book-ha-et-al-2025-learning-based-legged-locomotion-sta",
+      "type": "covers",
+      "weight": 0.614
+    },
+    {
+      "source": "topic-process-control",
+      "target": "book-basic-and-applied-thermodynamics-by-p-k-nag-z-lib-",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-process-control",
+      "target": "book-advances-in-consciousness-research-steven-m-miller",
+      "type": "covers",
+      "weight": 0.554
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-discrete-mathematics-for-computer-science-fitch",
+      "type": "covers",
+      "weight": 0.647
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-transition-to-higher-mathematics-dumas-and-mccarth",
+      "type": "covers",
+      "weight": 0.604
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-friendly-introduction-to-mathematical-logic-leary-",
+      "type": "covers",
+      "weight": 0.591
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-graduate-texts-in-mathematics-saunders-mac-lane-ca",
+      "type": "covers",
+      "weight": 0.59
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.589
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-arithmetic",
+      "type": "covers",
+      "weight": 0.58
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-a-spiral-workbook-for-discrete-mathematics-kwong",
+      "type": "covers",
+      "weight": 0.58
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-fundamentals-of-matrix-algebra-hartman",
+      "type": "covers",
+      "weight": 0.575
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-angelo-bassi-sheldon-goldstein-roderich-tumulka-ni",
+      "type": "covers",
+      "weight": 0.569
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-supplemental-modules-algebra",
+      "type": "covers",
+      "weight": 0.567
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-matrix-algebra-with-computational-applications-col",
+      "type": "covers",
+      "weight": 0.566
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-accounting-finance-sustainability-governance-and-f",
+      "type": "covers",
+      "weight": 0.565
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-ha-et-al-2025-learning-based-legged-locomotion-sta",
+      "type": "covers",
+      "weight": 0.564
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-first-semester-abstract-algebra-a-structural-appro",
+      "type": "covers",
+      "weight": 0.562
+    },
+    {
+      "source": "topic-digital-logic",
+      "target": "book-discrete-mathematics-levin",
+      "type": "covers",
+      "weight": 0.561
+    },
+    {
+      "source": "topic-architecture",
+      "target": "book-axiomatic-design-advances-and-applications-nam-pyo",
+      "type": "covers",
+      "weight": 0.607
+    },
+    {
+      "source": "topic-architecture",
+      "target": "book-ha-et-al-2025-learning-based-legged-locomotion-sta",
+      "type": "covers",
+      "weight": 0.563
+    },
+    {
+      "source": "topic-control",
+      "target": "topic-process-control",
+      "type": "related",
+      "weight": 0.583
+    }
+  ],
+  "stats": {
+    "topics": 20,
+    "books": 35,
+    "edges": 75,
+    "prerequisite_edges": 0,
+    "related_edges": 1,
+    "covers_edges": 74
+  }
+}

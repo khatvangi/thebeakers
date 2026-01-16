@@ -186,7 +186,7 @@ Choose format based on source type (flexible, use judgment):
 ```
 Qdrant (localhost:6333)
 ├── chunks_text (9,884 points) - LibreTexts textbooks (665 books)
-├── quizzes_questions - Quiz bank (to populate)
+├── quizzes_questions - Quiz bank (5+ questions, growing)
 └── chunks_hybrid - Hybrid search
 ```
 
@@ -197,24 +197,67 @@ Qdrant (localhost:6333)
 | Sophomore | 200-300 | Organic, Intermediate |
 | Junior | 300-400 | Physical, Analytical, Advanced |
 
-### Workflow
-1. **Paper comes in** → Query Qdrant for matching curriculum
-2. **Identify level** → Based on which LibreTexts category matches
-3. **Generate connection** → List related topics + prerequisites
-4. **Generate quizzes** → Questions at appropriate difficulty
+### Curriculum Data
+- `data/curriculum.json` - 7 disciplines, 35 subfields, 142 topics
+- Each topic has: name, slug, keywords, difficulty level
+- Education article criteria: new-understanding, simple-experiment, misconception, teaching-innovation
 
 ### Key Commands
 ```bash
-# Query RAG for curriculum
-source /storage/RAG/.venv/bin/activate
-python /storage/RAG/src/query.py "YOUR TOPIC"
+# Curriculum pipeline (fetch → match → quiz)
+python scripts/curriculum_pipeline.py chemistry
+python scripts/curriculum_pipeline.py --all
+python scripts/curriculum_pipeline.py --status
 
-# Interactive chat
-python /storage/RAG/src/chat.py
+# Individual scripts
+python scripts/society_fetcher.py chemistry      # fetch society journal papers
+python scripts/curriculum_matcher.py --test      # match paper to curriculum
+python scripts/quiz_generator.py chemistry kinetics  # generate quizzes
+
+# Update discipline pages with curriculum.json
+python scripts/update_discipline_curriculum.py
 ```
 
 ### Full Documentation
 See `docs/CURRICULUM_QDRANT_INTEGRATION.md` for complete details.
+
+## Knowledge Graph Explorer (INTERACTIVE FEATURE)
+
+**Visual knowledge graph** connecting curriculum topics to LibreTexts books.
+
+### Access
+- URL: `https://thebeakers.com/explore/`
+- Linked from: main nav + all discipline pages
+
+### Features
+- D3.js force-directed graph
+- Color by difficulty: 🟢 Freshman → 🟡 Sophomore → 🔴 Junior
+- Click topic → see connected books, prerequisites, related topics
+- Search by topic name or keyword
+- Research connector: paste paper abstract → highlights matching topics
+- Zoom/pan navigation
+
+### Graph Data
+```
+data/graphs/
+├── chemistry_graph.json    (22 topics, 91 books, 294 edges)
+├── physics_graph.json      (20 topics, 31 books, 107 edges)
+├── biology_graph.json      (20 topics, 68 books, 188 edges)
+├── mathematics_graph.json  (20 topics, 72 books, 190 edges)
+├── engineering_graph.json  (20 topics, 35 books, 75 edges)
+├── ai_graph.json           (20 topics, 25 books, 56 edges)
+└── agriculture_graph.json  (20 topics, 68 books, 195 edges)
+
+TOTAL: 142 topics, 390 books, 1,105 edges
+```
+
+### Commands
+```bash
+# Build/rebuild graphs
+python scripts/knowledge_graph_builder.py              # all disciplines
+python scripts/knowledge_graph_builder.py chemistry    # one discipline
+python scripts/knowledge_graph_builder.py --stats      # show statistics
+```
 
 ## Content Modes (Simplified)
 
@@ -232,6 +275,8 @@ thebeakers.com/
 ├── index.html              # Main page with cards, animations, newsletter
 ├── [discipline].html       # 7 discipline pages (chemistry, physics, etc.)
 ├── article.html            # Regular article page (dynamic, loads from JSON)
+├── explore/
+│   └── index.html          # Interactive knowledge graph explorer (D3.js)
 ├── deepdive/
 │   └── [slug].html         # Deep Dive articles (static, rich media)
 ├── articles/
@@ -239,13 +284,20 @@ thebeakers.com/
 │       ├── index.json      # Auto-generated article index
 │       └── *.json          # Rewritten articles
 ├── data/
-│   ├── articles.db         # SQLite: seen_articles, archive tables
-│   └── pending_articles.json
+│   ├── articles.db         # SQLite: seen_articles, society_papers tables
+│   ├── curriculum.json     # 7 disciplines, 142 topics with keywords
+│   └── graphs/             # Knowledge graph JSON files (7 disciplines)
+│       └── [discipline]_graph.json
 └── scripts/
-    ├── society_fetcher.py  # Fetch from society journals (ACS, APS, etc.)
-    ├── feed_collector.py   # v2: Curated RSS collector
-    ├── ai_rewriter.py      # Ollama rewriter for regular articles
-    └── generate_indexes.py # Generate article index files
+    ├── knowledge_graph_builder.py  # Build D3.js knowledge graphs
+    ├── curriculum_pipeline.py      # End-to-end: fetch → match → quiz
+    ├── curriculum_matcher.py       # Match papers to curriculum topics
+    ├── quiz_generator.py           # Generate quizzes from LibreTexts
+    ├── society_fetcher.py          # Fetch from society journals (ACS, APS, etc.)
+    ├── update_discipline_curriculum.py  # Sync pages with curriculum.json
+    ├── feed_collector.py           # v2: Curated RSS collector
+    ├── ai_rewriter.py              # Ollama rewriter for regular articles
+    └── generate_indexes.py         # Generate article index files
 ```
 
 ## Disciplines
@@ -376,7 +428,7 @@ Sections:
 
 ## Current Status (Jan 2026)
 
-- [x] All 7 discipline pages created
+- [x] All 7 discipline pages created (rainbow colors: Lime→Cyan→Teal→Amber→Rose→Violet→Sky)
 - [x] Feed collector v2 with curated sources
 - [x] 21 articles published (3 per discipline)
 - [x] Deep Dive template created (solar-cell-bromine)
@@ -388,6 +440,17 @@ Sections:
   - Visual Summary: `deepdive/legged-locomotion-visual.html`
   - Source: Ha et al., IJRR 2025 (32-page survey)
   - Curriculum Connection: 6 courses (ME, EECS, CS, MATH)
+- [x] **Knowledge Graph Explorer** (`/explore/`)
+  - Interactive D3.js force-directed graphs
+  - 142 topics, 390 books, 1,105 edges across 7 disciplines
+  - Search, zoom, research paper connector
+- [x] **Curriculum System Complete**
+  - `curriculum.json` with 7 disciplines, 35 subfields, 142 topics
+  - Society journal fetcher (ACS, APS, PLOS, IEEE, etc.)
+  - Automated curriculum matching via Qdrant
+  - Quiz generation from LibreTexts content
+  - End-to-end pipeline: `curriculum_pipeline.py`
+- [x] Nav links to Explorer from all pages
 - [ ] Public launch announcement (Monday, Jan 6)
 
 ## Contact
