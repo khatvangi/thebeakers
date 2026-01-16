@@ -178,6 +178,53 @@ Choose format based on source type (flexible, use judgment):
 - **Education journals**: Written for students
 - **High-impact journals**: Top research journals
 
+## Qdrant + Curriculum Integration (SIGNATURE FEATURE)
+
+**Our key differentiator** - Every article connects to undergraduate curriculum.
+
+### Architecture
+```
+Qdrant (localhost:6333)
+├── chunks_text (9,884 points) - LibreTexts textbooks (665 books)
+├── quizzes_questions - Quiz bank (to populate)
+└── chunks_hybrid - Hybrid search
+```
+
+### Difficulty Levels
+| Level | Course | LibreTexts Category |
+|-------|--------|---------------------|
+| Freshman | 100-200 | Introductory, General |
+| Sophomore | 200-300 | Organic, Intermediate |
+| Junior | 300-400 | Physical, Analytical, Advanced |
+
+### Workflow
+1. **Paper comes in** → Query Qdrant for matching curriculum
+2. **Identify level** → Based on which LibreTexts category matches
+3. **Generate connection** → List related topics + prerequisites
+4. **Generate quizzes** → Questions at appropriate difficulty
+
+### Key Commands
+```bash
+# Query RAG for curriculum
+source /storage/RAG/.venv/bin/activate
+python /storage/RAG/src/query.py "YOUR TOPIC"
+
+# Interactive chat
+python /storage/RAG/src/chat.py
+```
+
+### Full Documentation
+See `docs/CURRICULUM_QDRANT_INTEGRATION.md` for complete details.
+
+## Content Modes (Simplified)
+
+| Mode | Name | Source | Processing |
+|------|------|--------|------------|
+| Tacos | Visual Summaries | Single PDF | Local templates |
+| Big Enchilada | Deep Dives | Collection of PDFs | NotebookLM full treatment |
+
+Both include: Curriculum Connection + Quizzes (from Qdrant)
+
 ## Site Structure
 
 ```
@@ -195,6 +242,7 @@ thebeakers.com/
 │   ├── articles.db         # SQLite: seen_articles, archive tables
 │   └── pending_articles.json
 └── scripts/
+    ├── society_fetcher.py  # Fetch from society journals (ACS, APS, etc.)
     ├── feed_collector.py   # v2: Curated RSS collector
     ├── ai_rewriter.py      # Ollama rewriter for regular articles
     └── generate_indexes.py # Generate article index files
