@@ -1,0 +1,56 @@
+version: 1.0
+
+credibility_policy:
+  allow_preprints: true
+  labels:
+    peer_reviewed: "Peer-Reviewed"
+    preprint: "Frontier (Preprint)"
+
+resolution_ladder:
+  - publisher_open_access
+  - repository_open_access
+  - accepted_manuscript
+  - preprint
+  - metadata_only
+
+feeds:
+  - id: jce_current
+    kind: journal_toc
+    track: education_paper
+    review_status: peer_reviewed
+    homepage: "https://pubs.acs.org/toc/jceda8/current"
+    cadence: weekly
+
+  - id: pmc_ag
+    kind: pmc
+    track: research_paper
+    review_status: peer_reviewed
+    query: "(soil OR crop OR plant) AND (microbiome OR biogeochemistry OR genomics)"
+    cadence: weekly
+
+# optional frontier layer — can be disabled until you want it
+frontier_feeds:
+  enabled: true
+  items:
+    - id: biorxiv_plants
+      kind: biorxiv
+      track: research_paper
+      review_status: preprint
+      query: "(plant OR crop OR maize OR rice)"
+      cadence: daily
+
+labs:
+  - id: ucd_digital_ag
+    name: "Digital Agriculture Lab (UC Davis)"
+    url: "https://digitalag.ucdavis.edu/"
+    track: research_paper
+    review_status: mixed
+    cadence: monthly
+
+  - id: unh_soil_biome
+    name: "Soil BioME (UNH)"
+    url: "https://colsa.unh.edu/soil-biome"
+    track: research_paper
+    review_status: mixed
+    cadence: monthly
+

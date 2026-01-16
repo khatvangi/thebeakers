@@ -5,5 +5,26 @@ __pycache__/
 # Large media files - host on YouTube
 *.m4a
 *.mp4
+*.wav
 deepdive/*/podcast.*
 deepdive/*/video.*
+
+# Runtime and cache
+cache/
+logs/
+*.log
+
+# Database backups (keep db itself tracked for now)
+*.backup.*
+data/articles.db.backup*
+
+# Temporary/generated
+summary
+*_transcript.txt
+data/stories/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo

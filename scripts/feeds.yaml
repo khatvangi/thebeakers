@@ -1,0 +1,321 @@
+# feeds.yaml - OA-first feed configuration for TheBeakers
+#
+# architecture:
+#   - arXiv: direct PDF (no cloudflare)
+#   - bioRxiv API: metadata only, PDF via Unpaywall
+#   - PMC: direct PDF (government OA)
+#   - publishers: metadata only, PDF via Unpaywall
+#
+# pdf_method: direct | unpaywall | none
+
+# PMC / Europe PMC feeds - highest ROI, guaranteed PDFs
+pmc:
+  # PMC provides OAI-PMH and RSS feeds for open-access content
+  # all articles here have freely available full-text
+
+  chemistry:
+    - name: "PMC Chemistry"
+      url: "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=ListRecords&metadataPrefix=pmc&set=chemistry"
+      type: "oai-pmh"
+      oa_hint: "gold"
+
+  biology:
+    - name: "PMC Biology"
+      url: "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=ListRecords&metadataPrefix=pmc&set=biology"
+      type: "oai-pmh"
+      oa_hint: "gold"
+
+    - name: "PMC Genetics"
+      url: "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=ListRecords&metadataPrefix=pmc&set=genetics"
+      type: "oai-pmh"
+      oa_hint: "gold"
+
+  physics:
+    - name: "PMC Physics"
+      url: "https://www.ncbi.nlm.nih.gov/pmc/oai/oai.cgi?verb=ListRecords&metadataPrefix=pmc&set=physics"
+      type: "oai-pmh"
+      oa_hint: "gold"
+
+
+# bioRxiv / medRxiv - use API for metadata, Unpaywall for PDFs
+# API: https://api.biorxiv.org/details/biorxiv/{start}/{end}
+# cloudflare blocks direct PDF, so we rely on Unpaywall
+biorxiv_api:
+  pdf_method: unpaywall
+  base_url: "https://api.biorxiv.org/details/biorxiv"
+  categories:
+    - "cell biology"
+    - "genetics"
+    - "molecular biology"
+    - "neuroscience"
+    - "biochemistry"
+    - "bioinformatics"
+    - "systems biology"
+
+# bioRxiv RSS feeds (fallback, less reliable than API)
+biorxiv:
+  pdf_method: unpaywall
+
+  biology:
+    - name: "bioRxiv Cell Biology"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=cell_biology"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Genetics"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=genetics"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Molecular Biology"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=molecular_biology"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Evolutionary Biology"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=evolutionary_biology"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Neuroscience"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=neuroscience"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Bioinformatics"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=bioinformatics"
+      type: "rss"
+      oa_hint: "preprint"
+
+  chemistry:
+    - name: "bioRxiv Biochemistry"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=biochemistry"
+      type: "rss"
+      oa_hint: "preprint"
+
+  ai:
+    - name: "bioRxiv Bioinformatics"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=bioinformatics"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "bioRxiv Systems Biology"
+      url: "https://connect.biorxiv.org/biorxiv_xml.php?subject=systems_biology"
+      type: "rss"
+      oa_hint: "preprint"
+
+medrxiv:
+  biology:
+    - name: "medRxiv Health Sciences"
+      url: "https://connect.medrxiv.org/medrxiv_xml.php?subject=health_sciences"
+      type: "rss"
+      oa_hint: "preprint"
+
+
+# arXiv - physics/math/CS preprints, all PDFs freely available
+arxiv:
+  # RSS feeds by subject: https://arxiv.org/help/rss
+  # PDF pattern: https://arxiv.org/pdf/{id}.pdf
+
+  physics:
+    - name: "arXiv Physics"
+      url: "https://rss.arxiv.org/rss/physics"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Condensed Matter"
+      url: "https://rss.arxiv.org/rss/cond-mat"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Quantum Physics"
+      url: "https://rss.arxiv.org/rss/quant-ph"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Astrophysics"
+      url: "https://rss.arxiv.org/rss/astro-ph"
+      type: "rss"
+      oa_hint: "preprint"
+
+  mathematics:
+    - name: "arXiv Mathematics"
+      url: "https://rss.arxiv.org/rss/math"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Statistics"
+      url: "https://rss.arxiv.org/rss/stat"
+      type: "rss"
+      oa_hint: "preprint"
+
+  ai:
+    - name: "arXiv Machine Learning"
+      url: "https://rss.arxiv.org/rss/cs.LG"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv AI"
+      url: "https://rss.arxiv.org/rss/cs.AI"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Computation & Language"
+      url: "https://rss.arxiv.org/rss/cs.CL"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Computer Vision"
+      url: "https://rss.arxiv.org/rss/cs.CV"
+      type: "rss"
+      oa_hint: "preprint"
+
+  engineering:
+    - name: "arXiv Robotics"
+      url: "https://rss.arxiv.org/rss/cs.RO"
+      type: "rss"
+      oa_hint: "preprint"
+
+    - name: "arXiv Systems & Control"
+      url: "https://rss.arxiv.org/rss/eess.SY"
+      type: "rss"
+      oa_hint: "preprint"
+
+
+# mixed-OA publisher feeds (metadata-only, PDF via Unpaywall)
+# these provide breadth - we ingest metadata but only fetch PDFs confirmed OA
+publishers:
+  pdf_method: unpaywall  # only fetch if Unpaywall confirms OA
+
+  chemistry:
+    - name: "JACS"
+      url: "https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=jacsat"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Nature Chemistry"
+      url: "https://www.nature.com/nchem.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Angewandte Chemie"
+      url: "https://onlinelibrary.wiley.com/feed/15213773/most-recent"
+      type: "rss"
+      oa_hint: "hybrid"
+
+  physics:
+    - name: "Nature Physics"
+      url: "https://www.nature.com/nphys.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Physical Review Letters"
+      url: "https://feeds.aps.org/rss/recent/prl.xml"
+      type: "rss"
+      oa_hint: "hybrid"
+
+  biology:
+    - name: "Nature"
+      url: "https://www.nature.com/nature.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Cell"
+      url: "https://www.cell.com/cell/rss"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Science"
+      url: "https://www.science.org/rss/news_current.xml"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "eLife"
+      url: "https://elifesciences.org/rss/recent.xml"
+      type: "rss"
+      oa_hint: "gold"  # fully OA
+
+  ai:
+    - name: "Nature Machine Intelligence"
+      url: "https://www.nature.com/natmachintell.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+
+  engineering:
+    - name: "Nature Materials"
+      url: "https://www.nature.com/nmat.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+    - name: "Nature Energy"
+      url: "https://www.nature.com/nenergy.rss"
+      type: "rss"
+      oa_hint: "hybrid"
+
+
+# ============================================================
+# SECONDARY SOURCES (discovery-only → resolve to primary)
+# RULE: never run truth pipeline on secondary article
+# ============================================================
+
+secondary:
+  # these are news/aggregator sites - we extract DOI/arXiv/PMCID
+  # and create primary records for pipeline processing
+
+  general:
+    - name: "ScienceDaily"
+      url: "https://www.sciencedaily.com/rss/all.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"  # scrape page for DOI links
+
+    - name: "Phys.org"
+      url: "https://phys.org/rss-feed/"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "EurekAlert"
+      url: "https://www.eurekalert.org/rss/technology_engineering.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+  tech:
+    - name: "MIT Tech Review"
+      url: "https://www.technologyreview.com/feed/"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "IEEE Spectrum"
+      url: "https://spectrum.ieee.org/feeds/feed.rss"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "Interesting Engineering"
+      url: "https://interestingengineering.com/rss"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+  biology:
+    - name: "ScienceDaily Biology"
+      url: "https://www.sciencedaily.com/rss/plants_animals.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "ScienceDaily Health"
+      url: "https://www.sciencedaily.com/rss/health_medicine.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+  physics:
+    - name: "ScienceDaily Physics"
+      url: "https://www.sciencedaily.com/rss/matter_energy.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "Phys.org Physics"
+      url: "https://phys.org/rss-feed/physics-news/"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+  ai:
+    - name: "ScienceDaily AI"
+      url: "https://www.sciencedaily.com/rss/computers_math/artificial_intelligence.xml"
+      type: "rss"
+      resolve_method: "scrape_doi"
+
+    - name: "VentureBeat AI"
+      url: "https://venturebeat.com/category/ai/feed/"
+      type: "rss"
+      resolve_method: "scrape_doi"
