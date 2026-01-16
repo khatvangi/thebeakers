@@ -106,14 +106,23 @@ def run_daily_digest(dry_run: bool = False, skip_email: bool = False):
         "--disciplines", "biology,chemistry,physics,ai,engineering,mathematics"
     ] + (["--dry-run"] if dry_run else []), dry_run)
 
-    # step 7: render digest page (TODO: implement)
-    log("=== 7. RENDER DIGEST ===")
-    log("  [TODO] render_digest_page.py not yet implemented")
+    # step 7: render digest page
+    output_file = SCRIPT_DIR.parent / "data" / f"digest_{week}.html"
+    run_step("7. RENDER DIGEST", [
+        sys.executable, str(SCRIPT_DIR / "render_digest_page.py"),
+        "--week", week,
+        "--output", str(output_file),
+        "--title", f"The Beakers — Daily Digest ({week})"
+    ] + (["--dry-run"] if dry_run else []), dry_run)
 
     # step 8: send email
     if not skip_email:
-        log("=== 8. SEND EMAIL ===")
-        log("  [TODO] send_campaign not yet implemented for daily")
+        run_step("8. SEND EMAIL", [
+            sys.executable, str(SCRIPT_DIR / "email" / "send_campaign_listmonk.py"),
+            "--cadence", "daily",
+            "--html", str(output_file),
+            "--subject", f"The Beakers — Daily Digest ({week})"
+        ] + (["--dry-run"] if dry_run else []), dry_run)
     else:
         log("=== 8. SEND EMAIL (skipped) ===")
 
