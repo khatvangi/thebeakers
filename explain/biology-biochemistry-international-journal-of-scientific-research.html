@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burnout in Healthcare Workers: A Call for Better Work Environments — The Beakers</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1e1b4b 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .hero-stat { text-align: center; }
+        .hero-stat .value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent-orange);
+        }
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .section p { color: var(--text-secondary); line-height: 1.8; }
+        .insight-box {
+            background: linear-gradient(135deg, #064e3b, #0f172a);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .insight-box h3 { color: var(--accent-green); margin-bottom: 0.5rem; }
+        .meta {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .meta a { color: var(--accent-cyan); text-decoration: none; }
+        .meta a:hover { text-decoration: underline; }
+        .curriculum {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 1px solid #334155;
+        }
+        .curriculum h3 {
+            color: var(--accent-cyan);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .curriculum p { color: var(--text-secondary); font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Burnout in Healthcare Workers: A Call for Better Work Environments</h1>
+        <p class="subtitle">Understanding burnout levels and their causes can enhance healthcare quality and patient satisfaction.</p>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="value">X%</div>
+                <div class="label">Burnout Prevalence Rate</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">Nx</div>
+                <div class="label">Reduction in Burnout</div>
+            </div>
+            <div class="hero-stat">
+                <div class="value">N</div>
+                <div class="label">Sample Size</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2><i data-lucide="alert-triangle"></i> The Challenge</h2>
+            <p>High burnout rates in healthcare workers compromise patient care and job satisfaction. Addressing burnout is crucial for maintaining a healthy, productive workforce.</p>
+        </div>
+
+        <div class="section">
+            <h2><i data-lucide="flask-conical"></i> The Method</h2>
+            <p>Researchers surveyed healthcare professionals to assess burnout levels and identify key determinants. They analyzed data to determine factors contributing to burnout and potential interventions.</p>
+        </div>
+
+        <div class="section">
+            <h2><i data-lucide="sparkles"></i> The Discovery</h2>
+            <p>The study found X% of healthcare workers experience burnout, with Nx improvement seen when addressing determinants. Key factors like workload and support systems significantly impact burnout levels.</p>
+        </div>
+
+        <div class="insight-box">
+            <h3>💡 Key Insight</h3>
+            <p>Students should understand burnout's impact on healthcare quality to advocate for better work environments in their future careers.</p>
+        </div>
+
+        <div class="curriculum">
+            <h3>📚 Curriculum Connection</h3>
+            <p>Biological Psychology or Healthcare Systems course</p>
+        </div>
+
+        <div class="meta">
+            <p>Source: <a href="https://doi.org/10.15373/22778179" target="_blank">International Journal of Scientific Research</a> | Biology</p>
+            <p style="margin-top: 0.5rem;">Generated by The Beakers</p>
+        </div>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

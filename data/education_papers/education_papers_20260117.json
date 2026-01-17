@@ -1,0 +1,242 @@
+[
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "chemistry",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a chemistry education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41586-025-09422-z",
+    "paper_title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning",
+    "discipline": "chemistry",
+    "education_type": "experiment",
+    "concept_summary": "Abstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilitie",
+    "visualization_prompt": "Visualize this educational concept from a chemistry education paper:\n\nTitle: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning\n\nKey points from abstract:\nAbstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification and dynamic strategy adaptation. \n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.15373/22778179",
+    "paper_title": "International Journal of Scientific Research",
+    "discipline": "chemistry",
+    "education_type": "general",
+    "concept_summary": "Knowing the level of burnout and their determinants can help in formulating measures of improving the work environment. A healthy workforce ensures high quality of healthcare and patient satisfaction.",
+    "visualization_prompt": "Visualize this educational concept from a chemistry education paper:\n\nTitle: International Journal of Scientific Research\n\nKey points from abstract:\nKnowing the level of burnout and their determinants can help in formulating measures of improving the work environment. A healthy workforce ensures high quality of healthcare and patient satisfaction.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.25903/8a5d-4f29",
+    "paper_title": "Struvite crystallization from nutrient rich wastewater",
+    "discipline": "chemistry",
+    "education_type": "experiment",
+    "concept_summary": "Discharge of untreated nutrient-rich wastewater is a problematic issue, which may cause root burning and eutrophication of receiving water. It is also a problematic issue due to the formation of crystalline deposits in waste water systems. The recovery of nutrients using a crystallization technique may provide a value added product. The recovered product is struvite, which is chemically known as magnesium ammonium phosphate hexahydrate. The key focus of this research is the modeling and simulati",
+    "visualization_prompt": "Visualize this educational concept from a chemistry education paper:\n\nTitle: Struvite crystallization from nutrient rich wastewater\n\nKey points from abstract:\nDischarge of untreated nutrient-rich wastewater is a problematic issue, which may cause root burning and eutrophication of receiving water. It is also a problematic issue due to the formation of crystalline deposits in waste water systems. The recovery of nutrients using a crystallization technique may provide a value added product. The recovered product is struvite, which is chemically known as magnesium ammonium phosphate hexahydrate. The key focus of this research is the modeling and simulation of struvite growth, which incorporates solution chemistry and thermodynamics, kinetics of growth and process description of the recovery system. This research also focuses on the strategy of struvite crystallization in a fed batch system, to avoid spontaneous precipitation. A fully integrated con\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.3390/clinpract15090169",
+    "paper_title": "Artificial Intelligence in Clinical Medicine: Challenges Across Diagnostic Imaging, Clinical Decision Support, Surgery, Pathology, and Drug Discovery",
+    "discipline": "chemistry",
+    "education_type": "experiment",
+    "concept_summary": "Aims/Background: The growing integration of artificial intelligence (AI) into clinical medicine has opened new possibilities for enhancing diagnostic accuracy, therapeutic decision-making, and biomedical innovation across several domains. This review is aimed to evaluate the clinical applications of AI across five key domains of medicine: diagnostic imaging, clinical decision support systems (CDSS), surgery, pathology, and drug discovery, highlighting achievements, limitations, and future direct",
+    "visualization_prompt": "Visualize this educational concept from a chemistry education paper:\n\nTitle: Artificial Intelligence in Clinical Medicine: Challenges Across Diagnostic Imaging, Clinical Decision Support, Surgery, Pathology, and Drug Discovery\n\nKey points from abstract:\nAims/Background: The growing integration of artificial intelligence (AI) into clinical medicine has opened new possibilities for enhancing diagnostic accuracy, therapeutic decision-making, and biomedical innovation across several domains. This review is aimed to evaluate the clinical applications of AI across five key domains of medicine: diagnostic imaging, clinical decision support systems (CDSS), surgery, pathology, and drug discovery, highlighting achievements, limitations, and future directions. Methods: A comprehensive PubMed search was performed without language or publication date restrictions, combining Medical Subject Headings (MeSH) and free-text keywords for AI with domain-specific terms. The search yielded 2047 records, of which 243 duplicates were removed, leaving 1804 unique\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "physics",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a physics education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41586-025-09422-z",
+    "paper_title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning",
+    "discipline": "physics",
+    "education_type": "experiment",
+    "concept_summary": "Abstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilitie",
+    "visualization_prompt": "Visualize this educational concept from a physics education paper:\n\nTitle: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning\n\nKey points from abstract:\nAbstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification and dynamic strategy adaptation. \n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.58036/stss.v8i3.292",
+    "paper_title": "Family Background and School Choice in Cities of Russia and Estonia: Selective Agenda of the Soviet Past and Present",
+    "discipline": "physics",
+    "education_type": "general",
+    "concept_summary": "In this article, we demonstrate the size of family background eff ects in various regions of Russia and Estonia, concentrating on urban and rural diff erences, addressing the idea that the family background effect is moderated by school level admission policies. Having common path-dependent educational institutions from the communist period, the countries diff er in both the extensiveness of the welfare state and system level school choice policies. However, we see many commonalities in both sys",
+    "visualization_prompt": "Visualize this educational concept from a physics education paper:\n\nTitle: Family Background and School Choice in Cities of Russia and Estonia: Selective Agenda of the Soviet Past and Present\n\nKey points from abstract:\nIn this article, we demonstrate the size of family background eff ects in various regions of Russia and Estonia, concentrating on urban and rural diff erences, addressing the idea that the family background effect is moderated by school level admission policies. Having common path-dependent educational institutions from the communist period, the countries diff er in both the extensiveness of the welfare state and system level school choice policies. However, we see many commonalities in both systems, especially at the urban school level. The family background eff ect is defi ned as the dependence of student achievement on family background characteristics, such as parental education, income and social status. In operationalising family background, the number of books at home and parental e\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s42005-025-02232-9",
+    "paper_title": "Topological Weyl altermagnetism in CrSb",
+    "discipline": "physics",
+    "education_type": "general",
+    "concept_summary": "Abstract Altermagnets constitute a novel, third fundamental class of collinear magnetic ordered materials, alongside with ferro- and antiferromagnets. They share with conventional antiferromagnets the feature of a vanishing net magnetization. At the same time they show a spin-splitting of electronic bands, just as in ferromagnets, caused by the atomic exchange interaction. On the other hand, topology has recently revolutionized our understanding of condensed matter physics, introducing new phase",
+    "visualization_prompt": "Visualize this educational concept from a physics education paper:\n\nTitle: Topological Weyl altermagnetism in CrSb\n\nKey points from abstract:\nAbstract Altermagnets constitute a novel, third fundamental class of collinear magnetic ordered materials, alongside with ferro- and antiferromagnets. They share with conventional antiferromagnets the feature of a vanishing net magnetization. At the same time they show a spin-splitting of electronic bands, just as in ferromagnets, caused by the atomic exchange interaction. On the other hand, topology has recently revolutionized our understanding of condensed matter physics, introducing new phases of matter classified by intrinsic topological order. Here we connect the worlds of altermagnetism and topology, showing that the electronic structure of the altermagnet CrSb is topological. Using high-resolution angle-resolved photoemission spectroscopy, we observe the large momentum-dependent spi\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.26077/nv5r-6685",
+    "paper_title": "The Student Nitric Oxide Explorer",
+    "discipline": "physics",
+    "education_type": "experiment",
+    "concept_summary": "The Student Nitric Oxide Explorer (SNOE) is a small scientific spacecraft designed for launch on a Pegasus\u2122 XL launch vehicle for the USRA Student Explorer Demonstration Initiative. Its scientific goals are to measure nitric oxide density in the lower thermosphere and analyze the energy inputs to that region from the sun and magnetosphere that create it and cause its abundance to vary dramatically. These inputs are energetic solar photons in the EUV and X -ray spectral regions, and energetic ele",
+    "visualization_prompt": "Visualize this educational concept from a physics education paper:\n\nTitle: The Student Nitric Oxide Explorer\n\nKey points from abstract:\nThe Student Nitric Oxide Explorer (SNOE) is a small scientific spacecraft designed for launch on a Pegasus\u2122 XL launch vehicle for the USRA Student Explorer Demonstration Initiative. Its scientific goals are to measure nitric oxide density in the lower thermosphere and analyze the energy inputs to that region from the sun and magnetosphere that create it and cause its abundance to vary dramatically. These inputs are energetic solar photons in the EUV and X -ray spectral regions, and energetic electrons that are accelerated into the polar regions, where they cause auroral disturbances and displays. Both of these phenomena are aspects of solar variability; thermospheric nitric oxide responds to that variability and in turn determines key temperature and compositional aspects of the thermosphe\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "biology",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a biology education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41586-025-09422-z",
+    "paper_title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning",
+    "discipline": "biology",
+    "education_type": "experiment",
+    "concept_summary": "Abstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilitie",
+    "visualization_prompt": "Visualize this educational concept from a biology education paper:\n\nTitle: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning\n\nKey points from abstract:\nAbstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification and dynamic strategy adaptation. \n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.15373/22778179",
+    "paper_title": "International Journal of Scientific Research",
+    "discipline": "biology",
+    "education_type": "general",
+    "concept_summary": "Knowing the level of burnout and their determinants can help in formulating measures of improving the work environment. A healthy workforce ensures high quality of healthcare and patient satisfaction.",
+    "visualization_prompt": "Visualize this educational concept from a biology education paper:\n\nTitle: International Journal of Scientific Research\n\nKey points from abstract:\nKnowing the level of burnout and their determinants can help in formulating measures of improving the work environment. A healthy workforce ensures high quality of healthcare and patient satisfaction.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.25903/8a5d-4f29",
+    "paper_title": "Struvite crystallization from nutrient rich wastewater",
+    "discipline": "biology",
+    "education_type": "experiment",
+    "concept_summary": "Discharge of untreated nutrient-rich wastewater is a problematic issue, which may cause root burning and eutrophication of receiving water. It is also a problematic issue due to the formation of crystalline deposits in waste water systems. The recovery of nutrients using a crystallization technique may provide a value added product. The recovered product is struvite, which is chemically known as magnesium ammonium phosphate hexahydrate. The key focus of this research is the modeling and simulati",
+    "visualization_prompt": "Visualize this educational concept from a biology education paper:\n\nTitle: Struvite crystallization from nutrient rich wastewater\n\nKey points from abstract:\nDischarge of untreated nutrient-rich wastewater is a problematic issue, which may cause root burning and eutrophication of receiving water. It is also a problematic issue due to the formation of crystalline deposits in waste water systems. The recovery of nutrients using a crystallization technique may provide a value added product. The recovered product is struvite, which is chemically known as magnesium ammonium phosphate hexahydrate. The key focus of this research is the modeling and simulation of struvite growth, which incorporates solution chemistry and thermodynamics, kinetics of growth and process description of the recovery system. This research also focuses on the strategy of struvite crystallization in a fed batch system, to avoid spontaneous precipitation. A fully integrated con\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.13165/ie",
+    "paper_title": "Intellectual Economics",
+    "discipline": "biology",
+    "education_type": "teaching_method",
+    "concept_summary": "Purpose.This article highlights the notion that methodological normativism of the neoclassical school has consolidated its monopoly position within economics, and significantly reduces our social reality by understanding the economic system as a closed system.The author aims to show that such a misleading picture of the world leads to one single best epistemology, theory, methodology and educational system within economics.Design/Methodology/Approach.The author explains complaints against such a",
+    "visualization_prompt": "Visualize this educational concept from a biology education paper:\n\nTitle: Intellectual Economics\n\nKey points from abstract:\nPurpose.This article highlights the notion that methodological normativism of the neoclassical school has consolidated its monopoly position within economics, and significantly reduces our social reality by understanding the economic system as a closed system.The author aims to show that such a misleading picture of the world leads to one single best epistemology, theory, methodology and educational system within economics.Design/Methodology/Approach.The author explains complaints against such an approach in terms of five different kinds of interrelated and interdependent pluralisms.The comparative and documentary methods ensure maximum openness with regard to the collection of theoretical and empirical papers.The qualitative analysis of \"pro et contra\" debate is based on a questionnaire c\n\nEducation type: teaching_method\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "mathematics",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a mathematics education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41586-025-09422-z",
+    "paper_title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning",
+    "discipline": "mathematics",
+    "education_type": "experiment",
+    "concept_summary": "Abstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilitie",
+    "visualization_prompt": "Visualize this educational concept from a mathematics education paper:\n\nTitle: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning\n\nKey points from abstract:\nAbstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification and dynamic strategy adaptation. \n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.58036/stss.v8i3.292",
+    "paper_title": "Family Background and School Choice in Cities of Russia and Estonia: Selective Agenda of the Soviet Past and Present",
+    "discipline": "mathematics",
+    "education_type": "general",
+    "concept_summary": "In this article, we demonstrate the size of family background eff ects in various regions of Russia and Estonia, concentrating on urban and rural diff erences, addressing the idea that the family background effect is moderated by school level admission policies. Having common path-dependent educational institutions from the communist period, the countries diff er in both the extensiveness of the welfare state and system level school choice policies. However, we see many commonalities in both sys",
+    "visualization_prompt": "Visualize this educational concept from a mathematics education paper:\n\nTitle: Family Background and School Choice in Cities of Russia and Estonia: Selective Agenda of the Soviet Past and Present\n\nKey points from abstract:\nIn this article, we demonstrate the size of family background eff ects in various regions of Russia and Estonia, concentrating on urban and rural diff erences, addressing the idea that the family background effect is moderated by school level admission policies. Having common path-dependent educational institutions from the communist period, the countries diff er in both the extensiveness of the welfare state and system level school choice policies. However, we see many commonalities in both systems, especially at the urban school level. The family background eff ect is defi ned as the dependence of student achievement on family background characteristics, such as parental education, income and social status. In operationalising family background, the number of books at home and parental e\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.58036/stss.v3i3.83",
+    "paper_title": "Language and Identity in Ukraine: Was it Really Nation-Building?",
+    "discipline": "mathematics",
+    "education_type": "general",
+    "concept_summary": "After the collapse of three socialist federations in Eastern Europe, the expression \u2018nation-building\u2019 returned to the heart of academic debates. Like other former socialist republics, Ukraine has started its nationbuilding project trying to balance between a limitation of centrifugal forces and the \u2018nationalisation\u2019 (Brubaker 1994) of the state. This article examines the main features of language policies within the Ukrainian nation-building project and adopts a dual approach. It \ufb01 rst surveys t",
+    "visualization_prompt": "Visualize this educational concept from a mathematics education paper:\n\nTitle: Language and Identity in Ukraine: Was it Really Nation-Building?\n\nKey points from abstract:\nAfter the collapse of three socialist federations in Eastern Europe, the expression \u2018nation-building\u2019 returned to the heart of academic debates. Like other former socialist republics, Ukraine has started its nationbuilding project trying to balance between a limitation of centrifugal forces and the \u2018nationalisation\u2019 (Brubaker 1994) of the state. This article examines the main features of language policies within the Ukrainian nation-building project and adopts a dual approach. It \ufb01 rst surveys the political will that has been incarnated in language policies since 1991, and how national identity has been a\ufb00 ected by those policies. However, it counterpoises this approach with an analysis of bottom actors and their attitude towards language policies. The framework constructed is intended to \n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41746-025-01722-y",
+    "paper_title": "Systematic review of cost effectiveness and budget impact of artificial intelligence in healthcare",
+    "discipline": "mathematics",
+    "education_type": "general",
+    "concept_summary": "Abstract This systematic review examines the cost-effectiveness, utility, and budget impact of clinical artificial intelligence (AI) interventions across diverse healthcare settings. Nineteen studies spanning oncology, cardiology, ophthalmology, and infectious diseases demonstrate that AI improves diagnostic accuracy, enhances quality-adjusted life years, and reduces costs\u2014largely by minimizing unnecessary procedures and optimizing resource use. Several interventions achieved incremental cost-ef",
+    "visualization_prompt": "Visualize this educational concept from a mathematics education paper:\n\nTitle: Systematic review of cost effectiveness and budget impact of artificial intelligence in healthcare\n\nKey points from abstract:\nAbstract This systematic review examines the cost-effectiveness, utility, and budget impact of clinical artificial intelligence (AI) interventions across diverse healthcare settings. Nineteen studies spanning oncology, cardiology, ophthalmology, and infectious diseases demonstrate that AI improves diagnostic accuracy, enhances quality-adjusted life years, and reduces costs\u2014largely by minimizing unnecessary procedures and optimizing resource use. Several interventions achieved incremental cost-effectiveness ratios well below accepted thresholds. However, many evaluations relied on static models that may overestimate benefits by not capturing the adaptive learning of AI systems over time. Additionally, indirect costs, infrastructure investments, and equity considerations were often underrepo\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "engineering",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a engineering education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1038/s41586-025-09422-z",
+    "paper_title": "DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning",
+    "discipline": "engineering",
+    "education_type": "experiment",
+    "concept_summary": "Abstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilitie",
+    "visualization_prompt": "Visualize this educational concept from a engineering education paper:\n\nTitle: DeepSeek-R1 incentivizes reasoning in LLMs through reinforcement learning\n\nKey points from abstract:\nAbstract General reasoning represents a long-standing and formidable challenge in artificial intelligence (AI). Recent breakthroughs, exemplified by large language models (LLMs) 1,2 and chain-of-thought (CoT) prompting 3 , have achieved considerable success on foundational reasoning tasks. However, this success is heavily contingent on extensive human-annotated demonstrations and the capabilities of models are still insufficient for more complex problems. Here we show that the reasoning abilities of LLMs can be incentivized through pure reinforcement learning (RL), obviating the need for human-labelled reasoning trajectories. The proposed RL framework facilitates the emergent development of advanced reasoning patterns, such as self-reflection, verification and dynamic strategy adaptation. \n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.31219/osf.io/fpq7z_v1",
+    "paper_title": "Outcasting: Enforcement in Domestic and International Law",
+    "discipline": "engineering",
+    "education_type": "general",
+    "concept_summary": "This Article offers a new way to understand the enforcement of domestic and international law that we call \u201coutcasting.\u201d Unlike the distinctive method that modern states use to enforce their law, outcasting is nonviolent: it does not rely on bureaucratic organizations, such as police or militia, that employ physical force to maintain order. Instead, outcasting involves denying the disobedient the benefits of social cooperation and membership. Law enforcement through outcasting in domestic law ca",
+    "visualization_prompt": "Visualize this educational concept from a engineering education paper:\n\nTitle: Outcasting: Enforcement in Domestic and International Law\n\nKey points from abstract:\nThis Article offers a new way to understand the enforcement of domestic and international law that we call \u201coutcasting.\u201d Unlike the distinctive method that modern states use to enforce their law, outcasting is nonviolent: it does not rely on bureaucratic organizations, such as police or militia, that employ physical force to maintain order. Instead, outcasting involves denying the disobedient the benefits of social cooperation and membership. Law enforcement through outcasting in domestic law can be found throughout history - from medieval Iceland and classic canon law to modern-day public law. And it is ubiquitous in modern international law, from the World Trade Organization to the Universal Postal Union to the Montreal Protocol. Across radically different subject areas, international le\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.26077/d7p3-3z80",
+    "paper_title": "Report on Alternative Devices to Pyrotechnics on Spacecraft",
+    "discipline": "engineering",
+    "education_type": "experiment",
+    "concept_summary": "Pyrotechnics accomplish many functions on today's spacecraft, possessing minimum volume/weight, providing instantaneous operation on demand, and requiring little input energy. However, functional shock, safety, and overall system cost issues, combined with emergence and availability of new technologies question their continued use on space missions. Upon request from the National Aeronautics and Space Administration's (NASA) Program Management Council (PMC) , Langley Research Center (LaRC) condu",
+    "visualization_prompt": "Visualize this educational concept from a engineering education paper:\n\nTitle: Report on Alternative Devices to Pyrotechnics on Spacecraft\n\nKey points from abstract:\nPyrotechnics accomplish many functions on today's spacecraft, possessing minimum volume/weight, providing instantaneous operation on demand, and requiring little input energy. However, functional shock, safety, and overall system cost issues, combined with emergence and availability of new technologies question their continued use on space missions. Upon request from the National Aeronautics and Space Administration's (NASA) Program Management Council (PMC) , Langley Research Center (LaRC) conducted a survey to identify and evaluate state-of-the-art nonexplosively actuated (NEA) alternatives to pyrotechnics, identify NEA devices planned for NASA use, and investigate potential interagency cooperative efforts. In this study, over 135 organizations were contacted, including NASA field centers\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.58036/stss.v3i3.83",
+    "paper_title": "Language and Identity in Ukraine: Was it Really Nation-Building?",
+    "discipline": "engineering",
+    "education_type": "general",
+    "concept_summary": "After the collapse of three socialist federations in Eastern Europe, the expression \u2018nation-building\u2019 returned to the heart of academic debates. Like other former socialist republics, Ukraine has started its nationbuilding project trying to balance between a limitation of centrifugal forces and the \u2018nationalisation\u2019 (Brubaker 1994) of the state. This article examines the main features of language policies within the Ukrainian nation-building project and adopts a dual approach. It \ufb01 rst surveys t",
+    "visualization_prompt": "Visualize this educational concept from a engineering education paper:\n\nTitle: Language and Identity in Ukraine: Was it Really Nation-Building?\n\nKey points from abstract:\nAfter the collapse of three socialist federations in Eastern Europe, the expression \u2018nation-building\u2019 returned to the heart of academic debates. Like other former socialist republics, Ukraine has started its nationbuilding project trying to balance between a limitation of centrifugal forces and the \u2018nationalisation\u2019 (Brubaker 1994) of the state. This article examines the main features of language policies within the Ukrainian nation-building project and adopts a dual approach. It \ufb01 rst surveys the political will that has been incarnated in language policies since 1991, and how national identity has been a\ufb00 ected by those policies. However, it counterpoises this approach with an analysis of bottom actors and their attitude towards language policies. The framework constructed is intended to \n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.5040/9781350441491.ch-12",
+    "paper_title": "Development Education",
+    "discipline": "agriculture",
+    "education_type": "general",
+    "concept_summary": "sponsorship: Afd. Theoret., cultuur- en onderwijssoc.",
+    "visualization_prompt": "Visualize this educational concept from a agriculture education paper:\n\nTitle: Development Education\n\nKey points from abstract:\nsponsorship: Afd. Theoret., cultuur- en onderwijssoc.\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.64534/comm",
+    "paper_title": "Pakistan Journal of Commerce and Social Sciences",
+    "discipline": "agriculture",
+    "education_type": "general",
+    "concept_summary": "",
+    "visualization_prompt": "Visualize this educational concept from a agriculture education paper:\n\nTitle: Pakistan Journal of Commerce and Social Sciences\n\nKey points from abstract:\n\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.15580/gjas",
+    "paper_title": "Greener Journal of Agricultural Sciences",
+    "discipline": "agriculture",
+    "education_type": "experiment",
+    "concept_summary": "The ability of animal waste to restore and reclaim the productivity of degraded soil is dependent on the nutrient content of the waste, rates applied and ability to release nutrients in available form for crop production.In this present study the comparative effectiveness of three (3) animal wastes; poultry waste, swine waste and cow waste in improving the productivity of a degraded soil was simultaneously investigated in a greenhouse study.The experiment was laid out in factorial experiment in ",
+    "visualization_prompt": "Visualize this educational concept from a agriculture education paper:\n\nTitle: Greener Journal of Agricultural Sciences\n\nKey points from abstract:\nThe ability of animal waste to restore and reclaim the productivity of degraded soil is dependent on the nutrient content of the waste, rates applied and ability to release nutrients in available form for crop production.In this present study the comparative effectiveness of three (3) animal wastes; poultry waste, swine waste and cow waste in improving the productivity of a degraded soil was simultaneously investigated in a greenhouse study.The experiment was laid out in factorial experiment in randomized complete block design and each treatment was replicated three (3) times.A control was also included.The findings from the study showed that animal wastes and rates studied significantly increased water potentials at 0.1bar, 1.0bar and 15bar for the 2 years study.The readily available wate\n\nEducation type: experiment\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.1016/s0140-6736(25)01919-1",
+    "paper_title": "The 2025 report of the Lancet Countdown on health and climate change: climate change action offers a lifeline",
+    "discipline": "agriculture",
+    "education_type": "general",
+    "concept_summary": "",
+    "visualization_prompt": "Visualize this educational concept from a agriculture education paper:\n\nTitle: The 2025 report of the Lancet Countdown on health and climate change: climate change action offers a lifeline\n\nKey points from abstract:\n\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  },
+  {
+    "paper_doi": "10.58036/stss.v4i1.91",
+    "paper_title": "Educational Systems and Inequalities in Educational Attainment in Central and Eastern European Countries",
+    "discipline": "agriculture",
+    "education_type": "general",
+    "concept_summary": "Before exploring the selectivity of educational attainment in detail, this article extensively describes the contours of educational systems in Central and Eastern European (CEE) countries. These countries provide an interesting setting in view of their post-secondary education expansion and differentiation, as well as their variation in the degree of vocational orientation at the secondary level. Drawing on high quality, national micro data, we find that students from disadvantaged family backg",
+    "visualization_prompt": "Visualize this educational concept from a agriculture education paper:\n\nTitle: Educational Systems and Inequalities in Educational Attainment in Central and Eastern European Countries\n\nKey points from abstract:\nBefore exploring the selectivity of educational attainment in detail, this article extensively describes the contours of educational systems in Central and Eastern European (CEE) countries. These countries provide an interesting setting in view of their post-secondary education expansion and differentiation, as well as their variation in the degree of vocational orientation at the secondary level. Drawing on high quality, national micro data, we find that students from disadvantaged family backgrounds who manage to enter post-secondary education are \u2018diverted\u2019 to second-tier post-secondary institutions, while longterm university programs are more likely to be dominated by students whose parents have an academic background. At the secondary level, we confirm the patterns of negative selecti\n\nEducation type: general\n\nCreate a p5.js visualization that:\n1. Shows the concept progressively (stages)\n2. Highlights what students typically misunderstand\n3. Uses clear labels and data cards\n4. Has continuous motion to keep engagement"
+  }
+]

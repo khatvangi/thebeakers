@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTM Outperforms in Crop Genomic Prediction — The Beakers</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #10b981;
+            --accent-cyan: #06b6d4;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.8rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 3rem;
+            border-bottom: 1px solid #334155;
+        }
+        .scene:last-child { border-bottom: none; }
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+        .scene p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        .mermaid {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+        }
+        .insight-box {
+            background: linear-gradient(135deg, #064e3b, #0f172a);
+            border-left: 4px solid var(--accent-green);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        .insight-box h3 { color: var(--accent-green); margin-bottom: 0.5rem; }
+        .insight-box p { color: var(--text-primary); font-size: 1.1rem; }
+        .curriculum {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+        .curriculum h3 { color: var(--accent-cyan); margin-bottom: 0.5rem; }
+        .curriculum p { color: var(--text-secondary); }
+        .meta {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .meta a { color: var(--accent-cyan); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>LSTM Outperforms in Crop Genomic Prediction</h1>
+        <p class="subtitle">Which machine learning model best predicts crop traits?</p>
+        <p class="meta" style="margin-top: 2rem;">
+            <a href="https://doi.org/10.1007/s00425-025-04843-6" target="_blank">Planta</a>
+        </p>
+    </div>
+
+    <div class="container">
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1</span>
+            <h2>The Challenge</h2>
+            <p>Breeders face difficulty selecting the best genomic prediction (GP) methods, leading to inefficiencies in crop breeding. Traditional approaches struggle with complex genetic interactions, hindering cost-effective decision-making in early stages.</p>
+            <div class="mermaid">mindmap
+  root((The Challenge))
+    Key Point 1
+    Key Point 2
+    Key Point 3</div>
+        </div>
+        <div class="scene">
+            <span class="scene-number">Scene 2</span>
+            <h2>The Hypothesis</h2>
+            <p>Researchers proposed that LSTM and feature selection methods could better capture genetic complexity. They hypothesized that LSTM's architecture would excel at modeling additive and epistatic effects among SNPs.</p>
+            <div class="mermaid">flowchart LR
+    A[Start] --> B[Process]
+    B --> C[Result]</div>
+        </div>
+        <div class="scene">
+            <span class="scene-number">Scene 3</span>
+            <h2>The Method</h2>
+            <p>The team tested 15 GP methods, comparing feature selection (SNP filtering) vs. extraction (PCA). They analyzed marker density, population size, and trait complexity to evaluate performance across six datasets.</p>
+            <div class="mermaid">flowchart LR
+    A[Start] --> B[Process]
+    B --> C[Result]</div>
+        </div>
+        <div class="scene">
+            <span class="scene-number">Scene 4</span>
+            <h2>The Discovery</h2>
+            <p>LSTM achieved the highest average STScore (0.967), outperforming other methods. It uniquely captured both additive and epistatic QTL effects, proving superior for complex trait prediction.</p>
+            <div class="mermaid">flowchart LR
+    A[Start] --> B[Process]
+    B --> C[Result]</div>
+        </div>
+        <div class="scene">
+            <span class="scene-number">Scene 5</span>
+            <h2>Why It Matters</h2>
+            <p>This breakthrough enables breeders to make data-driven decisions early, reducing costs and improving crop yields. It bridges machine learning and agriculture, transforming genomic prediction practices.</p>
+            <div class="mermaid">mindmap
+  root((Why It Matters))
+    Key Point 1
+    Key Point 2
+    Key Point 3</div>
+        </div>
+
+        <div class="insight-box">
+            <h3>💡 Key Takeaway</h3>
+            <p>Machine learning models like LSTM can significantly improve crop genomic prediction, leading to more efficient and effective breeding practices.</p>
+        </div>
+
+        <div class="curriculum">
+            <h3>📚 Curriculum Connection</h3>
+            <p>Agricultural Biotechnology or Genomics</p>
+        </div>
+
+        <div class="meta">
+            <p>Generated by The Beakers | Agriculture</p>
+        </div>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#10b981',
+                primaryTextColor: '#e2e8f0',
+                primaryBorderColor: '#334155',
+                lineColor: '#64748b',
+                secondaryColor: '#1e293b',
+                tertiaryColor: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>
