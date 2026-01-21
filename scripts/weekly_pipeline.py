@@ -17,6 +17,9 @@ from dataclasses import dataclass, asdict
 from typing import List, Dict, Optional
 from pathlib import Path
 
+# import society_fetcher for OA society journal papers
+from society_fetcher import fetch_discipline as fetch_society_papers, SOURCES as SOCIETY_SOURCES
+
 # Paths
 ROOT = Path("/storage/thebeakers")
 NAPKIN = Path("/storage/napkin")
@@ -1037,10 +1040,29 @@ def run_weekly(subjects: List[str] = None, days: int = 7):
         print(f"   From OpenAlex OA...")
         oa_articles = fetch_openalex(subject, concepts, days, limit=50)
 
+        # 3. Society journal papers (ACS, APS, PLOS, IEEE, etc.)
+        society_articles = []
+        if subject in SOCIETY_SOURCES:
+            print(f"   From society journals...")
+            try:
+                society_papers = fetch_society_papers(subject, download_pdfs=False)
+                for p in society_papers:
+                    society_articles.append(Article(
+                        title=p.title,
+                        abstract=p.abstract,
+                        url=f"https://doi.org/{p.doi}" if p.doi else "",
+                        doi=p.doi,
+                        source=p.journal,
+                        subject=subject,
+                        pdf_url=p.pdf_url,
+                    ))
+            except Exception as e:
+                print(f"   [!] society fetch error: {e}")
+
         # Combine and dedupe by title
         seen_titles = set()
         articles = []
-        for a in rss_articles + oa_articles:
+        for a in rss_articles + oa_articles + society_articles:
             title_key = a.title.lower()[:50]
             if title_key not in seen_titles:
                 seen_titles.add(title_key)
