@@ -1,0 +1,91 @@
+{
+  "id": "s1-hunt-c2h5f",
+  "name": "Fluoroethane (Bonus)",
+  "stage": 1,
+  "target_formula": {
+    "atoms": {
+      "C": 2,
+      "H": 5,
+      "O": 0,
+      "N": 0,
+      "F": 1,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "hunt",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "all_isomers",
+    "target_count": 1
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "f1",
+        "element": "F",
+        "x": 120,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "f1",
+        "a2": "c1"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_f1",
+        "type": "X",
+        "memberAtomIds": [
+          "f1"
+        ],
+        "anchorAtomId": "f1"
+      }
+    ]
+  },
+  "target_state": null,
+  "brick_set": [
+    "X"
+  ],
+  "hints": []
+}

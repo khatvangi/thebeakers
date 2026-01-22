@@ -1,0 +1,1193 @@
+{
+  "levels": [
+    {
+      "id": "s0-hunt-ch4",
+      "name": "Methane Warmup",
+      "stage": 0,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 1,
+          "H": 4,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s0-hunt-c2h6",
+      "name": "Ethane Warmup",
+      "stage": 0,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s0-hunt-ch3cl",
+      "name": "Chloromethane",
+      "stage": 0,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 1,
+          "H": 3,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s0-hunt-c2h5cl",
+      "name": "Chloroethane",
+      "stage": 0,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 5,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s0-detox-c2h6",
+      "name": "Detox: Split Ethane",
+      "stage": 0,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c2h6o",
+      "name": "C2H6O Isomers",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c3h8o",
+      "name": "C3H8O Trio",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c3h7cl",
+      "name": "C3H7Cl Isomers",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c4h10",
+      "name": "C4H10 Isomers",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 10,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c4h9cl",
+      "name": "C4H9Cl Isomers",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 9,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-detox-c3h8o",
+      "name": "Detox: Scatter C3H8O",
+      "stage": 1,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-detox-c4h10",
+      "name": "Detox: Split Butane",
+      "stage": 1,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 10,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-transform-c3h8o",
+      "name": "Transform: 1-Propanol \u2192 2-Propanol",
+      "stage": 1,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-transform-c4h10",
+      "name": "Transform: n-Butane \u2192 Isobutane",
+      "stage": 1,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 10,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-transform-c2h6o",
+      "name": "Transform: Ethanol \u2192 Dimethyl Ether",
+      "stage": 1,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-hunt-c5h12",
+      "name": "C5H12 Isomers",
+      "stage": 2,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-hunt-c2h7n",
+      "name": "C2H7N Isomers",
+      "stage": 2,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 7,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-hunt-c3h9n",
+      "name": "C3H9N Quartet",
+      "stage": 2,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 9,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-hunt-c2h5br",
+      "name": "Bromoethane",
+      "stage": 2,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 5,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 1,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-hunt-c3h7br",
+      "name": "C3H7Br Isomers",
+      "stage": 2,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 1,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-detox-c3h9n",
+      "name": "Detox: Scatter C3H9N",
+      "stage": 2,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 9,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-detox-c2h7n",
+      "name": "Detox: Split C2H7N",
+      "stage": 2,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 7,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-transform-c3h9n",
+      "name": "Transform: Propylamine \u2192 Isopropylamine",
+      "stage": 2,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 9,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-transform-c3h7cl",
+      "name": "Transform: 1-Chloropropane \u2192 2-Chloropropane",
+      "stage": 2,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s2-transform-c3h7br",
+      "name": "Transform: 1-Bromopropane \u2192 2-Bromopropane",
+      "stage": 2,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 1,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-hunt-c2h5f",
+      "name": "Fluoroethane",
+      "stage": 3,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 5,
+          "O": 0,
+          "N": 0,
+          "F": 1,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-hunt-c2h5i",
+      "name": "Iodoethane",
+      "stage": 3,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 5,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 1
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-hunt-c3h7f",
+      "name": "C3H7F Isomers",
+      "stage": 3,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 1,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-detox-c4h9cl",
+      "name": "Detox: Scatter C4H9Cl",
+      "stage": 3,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 9,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-detox-c2h6o",
+      "name": "Detox: Split C2H6O",
+      "stage": 3,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 2
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-detox-c5h12",
+      "name": "Detox: Scatter C5H12",
+      "stage": 3,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-detox-c3h7cl",
+      "name": "Detox: Split C3H7Cl",
+      "stage": 3,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 3
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 7,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-transform-c4h9cl",
+      "name": "Transform: 1-Chlorobutane \u2192 tert-Butyl chloride",
+      "stage": 3,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 9,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 1,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s3-transform-c5h12",
+      "name": "Transform: n-Pentane \u2192 Isopentane",
+      "stage": 3,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-hunt-c4h10o",
+      "name": "Butanol & Ethers (Biofuel Blend)",
+      "stage": 4,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 7,
+        "time_limit_seconds": 120
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 10,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-hunt-c6h14",
+      "name": "Hexane Isomer Hunt (Solvent)",
+      "stage": 4,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 5,
+        "time_limit_seconds": 90
+      },
+      "formula": {
+        "atoms": {
+          "C": 6,
+          "H": 14,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-transform-c2h6o2",
+      "name": "Transform: Ethylene Glycol (Antifreeze)",
+      "stage": 4,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3,
+        "time_limit_seconds": 60
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 2,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-transform-c3h8o2",
+      "name": "Transform: Propylene Glycol (Excipient)",
+      "stage": 4,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4,
+        "time_limit_seconds": 70
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 2,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-transform-c3h8o3",
+      "name": "Transform: Glycerol (Metabolite)",
+      "stage": 4,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 5,
+        "time_limit_seconds": 80
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 3,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-transform-c4h10o",
+      "name": "Transform: Isobutanol \u2192 tert-Butanol",
+      "stage": 4,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4,
+        "time_limit_seconds": 70
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 10,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-detox-c2h6o2",
+      "name": "Detox: Ethylene Glycol Spill",
+      "stage": 4,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 3,
+        "time_limit_seconds": 45
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 6,
+          "O": 2,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s4-detox-c3h8o3",
+      "name": "Detox: Glycerol Spill",
+      "stage": 4,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 5,
+        "time_limit_seconds": 60
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 3,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-hunt-c5h12o",
+      "name": "Pentanol & Ethers (Solvent)",
+      "stage": 5,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 6,
+        "time_limit_seconds": 120
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-hunt-c7h16",
+      "name": "Heptane Isomer Hunt (Gasoline)",
+      "stage": 5,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 6,
+        "time_limit_seconds": 120
+      },
+      "formula": {
+        "atoms": {
+          "C": 7,
+          "H": 16,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-hunt-c3h8o2",
+      "name": "Diols & Ethers (Skin-care)",
+      "stage": 5,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 3,
+        "time_limit_seconds": 90
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 2,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-transform-c5h12",
+      "name": "Transform: n-Pentane \u2192 Neopentane",
+      "stage": 5,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 3,
+        "time_limit_seconds": 50
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-transform-c4h11n",
+      "name": "Transform: n-Butylamine \u2192 tert-Butylamine",
+      "stage": 5,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4,
+        "time_limit_seconds": 70
+      },
+      "formula": {
+        "atoms": {
+          "C": 4,
+          "H": 11,
+          "O": 0,
+          "N": 1,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-transform-c3h8o2",
+      "name": "Transform: 1,3-Propanediol \u2192 Propylene Glycol",
+      "stage": 5,
+      "mode": "transform",
+      "goal": {
+        "type": "transform",
+        "max_moves": 4,
+        "time_limit_seconds": 70
+      },
+      "formula": {
+        "atoms": {
+          "C": 3,
+          "H": 8,
+          "O": 2,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-detox-c7h16",
+      "name": "Detox: Heptane Spill",
+      "stage": 5,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 5,
+        "time_limit_seconds": 60
+      },
+      "formula": {
+        "atoms": {
+          "C": 7,
+          "H": 16,
+          "O": 0,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s5-detox-c5h12o",
+      "name": "Detox: Pentanol Spill",
+      "stage": 5,
+      "mode": "detox",
+      "goal": {
+        "type": "detox",
+        "max_moves": 4,
+        "time_limit_seconds": 50
+      },
+      "formula": {
+        "atoms": {
+          "C": 5,
+          "H": 12,
+          "O": 1,
+          "N": 0,
+          "F": 0,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    },
+    {
+      "id": "s1-hunt-c2h5f",
+      "name": "Fluoroethane (Bonus)",
+      "stage": 1,
+      "mode": "hunt",
+      "goal": {
+        "type": "all_isomers",
+        "target_count": 1
+      },
+      "formula": {
+        "atoms": {
+          "C": 2,
+          "H": 5,
+          "O": 0,
+          "N": 0,
+          "F": 1,
+          "Cl": 0,
+          "Br": 0,
+          "I": 0
+        },
+        "charge": 0
+      }
+    }
+  ]
+}

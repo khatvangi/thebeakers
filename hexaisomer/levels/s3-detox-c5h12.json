@@ -1,0 +1,81 @@
+{
+  "id": "s3-detox-c5h12",
+  "name": "Detox: Scatter C5H12",
+  "stage": 3,
+  "target_formula": {
+    "atoms": {
+      "C": 5,
+      "H": 12,
+      "O": 0,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "detox",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "detox",
+    "max_moves": 4
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "c4",
+        "element": "C",
+        "x": 390,
+        "y": 200
+      },
+      {
+        "id": "c5",
+        "element": "C",
+        "x": 480,
+        "y": 200
+      }
+    ],
+    "bonds": [],
+    "functionalGroups": []
+  },
+  "target_state": null,
+  "brick_set": [],
+  "hints": []
+}

@@ -1,0 +1,240 @@
+{
+  "id": "s4-transform-c3h8o3",
+  "name": "Transform: Glycerol (Metabolite)",
+  "stage": 4,
+  "target_formula": {
+    "atoms": {
+      "C": 3,
+      "H": 8,
+      "O": 3,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "transform",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "transform",
+    "max_moves": 5,
+    "time_limit_seconds": 80
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "o1",
+        "element": "O",
+        "x": 120,
+        "y": 110
+      },
+      {
+        "id": "o2",
+        "element": "O",
+        "x": 120,
+        "y": 290
+      },
+      {
+        "id": "o3",
+        "element": "O",
+        "x": 120,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "o1",
+        "a2": "c1"
+      },
+      {
+        "id": "b4",
+        "a1": "o2",
+        "a2": "c1"
+      },
+      {
+        "id": "b5",
+        "a1": "o3",
+        "a2": "c1"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_o1",
+        "type": "OH",
+        "memberAtomIds": [
+          "o1"
+        ],
+        "anchorAtomId": "o1"
+      },
+      {
+        "id": "fg_o2",
+        "type": "OH",
+        "memberAtomIds": [
+          "o2"
+        ],
+        "anchorAtomId": "o2"
+      },
+      {
+        "id": "fg_o3",
+        "type": "OH",
+        "memberAtomIds": [
+          "o3"
+        ],
+        "anchorAtomId": "o3"
+      }
+    ]
+  },
+  "target_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "o1",
+        "element": "O",
+        "x": 120,
+        "y": 110
+      },
+      {
+        "id": "o2",
+        "element": "O",
+        "x": 210,
+        "y": 290
+      },
+      {
+        "id": "o3",
+        "element": "O",
+        "x": 300,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "o1",
+        "a2": "c1"
+      },
+      {
+        "id": "b4",
+        "a1": "o2",
+        "a2": "c2"
+      },
+      {
+        "id": "b5",
+        "a1": "o3",
+        "a2": "c3"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_o1",
+        "type": "OH",
+        "memberAtomIds": [
+          "o1"
+        ],
+        "anchorAtomId": "o1"
+      },
+      {
+        "id": "fg_o2",
+        "type": "OH",
+        "memberAtomIds": [
+          "o2"
+        ],
+        "anchorAtomId": "o2"
+      },
+      {
+        "id": "fg_o3",
+        "type": "OH",
+        "memberAtomIds": [
+          "o3"
+        ],
+        "anchorAtomId": "o3"
+      }
+    ]
+  },
+  "brick_set": [
+    "OH"
+  ],
+  "hints": [
+    "Glycerol is a natural metabolite and humectant."
+  ],
+  "reveal": {
+    "title": "Glycerol",
+    "emoji": "\ud83e\uddf4",
+    "description": "Natural metabolite, sweetener, and humectant."
+  }
+}

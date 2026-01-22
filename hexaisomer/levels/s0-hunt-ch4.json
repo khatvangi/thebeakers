@@ -1,0 +1,59 @@
+{
+  "id": "s0-hunt-ch4",
+  "name": "Methane Warmup",
+  "stage": 0,
+  "target_formula": {
+    "atoms": {
+      "C": 1,
+      "H": 4,
+      "O": 0,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "hunt",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "all_isomers",
+    "target_count": 1
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      }
+    ],
+    "bonds": [],
+    "functionalGroups": []
+  },
+  "target_state": null,
+  "brick_set": [],
+  "hints": [
+    "Single carbon, four hydrogens. You're already there!"
+  ]
+}

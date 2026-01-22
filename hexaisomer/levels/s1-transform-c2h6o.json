@@ -1,0 +1,141 @@
+{
+  "id": "s1-transform-c2h6o",
+  "name": "Transform: Ethanol \u2192 Dimethyl Ether",
+  "stage": 1,
+  "target_formula": {
+    "atoms": {
+      "C": 2,
+      "H": 6,
+      "O": 1,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "transform",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "transform",
+    "max_moves": 3
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "o1",
+        "element": "O",
+        "x": 210,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "o1",
+        "a2": "c2"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_o1",
+        "type": "OH",
+        "memberAtomIds": [
+          "o1"
+        ],
+        "anchorAtomId": "o1"
+      }
+    ]
+  },
+  "target_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "o1",
+        "element": "O",
+        "x": 120,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "o1",
+        "a2": "c1"
+      },
+      {
+        "id": "b3",
+        "a1": "o1",
+        "a2": "c2"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_o1",
+        "type": "OH",
+        "memberAtomIds": [
+          "o1"
+        ],
+        "anchorAtomId": "o1"
+      }
+    ]
+  },
+  "brick_set": [
+    "OH"
+  ],
+  "hints": [
+    "O can bond to two carbons."
+  ]
+}

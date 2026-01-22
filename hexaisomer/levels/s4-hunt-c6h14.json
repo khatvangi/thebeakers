@@ -1,0 +1,121 @@
+{
+  "id": "s4-hunt-c6h14",
+  "name": "Hexane Isomer Hunt (Solvent)",
+  "stage": 4,
+  "target_formula": {
+    "atoms": {
+      "C": 6,
+      "H": 14,
+      "O": 0,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "hunt",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "all_isomers",
+    "target_count": 5,
+    "time_limit_seconds": 90
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "c4",
+        "element": "C",
+        "x": 390,
+        "y": 200
+      },
+      {
+        "id": "c5",
+        "element": "C",
+        "x": 480,
+        "y": 200
+      },
+      {
+        "id": "c6",
+        "element": "C",
+        "x": 570,
+        "y": 200
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "c3",
+        "a2": "c4"
+      },
+      {
+        "id": "b4",
+        "a1": "c4",
+        "a2": "c5"
+      },
+      {
+        "id": "b5",
+        "a1": "c5",
+        "a2": "c6"
+      }
+    ],
+    "functionalGroups": []
+  },
+  "target_state": null,
+  "brick_set": [],
+  "hints": [
+    "Used in extractions. Branching creates new isomers."
+  ],
+  "reveal": {
+    "title": "Hexane",
+    "emoji": "\ud83e\uddea",
+    "description": "Common lab solvent and extraction fluid."
+  }
+}

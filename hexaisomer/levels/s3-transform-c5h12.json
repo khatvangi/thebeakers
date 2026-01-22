@@ -1,0 +1,158 @@
+{
+  "id": "s3-transform-c5h12",
+  "name": "Transform: n-Pentane \u2192 Isopentane",
+  "stage": 3,
+  "target_formula": {
+    "atoms": {
+      "C": 5,
+      "H": 12,
+      "O": 0,
+      "N": 0,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "transform",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "transform",
+    "max_moves": 4
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "c4",
+        "element": "C",
+        "x": 390,
+        "y": 200
+      },
+      {
+        "id": "c5",
+        "element": "C",
+        "x": 480,
+        "y": 200
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "c3",
+        "a2": "c4"
+      },
+      {
+        "id": "b4",
+        "a1": "c4",
+        "a2": "c5"
+      }
+    ],
+    "functionalGroups": []
+  },
+  "target_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "c4",
+        "element": "C",
+        "x": 390,
+        "y": 200
+      },
+      {
+        "id": "c5",
+        "element": "C",
+        "x": 480,
+        "y": 200
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c2",
+        "a2": "c1"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "c2",
+        "a2": "c5"
+      },
+      {
+        "id": "b4",
+        "a1": "c3",
+        "a2": "c4"
+      }
+    ],
+    "functionalGroups": []
+  },
+  "brick_set": [],
+  "hints": []
+}

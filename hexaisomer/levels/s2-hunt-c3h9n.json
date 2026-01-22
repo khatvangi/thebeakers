@@ -1,0 +1,102 @@
+{
+  "id": "s2-hunt-c3h9n",
+  "name": "C3H9N Quartet",
+  "stage": 2,
+  "target_formula": {
+    "atoms": {
+      "C": 3,
+      "H": 9,
+      "O": 0,
+      "N": 1,
+      "F": 0,
+      "Cl": 0,
+      "Br": 0,
+      "I": 0
+    },
+    "charge": 0
+  },
+  "mode": "hunt",
+  "allowed_moves": [
+    "move_functional_group",
+    "reattach_atom"
+  ],
+  "ruleset": {
+    "connected_required": true,
+    "allowed_elements": [
+      "C",
+      "O",
+      "N",
+      "F",
+      "Cl",
+      "Br",
+      "I"
+    ],
+    "bond_orders": [
+      1
+    ]
+  },
+  "goal": {
+    "type": "all_isomers",
+    "target_count": 4
+  },
+  "start_state": {
+    "atoms": [
+      {
+        "id": "c1",
+        "element": "C",
+        "x": 120,
+        "y": 200
+      },
+      {
+        "id": "c2",
+        "element": "C",
+        "x": 210,
+        "y": 200
+      },
+      {
+        "id": "c3",
+        "element": "C",
+        "x": 300,
+        "y": 200
+      },
+      {
+        "id": "n1",
+        "element": "N",
+        "x": 300,
+        "y": 110
+      }
+    ],
+    "bonds": [
+      {
+        "id": "b1",
+        "a1": "c1",
+        "a2": "c2"
+      },
+      {
+        "id": "b2",
+        "a1": "c2",
+        "a2": "c3"
+      },
+      {
+        "id": "b3",
+        "a1": "n1",
+        "a2": "c3"
+      }
+    ],
+    "functionalGroups": [
+      {
+        "id": "fg_n1",
+        "type": "NH2",
+        "memberAtomIds": [
+          "n1"
+        ],
+        "anchorAtomId": "n1"
+      }
+    ]
+  },
+  "target_state": null,
+  "brick_set": [
+    "NH2"
+  ],
+  "hints": []
+}
