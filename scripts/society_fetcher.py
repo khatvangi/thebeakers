@@ -86,12 +86,19 @@ HEADERS = {
 SOURCES = {
     "chemistry": {
         "research": [
+            # open access with abstracts
+            {"name": "Frontiers in Chemistry", "issn": "2296-2646", "publisher": "Frontiers", "oa": True},
+            {"name": "RSC Advances", "issn": "2046-2069", "publisher": "RSC", "oa": True},
+            {"name": "Beilstein J. Org. Chem.", "issn": "1860-5397", "publisher": "Beilstein", "oa": True},
+            {"name": "Molecules", "issn": "1420-3049", "publisher": "MDPI", "oa": True},
+            {"name": "Catalysts", "issn": "2073-4344", "publisher": "MDPI", "oa": True},
+            # ACS OA (may not have abstracts via API)
             {"name": "ACS Central Science", "issn": "2374-7943", "publisher": "ACS", "oa": True},
             {"name": "JACS Au", "issn": "2691-3704", "publisher": "ACS", "oa": True},
-            {"name": "ACS Omega", "issn": "2470-1343", "publisher": "ACS", "oa": True},
         ],
         "education": [
             {"name": "J. Chem. Education", "issn": "0021-9584", "publisher": "ACS", "oa": False},
+            {"name": "Chemistry Education Research and Practice", "issn": "1756-1108", "publisher": "RSC", "oa": False},
         ]
     },
     "physics": {
@@ -136,11 +143,19 @@ SOURCES = {
     },
     "ai": {
         "research": [
+            # open access with abstracts
+            {"name": "Frontiers in Artificial Intelligence", "issn": "2624-8212", "publisher": "Frontiers", "oa": True},
+            {"name": "Machine Learning", "issn": "1573-0565", "publisher": "Springer", "oa": False},  # some OA
+            {"name": "Applied Sciences - AI Section", "issn": "2076-3417", "publisher": "MDPI", "oa": True},
+            {"name": "Algorithms", "issn": "1999-4893", "publisher": "MDPI", "oa": True},
+            {"name": "AI", "issn": "2673-2688", "publisher": "MDPI", "oa": True},
+            # traditional
             {"name": "JMLR", "issn": "1533-7928", "publisher": "JMLR", "oa": True},
             {"name": "TMLR", "issn": "2835-8856", "publisher": "TMLR", "oa": True},
-            {"name": "Distill", "issn": "2476-0757", "publisher": "Distill", "oa": True},  # archived but valuable
         ],
-        "education": []  # AI education papers come from general CS education
+        "education": [
+            {"name": "AI & Society", "issn": "1435-5655", "publisher": "Springer", "oa": False},
+        ]
     },
     "agriculture": {
         "research": [

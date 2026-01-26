@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Buried Dirac Points in Quantum Spin Hall Insulators: Implications for Majorana Kramers Pair-Based Quantum Computing</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #3b82f6;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Buried Dirac Points in Quantum Spin Hall Insulators: Implications for Majorana Kramers Pair-Based Quantum Computing</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: PRX Quantum | <a href="https://doi.org/10.1103/tw65-82r9">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/physics.html" class="back-link">&larr; Back to Physics</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 5</span>
+            <h2>The Challenge</h2>
+            <div class="scene-text">
+                <p>Quantum spin hall insulators (QSHIs) have unique properties that make them useful for quantum computing. However, one problem has puzzled researchers: how do QSHI edge states behave when the time-reversal symmetry is broken? In strong magnetic fields, TRS should destroy these edge states, but they seem to be resilient instead. This paradox needs solving to unlock the full potential of QSHIs for quantum computing.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[QSHI Edge States]
+    B[Strong Magnetic Field]
+    C[TRS Broken]
+    D[Expected Destruction]
+    E[Observed Resilience]
+    F[The Challenge: Solve the Paradox]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 5</span>
+            <h2>The Approach</h2>
+            <div class="scene-text">
+                <p>To tackle this challenge, researchers created a QSHI-superconductor (QSHI-SC) junction using a double quantum well structure. The idea was to study how the edge states behave in this new system and gain insights into their resilience. By combining theoretical modeling with experimental measurements, researchers hoped to understand the underlying physics and shed light on the paradox.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[QSHI-SC Junction]
+    B[Theoretical Modeling]
+    C[Experimental Measurements]
+    D[Combining Models and Data]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 5</span>
+            <h2>The Innovation</h2>
+            <div class="scene-text">
+                <p>In this study, researchers observed a robust conductance plateau up to 2 T, indicating that the edge states are indeed resilient. To understand why, they used a modified Landauer-Büttiker analysis, which revealed a high transparency of the InAs/GaSb interface. This finding provides new insights into the behavior of QSHI edge states in strong magnetic fields and could have significant implications for Majorana Kramers pair-based quantum computing.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Robust Conductance Plateau]
+    B[High Transparency]
+    C[Modified Landauer-Büttiker Analysis]
+    D[New Insights into QSHI Edge States]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 5</span>
+            <h2>The Results</h2>
+            <div class="scene-text">
+                <p>By analyzing the transport properties of the QSHI-SC junction, researchers found that the zero-field conductance is consistent with a high Andreev-reflection probability. This suggests that the edge states are not destroyed by the strong magnetic field, but rather persist in a resilient state. These findings have important implications for the development of Majorana Kramers pair-based quantum computing.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Zero-Field Conductance]
+    B[High Andreev-Reflection Probability]
+    C[Resilient Edge States]
+    D[Majorana Kramers Pair-Based Quantum Computing]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 5</span>
+            <h2>Why It Matters</h2>
+            <div class="scene-text">
+                <p>The discovery of buried Dirac points in QSHI edge states has significant implications for the development of Majorana Kramers pair-based quantum computing. By understanding how these edge states behave in strong magnetic fields, researchers can design new materials and devices that take advantage of their unique properties. This could lead to breakthroughs in quantum computing, enabling faster, more efficient, and secure processing of information.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Quantum Computing Breakthroughs]
+    B[New Materials and Devices]
+    C[Advancing Quantum Computing Technology]
+    D[Faster, More Efficient, Secure Processing]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">PHYSICS 100</div>
+                <div class="course-name">Classical Mechanics</div>
+                <p class="course-connection">This research connects to topics like Newton's Laws, Energy & Work, Rotational Motion.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Newton's Laws</span><span class="concept-tag">Energy & Work</span><span class="concept-tag">Rotational Motion</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">PHYSICS 200</div>
+                <div class="course-name">Electromagnetism</div>
+                <p class="course-connection">This research connects to topics like Electric Fields, Magnetic Fields, Maxwell's Equations.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Electric Fields</span><span class="concept-tag">Magnetic Fields</span><span class="concept-tag">Maxwell's Equations</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">PHYSICS 300</div>
+                <div class="course-name">Quantum Mechanics</div>
+                <p class="course-connection">This research connects to topics like Wave-Particle Duality, Schrödinger Equation, Hydrogen Atom.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Wave-Particle Duality</span><span class="concept-tag">Schrödinger Equation</span><span class="concept-tag">Hydrogen Atom</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.1103/tw65-82r9</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>

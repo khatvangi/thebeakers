@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Two bHLH Transcription Factor Genes AhWSC1a and AhWSC1b Act as Gatekeepers of Testa Pigmentation, Preventing White Seed Coats in Peanuts</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #84cc16;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Two bHLH Transcription Factor Genes AhWSC1a and AhWSC1b Act as Gatekeepers of Testa Pigmentation, Preventing White Seed Coats in Peanuts</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: Plants | <a href="https://doi.org/10.3390/plants15020304">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/agriculture.html" class="back-link">&larr; Back to Agriculture</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 5</span>
+            <h2>The Challenge: White Seeds</h2>
+            <div class="scene-text">
+                <p>In agriculture, seed coat color plays a crucial role in determining nutritional quality and market appeal. In peanuts, white seeds are considered undesirable due to their lower nutrient content and reduced market value. The development of high-quality peanut varieties with desirable seed coat colors is essential for improving crop yields and farmer incomes. However, the genetic control of seed coat color is complex and not fully understood.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Seed Coat Color] --> B[Desirable Traits] --> C[Unwanted Traits]
+    D[White Seeds] --> E[Lower Nutrient Content] --> F[Agricultural Impact]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 5</span>
+            <h2>The Approach: Uncovering the Gatekeepers</h2>
+            <div class="scene-text">
+                <p>To tackle this challenge, researchers used a QTL-seq approach to identify genetic variants associated with seed coat color. They analyzed a recombinant inbred line population derived from black-testa and white-testa parents. By studying these genetic variations, they discovered two bHLH transcription factor genes, AhWSC1a and AhWSC1b, that play a critical role in regulating seed coat pigmentation.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TB
+    A[Genetic Analysis] --> B[QTL-seq Approach]
+    C[Identify Gatekeepers] --> D[AhWSC1a & AhWSC1b]
+    E[Transcription Factor Genes]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 5</span>
+            <h2>The Innovation: Role of AhWSC1</h2>
+            <div class="scene-text">
+                <p>The researchers found that AhWSC1 acts as a rate-limiting hub in the anthocyanin biosynthesis pathway, regulating proanthocyanin production. They demonstrated that AhWSC1 physically interacts with the R2R3-MYB regulator AhTc1 to form a functional MBW complex that activates late anthocyanin-pathway genes. This discovery highlights the importance of AhWSC1 in controlling seed coat pigmentation.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[AhWSC1] --> B[MBW Complex]
+    C[Activate Late Anthocyanin Genes]
+    D[Proanthocyanin Production]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 5</span>
+            <h2>The Results: Breaking Down the Barrier</h2>
+            <div class="scene-text">
+                <p>The study revealed that recessive loss-of-function mutations in AhWSC1a and AhWSC1b abolish proanthocyanin biosynthesis, resulting in white testa. The researchers also found that the black testa phenotype may arise from elevated AhTc1 expression associated with a structural variant. However, introducing AhWSC1 mutant lines suppressed AhTc1 expression, indicating that AhWSC1 is an indispensable gatekeeper of seed coat pigmentation.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[AhWSC1 Mutant] --> B[Suppress AhTc1 Expression]
+    C[Elevated AhTc1] --> D[Black Testa Phenotype]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 5</span>
+            <h2>Why It Matters: Future Implications</h2>
+            <div class="scene-text">
+                <p>This research has significant implications for peanut breeding and seed production. Understanding the genetic control of seed coat color can help breeders develop high-quality peanut varieties with desirable traits. The discovery of AhWSC1 as a key regulator of anthocyanin biosynthesis also sheds light on the complex interactions between transcription factors and gene regulation in plants.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[AhWSC1 Discovery] --> B[Future Breeding Strategies]
+    C[Improved Seed Quality]
+    D[Economic Impact]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">AGRICULTURE 200</div>
+                <div class="course-name">Crop Science</div>
+                <p class="course-connection">This research connects to topics like Plant Physiology, Crop Breeding, Crop Production.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Plant Physiology</span><span class="concept-tag">Crop Breeding</span><span class="concept-tag">Crop Production</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">AGRICULTURE 200</div>
+                <div class="course-name">Soil Science</div>
+                <p class="course-connection">This research connects to topics like Soil Chemistry, Soil Physics, Soil Biology.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Soil Chemistry</span><span class="concept-tag">Soil Physics</span><span class="concept-tag">Soil Biology</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">AGRICULTURE 200</div>
+                <div class="course-name">Plant Protection</div>
+                <p class="course-connection">This research connects to topics like Plant Pathology, Entomology, Weed Science.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Plant Pathology</span><span class="concept-tag">Entomology</span><span class="concept-tag">Weed Science</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.3390/plants15020304</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#84cc16',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#84cc16',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -312,6 +312,73 @@
             font-style: italic;
         }
 
+        /* Featured Stories Section */
+        .featured-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 3rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .featured-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-dark);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .featured-card.visible {
+            animation: cardFadeIn 0.6s ease forwards;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-green);
+        }
+
+        .featured-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+        }
+
+        .featured-badge.biology { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .featured-badge.physics { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .featured-badge.mathematics { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+        .featured-badge.engineering { background: rgba(245, 158, 11, 0.2); color: #f59e0b; }
+        .featured-badge.agriculture { background: rgba(132, 204, 22, 0.2); color: #84cc16; }
+        .featured-badge.chemistry { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+        .featured-badge.ai { background: rgba(6, 182, 212, 0.2); color: #06b6d4; }
+
+        .featured-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .featured-meta {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
         /* Media Section - Podcasts & Videos */
         .media-section {
             max-width: 1200px;
@@ -564,6 +631,48 @@
             <p class="attribution">— Chanakya Niti</p>
         </div>
 
+        <!-- Featured Visual Stories -->
+        <section class="featured-section" id="featured">
+            <p class="section-label">Latest Visual Stories</p>
+            <div class="featured-grid">
+                <a href="deepdive/microgravity-reshapes-bacteriophage-host-coevoluti-story.html" class="featured-card">
+                    <span class="featured-badge biology">Biology</span>
+                    <h3 class="featured-title">Microgravity Reshapes Bacteriophage–Host Coevolution Aboard the ISS</h3>
+                    <p class="featured-meta">PLOS Biology · Visual Story</p>
+                </a>
+
+                <a href="deepdive/buried-dirac-points-in-quantum-spin-hall-insulator-story.html" class="featured-card">
+                    <span class="featured-badge physics">Physics</span>
+                    <h3 class="featured-title">Buried Dirac Points in Quantum Spin Hall Insulators</h3>
+                    <p class="featured-meta">Physical Review Letters · Visual Story</p>
+                </a>
+
+                <a href="deepdive/adaptive-control-strategy-for-high-speed-milling-o-story.html" class="featured-card">
+                    <span class="featured-badge engineering">Engineering</span>
+                    <h3 class="featured-title">Adaptive Control Strategy for High-Speed Milling of Thin-Walled Parts</h3>
+                    <p class="featured-meta">Journal of Manufacturing · Visual Story</p>
+                </a>
+
+                <a href="deepdive/stacking-ensemble-learning-for-genomic-prediction--story.html" class="featured-card">
+                    <span class="featured-badge agriculture">Agriculture</span>
+                    <h3 class="featured-title">Stacking Ensemble Learning for Genomic Prediction</h3>
+                    <p class="featured-meta">Frontiers in Plant Science · Visual Story</p>
+                </a>
+
+                <a href="deepdive/hed-net-a-hybrid-ensemble-deep-learning-framework--story.html" class="featured-card">
+                    <span class="featured-badge ai">AI</span>
+                    <h3 class="featured-title">HED-Net: Hybrid Ensemble Deep Learning for Breast Ultrasound Classification</h3>
+                    <p class="featured-meta">Frontiers in AI · Visual Story</p>
+                </a>
+
+                <a href="deepdive/the-effect-of-fluorides-in-the-tio2-b-anode-on-the-story.html" class="featured-card">
+                    <span class="featured-badge chemistry">Chemistry</span>
+                    <h3 class="featured-title">Fluorides in TiO₂(B) Anodes and Hydrogen Evolution</h3>
+                    <p class="featured-meta">Frontiers in Chemistry · Visual Story</p>
+                </a>
+            </div>
+        </section>
+
         <section class="cards-section" id="disciplines">
             <p class="section-label">Explore Disciplines</p>
             <div class="cards-grid">
@@ -727,7 +836,7 @@
         }, observerOptions);
 
         // Observe all cards
-        document.querySelectorAll('.card, .media-card').forEach(card => {
+        document.querySelectorAll('.card, .media-card, .featured-card').forEach(card => {
             observer.observe(card);
         });
     </script>

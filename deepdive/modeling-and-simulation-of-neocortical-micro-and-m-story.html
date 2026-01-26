@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Modeling and simulation of neocortical micro- and mesocircuitry (Part I, anatomy)</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Modeling and simulation of neocortical micro- and mesocircuitry (Part I, anatomy)</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: eLife | <a href="https://cdn.elifesciences.org/articles/99688/elife-99688-v1.pdf">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/biology.html" class="back-link">&larr; Back to Biology</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 5</span>
+            <h2>The Challenge</h2>
+            <div class="scene-text">
+                <p>Understanding the Neocortex: A Complex Puzzle</p><p>The neocortex is a vital part of our brain responsible for processing sensory information, controlling movement, and facilitating thought. However, its intricate structure and complex connections make it challenging to study. The question remains: how do all these neurons and synapses work together to enable us to perceive the world around us?</p><p>To tackle this problem, researchers need a model that can accurately represent the neocortex's anatomy and function.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Complexity of Neocortex] --> B[Need for Model]
+    B --> C[Data-Driven Approach]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 5</span>
+            <h2>The Approach</h2>
+            <div class="scene-text">
+                <p>Combining Data and Simulation</p><p>To develop a comprehensive model of the neocortex, researchers used a data-driven approach. They integrated whole-brain scale data with cellular and subcellular specificity to create a detailed digital brain atlas. This atlas includes 4.2 million morphologically detailed neurons, connected by 14.2 billion synapses.</p><p>This approach allows for simulation-based studies, enabling researchers to test hypotheses and explore the neocortex's behavior in greater detail.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TB
+    Node 1[Data Integration] --> Node 2[Digital Brain Atlas]
+    Node 2 --> Node 3[Neuron-Synapse Connections]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 5</span>
+            <h2>The Innovation</h2>
+            <div class="scene-text">
+                <p>New Insights into Micro- and Mesocircuitry</p><p>The model presents a significant innovation in understanding the neocortex's micro- and mesocircuitry. By delineating the limits of determining connectivity from neuron morphology and placement, researchers have gained new insights into how local and interregional connectivity work together.</p><p>This finding reveals that hub neurons in layer 5 play a crucial role in tying together local clusters, highlighting the intricate relationships within the neocortex.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Local Connectivity] --> B[Hub Neurons]
+    B --> C[Interregional Connectivity]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 5</span>
+            <h2>The Results</h2>
+            <div class="scene-text">
+                <p>Simulating Neocortical Function</p><p>The model has been shown to reproduce targeting by Sst+ neurons, but requires additional specificity for PV+ and VIP+ interneurons. This suggests that local connectivity is essential, but interregional connectivity plays a more nuanced role.</p><p>The model's findings have significant implications for our understanding of the neocortex's function and behavior.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Targeting by Sst+] --> B[Local Connectivity]
+    B --> C[Interregional Connectivity]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 5</span>
+            <h2>Why It Matters</h2>
+            <div class="scene-text">
+                <p>Implications for Brain Research and Treatment</p><p>The development of this model has far-reaching implications for brain research and treatment. By understanding the neocortex's anatomy and function, researchers can better develop treatments for neurological disorders such as epilepsy, Parkinson's disease, and anxiety.</p><p>This model also opens up new avenues for simulation-based studies, enabling researchers to explore the complex relationships within the neocortex in greater detail.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Brain Research] --> B[Treatment Development]
+    B --> C[Simulation-Based Studies]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 200</div>
+                <div class="course-name">Molecular Biology</div>
+                <p class="course-connection">This research connects to topics like DNA Replication, Transcription, Translation.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">DNA Replication</span><span class="concept-tag">Transcription</span><span class="concept-tag">Translation</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 100</div>
+                <div class="course-name">Cell Biology</div>
+                <p class="course-connection">This research connects to topics like Cell Structure, Cell Cycle, Membrane Transport.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Cell Structure</span><span class="concept-tag">Cell Cycle</span><span class="concept-tag">Membrane Transport</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 200</div>
+                <div class="course-name">Genetics</div>
+                <p class="course-connection">This research connects to topics like Mendelian Genetics, Linkage & Mapping, Population Genetics.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Mendelian Genetics</span><span class="concept-tag">Linkage & Mapping</span><span class="concept-tag">Population Genetics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.7554/elife.99688</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#22c55e',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#22c55e',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>

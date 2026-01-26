@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: A single-cell spatiotemporal transcriptomic atlas of mouse prefrontal cortex maps dynamics of intratelencephalic neurons during postnatal development</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>A single-cell spatiotemporal transcriptomic atlas of mouse prefrontal cortex maps dynamics of intratelencephalic neurons during postnatal development</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: PLOS Biology | <a href="https://doi.org/10.1371/journal.pbio.3003594">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/biology.html" class="back-link">&larr; Back to Biology</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 3</span>
+            <h2>The Research</h2>
+            <div class="scene-text">
+                <p>In early postnatal brain, the prefrontal cortex (PFC) remains immature and highly plastic, particularly for the intratelencephalic (IT) neurons. However, the spatiotemporal molecular and cellular dynamics of PFC during this period remain poorly characterized. Here, we performed spatiotemporal single-cell RNA analysis on mouse PFC during different postnatal time points and systematically delineated the molecular and cellular dynamics of mouse PFC during early postnatal development, among which IT neurons exhibit most dramatic alterations. Based on these comprehensive spatiotemporal atlases of PFC, we deciphered the time-specific molecular and cellular characteristics during the maturation process of IT neurons in PFC, particularly the dynamic expression programs of genes regulating axon development and synaptic formation, and the risk genes of neurological developmental diseases. Furthermore, we revealed the dynamic neuron-glia interaction patterns and the underlying signaling pathways during early postnatal period. Our study provided a comprehensive resource and important insights for PFC development and PFC-associated neurological diseases.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Question] --> B[Research] --> C[Discovery]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 3</span>
+            <h2>The Method</h2>
+            <div class="scene-text">
+                <p>The researchers used innovative techniques to investigate this problem.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TB
+    A[Data] --> B[Analysis] --> C[Results]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 3</span>
+            <h2>The Impact</h2>
+            <div class="scene-text">
+                <p>This work advances our understanding and opens new possibilities.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Now] --> B[Future Applications]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 200</div>
+                <div class="course-name">Molecular Biology</div>
+                <p class="course-connection">This research connects to topics like DNA Replication, Transcription, Translation.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">DNA Replication</span><span class="concept-tag">Transcription</span><span class="concept-tag">Translation</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 100</div>
+                <div class="course-name">Cell Biology</div>
+                <p class="course-connection">This research connects to topics like Cell Structure, Cell Cycle, Membrane Transport.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Cell Structure</span><span class="concept-tag">Cell Cycle</span><span class="concept-tag">Membrane Transport</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">BIOLOGY 200</div>
+                <div class="course-name">Genetics</div>
+                <p class="course-connection">This research connects to topics like Mendelian Genetics, Linkage & Mapping, Population Genetics.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Mendelian Genetics</span><span class="concept-tag">Linkage & Mapping</span><span class="concept-tag">Population Genetics</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.1371/journal.pbio.3003594</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#22c55e',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#22c55e',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>

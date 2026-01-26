@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Partitioning theorems for sets of semi-Pfaffian sets, with applications</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #8b5cf6;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Partitioning theorems for sets of semi-Pfaffian sets, with applications</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: Forum of Mathematics, Sigma | <a href="https://doi.org/10.1017/fms.2025.10150">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/mathematics.html" class="back-link">&larr; Back to Mathematics</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 5</span>
+            <h2>The Challenge</h2>
+            <div class="scene-text">
+                <p>In mathematics, we often deal with complex problems that require creative solutions. In this case, researchers were trying to understand how to partition sets of semi-Pfaffian sets. A set is like a collection of objects, and in this case, the objects are called Pfaffian functions. These functions have some special properties that make them useful for solving certain types of problems. However, when we try to put these functions into a specific order, things get complicated. The researchers wanted to find a way to simplify this process and make it more efficient. But, they needed to overcome some significant challenges along the way.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Challenge: Complexity] --> B[Goal: Simplify]
+    B --> C[Need for New Approach]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 5</span>
+            <h2>The Approach</h2>
+            <div class="scene-text">
+                <p>To tackle this problem, researchers drew inspiration from earlier work on polynomial partitioning theorems. These theorems helped mathematicians understand how to divide complex polynomials into smaller pieces that are easier to handle. The researchers applied a similar idea to the semi-Pfaffian sets, using their own unique twist to create a new framework for solving the problem. This approach required a deep understanding of algebra and geometry, as well as some clever mathematical tricks.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart TB
+    A[Pfaffian Functions]
+    | --> B[Partitioning Theorems]
+    | --> C[New Framework]
+    C --> D[Solving the Problem]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 5</span>
+            <h2>The Innovation</h2>
+            <div class="scene-text">
+                <p>One of the key innovations in this research is the use of semi-Pfaffian sets, which are a type of mathematical object that has some special properties. By working with these objects, the researchers were able to create a new framework for solving the problem that is more efficient and powerful than earlier approaches. This innovation opens up new possibilities for solving complex problems in mathematics and beyond.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Semi-Pfaffian Sets]
+    | --> B[New Framework]
+    B --> C[Increased Efficiency]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 5</span>
+            <h2>The Results</h2>
+            <div class="scene-text">
+                <p>After months of hard work, the researchers were able to prove that there exists a polynomial of degree at most D that can partition any set of semi-Pfaffian sets. This is a major breakthrough in mathematics, as it shows that even the most complex problems can be solved using a well-defined and efficient framework. The researchers' findings have far-reaching implications for fields beyond mathematics, such as computer science and engineering.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Polynomial Partitioning]
+    | --> B[Major Breakthrough]
+    B --> C[Far-Reaching Implications]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 5</span>
+            <h2>Why It Matters</h2>
+            <div class="scene-text">
+                <p>So, why does this research matter? Well, it shows that even the most complex problems can be solved using a well-defined and efficient framework. This has significant implications for fields beyond mathematics, such as computer science and engineering. For example, in computer science, polynomial partitioning is used to optimize algorithms and improve performance. By developing new techniques for solving this problem, researchers can create more efficient algorithms that solve complex problems faster and better.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Optimization Algorithms]
+    | --> B[Faster Performance]
+    B --> C[Solving Complex Problems]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">MATHEMATICS 100</div>
+                <div class="course-name">Calculus</div>
+                <p class="course-connection">This research connects to topics like Limits & Continuity, Differentiation, Integration.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Limits & Continuity</span><span class="concept-tag">Differentiation</span><span class="concept-tag">Integration</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">MATHEMATICS 200</div>
+                <div class="course-name">Linear Algebra</div>
+                <p class="course-connection">This research connects to topics like Vectors & Matrices, Linear Systems, Eigenvalues & Eigenvectors.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Vectors & Matrices</span><span class="concept-tag">Linear Systems</span><span class="concept-tag">Eigenvalues & Eigenvectors</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">MATHEMATICS 200</div>
+                <div class="course-name">Differential Equations</div>
+                <p class="course-connection">This research connects to topics like First-Order ODEs, Second-Order ODEs, Systems of ODEs.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">First-Order ODEs</span><span class="concept-tag">Second-Order ODEs</span><span class="concept-tag">Systems of ODEs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.1017/fms.2025.10150</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#8b5cf6',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#8b5cf6',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>
