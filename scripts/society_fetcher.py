@@ -103,11 +103,18 @@ SOURCES = {
     },
     "physics": {
         "research": [
+            # OA journals with accessible abstracts/PDFs
+            {"name": "Frontiers in Physics", "issn": "2296-424X", "publisher": "Frontiers", "oa": True},
+            {"name": "New Journal of Physics", "issn": "1367-2630", "publisher": "IOP", "oa": True},
             {"name": "Physical Review X", "issn": "2160-3308", "publisher": "APS", "oa": True},
             {"name": "PRX Quantum", "issn": "2691-3399", "publisher": "APS", "oa": True},
             {"name": "Physical Review Research", "issn": "2643-1564", "publisher": "APS", "oa": True},
+            {"name": "Universe", "issn": "2218-1997", "publisher": "MDPI", "oa": True},
+            {"name": "Quantum", "issn": "2521-327X", "publisher": "Verein Quantum", "oa": True},
         ],
         "education": [
+            {"name": "Physics Education", "issn": "0031-9120", "publisher": "IOP", "oa": False},
+            {"name": "Eur. J. Physics", "issn": "0143-0807", "publisher": "IOP", "oa": False},
             {"name": "Am. J. Physics", "issn": "0002-9505", "publisher": "AAPT", "oa": False},
         ]
     },

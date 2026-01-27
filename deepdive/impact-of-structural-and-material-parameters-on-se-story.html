@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Story: Impact of structural and material parameters on sensitivity of engineered N-pocket DGTFET biosensors</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --accent-green: #3b82f6;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-orange: #f59e0b;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .hero .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .meta {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+        }
+
+        .meta a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        .meta a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .scene {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid #334155;
+        }
+
+        .scene:last-child {
+            border-bottom: none;
+        }
+
+        .scene-number {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .scene h2 {
+            font-family: 'Instrument Serif', serif;
+            color: var(--text-primary);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .scene-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .scene-text p {
+            margin-bottom: 1rem;
+        }
+
+        .scene-text strong {
+            color: var(--text-primary);
+        }
+
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .highlight-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.25rem 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--accent-green);
+        }
+
+        .curriculum-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid #334155;
+        }
+
+        .curriculum-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .curriculum-badge {
+            display: inline-block;
+            background: var(--accent-green);
+            color: var(--bg-dark);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .course-card {
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent-cyan);
+        }
+
+        .course-code {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .course-name {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0.25rem 0 0.75rem 0;
+        }
+
+        .course-connection {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .course-concepts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .concept-tag {
+            background: rgba(6, 182, 212, 0.1);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background: var(--bg-card);
+        }
+
+        footer a {
+            color: var(--accent-green);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .scene h2 { font-size: 1.5rem; }
+            .container { padding: 2rem 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Impact of structural and material parameters on sensitivity of engineered N-pocket DGTFET biosensors</h1>
+        <p class="subtitle">Research explained for undergraduate students</p>
+        <p class="meta">Source: Frontiers in Physics | <a href="https://doi.org/10.3389/fphy.2025.1757118">View original</a></p>
+    </div>
+
+    <div class="container">
+        <a href="/physics.html" class="back-link">&larr; Back to Physics</a>
+
+        
+        <div class="scene">
+            <span class="scene-number">Scene 1 of 5</span>
+            <h2>The Challenge</h2>
+            <div class="scene-text">
+                <p>Biosensors are crucial for monitoring various aspects of our lives, such as health, agriculture, and environment. However, traditional FET-based biosensors have limitations like high subthreshold slope, leakage current, and poor detection of neutral biomolecules. This can lead to inaccurate results and unreliable detection methods.</p><p>To overcome these challenges, researchers are exploring alternative technologies that can provide higher sensitivity, label-free detection, and improved performance.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Traditional FET-based biosensors] --> B[Limitations: high subthreshold slope, leakage current, poor detection]
+    C[Biosensors' importance in health, agriculture, and environment monitoring]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 2 of 5</span>
+            <h2>The Approach</h2>
+            <div class="scene-text">
+                <p>Researchers have been working on developing new materials and designs for FET-based biosensors. One promising approach is the use of Tunnel Field-Effect Transistors (TFETs), which utilize a band-to-band tunnelling mechanism to provide steep switching characteristics and low-power operation.</p><p>However, TFETs have their own set of challenges, such as low ON-current and ambipolar conduction issues. To overcome these limitations, researchers proposed a new design for a double-gate TFET featuring an N-pocket and AlGaAs-based heterostructure.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Traditional FET designs] --> B[Tunnel FETs: band-to-band tunnelling]
+    C[N-pocket and AlGaAs-based heterostructure design]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 3 of 5</span>
+            <h2>The Innovation</h2>
+            <div class="scene-text">
+                <p>The proposed N-pocket DGTFET features a GaSb–AlGaAs–GaAs heterostructures, dual-gate control, bilayer dielectrics, and optimised doping profiles. This design enhances tunnelling efficiency and sensitivity compared to traditional silicon-based and non-pocket devices.</p><p>The researchers used Silvaco ATLAS simulations to analyze the device's performance and identify key parameters that affect its sensitivity.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Traditional silicon-based devices] --> B[N-pocket DGTFET: GaSb–AlGaAs–GaAs heterostructures]
+    C[Bilayer dielectrics and optimised doping profiles]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 4 of 5</span>
+            <h2>The Results</h2>
+            <div class="scene-text">
+                <p>The results show that the proposed N-pocket DGTFET achieves a subthreshold swing of 9.2 mV/dec, an I on /I off ratio of 4 × 10^13, and a reduced threshold voltage of 0.32 V. These values surpass those of traditional silicon-based and non-pocket devices.</p><p>The sensitivity analysis indicates that the device exhibits notable improvements with rising dielectric constant, molar fraction, and positive biomolecule conditions. However, negative biomolecules diminish sensitivity due to repulsive interactions.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Traditional devices] --> B[N-pocket DGTFET: subthreshold swing 9.2 mV/dec]
+    C[Sensitivity analysis: dielectric constant, molar fraction, positive biomolecule conditions]
+                </div>
+            </div>
+        </div>
+
+        <div class="scene">
+            <span class="scene-number">Scene 5 of 5</span>
+            <h2>Why It Matters</h2>
+            <div class="scene-text">
+                <p>The proposed N-pocket DGTFET demonstrates a significant enhancement in selectivity, achieving sensitivity values of up to 1.20 × 10^5. This exceeds the performance of previously reported TFET biosensors by multiple orders of magnitude.</p><p>The findings suggest that the modified DGTFET serves as a reliable, energy-efficient, and highly sensitive platform for label-free biomolecule detection. This technology has far-reaching implications for various fields, including healthcare, agriculture, and environmental monitoring.</p>
+            </div>
+            <div class="diagram-box">
+                <div class="mermaid">
+flowchart LR
+    A[Previous TFET biosensors] --> B[N-pocket DGTFET: sensitivity > previous devices]
+    C[Future applications: label-free biomolecule detection, healthcare, agriculture, environment monitoring]
+                </div>
+            </div>
+        </div>
+
+
+        <div class="curriculum-section">
+            <div class="curriculum-header">
+                <span class="curriculum-badge">The Beakers</span>
+                <h2 class="curriculum-title">Curriculum Connection</h2>
+            </div>
+            
+            <div class="course-card">
+                <div class="course-code">PHYSICS 100</div>
+                <div class="course-name">Classical Mechanics</div>
+                <p class="course-connection">This research connects to topics like Newton's Laws, Energy & Work, Rotational Motion.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Newton's Laws</span><span class="concept-tag">Energy & Work</span><span class="concept-tag">Rotational Motion</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">PHYSICS 200</div>
+                <div class="course-name">Electromagnetism</div>
+                <p class="course-connection">This research connects to topics like Electric Fields, Magnetic Fields, Maxwell's Equations.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Electric Fields</span><span class="concept-tag">Magnetic Fields</span><span class="concept-tag">Maxwell's Equations</span>
+                </div>
+            </div>
+            <div class="course-card">
+                <div class="course-code">PHYSICS 300</div>
+                <div class="course-name">Quantum Mechanics</div>
+                <p class="course-connection">This research connects to topics like Wave-Particle Duality, Schrödinger Equation, Hydrogen Atom.</p>
+                <div class="course-concepts">
+                    <span class="concept-tag">Wave-Particle Duality</span><span class="concept-tag">Schrödinger Equation</span><span class="concept-tag">Hydrogen Atom</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Visual Story for <a href="https://thebeakers.com">The Beakers</a></p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">DOI: 10.3389/fphy.2025.1757118</p>
+    </footer>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#3b82f6',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#64748b',
+                secondaryColor: '#3b82f6',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a'
+            }
+        });
+    </script>
+</body>
+</html>

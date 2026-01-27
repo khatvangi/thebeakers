@@ -199,14 +199,23 @@ def parse_llm_questions(
 ) -> List[Dict]:
     """parse LLM response into question dicts"""
 
+    # strip thinking tags (qwen3 uses <think>...</think>)
+    clean_text = re.sub(r'<think>[\s\S]*?</think>', '', response_text)
+
     # try to extract JSON array from response
-    json_match = re.search(r'\[[\s\S]*\]', response_text)
+    json_match = re.search(r'\[[\s\S]*\]', clean_text)
     if not json_match:
         print(f"[!] could not find JSON in LLM response")
         return []
 
+    json_str = json_match.group()
+
+    # fix common JSON issues: trailing commas before ] or }
+    json_str = re.sub(r',\s*]', ']', json_str)
+    json_str = re.sub(r',\s*}', '}', json_str)
+
     try:
-        raw_questions = json.loads(json_match.group())
+        raw_questions = json.loads(json_str)
     except json.JSONDecodeError as e:
         print(f"[!] JSON parse error: {e}")
         return []

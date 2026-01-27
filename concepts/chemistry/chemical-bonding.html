@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Bonding | The Beakers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .subfield {
+            color: var(--text-secondary);
+        }
+
+        section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        section p {
+            color: var(--text-secondary);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .analogy {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+
+        .example {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">chemistry</span>
+            <span class="difficulty">freshman</span>
+            <h1>Chemical Bonding</h1>
+            <p class="subfield">General Chemistry</p>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>Chemical bonding explains how atoms connect to form molecules and compounds, primarily through ionic or covalent bonds. Understanding bonding types, electron distribution (Lewis structures), and molecular geometry (VSEPR) is essential for predicting chemical behavior.</p>
+        </section>
+
+        <section>
+            <h2>Key Points</h2>
+            <ul>
+                <li>Ionic bonds involve electron transfer between atoms (e.g., NaCl), while covalent bonds involve shared electrons (e.g., H2O).</li>
+<li>Lewis structures represent valence electrons as dots, showing bonding and lone pairs.</li>
+<li>VSEPR theory predicts molecular shapes based on electron pair repulsion (e.g., tetrahedral, bent).</li>
+<li>Electronegativity differences determine bond type: high difference = ionic, low difference = covalent.</li>
+<li>Bonding affects physical properties like melting points and solubility.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Think of it Like...</h2>
+            <p class="analogy">Ionic bonding is like static electricity—electrons jump from one atom to another, creating charged particles that attract. Covalent bonding is like sharing a pencil: atoms pool their electrons to work together.</p>
+        </section>
+
+        <section>
+            <h2>Example</h2>
+            <div class="example">
+                <p>In water (H2O), oxygen shares electrons with hydrogen atoms (covalent bond). Lewis structures show two lone pairs on oxygen, and VSEPR predicts a bent shape due to electron repulsion, explaining water’s polar nature.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Common Mistakes to Avoid</h2>
+            <ul>
+                <li>Confusing ionic and covalent bonds by focusing on metal/nonmetal distinctions without considering electronegativity.</li>
+<li>Drawing Lewis structures without accounting for all valence electrons or octet rules.</li>
+<li>Misapplying VSEPR by ignoring lone pairs when determining molecular geometry.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Connections</h2>
+            <ul>
+                <li>Links to periodic trends (e.g., electronegativity, ionization energy).</li>
+<li>Relates to molecular polarity and intermolecular forces (e.g., hydrogen bonding).</li>
+<li>Foundations for understanding reaction mechanisms and chemical reactivity.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Concept explainer for <a href="https://thebeakers.com">The Beakers</a></p>
+        </footer>
+    </div>
+</body>
+</html>
