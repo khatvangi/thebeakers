@@ -277,6 +277,9 @@ thebeakers.com/
 ├── article.html            # Regular article page (dynamic, loads from JSON)
 ├── explore/
 │   └── index.html          # Interactive knowledge graph explorer (D3.js)
+├── concepts/
+│   └── [discipline]/
+│       └── [topic].html    # Visual concept explainers (Lucide icons, cards)
 ├── deepdive/
 │   └── [slug].html         # Deep Dive articles (static, rich media)
 ├── articles/
@@ -284,7 +287,7 @@ thebeakers.com/
 │       ├── index.json      # Auto-generated article index
 │       └── *.json          # Rewritten articles
 ├── data/
-│   ├── articles.db         # SQLite: seen_articles, society_papers tables
+│   ├── articles.db         # SQLite: seen_articles, deepdive_candidates, media_items
 │   ├── curriculum.json     # 7 disciplines, 142 topics with keywords
 │   └── graphs/             # Knowledge graph JSON files (7 disciplines)
 │       └── [discipline]_graph.json
@@ -298,6 +301,14 @@ thebeakers.com/
     ├── feed_collector.py           # v2: Curated RSS collector
     ├── ai_rewriter.py              # Ollama rewriter for regular articles
     └── generate_indexes.py         # Generate article index files
+
+/storage/agents/             # Content automation agents
+├── cli.py                   # Main CLI entry point
+└── agents/
+    ├── deepdive.py          # Review article collector
+    ├── education.py         # Education journal processor
+    ├── concept.py           # Visual concept explainer generator
+    └── media.py             # YouTube video curator
 ```
 
 ## Disciplines
@@ -308,6 +319,96 @@ thebeakers.com/
 | Technology | Artificial Intelligence |
 | Engineering | Engineering (Civil, Mechanical, Electrical, Chemical) |
 | Mathematics | Mathematics |
+
+## Agents System (`/storage/agents/`)
+
+Automated content pipeline powered by specialized agents. Run from `/storage/agents/`.
+
+### Available Agents
+
+| Agent | Purpose | CLI Command |
+|-------|---------|-------------|
+| **Deep Dive** | Collect review articles & hot topics for full treatment | `python cli.py deepdive thebeakers` |
+| **Education** | Fetch from education journals, create visual stories | `python cli.py education thebeakers` |
+| **Concept** | Generate visual concept explainers with cards & icons | `python cli.py concept thebeakers` |
+| **Media** | Curate YouTube videos from educational channels | `python cli.py media thebeakers` |
+
+### Deep Dive Agent
+Collects papers from high-impact review journals and trending research for full NotebookLM treatment.
+
+```bash
+cd /storage/agents
+
+# fetch review articles and hot topics for all disciplines
+python cli.py deepdive thebeakers -d all
+
+# fetch for specific discipline
+python cli.py deepdive thebeakers -d chemistry
+
+# view pending candidates
+python cli.py deepdive thebeakers --pending
+
+# check status
+python cli.py deepdive thebeakers --status
+```
+
+**Sources:** Chemical Reviews (IF 62), Nature Reviews, Annual Reviews, Science, Nature, Cell
+
+### Education Agent
+Fetches from education journals and generates visual story pages with curriculum connections.
+
+```bash
+# fetch education papers and generate pages
+python cli.py education thebeakers -d chemistry
+
+# generate for all disciplines
+python cli.py education thebeakers -d all
+```
+
+**Output:** Discipline pages with Deep Dives and Noteworthy sections (e.g., `physics.html`)
+
+### Concept Agent
+Creates visual concept explainers with Lucide icons, gradient heroes, and card grids.
+
+```bash
+# generate concept explainer
+python cli.py concept thebeakers -t atomic-structure -d chemistry
+python cli.py concept thebeakers -t newtons-laws -d physics
+```
+
+**Output:** `concepts/[discipline]/[topic].html` - Visual cards, NO text walls
+
+### Media Agent
+Curates YouTube videos from educational channels (3Blue1Brown, Veritasium, etc.)
+
+```bash
+# scout videos for discipline
+python cli.py media thebeakers -d chemistry
+
+# scout for specific topic
+python cli.py media thebeakers -d physics -t quantum-mechanics
+```
+
+**Database:** 70+ curated videos in `media_items` table
+
+### Database Tables (articles.db)
+
+| Table | Purpose |
+|-------|---------|
+| `deepdive_candidates` | Papers pending Deep Dive treatment |
+| `education_papers` | Papers from education journals |
+| `media_items` | Curated YouTube videos |
+| `seen_articles` | All collected articles (dedup) |
+
+### NotebookLM MCP (Pending Setup)
+
+For automated podcast/video generation. Setup instructions saved at:
+`~/.claude/NOTEBOOKLM_SETUP.md`
+
+**Available tools after setup:**
+- `generate_audio_overview` - Create podcasts
+- `generate_video_overview` - Create videos
+- `generate_mind_map`, `generate_infographic`, `generate_quiz`
 
 ## Weekly Workflow
 
@@ -451,6 +552,16 @@ Sections:
   - Quiz generation from LibreTexts content
   - End-to-end pipeline: `curriculum_pipeline.py`
 - [x] Nav links to Explorer from all pages
+- [x] **Agents System** (`/storage/agents/`)
+  - Deep Dive agent: 22 candidates collected across all disciplines
+  - Education agent: Fetches + generates visual story pages
+  - Concept agent: Visual explainers with Lucide icons
+  - Media agent: 70+ curated YouTube videos
+- [x] **Visual Concept Explainers** (`/concepts/`)
+  - 6 explainers: atomic-structure, newtons-laws, cell-structure, dna-replication, limits, neural-nets
+  - Card-based design with Lucide icons (no text walls)
+- [x] **Front page curated videos** - Real YouTube links (not "Soon" placeholders)
+- [ ] NotebookLM MCP authentication (see `~/.claude/NOTEBOOKLM_SETUP.md`)
 - [ ] Public launch announcement (Monday, Jan 6)
 
 ## Contact
