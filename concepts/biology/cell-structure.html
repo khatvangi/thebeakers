@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Structure | The Beakers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #22c55e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .subfield {
+            color: var(--text-secondary);
+        }
+
+        section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        section p {
+            color: var(--text-secondary);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .analogy {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            font-style: italic;
+        }
+
+        .example {
+            background: rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        footer a { color: var(--accent); text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">biology</span>
+            <span class="difficulty">freshman</span>
+            <h1>Cell Structure</h1>
+            <p class="subfield">Cell Biology</p>
+        </header>
+
+        <section>
+            <h2>Overview</h2>
+            <p>The cell is the fundamental unit of life, organized into specialized structures called organelles that work together to maintain function. The cell membrane, cytoskeleton, and internal organelles like the nucleus and mitochondria each play critical roles in processes such as communication, energy production, and structural support.</p>
+        </section>
+
+        <section>
+            <h2>Key Points</h2>
+            <ul>
+                <li>The cell membrane acts as a selective barrier, regulating what enters and exits the cell.</li>
+<li>The nucleus houses DNA and controls cellular activities through gene expression.</li>
+<li>Mitochondria generate most of the cell's energy via cellular respiration.</li>
+<li>The endoplasmic reticulum and Golgi apparatus handle protein synthesis, modification, and transport.</li>
+<li>The cytoskeleton provides structural support, enables movement, and facilitates intracellular transport.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Think of it Like...</h2>
+            <p class="analogy">Imagine a cell as a bustling factory: the membrane is the guarded entrance, the nucleus is the CEO's office directing operations, mitochondria are the power plants, the ER and Gol3 are the assembly line and shipping department, and the cytoskeleton is the scaffolding and conveyor belts keeping everything organized.</p>
+        </section>
+
+        <section>
+            <h2>Example</h2>
+            <div class="example">
+                <p>In a muscle cell, the nucleus directs protein synthesis for contraction, mitochondria supply energy for muscle movement, the ER and Golgi package and transport these proteins, and the cytoskeleton allows the cell to contract and relax efficiently.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Common Mistakes to Avoid</h2>
+            <ul>
+                <li>Thinking the cell membrane only serves as a barrier, not realizing it's involved in signaling and transport.</li>
+<li>Confusing the roles of the rough ER and Golgi apparatus (e.g., thinking the ER handles final protein packaging).</li>
+<li>Believing the cytoskeleton is only for structure, not recognizing its role in movement and intracellular transport.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Connections</h2>
+            <ul>
+                <li>Cell structure relates to cell signaling via membrane receptors and cytoskeleton-mediated responses.</li>
+<li>Organelle functions connect to genetic expression (nucleus) and energy production (mitochondria).</li>
+<li>The cytoskeleton's role in movement ties to processes like cell division and muscle contraction.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Concept explainer for <a href="https://thebeakers.com">The Beakers</a></p>
+        </footer>
+    </div>
+</body>
+</html>

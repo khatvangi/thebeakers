@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atomic Structure | The Beakers</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-light: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #10b981;
+            --accent-dim: #10b98120;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #10b98115 0%, var(--bg-dark) 60%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #10b98130;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero-badge i { width: 16px; height: 16px; }
+
+        .difficulty-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 1rem 0 0.5rem;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subfield {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .section-icon i { width: 20px; height: 20px; }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* Overview Card */
+        .overview-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .overview-card p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Key Points Grid */
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .point-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .point-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .point-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .point-icon i { width: 18px; height: 18px; }
+
+        .point-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Analogy Card */
+        .analogy-card {
+            background: linear-gradient(135deg, var(--bg-card), #10b98110);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analogy-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        .analogy-card p {
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Example Card */
+        .example-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--bg-light);
+        }
+
+        .example-content {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Mistakes Section */
+        .mistakes-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .mistake-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-left: 3px solid #ef4444;
+        }
+
+        .mistake-icon {
+            width: 32px;
+            height: 32px;
+            background: #ef444420;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            flex-shrink: 0;
+        }
+
+        .mistake-icon i { width: 16px; height: 16px; }
+
+        .mistake-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Connections */
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .connection-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .connection-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .connection-icon i { width: 16px; height: 16px; }
+
+        .connection-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <span class="hero-badge"><i data-lucide="flask-conical"></i> chemistry</span>
+        <span class="difficulty-badge">freshman</span>
+        <h1>Atomic Structure</h1>
+        <p class="subfield">General Chemistry</p>
+    </div>
+
+    <div class="container">
+        <!-- Overview -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="book-open"></i></div>
+            <h2>What is it?</h2>
+        </div>
+        <div class="overview-card">
+            <p>Atomic structure explains how atoms are built from protons, neutrons, and electrons, with electrons arranged in specific energy levels and orbitals. Understanding electron configuration and quantum numbers is essential for predicting chemical behavior and bonding in elements.</p>
+        </div>
+
+        <!-- Key Points -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="list-checks"></i></div>
+            <h2>Key Concepts</h2>
+        </div>
+        <div class="points-grid">
+            
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="lightbulb"></i></div>
+                <p>Atoms consist of a nucleus (protons/neutrons) and electrons in energy levels called orbitals.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="target"></i></div>
+                <p>Electron configuration follows rules like the Aufbau principle and Pauli exclusion principle.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="zap"></i></div>
+                <p>Quantum numbers (n, l, m_l, m_s) define an electron's energy level, shape, orientation, and spin.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="check-circle"></i></div>
+                <p>Orbitals (s, p, d, f) have distinct shapes and can hold up to 2, 6, 10, or 14 electrons respectively.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="star"></i></div>
+                <p>The periodic table's structure is directly related to electron configurations of elements.</p>
+            </div>
+        </div>
+
+        <!-- Analogy -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="lightbulb"></i></div>
+            <h2>Think of it Like...</h2>
+        </div>
+        <div class="analogy-card">
+            <p>Imagine an atom as a hotel: the nucleus is the lobby, and electrons are guests staying in different rooms (orbitals). Each room has specific rules (quantum numbers) about how many guests can stay and their arrangement.</p>
+        </div>
+
+        <!-- Example -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="flask-conical"></i></div>
+            <h2>Example</h2>
+        </div>
+        <div class="example-card">
+            <div class="example-content">
+                Take carbon (atomic number 6). Its nucleus has 6 protons and 6 neutrons. Electrons fill orbitals starting with the lowest energy: 1s² 2s² 2p². Quantum numbers for the last electron are n=2, l=1, m_l=-1, m_s=+½. This configuration explains carbon's ability to form four covalent bonds.
+            </div>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="section-header">
+            <div class="section-icon" style="background: #ef444420; color: #ef4444;"><i data-lucide="alert-triangle"></i></div>
+            <h2>Watch Out For</h2>
+        </div>
+        <div class="mistakes-grid">
+            
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Confusing orbitals (regions of space) with electrons (particles)</p>
+            </div>
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Mixing up quantum numbers: thinking 'l' refers to electron energy level instead of orbital shape</p>
+            </div>
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Incorrectly filling orbitals by ignoring the Pauli exclusion principle</p>
+            </div>
+        </div>
+
+        <!-- Connections -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="git-branch"></i></div>
+            <h2>Connections</h2>
+        </div>
+        <div class="connections-grid">
+            
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Links to periodic table trends (e.g., electron configuration explains group/period behavior)</p>
+            </div>
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Foundational for understanding chemical bonding and molecular structure</p>
+            </div>
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Relates to spectroscopy (electron energy transitions produce atomic spectra)</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Concept explainer for <a href="https://thebeakers.com">The Beakers</a></p>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

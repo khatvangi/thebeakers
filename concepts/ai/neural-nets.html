@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neural Networks | The Beakers</title>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --bg-light: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent: #06b6d4;
+            --accent-dim: #06b6d420;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #06b6d415 0%, var(--bg-dark) 60%);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #06b6d430;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .hero-badge i { width: 16px; height: 16px; }
+
+        .difficulty-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            padding: 0.3rem 1rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin: 1rem 0 0.5rem;
+            background: linear-gradient(90deg, var(--text-primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subfield {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-dim);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .section-icon i { width: 20px; height: 20px; }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        /* Overview Card */
+        .overview-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--accent);
+        }
+
+        .overview-card p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Key Points Grid */
+        .points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .point-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .point-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .point-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .point-icon i { width: 18px; height: 18px; }
+
+        .point-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Analogy Card */
+        .analogy-card {
+            background: linear-gradient(135deg, var(--bg-card), #06b6d410);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .analogy-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 8rem;
+            color: var(--accent);
+            opacity: 0.1;
+            font-family: serif;
+        }
+
+        .analogy-card p {
+            color: var(--text-primary);
+            font-size: 1.15rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Example Card */
+        .example-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--bg-light);
+        }
+
+        .example-content {
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Mistakes Section */
+        .mistakes-grid {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .mistake-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            border-left: 3px solid #ef4444;
+        }
+
+        .mistake-icon {
+            width: 32px;
+            height: 32px;
+            background: #ef444420;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            flex-shrink: 0;
+        }
+
+        .mistake-icon i { width: 16px; height: 16px; }
+
+        .mistake-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Connections */
+        .connections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .connection-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .connection-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-dim);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .connection-icon i { width: 16px; height: 16px; }
+
+        .connection-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <span class="hero-badge"><i data-lucide="brain"></i> ai</span>
+        <span class="difficulty-badge">junior</span>
+        <h1>Neural Networks</h1>
+        <p class="subfield">Deep Learning</p>
+    </div>
+
+    <div class="container">
+        <!-- Overview -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="book-open"></i></div>
+            <h2>What is it?</h2>
+        </div>
+        <div class="overview-card">
+            <p>Neural networks are computational models inspired by the human brain, composed of interconnected nodes (neurons) that process information through layers. They leverage perceptrons as foundational units, backpropagation for learning, and activation functions to introduce non-linearity, enabling complex pattern recognition.</p>
+        </div>
+
+        <!-- Key Points -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="list-checks"></i></div>
+            <h2>Key Concepts</h2>
+        </div>
+        <div class="points-grid">
+            
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="lightbulb"></i></div>
+                <p>Perceptrons are the basic building blocks that perform weighted sums and apply activation functions.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="target"></i></div>
+                <p>Backpropagation uses gradient descent to iteratively adjust weights by propagating errors backward through the network.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="zap"></i></div>
+                <p>Activation functions (e.g., ReLU, sigmoid) determine neuron output and enable non-linear decision boundaries.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="check-circle"></i></div>
+                <p>Layers (input, hidden, output) structure the flow of data and transformations within the network.</p>
+            </div>
+            <div class="point-card">
+                <div class="point-icon"><i data-lucide="star"></i></div>
+                <p>Optimization of weights relies on minimizing loss functions via calculus-based updates.</p>
+            </div>
+        </div>
+
+        <!-- Analogy -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="lightbulb"></i></div>
+            <h2>Think of it Like...</h2>
+        </div>
+        <div class="analogy-card">
+            <p>Imagine a neural network as a team of chefs preparing a dish. Perceptrons are the chefs who apply ingredients (weights) to raw data (inputs), backpropagation is the head chef adjusting seasoning (weights) based on customer feedback (error), and activation functions decide which spices (non-linear transformations) to use at each step.</p>
+        </div>
+
+        <!-- Example -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="flask-conical"></i></div>
+            <h2>Example</h2>
+        </div>
+        <div class="example-card">
+            <div class="example-content">
+                In a hand-written digit recognition task, input pixels are processed by hidden layers of perceptrons. Each perceptron applies weights to pixel values, sums them, and passes through a ReLU activation function. Backpropagation calculates the error between predicted and actual digits, adjusting weights to minimize this error over iterations.
+            </div>
+        </div>
+
+        <!-- Common Mistakes -->
+        <div class="section-header">
+            <div class="section-icon" style="background: #ef444420; color: #ef4444;"><i data-lucide="alert-triangle"></i></div>
+            <h2>Watch Out For</h2>
+        </div>
+        <div class="mistakes-grid">
+            
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Assuming perceptrons are the entire network and not recognizing their role as modular units.</p>
+            </div>
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Confusing backpropagation with a single step rather than a multi-layer gradient calculation process.</p>
+            </div>
+            <div class="mistake-card">
+                <div class="mistake-icon"><i data-lucide="alert-triangle"></i></div>
+                <p>Neglecting the impact of activation functions on gradient flow (e.g., vanishing/exploding gradients).</p>
+            </div>
+        </div>
+
+        <!-- Connections -->
+        <div class="section-header">
+            <div class="section-icon"><i data-lucide="git-branch"></i></div>
+            <h2>Connections</h2>
+        </div>
+        <div class="connections-grid">
+            
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Backpropagation relies on calculus concepts like the chain rule for gradient computation.</p>
+            </div>
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Activation functions directly influence the effectiveness of optimization algorithms.</p>
+            </div>
+            <div class="connection-card">
+                <div class="connection-icon"><i data-lucide="link"></i></div>
+                <p>Neural networks form the basis for advanced architectures like CNNs and RNNs.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>Concept explainer for <a href="https://thebeakers.com">The Beakers</a></p>
+        </footer>
+    </div>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
