@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HexIsomer - 3D Lewis Structure LEGO Bricks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+      min-height: 100vh;
+      padding: 40px;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ffd60a, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+
+    .subtitle {
+      text-align: center;
+      opacity: 0.7;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .brick-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 50px;
+      justify-content: center;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brick-card {
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 24px;
+      padding: 40px 30px 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      min-width: 180px;
+    }
+
+    .brick-label {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .brick-formula {
+      font-size: 0.9rem;
+      opacity: 0.5;
+      font-family: monospace;
+    }
+
+    .valence-info {
+      font-size: 0.75rem;
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ═══════════════════════════════════════════
+       3D LEWIS STRUCTURE BASE
+       ═══════════════════════════════════════════ */
+
+    .lewis-brick {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+      transform-style: preserve-3d;
+      perspective: 500px;
+    }
+
+    .lewis-brick:hover {
+      transform: translateY(-6px) rotateX(-5deg) rotateY(5deg);
+      filter: drop-shadow(0 16px 32px rgba(0,0,0,0.6));
+    }
+
+    /* ═══════════════════════════════════════════
+       ATOM SPHERES (3D balls)
+       ═══════════════════════════════════════════ */
+
+    .atom {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow:
+        inset -4px -4px 10px rgba(0,0,0,0.4),
+        inset 4px 4px 10px rgba(255,255,255,0.3),
+        0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    .atom.large { width: 36px; height: 36px; font-size: 13px; }
+    .atom.medium { width: 28px; height: 28px; font-size: 11px; }
+    .atom.small { width: 20px; height: 20px; font-size: 9px; }
+
+    /* Atom colors */
+    .atom.carbon {
+      background: radial-gradient(circle at 30% 30%, #555, #333);
+      color: #fff;
+    }
+    .atom.oxygen {
+      background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc4444);
+      color: #fff;
+    }
+    .atom.nitrogen {
+      background: radial-gradient(circle at 30% 30%, #5bc0eb, #3a8ab8);
+      color: #fff;
+    }
+    .atom.hydrogen {
+      background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc);
+      color: #333;
+    }
+    .atom.halogen {
+      background: radial-gradient(circle at 30% 30%, #5dd47a, #3aa855);
+      color: #fff;
+    }
+    .atom.sulfur {
+      background: radial-gradient(circle at 30% 30%, #ffd93d, #e6b800);
+      color: #333;
+    }
+
+    /* ═══════════════════════════════════════════
+       BONDS (3D cylinders/sticks)
+       ═══════════════════════════════════════════ */
+
+    .bond {
+      position: absolute;
+      background: linear-gradient(90deg,
+        rgba(80,80,80,0.9) 0%,
+        rgba(120,120,120,0.9) 50%,
+        rgba(80,80,80,0.9) 100%
+      );
+      border-radius: 3px;
+      box-shadow:
+        0 2px 4px rgba(0,0,0,0.3),
+        inset 0 1px 2px rgba(255,255,255,0.2);
+      transform-origin: left center;
+    }
+
+    .bond.single {
+      height: 6px;
+    }
+
+    .bond.double {
+      height: 4px;
+    }
+    .bond.double::after {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: inherit;
+      border-radius: inherit;
+      box-shadow: inherit;
+    }
+
+    .bond.triple {
+      height: 3px;
+    }
+    .bond.triple::before,
+    .bond.triple::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: inherit;
+      border-radius: inherit;
+    }
+    .bond.triple::before { top: -6px; }
+    .bond.triple::after { top: 6px; }
+
+    /* ═══════════════════════════════════════════
+       STUD (Connection Point) - 3D raised
+       ═══════════════════════════════════════════ */
+
+    .stud {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd60a, #e6b800);
+      border: 2px solid #cc9900;
+      box-shadow:
+        inset -2px -2px 6px rgba(0,0,0,0.3),
+        inset 2px 2px 6px rgba(255,255,255,0.4),
+        0 3px 6px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .stud::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+
+    /* ═══════════════════════════════════════════
+       LEGO BASE PLATE (bottom of structure)
+       ═══════════════════════════════════════════ */
+
+    .base-plate {
+      position: absolute;
+      bottom: -12px;
+      background: linear-gradient(180deg, rgba(40,40,40,0.8), rgba(20,20,20,0.9));
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* ═══════════════════════════════════════════
+       SPECIFIC FUNCTIONAL GROUP STRUCTURES
+       ═══════════════════════════════════════════ */
+
+    /* Container sizing */
+    .structure-container {
+      position: relative;
+      min-width: 100px;
+      min-height: 80px;
+    }
+
+    /* --- HYDROXYL (-OH) --- */
+    .hydroxyl-struct {
+      width: 80px;
+      height: 50px;
+    }
+    .hydroxyl-struct .atom.oxygen { left: 35px; top: 10px; }
+    .hydroxyl-struct .atom.hydrogen { left: 65px; top: 5px; }
+    .hydroxyl-struct .bond-oh { left: 50px; top: 18px; width: 20px; transform: rotate(-15deg); }
+    .hydroxyl-struct .stud { left: -5px; top: 15px; }
+    .hydroxyl-struct .base-plate { left: 5px; width: 75px; height: 35px; }
+
+    /* --- ALDEHYDE (-CHO) --- */
+    .aldehyde-struct {
+      width: 100px;
+      height: 70px;
+    }
+    .aldehyde-struct .atom.carbon { left: 35px; top: 25px; }
+    .aldehyde-struct .atom.oxygen { left: 35px; top: -5px; }
+    .aldehyde-struct .atom.hydrogen { left: 75px; top: 25px; }
+    .aldehyde-struct .bond-co { left: 47px; top: 8px; width: 6px; height: 20px; transform: rotate(0deg); }
+    .aldehyde-struct .bond-ch { left: 55px; top: 35px; width: 25px; }
+    .aldehyde-struct .stud { left: -5px; top: 30px; }
+    .aldehyde-struct .base-plate { left: 0; width: 95px; height: 50px; }
+
+    /* --- CARBOXYL (-COOH) --- */
+    .carboxyl-struct {
+      width: 120px;
+      height: 80px;
+    }
+    .carboxyl-struct .atom.carbon { left: 30px; top: 30px; }
+    .carboxyl-struct .atom.oxygen.dbl { left: 30px; top: 0px; }
+    .carboxyl-struct .atom.oxygen.single { left: 70px; top: 35px; }
+    .carboxyl-struct .atom.hydrogen { left: 100px; top: 30px; }
+    .carboxyl-struct .bond-co-dbl { left: 42px; top: 12px; width: 6px; height: 18px; }
+    .carboxyl-struct .bond-co-single { left: 50px; top: 40px; width: 25px; }
+    .carboxyl-struct .bond-oh { left: 85px; top: 42px; width: 18px; transform: rotate(-10deg); }
+    .carboxyl-struct .stud { left: -8px; top: 35px; }
+    .carboxyl-struct .base-plate { left: 0; width: 115px; height: 55px; }
+
+    /* --- AMINO (-NH₂) --- */
+    .amino-struct {
+      width: 90px;
+      height: 70px;
+    }
+    .amino-struct .atom.nitrogen { left: 35px; top: 25px; }
+    .amino-struct .atom.hydrogen.h1 { left: 60px; top: 5px; }
+    .amino-struct .atom.hydrogen.h2 { left: 60px; top: 45px; }
+    .amino-struct .bond-nh1 { left: 50px; top: 22px; width: 18px; transform: rotate(-40deg); }
+    .amino-struct .bond-nh2 { left: 50px; top: 38px; width: 18px; transform: rotate(40deg); }
+    .amino-struct .stud { left: -5px; top: 30px; }
+    .amino-struct .base-plate { left: 5px; width: 80px; height: 50px; }
+
+    /* --- CARBONYL (-C=O) Divalent --- */
+    .carbonyl-struct {
+      width: 100px;
+      height: 70px;
+    }
+    .carbonyl-struct .atom.carbon { left: 35px; top: 30px; }
+    .carbonyl-struct .atom.oxygen { left: 35px; top: 0px; }
+    .carbonyl-struct .bond-co { left: 42px; top: 12px; width: 6px; height: 20px; }
+    .carbonyl-struct .stud.left { left: -5px; top: 35px; }
+    .carbonyl-struct .stud.right { left: 82px; top: 35px; }
+    .carbonyl-struct .base-plate { left: 5px; width: 90px; height: 45px; }
+
+    /* --- METHYL (-CH₃) --- */
+    .methyl-struct {
+      width: 90px;
+      height: 80px;
+    }
+    .methyl-struct .atom.carbon { left: 35px; top: 30px; }
+    .methyl-struct .atom.hydrogen.h1 { left: 65px; top: 10px; }
+    .methyl-struct .atom.hydrogen.h2 { left: 70px; top: 40px; }
+    .methyl-struct .atom.hydrogen.h3 { left: 50px; top: 60px; }
+    .methyl-struct .bond-ch1 { left: 52px; top: 28px; width: 18px; transform: rotate(-35deg); }
+    .methyl-struct .bond-ch2 { left: 52px; top: 42px; width: 22px; transform: rotate(20deg); }
+    .methyl-struct .bond-ch3 { left: 45px; top: 50px; width: 15px; transform: rotate(70deg); }
+    .methyl-struct .stud { left: -5px; top: 35px; }
+    .methyl-struct .base-plate { left: 5px; width: 82px; height: 55px; }
+
+    /* --- METHYLENE (-CH₂-) Divalent --- */
+    .methylene-struct {
+      width: 110px;
+      height: 70px;
+    }
+    .methylene-struct .atom.carbon { left: 45px; top: 25px; }
+    .methylene-struct .atom.hydrogen.h1 { left: 45px; top: 0px; }
+    .methylene-struct .atom.hydrogen.h2 { left: 45px; top: 50px; }
+    .methylene-struct .bond-ch1 { left: 55px; top: 12px; width: 6px; height: 15px; }
+    .methylene-struct .bond-ch2 { left: 55px; top: 42px; width: 6px; height: 15px; }
+    .methylene-struct .stud.left { left: -5px; top: 30px; }
+    .methylene-struct .stud.right { left: 97px; top: 30px; }
+    .methylene-struct .base-plate { left: 10px; width: 90px; height: 50px; }
+
+    /* --- ETHER (-O-) Divalent --- */
+    .ether-struct {
+      width: 90px;
+      height: 50px;
+    }
+    .ether-struct .atom.oxygen { left: 35px; top: 12px; }
+    .ether-struct .stud.left { left: -5px; top: 18px; }
+    .ether-struct .stud.right { left: 77px; top: 18px; }
+    .ether-struct .base-plate { left: 10px; width: 70px; height: 30px; }
+
+    /* --- PHENYL (Benzene) --- */
+    .phenyl-struct {
+      width: 120px;
+      height: 110px;
+    }
+    .phenyl-struct .ring {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      width: 70px;
+      height: 80px;
+    }
+    .phenyl-struct .atom.carbon.c1 { left: 52px; top: 5px; }
+    .phenyl-struct .atom.carbon.c2 { left: 82px; top: 25px; }
+    .phenyl-struct .atom.carbon.c3 { left: 82px; top: 60px; }
+    .phenyl-struct .atom.carbon.c4 { left: 52px; top: 80px; }
+    .phenyl-struct .atom.carbon.c5 { left: 22px; top: 60px; }
+    .phenyl-struct .atom.carbon.c6 { left: 22px; top: 25px; }
+    /* Ring bonds */
+    .phenyl-struct .bond.ring-bond {
+      background: linear-gradient(90deg, rgba(100,100,100,0.9), rgba(140,140,140,0.9), rgba(100,100,100,0.9));
+    }
+    .phenyl-struct .bond.b12 { left: 62px; top: 12px; width: 28px; transform: rotate(35deg); }
+    .phenyl-struct .bond.b23 { left: 92px; top: 38px; width: 28px; transform: rotate(90deg); }
+    .phenyl-struct .bond.b34 { left: 72px; top: 78px; width: 28px; transform: rotate(145deg); }
+    .phenyl-struct .bond.b45 { left: 35px; top: 78px; width: 28px; transform: rotate(-145deg); }
+    .phenyl-struct .bond.b56 { left: 22px; top: 38px; width: 28px; transform: rotate(-90deg); }
+    .phenyl-struct .bond.b61 { left: 32px; top: 12px; width: 28px; transform: rotate(-35deg); }
+    /* Inner circle for aromaticity */
+    .phenyl-struct .aromatic-circle {
+      position: absolute;
+      left: 40px;
+      top: 32px;
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
+    }
+    .phenyl-struct .stud { left: 105px; top: 40px; }
+    .phenyl-struct .base-plate { left: 10px; width: 100px; height: 85px; }
+
+    /* --- CHLORO (-Cl) --- */
+    .chloro-struct {
+      width: 60px;
+      height: 50px;
+    }
+    .chloro-struct .atom.halogen { left: 20px; top: 12px; }
+    .chloro-struct .stud { left: -5px; top: 18px; }
+    .chloro-struct .base-plate { left: 5px; width: 50px; height: 30px; }
+
+    /* --- THIOL (-SH) --- */
+    .thiol-struct {
+      width: 80px;
+      height: 50px;
+    }
+    .thiol-struct .atom.sulfur { left: 30px; top: 10px; }
+    .thiol-struct .atom.hydrogen { left: 60px; top: 5px; }
+    .thiol-struct .bond-sh { left: 48px; top: 16px; width: 16px; transform: rotate(-15deg); }
+    .thiol-struct .stud { left: -5px; top: 15px; }
+    .thiol-struct .base-plate { left: 5px; width: 70px; height: 32px; }
+
+    /* ═══════════════════════════════════════════
+       ANIMATION STATES
+       ═══════════════════════════════════════════ */
+
+    .lewis-brick.valid .stud {
+      animation: validGlow 1.2s ease infinite;
+    }
+    @keyframes validGlow {
+      0%, 100% { box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.4), 0 3px 6px rgba(0,0,0,0.4), 0 0 15px rgba(100,255,150,0.6); }
+      50% { box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.4), 0 3px 6px rgba(0,0,0,0.4), 0 0 25px rgba(100,255,150,0.9); }
+    }
+
+    .lewis-brick.warning {
+      animation: warningWobble 0.5s ease infinite;
+    }
+    @keyframes warningWobble {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+    }
+
+    .lewis-brick.error {
+      animation: errorReject 0.4s ease;
+    }
+    @keyframes errorReject {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(-8px) rotate(-3deg); }
+      40% { transform: translateX(8px) rotate(3deg); }
+      60% { transform: translateX(-5px) rotate(-2deg); }
+      80% { transform: translateX(5px) rotate(2deg); }
+      100% { transform: translateX(0); }
+    }
+
+    /* Click interaction hint */
+    .click-hint {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.6);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔬 HexIsomer 3D Lewis Bricks</h1>
+  <p class="subtitle">Functional Groups as 3D Molecular LEGO</p>
+
+  <div class="brick-gallery">
+
+    <!-- HYDROXYL (-OH) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container hydroxyl-struct">
+          <div class="base-plate"></div>
+          <div class="atom medium oxygen">O</div>
+          <div class="atom small hydrogen">H</div>
+          <div class="bond single bond-oh"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Hydroxyl</span>
+      <span class="brick-formula">-OH</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- ALDEHYDE (-CHO) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container aldehyde-struct">
+          <div class="base-plate"></div>
+          <div class="atom large carbon">C</div>
+          <div class="atom medium oxygen">O</div>
+          <div class="atom small hydrogen">H</div>
+          <div class="bond double bond-co"></div>
+          <div class="bond single bond-ch"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Aldehyde</span>
+      <span class="brick-formula">-CHO</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- CARBOXYL (-COOH) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container carboxyl-struct">
+          <div class="base-plate"></div>
+          <div class="atom large carbon">C</div>
+          <div class="atom medium oxygen dbl">O</div>
+          <div class="atom medium oxygen single">O</div>
+          <div class="atom small hydrogen">H</div>
+          <div class="bond double bond-co-dbl"></div>
+          <div class="bond single bond-co-single"></div>
+          <div class="bond single bond-oh"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Carboxyl</span>
+      <span class="brick-formula">-COOH</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- AMINO (-NH₂) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container amino-struct">
+          <div class="base-plate"></div>
+          <div class="atom large nitrogen">N</div>
+          <div class="atom small hydrogen h1">H</div>
+          <div class="atom small hydrogen h2">H</div>
+          <div class="bond single bond-nh1"></div>
+          <div class="bond single bond-nh2"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Amino</span>
+      <span class="brick-formula">-NH₂</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- METHYL (-CH₃) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container methyl-struct">
+          <div class="base-plate"></div>
+          <div class="atom large carbon">C</div>
+          <div class="atom small hydrogen h1">H</div>
+          <div class="atom small hydrogen h2">H</div>
+          <div class="atom small hydrogen h3">H</div>
+          <div class="bond single bond-ch1"></div>
+          <div class="bond single bond-ch2"></div>
+          <div class="bond single bond-ch3"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Methyl</span>
+      <span class="brick-formula">-CH₃</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- CARBONYL (-C=O) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container carbonyl-struct">
+          <div class="base-plate"></div>
+          <div class="atom large carbon">C</div>
+          <div class="atom medium oxygen">O</div>
+          <div class="bond double bond-co"></div>
+          <div class="stud left"></div>
+          <div class="stud right"></div>
+        </div>
+      </div>
+      <span class="brick-label">Carbonyl</span>
+      <span class="brick-formula">=C=O</span>
+      <span class="valence-info">⚫⚫ 2 connections</span>
+    </div>
+
+    <!-- METHYLENE (-CH₂-) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container methylene-struct">
+          <div class="base-plate"></div>
+          <div class="atom large carbon">C</div>
+          <div class="atom small hydrogen h1">H</div>
+          <div class="atom small hydrogen h2">H</div>
+          <div class="bond single bond-ch1"></div>
+          <div class="bond single bond-ch2"></div>
+          <div class="stud left"></div>
+          <div class="stud right"></div>
+        </div>
+      </div>
+      <span class="brick-label">Methylene</span>
+      <span class="brick-formula">-CH₂-</span>
+      <span class="valence-info">⚫⚫ 2 connections</span>
+    </div>
+
+    <!-- ETHER (-O-) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container ether-struct">
+          <div class="base-plate"></div>
+          <div class="atom large oxygen">O</div>
+          <div class="stud left"></div>
+          <div class="stud right"></div>
+        </div>
+      </div>
+      <span class="brick-label">Ether</span>
+      <span class="brick-formula">-O-</span>
+      <span class="valence-info">⚫⚫ 2 connections</span>
+    </div>
+
+    <!-- CHLORO (-Cl) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container chloro-struct">
+          <div class="base-plate"></div>
+          <div class="atom large halogen">Cl</div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Chloro</span>
+      <span class="brick-formula">-Cl</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- THIOL (-SH) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container thiol-struct">
+          <div class="base-plate"></div>
+          <div class="atom large sulfur">S</div>
+          <div class="atom small hydrogen">H</div>
+          <div class="bond single bond-sh"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Thiol</span>
+      <span class="brick-formula">-SH</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+    <!-- PHENYL (Benzene Ring) -->
+    <div class="brick-card">
+      <div class="lewis-brick">
+        <div class="structure-container phenyl-struct">
+          <div class="base-plate"></div>
+          <div class="aromatic-circle"></div>
+          <div class="atom small carbon c1">C</div>
+          <div class="atom small carbon c2">C</div>
+          <div class="atom small carbon c3">C</div>
+          <div class="atom small carbon c4">C</div>
+          <div class="atom small carbon c5">C</div>
+          <div class="atom small carbon c6">C</div>
+          <div class="bond single ring-bond b12"></div>
+          <div class="bond single ring-bond b23"></div>
+          <div class="bond single ring-bond b34"></div>
+          <div class="bond single ring-bond b45"></div>
+          <div class="bond single ring-bond b56"></div>
+          <div class="bond single ring-bond b61"></div>
+          <div class="stud"></div>
+        </div>
+      </div>
+      <span class="brick-label">Phenyl</span>
+      <span class="brick-formula">-C₆H₅</span>
+      <span class="valence-info">⚫ 1 connection</span>
+    </div>
+
+  </div>
+
+  <div class="click-hint">Click any brick to test states: normal → valid → warning → error</div>
+
+  <script>
+    // Demo: Click to cycle through feedback states
+    document.querySelectorAll('.lewis-brick').forEach(brick => {
+      brick.addEventListener('click', () => {
+        brick.classList.remove('valid', 'warning', 'error');
+        const states = ['', 'valid', 'warning', 'error'];
+        const current = states.indexOf(brick.dataset.state || '');
+        const next = states[(current + 1) % states.length];
+        brick.dataset.state = next;
+        if (next) brick.classList.add(next);
+      });
+    });
+  </script>
+</body>
+</html>

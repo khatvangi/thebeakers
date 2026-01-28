@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HexIsomer - LEGO Functional Group Bricks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      padding: 40px;
+      color: #fff;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .subtitle {
+      text-align: center;
+      opacity: 0.7;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .brick-gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .brick-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .brick-label {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .brick-formula {
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+
+    .valence-info {
+      font-size: 0.75rem;
+      background: rgba(255,255,255,0.1);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ═══════════════════════════════════════════
+       BASE LEGO BRICK STYLES
+       ═══════════════════════════════════════════ */
+
+    .lego-brick {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+    }
+
+    .lego-brick:hover {
+      transform: translateY(-4px) scale(1.05);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+    }
+
+    .lego-brick:active {
+      cursor: grabbing;
+      transform: scale(0.98);
+    }
+
+    /* Brick body - the main plastic piece */
+    .brick-body {
+      position: relative;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: rgba(0,0,0,0.7);
+      text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+      overflow: visible;
+    }
+
+    /* 3D depth effect - bottom */
+    .brick-body::before {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 2px;
+      right: 2px;
+      height: 8px;
+      border-radius: 0 0 6px 6px;
+      z-index: -1;
+    }
+
+    /* Shine highlight - top */
+    .brick-body::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 8%;
+      width: 84%;
+      height: 35%;
+      background: linear-gradient(
+        180deg,
+        rgba(255,255,255,0.5) 0%,
+        rgba(255,255,255,0.1) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      border-radius: 4px 4px 50% 50%;
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       STUD (Connection Point)
+       ═══════════════════════════════════════════ */
+
+    .stud {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.3);
+      box-shadow:
+        inset 0 -3px 6px rgba(0,0,0,0.3),
+        inset 0 2px 4px rgba(255,255,255,0.4),
+        0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .stud.top { top: -8px; left: 50%; transform: translateX(-50%); }
+    .stud.bottom { bottom: -8px; left: 50%; transform: translateX(-50%); }
+    .stud.left { left: -8px; top: 50%; transform: translateY(-50%); }
+    .stud.right { right: -8px; top: 50%; transform: translateY(-50%); }
+
+    /* ═══════════════════════════════════════════
+       COLOR THEMES BY ELEMENT
+       ═══════════════════════════════════════════ */
+
+    /* CARBON - Warm Yellow/Orange */
+    .brick-carbon .brick-body {
+      background: linear-gradient(180deg, #FFE066 0%, #FFCC00 50%, #E6B800 100%);
+    }
+    .brick-carbon .brick-body::before {
+      background: #CC9900;
+    }
+    .brick-carbon .stud {
+      background: linear-gradient(180deg, #FFE066 0%, #FFCC00 100%);
+    }
+
+    /* OXYGEN - Coral Red */
+    .brick-oxygen .brick-body {
+      background: linear-gradient(180deg, #FF8A8A 0%, #FF6B6B 50%, #E85555 100%);
+    }
+    .brick-oxygen .brick-body::before {
+      background: #CC4444;
+    }
+    .brick-oxygen .stud {
+      background: linear-gradient(180deg, #FF8A8A 0%, #FF6B6B 100%);
+    }
+
+    /* NITROGEN - Sky Blue */
+    .brick-nitrogen .brick-body {
+      background: linear-gradient(180deg, #8ED6FF 0%, #5BC0EB 50%, #4AA8D4 100%);
+    }
+    .brick-nitrogen .brick-body::before {
+      background: #3A8AB8;
+    }
+    .brick-nitrogen .stud {
+      background: linear-gradient(180deg, #8ED6FF 0%, #5BC0EB 100%);
+    }
+
+    /* HALOGEN - Green variants */
+    .brick-halogen .brick-body {
+      background: linear-gradient(180deg, #7FE5A0 0%, #5DD47A 50%, #4BC066 100%);
+    }
+    .brick-halogen .brick-body::before {
+      background: #3AA855;
+    }
+    .brick-halogen .stud {
+      background: linear-gradient(180deg, #7FE5A0 0%, #5DD47A 100%);
+    }
+
+    /* AROMATIC - Dark Gray/Charcoal */
+    .brick-aromatic .brick-body {
+      background: linear-gradient(180deg, #6B6B6B 0%, #505050 50%, #3D3D3D 100%);
+      color: rgba(255,255,255,0.9);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .brick-aromatic .brick-body::before {
+      background: #2A2A2A;
+    }
+    .brick-aromatic .stud {
+      background: linear-gradient(180deg, #6B6B6B 0%, #505050 100%);
+    }
+
+    /* CARBONYL - Purple/Mauve */
+    .brick-carbonyl .brick-body {
+      background: linear-gradient(180deg, #C9A0DC 0%, #A855C4 50%, #9244B0 100%);
+      color: rgba(255,255,255,0.9);
+    }
+    .brick-carbonyl .brick-body::before {
+      background: #7A3399;
+    }
+    .brick-carbonyl .stud {
+      background: linear-gradient(180deg, #C9A0DC 0%, #A855C4 100%);
+    }
+
+    /* ═══════════════════════════════════════════
+       BRICK SHAPES BY FUNCTIONAL GROUP
+       ═══════════════════════════════════════════ */
+
+    /* SMALL RECTANGLE - Monovalent (1 stud) */
+    .brick-small .brick-body {
+      width: 50px;
+      height: 40px;
+    }
+
+    /* MEDIUM RECTANGLE - Divalent (2 studs) */
+    .brick-medium .brick-body {
+      width: 70px;
+      height: 40px;
+    }
+
+    /* LARGE RECTANGLE - Trivalent/Tetravalent */
+    .brick-large .brick-body {
+      width: 90px;
+      height: 50px;
+    }
+
+    /* HEXAGON - Aromatic rings */
+    .brick-hexagon .brick-body {
+      width: 80px;
+      height: 70px;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      border-radius: 0;
+    }
+    .brick-hexagon .brick-body::before {
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      bottom: -8px;
+      left: 4px;
+      right: 4px;
+    }
+    .brick-hexagon .brick-body::after {
+      top: 12px;
+      width: 60%;
+      height: 25%;
+    }
+
+    /* LONG BAR - Chains */
+    .brick-bar .brick-body {
+      width: 100px;
+      height: 35px;
+    }
+
+    /* SQUARE - Quaternary carbon */
+    .brick-square .brick-body {
+      width: 55px;
+      height: 55px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SPECIAL ELEMENTS INSIDE BRICKS
+       ═══════════════════════════════════════════ */
+
+    .benzene-ring {
+      width: 30px;
+      height: 26px;
+      border: 3px solid rgba(255,255,255,0.8);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .double-bond {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .double-bond span {
+      width: 20px;
+      height: 3px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 2px;
+    }
+
+    /* ═══════════════════════════════════════════
+       ANIMATION STATES
+       ═══════════════════════════════════════════ */
+
+    .lego-brick.valid {
+      animation: validPulse 1s ease infinite;
+    }
+
+    @keyframes validPulse {
+      0%, 100% { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)) drop-shadow(0 0 10px rgba(100,255,150,0.5)); }
+      50% { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)) drop-shadow(0 0 20px rgba(100,255,150,0.8)); }
+    }
+
+    .lego-brick.warning {
+      animation: warningPulse 0.8s ease infinite;
+    }
+
+    @keyframes warningPulse {
+      0%, 100% { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)) drop-shadow(0 0 10px rgba(255,180,100,0.5)); }
+      50% { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4)) drop-shadow(0 0 20px rgba(255,180,100,0.8)); }
+    }
+
+    .lego-brick.error {
+      animation: errorShake 0.4s ease;
+    }
+
+    @keyframes errorShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px) rotate(-2deg); }
+      40% { transform: translateX(6px) rotate(2deg); }
+      60% { transform: translateX(-4px) rotate(-1deg); }
+      80% { transform: translateX(4px) rotate(1deg); }
+    }
+
+    /* ═══════════════════════════════════════════
+       CONNECTED STATE
+       ═══════════════════════════════════════════ */
+
+    .stud.connected {
+      box-shadow:
+        inset 0 -3px 6px rgba(0,0,0,0.4),
+        inset 0 2px 4px rgba(255,255,255,0.3),
+        0 0 8px rgba(255,255,255,0.6);
+      border-color: rgba(255,255,255,0.5);
+    }
+
+    .stud.connected::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <h1>🧱 HexIsomer LEGO Bricks</h1>
+  <p class="subtitle">Functional Group Sprites with Valence Studs</p>
+
+  <div class="brick-gallery">
+
+    <!-- METHYL (-CH₃) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbon brick-small">
+        <div class="brick-body">CH₃</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Methyl</span>
+      <span class="brick-formula">-CH₃</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- HYDROXYL (-OH) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-oxygen brick-small">
+        <div class="brick-body">OH</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Hydroxyl</span>
+      <span class="brick-formula">-OH</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- AMINO (-NH₂) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-nitrogen brick-small">
+        <div class="brick-body">NH₂</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Amino</span>
+      <span class="brick-formula">-NH₂</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- CHLORO (-Cl) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-halogen brick-small">
+        <div class="brick-body">Cl</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Chloro</span>
+      <span class="brick-formula">-Cl</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- METHYLENE (-CH₂-) - Divalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbon brick-medium">
+        <div class="brick-body">CH₂</div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Methylene</span>
+      <span class="brick-formula">-CH₂-</span>
+      <span class="valence-info">Valence: 2</span>
+    </div>
+
+    <!-- ETHER (-O-) - Divalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-oxygen brick-medium">
+        <div class="brick-body">O</div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Ether</span>
+      <span class="brick-formula">-O-</span>
+      <span class="valence-info">Valence: 2</span>
+    </div>
+
+    <!-- SECONDARY AMINE (-NH-) - Divalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-nitrogen brick-medium">
+        <div class="brick-body">NH</div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Sec. Amine</span>
+      <span class="brick-formula">-NH-</span>
+      <span class="valence-info">Valence: 2</span>
+    </div>
+
+    <!-- CARBONYL (-CO-) - Divalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbonyl brick-medium">
+        <div class="brick-body">
+          <span>C</span>
+          <div class="double-bond"><span></span><span></span></div>
+          <span>O</span>
+        </div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Carbonyl</span>
+      <span class="brick-formula">-C=O</span>
+      <span class="valence-info">Valence: 2</span>
+    </div>
+
+    <!-- METHINE (>CH-) - Trivalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbon brick-large">
+        <div class="brick-body">CH</div>
+        <div class="stud top"></div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Methine</span>
+      <span class="brick-formula">>CH-</span>
+      <span class="valence-info">Valence: 3</span>
+    </div>
+
+    <!-- TERTIARY AMINE (>N-) - Trivalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-nitrogen brick-large">
+        <div class="brick-body">N</div>
+        <div class="stud top"></div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Tert. Amine</span>
+      <span class="brick-formula">>N-</span>
+      <span class="valence-info">Valence: 3</span>
+    </div>
+
+    <!-- QUATERNARY CARBON (>C<) - Tetravalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbon brick-square">
+        <div class="brick-body">C</div>
+        <div class="stud top"></div>
+        <div class="stud bottom"></div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Quaternary</span>
+      <span class="brick-formula">>C&lt;</span>
+      <span class="valence-info">Valence: 4</span>
+    </div>
+
+    <!-- PHENYL (Benzene ring) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-aromatic brick-hexagon">
+        <div class="brick-body">
+          <div class="benzene-ring"></div>
+        </div>
+        <div class="stud right" style="right: -8px; top: 50%;"></div>
+      </div>
+      <span class="brick-label">Phenyl</span>
+      <span class="brick-formula">-C₆H₅</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- PROPYL CHAIN - Divalent Bar -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbon brick-bar">
+        <div class="brick-body">C₃H₆</div>
+        <div class="stud left"></div>
+        <div class="stud right"></div>
+      </div>
+      <span class="brick-label">Propylene</span>
+      <span class="brick-formula">-C₃H₆-</span>
+      <span class="valence-info">Valence: 2</span>
+    </div>
+
+    <!-- CARBOXYL (-COOH) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-oxygen brick-medium">
+        <div class="brick-body" style="font-size: 12px;">COOH</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Carboxyl</span>
+      <span class="brick-formula">-COOH</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+    <!-- ALDEHYDE (-CHO) - Monovalent -->
+    <div class="brick-card">
+      <div class="lego-brick brick-carbonyl brick-small">
+        <div class="brick-body">CHO</div>
+        <div class="stud left"></div>
+      </div>
+      <span class="brick-label">Aldehyde</span>
+      <span class="brick-formula">-CHO</span>
+      <span class="valence-info">Valence: 1</span>
+    </div>
+
+  </div>
+
+  <script>
+    // Demo: Click to toggle states
+    document.querySelectorAll('.lego-brick').forEach(brick => {
+      brick.addEventListener('click', () => {
+        brick.classList.remove('valid', 'warning', 'error');
+        const states = ['', 'valid', 'warning', 'error'];
+        const current = states.indexOf(brick.dataset.state || '');
+        const next = states[(current + 1) % states.length];
+        brick.dataset.state = next;
+        if (next) brick.classList.add(next);
+      });
+    });
+  </script>
+</body>
+</html>
