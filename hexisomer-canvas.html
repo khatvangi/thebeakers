@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HexIsomer - Build Canvas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+      min-height: 100vh;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       LAYOUT
+       ═══════════════════════════════════════════ */
+
+    .game-container {
+      display: grid;
+      grid-template-columns: 280px 1fr 300px;
+      grid-template-rows: auto 1fr auto;
+      height: 100vh;
+      gap: 0;
+    }
+
+    /* Header */
+    .header {
+      grid-column: 1 / -1;
+      background: rgba(0,0,0,0.3);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .header h1 {
+      font-size: 1.4rem;
+      background: linear-gradient(135deg, #ffd60a, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .level-info {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .energy-display {
+      background: rgba(255,255,255,0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .energy-value {
+      color: #ffd60a;
+      font-weight: 700;
+    }
+
+    .target-energy {
+      opacity: 0.6;
+      font-size: 0.8rem;
+    }
+
+    /* Brick Pool (Left Panel) */
+    .brick-pool {
+      background: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+      overflow-y: auto;
+    }
+
+    .pool-title {
+      font-size: 0.9rem;
+      opacity: 0.6;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .pool-bricks {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pool-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: grab;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .pool-item:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.02);
+    }
+
+    .pool-item.dragging {
+      opacity: 0.5;
+    }
+
+    .pool-label {
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    /* Build Canvas (Center) */
+    .build-area {
+      position: relative;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.03) 0%, transparent 70%),
+        repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px),
+        repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px);
+      overflow: hidden;
+    }
+
+    .canvas-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .canvas-hint.hidden {
+      display: none;
+    }
+
+    .canvas-hint h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    /* Right Panel */
+    .info-panel {
+      background: rgba(0,0,0,0.2);
+      padding: 20px;
+      border-left: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      opacity: 0.6;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .molecule-preview {
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+
+    .connection-list {
+      font-size: 0.85rem;
+      line-height: 1.8;
+    }
+
+    .connection-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .connection-item::before {
+      content: '•';
+      color: #5dd47a;
+    }
+
+    /* Footer */
+    .footer {
+      grid-column: 1 / -1;
+      background: rgba(0,0,0,0.3);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #ffd60a, #ffaa00);
+      color: #1a1a2e;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 25px;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+      box-shadow: 0 4px 15px rgba(255,214,10,0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,214,10,0.4);
+    }
+
+    .btn.secondary {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      box-shadow: none;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .footer-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* ═══════════════════════════════════════════
+       DRAGGABLE BRICKS ON CANVAS
+       ═══════════════════════════════════════════ */
+
+    .canvas-brick {
+      position: absolute;
+      cursor: grab;
+      transition: filter 0.15s;
+      z-index: 10;
+    }
+
+    .canvas-brick:hover {
+      filter: brightness(1.1);
+      z-index: 100;
+    }
+
+    .canvas-brick.dragging {
+      cursor: grabbing;
+      z-index: 1000;
+      filter: brightness(1.2) drop-shadow(0 15px 30px rgba(0,0,0,0.5));
+    }
+
+    .canvas-brick.snapping {
+      transition: left 0.2s ease, top 0.2s ease;
+    }
+
+    /* ═══════════════════════════════════════════
+       3D LEWIS BRICK STYLES (copied from sprites)
+       ═══════════════════════════════════════════ */
+
+    .lewis-brick {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.4));
+    }
+
+    .structure-container {
+      position: relative;
+    }
+
+    .atom {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow:
+        inset -3px -3px 8px rgba(0,0,0,0.4),
+        inset 3px 3px 8px rgba(255,255,255,0.3),
+        0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    .atom.large { width: 32px; height: 32px; font-size: 12px; }
+    .atom.medium { width: 24px; height: 24px; font-size: 10px; }
+    .atom.small { width: 18px; height: 18px; font-size: 8px; }
+
+    .atom.carbon { background: radial-gradient(circle at 30% 30%, #555, #333); color: #fff; }
+    .atom.oxygen { background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc4444); color: #fff; }
+    .atom.nitrogen { background: radial-gradient(circle at 30% 30%, #5bc0eb, #3a8ab8); color: #fff; }
+    .atom.hydrogen { background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc); color: #333; }
+    .atom.halogen { background: radial-gradient(circle at 30% 30%, #5dd47a, #3aa855); color: #fff; }
+
+    .bond {
+      position: absolute;
+      background: linear-gradient(90deg, rgba(80,80,80,0.9), rgba(120,120,120,0.9), rgba(80,80,80,0.9));
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .bond.single { height: 5px; }
+    .bond.double { height: 4px; }
+    .bond.double::after {
+      content: '';
+      position: absolute;
+      top: 7px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: inherit;
+      border-radius: inherit;
+    }
+
+    .stud {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd60a, #e6b800);
+      border: 2px solid #cc9900;
+      box-shadow:
+        inset -2px -2px 5px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.4),
+        0 2px 4px rgba(0,0,0,0.4);
+      z-index: 10;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .stud::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 5px;
+      height: 5px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+
+    .stud:hover {
+      transform: scale(1.2);
+      box-shadow:
+        inset -2px -2px 5px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.4),
+        0 0 15px rgba(255,214,10,0.6);
+    }
+
+    .stud.connected {
+      background: radial-gradient(circle at 35% 35%, #5dd47a, #3aa855);
+      border-color: #2a8a3a;
+    }
+
+    .stud.highlight {
+      animation: studPulse 0.5s ease infinite;
+    }
+
+    @keyframes studPulse {
+      0%, 100% { box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.4), 0 0 10px rgba(255,214,10,0.5); }
+      50% { box-shadow: inset -2px -2px 5px rgba(0,0,0,0.3), inset 2px 2px 5px rgba(255,255,255,0.4), 0 0 25px rgba(255,214,10,0.9); }
+    }
+
+    .base-plate {
+      position: absolute;
+      bottom: -10px;
+      background: linear-gradient(180deg, rgba(40,40,40,0.8), rgba(20,20,20,0.9));
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* Connection line between snapped bricks */
+    .connection-line {
+      position: absolute;
+      height: 6px;
+      background: linear-gradient(90deg, #ffd60a, #5dd47a, #ffd60a);
+      border-radius: 3px;
+      box-shadow: 0 0 10px rgba(255,214,10,0.5);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       SPECIFIC BRICK STRUCTURES
+       ═══════════════════════════════════════════ */
+
+    /* Hydroxyl */
+    .hydroxyl-struct { width: 70px; height: 45px; }
+    .hydroxyl-struct .atom.oxygen { left: 30px; top: 8px; }
+    .hydroxyl-struct .atom.hydrogen { left: 55px; top: 4px; }
+    .hydroxyl-struct .bond { left: 45px; top: 14px; width: 15px; transform: rotate(-15deg); }
+    .hydroxyl-struct .stud { left: -5px; top: 12px; }
+    .hydroxyl-struct .base-plate { left: 5px; width: 62px; height: 30px; }
+
+    /* Methyl */
+    .methyl-struct { width: 80px; height: 70px; }
+    .methyl-struct .atom.carbon { left: 28px; top: 25px; }
+    .methyl-struct .atom.hydrogen.h1 { left: 55px; top: 8px; }
+    .methyl-struct .atom.hydrogen.h2 { left: 60px; top: 35px; }
+    .methyl-struct .atom.hydrogen.h3 { left: 40px; top: 52px; }
+    .methyl-struct .bond.b1 { left: 45px; top: 24px; width: 15px; transform: rotate(-35deg); }
+    .methyl-struct .bond.b2 { left: 48px; top: 38px; width: 18px; transform: rotate(20deg); }
+    .methyl-struct .bond.b3 { left: 40px; top: 45px; width: 12px; transform: rotate(70deg); }
+    .methyl-struct .stud { left: -5px; top: 30px; }
+    .methyl-struct .base-plate { left: 5px; width: 70px; height: 50px; }
+
+    /* Methylene */
+    .methylene-struct { width: 95px; height: 60px; }
+    .methylene-struct .atom.carbon { left: 38px; top: 20px; }
+    .methylene-struct .atom.hydrogen.h1 { left: 38px; top: 0px; }
+    .methylene-struct .atom.hydrogen.h2 { left: 38px; top: 42px; }
+    .methylene-struct .bond.b1 { left: 48px; top: 10px; width: 5px; height: 12px; }
+    .methylene-struct .bond.b2 { left: 48px; top: 38px; width: 5px; height: 12px; }
+    .methylene-struct .stud.left { left: -5px; top: 25px; }
+    .methylene-struct .stud.right { left: 82px; top: 25px; }
+    .methylene-struct .base-plate { left: 8px; width: 78px; height: 42px; }
+
+    /* Oxygen (ether) */
+    .ether-struct { width: 75px; height: 40px; }
+    .ether-struct .atom.oxygen { left: 28px; top: 8px; }
+    .ether-struct .stud.left { left: -5px; top: 12px; }
+    .ether-struct .stud.right { left: 62px; top: 12px; }
+    .ether-struct .base-plate { left: 8px; width: 58px; height: 26px; }
+
+    /* Carbonyl */
+    .carbonyl-struct { width: 85px; height: 60px; }
+    .carbonyl-struct .atom.carbon { left: 30px; top: 25px; }
+    .carbonyl-struct .atom.oxygen { left: 30px; top: 0px; }
+    .carbonyl-struct .bond.double { left: 40px; top: 10px; width: 5px; height: 18px; }
+    .carbonyl-struct .stud.left { left: -5px; top: 30px; }
+    .carbonyl-struct .stud.right { left: 72px; top: 30px; }
+    .carbonyl-struct .base-plate { left: 8px; width: 70px; height: 40px; }
+
+    /* Chloro */
+    .chloro-struct { width: 55px; height: 40px; }
+    .chloro-struct .atom.halogen { left: 18px; top: 8px; }
+    .chloro-struct .stud { left: -5px; top: 12px; }
+    .chloro-struct .base-plate { left: 5px; width: 45px; height: 26px; }
+
+    /* Methine (>CH-) - 3 valence */
+    .methine-struct { width: 95px; height: 75px; }
+    .methine-struct .atom.carbon { left: 38px; top: 28px; }
+    .methine-struct .atom.hydrogen { left: 38px; top: 55px; }
+    .methine-struct .bond.b1 { left: 48px; top: 48px; width: 5px; height: 14px; }
+    .methine-struct .stud.left { left: -5px; top: 35px; }
+    .methine-struct .stud.right { left: 82px; top: 35px; }
+    .methine-struct .stud.top { left: 38px; top: -5px; }
+    .methine-struct .base-plate { left: 10px; width: 75px; height: 55px; }
+
+    /* Quaternary Carbon (>C<) - 4 valence */
+    .quaternary-struct { width: 95px; height: 90px; }
+    .quaternary-struct .atom.carbon { left: 38px; top: 35px; }
+    .quaternary-struct .stud.left { left: -5px; top: 35px; }
+    .quaternary-struct .stud.right { left: 82px; top: 35px; }
+    .quaternary-struct .stud.top { left: 38px; top: -5px; }
+    .quaternary-struct .stud.bottom { left: 38px; top: 75px; }
+    .quaternary-struct .base-plate { left: 10px; width: 75px; height: 70px; }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <!-- Header -->
+    <header class="header">
+      <h1>🧪 HexIsomer</h1>
+      <div class="level-info">
+        <span style="opacity: 0.6;">Level 1:</span>
+        <span>Build Ethanol</span>
+        <div class="energy-display">
+          Energy: <span class="energy-value" id="current-energy">0.0</span> kcal/mol
+          <span class="target-energy">| Target: -277.5</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Left: Brick Pool -->
+    <aside class="brick-pool">
+      <div class="pool-title">Functional Groups</div>
+      <div class="pool-bricks" id="brick-pool">
+        <!-- Bricks will be added by JS -->
+      </div>
+    </aside>
+
+    <!-- Center: Build Canvas -->
+    <main class="build-area" id="build-canvas">
+      <div class="canvas-hint" id="canvas-hint">
+        <h2>Drag bricks here</h2>
+        <p>Connect studs to build your molecule</p>
+      </div>
+      <!-- Placed bricks and connection lines appear here -->
+    </main>
+
+    <!-- Right: Info Panel -->
+    <aside class="info-panel">
+      <div class="panel-section">
+        <div class="section-title">Lewis Structure</div>
+        <div class="molecule-preview" id="lewis-preview">
+          Connect bricks to see structure
+        </div>
+      </div>
+      <div class="panel-section">
+        <div class="section-title">Connections</div>
+        <div class="connection-list" id="connection-list">
+          No connections yet
+        </div>
+      </div>
+      <div class="panel-section">
+        <div class="section-title">Hints</div>
+        <div style="font-size: 0.85rem; opacity: 0.7; line-height: 1.6;">
+          Ethanol has:<br>
+          • 2 carbons (CH₃ + CH₂)<br>
+          • 1 oxygen (OH)<br>
+          • Formula: C₂H₆O
+        </div>
+      </div>
+    </aside>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-left">
+        <button class="btn secondary" onclick="resetCanvas()">↺ Reset</button>
+        <button class="btn secondary" onclick="undoLast()">← Undo</button>
+      </div>
+      <button class="btn" onclick="checkSolution()">Check Solution ✓</button>
+    </footer>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════
+    // GAME STATE
+    // ═══════════════════════════════════════════
+
+    const state = {
+      bricks: [],           // Bricks placed on canvas
+      connections: [],      // Stud-to-stud connections
+      draggedBrick: null,
+      dragOffset: { x: 0, y: 0 },
+      nextBrickId: 1
+    };
+
+    // Brick definitions
+    const BRICK_TYPES = {
+      methyl: {
+        name: 'Methyl',
+        formula: '-CH₃',
+        studs: [{ id: 'left', x: -5, y: 30 }],
+        struct: 'methyl-struct',
+        html: `
+          <div class="structure-container methyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen h1">H</div>
+            <div class="atom small hydrogen h2">H</div>
+            <div class="atom small hydrogen h3">H</div>
+            <div class="bond single b1"></div>
+            <div class="bond single b2"></div>
+            <div class="bond single b3"></div>
+            <div class="stud" data-stud="left"></div>
+          </div>
+        `
+      },
+      methylene: {
+        name: 'Methylene',
+        formula: '-CH₂-',
+        studs: [{ id: 'left', x: -5, y: 25 }, { id: 'right', x: 82, y: 25 }],
+        struct: 'methylene-struct',
+        html: `
+          <div class="structure-container methylene-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen h1">H</div>
+            <div class="atom small hydrogen h2">H</div>
+            <div class="bond single b1"></div>
+            <div class="bond single b2"></div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      hydroxyl: {
+        name: 'Hydroxyl',
+        formula: '-OH',
+        studs: [{ id: 'left', x: -5, y: 12 }],
+        struct: 'hydroxyl-struct',
+        html: `
+          <div class="structure-container hydroxyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom medium oxygen">O</div>
+            <div class="atom small hydrogen">H</div>
+            <div class="bond single"></div>
+            <div class="stud" data-stud="left"></div>
+          </div>
+        `
+      },
+      ether: {
+        name: 'Ether',
+        formula: '-O-',
+        studs: [{ id: 'left', x: -5, y: 12 }, { id: 'right', x: 62, y: 12 }],
+        struct: 'ether-struct',
+        html: `
+          <div class="structure-container ether-struct">
+            <div class="base-plate"></div>
+            <div class="atom large oxygen">O</div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      carbonyl: {
+        name: 'Carbonyl',
+        formula: '=C=O',
+        studs: [{ id: 'left', x: -5, y: 30 }, { id: 'right', x: 72, y: 30 }],
+        struct: 'carbonyl-struct',
+        html: `
+          <div class="structure-container carbonyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom medium oxygen">O</div>
+            <div class="bond double"></div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      methine: {
+        name: 'Methine',
+        formula: '>CH-',
+        studs: [
+          { id: 'left', x: -5, y: 35 },
+          { id: 'right', x: 82, y: 35 },
+          { id: 'top', x: 38, y: -5 }
+        ],
+        struct: 'methine-struct',
+        html: `
+          <div class="structure-container methine-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen">H</div>
+            <div class="bond single b1"></div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+            <div class="stud top" data-stud="top"></div>
+          </div>
+        `
+      },
+      quaternary: {
+        name: 'Carbon',
+        formula: '>C<',
+        studs: [
+          { id: 'left', x: -5, y: 35 },
+          { id: 'right', x: 82, y: 35 },
+          { id: 'top', x: 38, y: -5 },
+          { id: 'bottom', x: 38, y: 75 }
+        ],
+        struct: 'quaternary-struct',
+        html: `
+          <div class="structure-container quaternary-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+            <div class="stud top" data-stud="top"></div>
+            <div class="stud bottom" data-stud="bottom"></div>
+          </div>
+        `
+      }
+    };
+
+    // ═══════════════════════════════════════════
+    // INITIALIZE
+    // ═══════════════════════════════════════════
+
+    function init() {
+      renderBrickPool();
+      setupCanvasListeners();
+    }
+
+    function renderBrickPool() {
+      const pool = document.getElementById('brick-pool');
+      pool.innerHTML = '';
+
+      // Core carbon units + oxygen
+      const availableBricks = ['methyl', 'methylene', 'methine', 'quaternary', 'ether', 'hydroxyl'];
+
+      availableBricks.forEach(type => {
+        const brick = BRICK_TYPES[type];
+        const item = document.createElement('div');
+        item.className = 'pool-item';
+        item.dataset.brickType = type;
+        item.innerHTML = `
+          <div class="lewis-brick">${brick.html}</div>
+          <span class="pool-label">${brick.name} (${brick.formula})</span>
+        `;
+        item.draggable = true;
+        item.addEventListener('dragstart', onPoolDragStart);
+        item.addEventListener('dragend', onPoolDragEnd);
+        pool.appendChild(item);
+      });
+    }
+
+    // ═══════════════════════════════════════════
+    // DRAG FROM POOL
+    // ═══════════════════════════════════════════
+
+    function onPoolDragStart(e) {
+      const type = e.currentTarget.dataset.brickType;
+      e.dataTransfer.setData('brickType', type);
+      e.currentTarget.classList.add('dragging');
+    }
+
+    function onPoolDragEnd(e) {
+      e.currentTarget.classList.remove('dragging');
+    }
+
+    // ═══════════════════════════════════════════
+    // CANVAS LISTENERS
+    // ═══════════════════════════════════════════
+
+    function setupCanvasListeners() {
+      const canvas = document.getElementById('build-canvas');
+
+      canvas.addEventListener('dragover', e => {
+        e.preventDefault();
+      });
+
+      canvas.addEventListener('drop', e => {
+        e.preventDefault();
+        const type = e.dataTransfer.getData('brickType');
+        if (type && BRICK_TYPES[type]) {
+          const rect = canvas.getBoundingClientRect();
+          const x = e.clientX - rect.left - 40;
+          const y = e.clientY - rect.top - 30;
+          addBrickToCanvas(type, x, y);
+        }
+      });
+
+      // Mouse move for dragging placed bricks
+      canvas.addEventListener('mousemove', onCanvasMouseMove);
+      canvas.addEventListener('mouseup', onCanvasMouseUp);
+      canvas.addEventListener('mouseleave', onCanvasMouseUp);
+    }
+
+    // ═══════════════════════════════════════════
+    // ADD BRICK TO CANVAS
+    // ═══════════════════════════════════════════
+
+    function addBrickToCanvas(type, x, y) {
+      const brickDef = BRICK_TYPES[type];
+      const id = state.nextBrickId++;
+
+      const brick = {
+        id,
+        type,
+        x,
+        y,
+        studs: brickDef.studs.map(s => ({ ...s, connected: false }))
+      };
+
+      state.bricks.push(brick);
+      renderCanvasBrick(brick);
+      hideCanvasHint();
+      updateEnergy();
+      updateConnectionList();
+    }
+
+    function renderCanvasBrick(brick) {
+      const canvas = document.getElementById('build-canvas');
+      const brickDef = BRICK_TYPES[brick.type];
+
+      const el = document.createElement('div');
+      el.className = 'canvas-brick';
+      el.id = `brick-${brick.id}`;
+      el.style.left = `${brick.x}px`;
+      el.style.top = `${brick.y}px`;
+      el.innerHTML = `<div class="lewis-brick">${brickDef.html}</div>`;
+
+      // Add mousedown for dragging
+      el.addEventListener('mousedown', e => onBrickMouseDown(e, brick.id));
+
+      // Add stud click handlers
+      el.querySelectorAll('.stud').forEach(studEl => {
+        studEl.addEventListener('click', e => {
+          e.stopPropagation();
+          onStudClick(brick.id, studEl.dataset.stud);
+        });
+      });
+
+      canvas.appendChild(el);
+    }
+
+    // ═══════════════════════════════════════════
+    // DRAG PLACED BRICKS
+    // ═══════════════════════════════════════════
+
+    function onBrickMouseDown(e, brickId) {
+      const brick = state.bricks.find(b => b.id === brickId);
+      if (!brick) return;
+
+      const el = document.getElementById(`brick-${brickId}`);
+      const rect = el.getBoundingClientRect();
+
+      state.draggedBrick = brick;
+      state.dragOffset = {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      };
+
+      el.classList.add('dragging');
+      e.preventDefault();
+    }
+
+    function onCanvasMouseMove(e) {
+      if (!state.draggedBrick) return;
+
+      const canvas = document.getElementById('build-canvas');
+      const rect = canvas.getBoundingClientRect();
+
+      const x = e.clientX - rect.left - state.dragOffset.x;
+      const y = e.clientY - rect.top - state.dragOffset.y;
+
+      state.draggedBrick.x = x;
+      state.draggedBrick.y = y;
+
+      const el = document.getElementById(`brick-${state.draggedBrick.id}`);
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+
+      // Check for nearby studs to highlight
+      highlightNearbyStuds(state.draggedBrick);
+      updateConnectionLines();
+    }
+
+    function onCanvasMouseUp() {
+      if (!state.draggedBrick) return;
+
+      const el = document.getElementById(`brick-${state.draggedBrick.id}`);
+      el.classList.remove('dragging');
+
+      // Try to snap to nearby stud
+      trySnapToStud(state.draggedBrick);
+
+      state.draggedBrick = null;
+      clearStudHighlights();
+      updateEnergy();
+    }
+
+    // ═══════════════════════════════════════════
+    // STUD SNAPPING
+    // ═══════════════════════════════════════════
+
+    const SNAP_DISTANCE = 40;
+
+    function getStudWorldPosition(brick, stud) {
+      return {
+        x: brick.x + stud.x + 8, // +8 for stud center
+        y: brick.y + stud.y + 8
+      };
+    }
+
+    function highlightNearbyStuds(draggedBrick) {
+      clearStudHighlights();
+
+      state.bricks.forEach(otherBrick => {
+        if (otherBrick.id === draggedBrick.id) return;
+
+        otherBrick.studs.forEach(otherStud => {
+          if (otherStud.connected) return;
+
+          draggedBrick.studs.forEach(myStud => {
+            if (myStud.connected) return;
+
+            const myPos = getStudWorldPosition(draggedBrick, myStud);
+            const otherPos = getStudWorldPosition(otherBrick, otherStud);
+            const dist = Math.hypot(myPos.x - otherPos.x, myPos.y - otherPos.y);
+
+            if (dist < SNAP_DISTANCE) {
+              const otherEl = document.getElementById(`brick-${otherBrick.id}`);
+              const studEl = otherEl.querySelector(`[data-stud="${otherStud.id}"]`);
+              if (studEl) studEl.classList.add('highlight');
+            }
+          });
+        });
+      });
+    }
+
+    function clearStudHighlights() {
+      document.querySelectorAll('.stud.highlight').forEach(el => {
+        el.classList.remove('highlight');
+      });
+    }
+
+    function trySnapToStud(draggedBrick) {
+      let bestSnap = null;
+      let bestDist = SNAP_DISTANCE;
+
+      state.bricks.forEach(otherBrick => {
+        if (otherBrick.id === draggedBrick.id) return;
+
+        otherBrick.studs.forEach(otherStud => {
+          if (otherStud.connected) return;
+
+          draggedBrick.studs.forEach(myStud => {
+            if (myStud.connected) return;
+
+            const myPos = getStudWorldPosition(draggedBrick, myStud);
+            const otherPos = getStudWorldPosition(otherBrick, otherStud);
+            const dist = Math.hypot(myPos.x - otherPos.x, myPos.y - otherPos.y);
+
+            if (dist < bestDist) {
+              bestDist = dist;
+              bestSnap = {
+                draggedBrick,
+                myStud,
+                otherBrick,
+                otherStud,
+                targetPos: {
+                  x: otherBrick.x + otherStud.x - myStud.x,
+                  y: otherBrick.y + otherStud.y - myStud.y
+                }
+              };
+            }
+          });
+        });
+      });
+
+      if (bestSnap) {
+        // Snap position
+        draggedBrick.x = bestSnap.targetPos.x;
+        draggedBrick.y = bestSnap.targetPos.y;
+
+        const el = document.getElementById(`brick-${draggedBrick.id}`);
+        el.classList.add('snapping');
+        el.style.left = `${draggedBrick.x}px`;
+        el.style.top = `${draggedBrick.y}px`;
+        setTimeout(() => el.classList.remove('snapping'), 200);
+
+        // Create connection
+        createConnection(
+          draggedBrick.id, bestSnap.myStud.id,
+          bestSnap.otherBrick.id, bestSnap.otherStud.id
+        );
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // CONNECTIONS
+    // ═══════════════════════════════════════════
+
+    function createConnection(brick1Id, stud1Id, brick2Id, stud2Id) {
+      const brick1 = state.bricks.find(b => b.id === brick1Id);
+      const brick2 = state.bricks.find(b => b.id === brick2Id);
+      const stud1 = brick1.studs.find(s => s.id === stud1Id);
+      const stud2 = brick2.studs.find(s => s.id === stud2Id);
+
+      stud1.connected = true;
+      stud2.connected = true;
+
+      state.connections.push({
+        brick1Id, stud1Id,
+        brick2Id, stud2Id
+      });
+
+      // Update stud visuals
+      updateStudVisual(brick1Id, stud1Id, true);
+      updateStudVisual(brick2Id, stud2Id, true);
+
+      updateConnectionLines();
+      updateConnectionList();
+    }
+
+    function updateStudVisual(brickId, studId, connected) {
+      const el = document.getElementById(`brick-${brickId}`);
+      const studEl = el.querySelector(`[data-stud="${studId}"]`);
+      if (studEl) {
+        if (connected) {
+          studEl.classList.add('connected');
+        } else {
+          studEl.classList.remove('connected');
+        }
+      }
+    }
+
+    function updateConnectionLines() {
+      // Remove old lines
+      document.querySelectorAll('.connection-line').forEach(el => el.remove());
+
+      const canvas = document.getElementById('build-canvas');
+
+      state.connections.forEach(conn => {
+        const brick1 = state.bricks.find(b => b.id === conn.brick1Id);
+        const brick2 = state.bricks.find(b => b.id === conn.brick2Id);
+        const stud1 = brick1.studs.find(s => s.id === conn.stud1Id);
+        const stud2 = brick2.studs.find(s => s.id === conn.stud2Id);
+
+        const pos1 = getStudWorldPosition(brick1, stud1);
+        const pos2 = getStudWorldPosition(brick2, stud2);
+
+        const line = document.createElement('div');
+        line.className = 'connection-line';
+
+        const dx = pos2.x - pos1.x;
+        const dy = pos2.y - pos1.y;
+        const length = Math.hypot(dx, dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+        line.style.left = `${pos1.x}px`;
+        line.style.top = `${pos1.y - 3}px`;
+        line.style.width = `${length}px`;
+        line.style.transform = `rotate(${angle}deg)`;
+
+        canvas.appendChild(line);
+      });
+    }
+
+    function updateConnectionList() {
+      const list = document.getElementById('connection-list');
+
+      if (state.connections.length === 0) {
+        list.innerHTML = 'No connections yet';
+        return;
+      }
+
+      list.innerHTML = state.connections.map(conn => {
+        const brick1 = state.bricks.find(b => b.id === conn.brick1Id);
+        const brick2 = state.bricks.find(b => b.id === conn.brick2Id);
+        const type1 = BRICK_TYPES[brick1.type];
+        const type2 = BRICK_TYPES[brick2.type];
+        return `<div class="connection-item">${type1.name} — ${type2.name}</div>`;
+      }).join('');
+    }
+
+    // ═══════════════════════════════════════════
+    // ENERGY CALCULATION (simplified)
+    // ═══════════════════════════════════════════
+
+    const ENERGY_VALUES = {
+      methyl: -40,      // CH₃
+      methylene: -35,   // CH₂
+      methine: -30,     // CH
+      quaternary: -25,  // C
+      hydroxyl: -180,   // OH
+      ether: -100,      // O
+      carbonyl: -120,
+      chloro: -50
+    };
+
+    const CONNECTION_BONUS = -10; // Energy bonus per connection
+
+    function updateEnergy() {
+      let energy = 0;
+
+      state.bricks.forEach(brick => {
+        energy += ENERGY_VALUES[brick.type] || 0;
+      });
+
+      energy += state.connections.length * CONNECTION_BONUS;
+
+      document.getElementById('current-energy').textContent = energy.toFixed(1);
+    }
+
+    // ═══════════════════════════════════════════
+    // UTILITIES
+    // ═══════════════════════════════════════════
+
+    function hideCanvasHint() {
+      document.getElementById('canvas-hint').classList.add('hidden');
+    }
+
+    function resetCanvas() {
+      // Remove all bricks and connections
+      state.bricks = [];
+      state.connections = [];
+
+      document.querySelectorAll('.canvas-brick, .connection-line').forEach(el => el.remove());
+      document.getElementById('canvas-hint').classList.remove('hidden');
+      updateEnergy();
+      updateConnectionList();
+    }
+
+    function undoLast() {
+      if (state.bricks.length === 0) return;
+
+      const lastBrick = state.bricks.pop();
+
+      // Remove connections involving this brick
+      state.connections = state.connections.filter(conn => {
+        if (conn.brick1Id === lastBrick.id || conn.brick2Id === lastBrick.id) {
+          // Disconnect the other stud
+          const otherId = conn.brick1Id === lastBrick.id ? conn.brick2Id : conn.brick1Id;
+          const otherStudId = conn.brick1Id === lastBrick.id ? conn.stud2Id : conn.stud1Id;
+          const otherBrick = state.bricks.find(b => b.id === otherId);
+          if (otherBrick) {
+            const stud = otherBrick.studs.find(s => s.id === otherStudId);
+            if (stud) stud.connected = false;
+            updateStudVisual(otherId, otherStudId, false);
+          }
+          return false;
+        }
+        return true;
+      });
+
+      document.getElementById(`brick-${lastBrick.id}`)?.remove();
+      updateConnectionLines();
+      updateEnergy();
+      updateConnectionList();
+
+      if (state.bricks.length === 0) {
+        document.getElementById('canvas-hint').classList.remove('hidden');
+      }
+    }
+
+    function checkSolution() {
+      // For ethanol: CH₃-CH₂-OH
+      // Need: 1 methyl, 1 methylene, 1 hydroxyl, 2 connections
+
+      const counts = {};
+      state.bricks.forEach(b => {
+        counts[b.type] = (counts[b.type] || 0) + 1;
+      });
+
+      const isCorrect = (
+        counts.methyl === 1 &&
+        counts.methylene === 1 &&
+        counts.hydroxyl === 1 &&
+        state.connections.length === 2
+      );
+
+      if (isCorrect) {
+        alert('🎉 Correct! You built ethanol (C₂H₆O)!');
+      } else {
+        alert('Not quite right. Hint: Ethanol is CH₃-CH₂-OH');
+      }
+    }
+
+    function onStudClick(brickId, studId) {
+      // Future: manual connection mode
+      console.log('Clicked stud:', brickId, studId);
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>
