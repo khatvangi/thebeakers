@@ -1,0 +1,6 @@
+# The Beakers - STEM Research for Students
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://thebeakers.com/sitemap.xml
