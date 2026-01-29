@@ -14,7 +14,7 @@
     // config - update PLAUSIBLE_DOMAIN when ready
     const PLAUSIBLE_DOMAIN = 'thebeakers.com';
     const PLAUSIBLE_API = 'https://plausible.io/api/event';  // or self-hosted URL
-    const ENABLED = false;  // set true when plausible is configured
+    const ENABLED = true;  // enabled for thebeakers.com
 
     if (!ENABLED) return;
 
