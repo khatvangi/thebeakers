@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HexIsomer - Chemical LEGO Anagram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0a0f1a;
+      --bg-mid: #131b2e;
+      --bg-card: rgba(255,255,255,0.03);
+      --accent-gold: #ffd60a;
+      --accent-coral: #ff6b6b;
+      --accent-teal: #00d9ff;
+      --text-primary: #f0f0f0;
+      --text-muted: rgba(255,255,255,0.5);
+      --success: #4ade80;
+      --warning: #fb923c;
+      --error: #f87171;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-mid) 50%, #1e293b 100%);
+      min-height: 100vh;
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER - Level Info
+       ═══════════════════════════════════════════ */
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background: rgba(0,0,0,0.3);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .level-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .level-badge {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: #000;
+    }
+
+    .level-name {
+      font-size: 1.4rem;
+      font-weight: 600;
+    }
+
+    .mystery-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .game-controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    .control-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .control-btn:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+
+    .control-btn.primary {
+      background: linear-gradient(135deg, var(--accent-teal), #0099cc);
+      border: none;
+      font-weight: 600;
+    }
+
+    /* ═══════════════════════════════════════════
+       MAIN GAME LAYOUT
+       ═══════════════════════════════════════════ */
+
+    .game-container {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 0;
+      height: calc(100vh - 80px);
+    }
+
+    /* ═══════════════════════════════════════════
+       LEFT: BUILD CANVAS
+       ═══════════════════════════════════════════ */
+
+    .build-section {
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      gap: 20px;
+    }
+
+    .section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+
+    .build-canvas {
+      flex: 1;
+      background: radial-gradient(circle at 50% 50%, rgba(30,40,60,0.8), rgba(10,15,26,0.95));
+      border-radius: 20px;
+      border: 2px dashed rgba(255,255,255,0.1);
+      position: relative;
+      overflow: hidden;
+      min-height: 400px;
+    }
+
+    .canvas-hint {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: var(--text-muted);
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    .canvas-hint.hidden {
+      opacity: 0;
+    }
+
+    .canvas-hint-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    /* Grid overlay */
+    .build-canvas::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at center, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       BRICK TRAY (Given Pieces)
+       ═══════════════════════════════════════════ */
+
+    .brick-tray {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .tray-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .pieces-count {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .tray-bricks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+
+    /* ═══════════════════════════════════════════
+       RIGHT: ENERGY & INFO PANEL
+       ═══════════════════════════════════════════ */
+
+    .info-panel {
+      background: rgba(0,0,0,0.4);
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      border-left: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Target Energy Display */
+    .target-energy {
+      background: linear-gradient(135deg, rgba(255,214,10,0.1), rgba(255,107,107,0.05));
+      border: 1px solid rgba(255,214,10,0.3);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .target-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      margin-bottom: 8px;
+    }
+
+    .target-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--accent-gold);
+    }
+
+    .target-unit {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Your Energy Display */
+    .your-energy {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .your-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .your-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .your-value.empty {
+      color: var(--text-muted);
+    }
+
+    .your-value.close {
+      color: var(--success);
+    }
+
+    .your-value.medium {
+      color: var(--warning);
+    }
+
+    .your-value.far {
+      color: var(--error);
+    }
+
+    /* Energy Difference Meter */
+    .energy-diff {
+      margin-top: 10px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .diff-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .diff-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease, background 0.3s;
+    }
+
+    .diff-text {
+      font-size: 0.8rem;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    /* Star Rating Preview */
+    .star-preview {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .star {
+      width: 32px;
+      height: 32px;
+      font-size: 1.5rem;
+      opacity: 0.2;
+      transition: all 0.3s;
+    }
+
+    .star.earned {
+      opacity: 1;
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 8px var(--accent-gold));
+    }
+
+    /* Connection Status */
+    .connection-status {
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      padding: 15px;
+    }
+
+    .status-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .status-dot.connected { background: var(--success); }
+    .status-dot.open { background: var(--warning); }
+    .status-dot.invalid { background: var(--error); }
+
+    /* Submit Button */
+    .submit-btn {
+      background: linear-gradient(135deg, var(--success), #22c55e);
+      border: none;
+      color: #000;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: auto;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(74, 222, 128, 0.4);
+    }
+
+    .submit-btn:disabled {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ═══════════════════════════════════════════
+       3D LEWIS BRICKS (from lego-3d.html)
+       ═══════════════════════════════════════════ */
+
+    .lewis-brick {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+      transition: transform 0.2s ease, filter 0.2s ease;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.5));
+      transform-style: preserve-3d;
+      user-select: none;
+    }
+
+    .lewis-brick:hover {
+      transform: translateY(-4px) rotateX(-3deg) rotateY(3deg);
+      filter: drop-shadow(0 12px 24px rgba(0,0,0,0.6));
+    }
+
+    .lewis-brick.dragging {
+      cursor: grabbing;
+      transform: scale(1.1) rotateX(-5deg) rotateY(5deg);
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.7));
+      z-index: 1000;
+    }
+
+    .lewis-brick.placed {
+      cursor: move;
+    }
+
+    .lewis-brick.snap-valid .stud {
+      animation: validGlow 0.8s ease infinite;
+    }
+
+    @keyframes validGlow {
+      0%, 100% { box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.4), 0 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(74,222,128,0.8); }
+      50% { box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3), inset 2px 2px 6px rgba(255,255,255,0.4), 0 3px 6px rgba(0,0,0,0.4), 0 0 30px rgba(74,222,128,1); }
+    }
+
+    /* Atoms */
+    .atom {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 10px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow:
+        inset -4px -4px 10px rgba(0,0,0,0.4),
+        inset 4px 4px 10px rgba(255,255,255,0.3),
+        0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    .atom.large { width: 32px; height: 32px; font-size: 12px; }
+    .atom.medium { width: 24px; height: 24px; font-size: 10px; }
+    .atom.small { width: 18px; height: 18px; font-size: 8px; }
+
+    .atom.carbon { background: radial-gradient(circle at 30% 30%, #555, #333); color: #fff; }
+    .atom.oxygen { background: radial-gradient(circle at 30% 30%, #ff6b6b, #cc4444); color: #fff; }
+    .atom.nitrogen { background: radial-gradient(circle at 30% 30%, #5bc0eb, #3a8ab8); color: #fff; }
+    .atom.hydrogen { background: radial-gradient(circle at 30% 30%, #f0f0f0, #ccc); color: #333; }
+
+    /* Bonds */
+    .bond {
+      position: absolute;
+      background: linear-gradient(90deg, rgba(80,80,80,0.9), rgba(120,120,120,0.9), rgba(80,80,80,0.9));
+      border-radius: 3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.2);
+      transform-origin: left center;
+    }
+
+    .bond.single { height: 5px; }
+
+    /* Studs */
+    .stud {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd60a, #e6b800);
+      border: 2px solid #cc9900;
+      box-shadow:
+        inset -2px -2px 5px rgba(0,0,0,0.3),
+        inset 2px 2px 5px rgba(255,255,255,0.4),
+        0 3px 5px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .stud::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 5px;
+      height: 5px;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+    }
+
+    .stud.connected {
+      background: radial-gradient(circle at 35% 35%, var(--success), #22c55e);
+      border-color: #16a34a;
+    }
+
+    /* Base plate */
+    .base-plate {
+      position: absolute;
+      bottom: -10px;
+      background: linear-gradient(180deg, rgba(40,40,40,0.8), rgba(20,20,20,0.9));
+      border-radius: 6px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      z-index: -1;
+    }
+
+    /* Brick structure containers */
+    .structure-container {
+      position: relative;
+    }
+
+    /* ═══════════════════════════════════════════
+       SPECIFIC BRICK LAYOUTS (scaled down for tray)
+       ═══════════════════════════════════════════ */
+
+    .brick-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brick-name {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Methyl -CH3 */
+    .methyl-struct { width: 75px; height: 65px; }
+    .methyl-struct .atom.carbon { left: 28px; top: 24px; }
+    .methyl-struct .atom.hydrogen.h1 { left: 52px; top: 8px; }
+    .methyl-struct .atom.hydrogen.h2 { left: 56px; top: 32px; }
+    .methyl-struct .atom.hydrogen.h3 { left: 40px; top: 48px; }
+    .methyl-struct .bond.ch1 { left: 42px; top: 22px; width: 14px; transform: rotate(-35deg); }
+    .methyl-struct .bond.ch2 { left: 42px; top: 34px; width: 18px; transform: rotate(20deg); }
+    .methyl-struct .bond.ch3 { left: 36px; top: 40px; width: 12px; transform: rotate(70deg); }
+    .methyl-struct .stud { left: -4px; top: 28px; }
+    .methyl-struct .base-plate { left: 4px; width: 68px; height: 45px; }
+
+    /* Methylene -CH2- */
+    .methylene-struct { width: 90px; height: 55px; }
+    .methylene-struct .atom.carbon { left: 36px; top: 18px; }
+    .methylene-struct .atom.hydrogen.h1 { left: 36px; top: 0; }
+    .methylene-struct .atom.hydrogen.h2 { left: 36px; top: 38px; }
+    .methylene-struct .bond.ch1 { left: 44px; top: 8px; width: 5px; height: 12px; }
+    .methylene-struct .bond.ch2 { left: 44px; top: 32px; width: 5px; height: 12px; }
+    .methylene-struct .stud.left { left: -4px; top: 22px; }
+    .methylene-struct .stud.right { left: 78px; top: 22px; }
+    .methylene-struct .base-plate { left: 8px; width: 74px; height: 38px; }
+
+    /* Hydroxyl -OH */
+    .hydroxyl-struct { width: 65px; height: 40px; }
+    .hydroxyl-struct .atom.oxygen { left: 28px; top: 8px; }
+    .hydroxyl-struct .atom.hydrogen { left: 52px; top: 4px; }
+    .hydroxyl-struct .bond.oh { left: 40px; top: 12px; width: 16px; transform: rotate(-12deg); }
+    .hydroxyl-struct .stud { left: -4px; top: 12px; }
+    .hydroxyl-struct .base-plate { left: 4px; width: 58px; height: 26px; }
+
+    /* Methanediyl -CH< (trivalent carbon) */
+    .methanediyl-struct { width: 80px; height: 70px; }
+    .methanediyl-struct .atom.carbon { left: 32px; top: 28px; }
+    .methanediyl-struct .atom.hydrogen { left: 32px; top: 52px; }
+    .methanediyl-struct .bond.ch { left: 40px; top: 42px; width: 5px; height: 14px; }
+    .methanediyl-struct .stud.left { left: -4px; top: 32px; }
+    .methanediyl-struct .stud.top { left: 56px; top: 4px; }
+    .methanediyl-struct .stud.right { left: 66px; top: 32px; }
+    .methanediyl-struct .base-plate { left: 4px; width: 72px; height: 50px; }
+
+    /* Carbon -C (tetravalent) */
+    .carbon-struct { width: 70px; height: 70px; }
+    .carbon-struct .atom.carbon { left: 26px; top: 26px; }
+    .carbon-struct .stud.left { left: -4px; top: 30px; }
+    .carbon-struct .stud.top { left: 30px; top: -4px; }
+    .carbon-struct .stud.right { left: 56px; top: 30px; }
+    .carbon-struct .stud.bottom { left: 30px; top: 56px; }
+    .carbon-struct .base-plate { left: 4px; width: 62px; height: 55px; }
+
+    /* Oxygen -O- (ether) */
+    .ether-struct { width: 70px; height: 40px; }
+    .ether-struct .atom.oxygen { left: 26px; top: 8px; }
+    .ether-struct .stud.left { left: -4px; top: 12px; }
+    .ether-struct .stud.right { left: 58px; top: 12px; }
+    .ether-struct .base-plate { left: 8px; width: 54px; height: 24px; }
+
+    /* ═══════════════════════════════════════════
+       WIN MODAL
+       ═══════════════════════════════════════════ */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: linear-gradient(160deg, var(--bg-mid), var(--bg-deep));
+      border-radius: 24px;
+      padding: 40px 50px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.1);
+      transform: scale(0.9);
+      transition: transform 0.3s;
+      max-width: 500px;
+    }
+
+    .modal-overlay.visible .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-stars {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .modal-discovery {
+      background: linear-gradient(135deg, rgba(74,222,128,0.2), rgba(74,222,128,0.05));
+      border: 1px solid var(--success);
+      border-radius: 12px;
+      padding: 15px;
+      margin: 20px 0;
+    }
+
+    .modal-discovery-title {
+      color: var(--success);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .modal-energy {
+      font-family: 'JetBrains Mono', monospace;
+      margin: 20px 0;
+    }
+
+    .modal-btns {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .modal-btn {
+      padding: 12px 28px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-btn.secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--text-primary);
+    }
+
+    .modal-btn.primary {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+      border: none;
+      color: #000;
+    }
+
+    .modal-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* ═══════════════════════════════════════════
+       ANIMATIONS
+       ═══════════════════════════════════════════ */
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .floating {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .pulsing {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="game-header">
+    <div class="level-info">
+      <span class="level-badge">Level 1</span>
+      <div>
+        <div class="level-name">Ethanol</div>
+        <div class="mystery-label">Build the mystery molecule</div>
+      </div>
+    </div>
+    <div class="game-controls">
+      <button class="control-btn" onclick="resetCanvas()">↻ Reset</button>
+      <button class="control-btn" onclick="showHint()">💡 Hint</button>
+      <button class="control-btn primary" onclick="checkSolution()">Check 🧪</button>
+    </div>
+  </header>
+
+  <!-- MAIN GAME -->
+  <main class="game-container">
+
+    <!-- LEFT: BUILD AREA -->
+    <section class="build-section">
+
+      <!-- Brick Tray -->
+      <div class="brick-tray">
+        <div class="tray-title">
+          <span class="section-title">Your Bricks</span>
+          <span class="pieces-count" id="piecesCount">3 pieces</span>
+        </div>
+        <div class="tray-bricks" id="trayBricks">
+          <!-- Bricks will be populated by JS -->
+        </div>
+      </div>
+
+      <!-- Build Canvas -->
+      <div class="build-canvas" id="buildCanvas">
+        <div class="canvas-hint" id="canvasHint">
+          <div class="canvas-hint-icon">🧱</div>
+          <div>Drag bricks here to build</div>
+          <div style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">Snap studs together to connect</div>
+        </div>
+        <!-- Placed bricks appear here -->
+      </div>
+
+    </section>
+
+    <!-- RIGHT: INFO PANEL -->
+    <aside class="info-panel">
+
+      <!-- Target Energy -->
+      <div class="target-energy">
+        <div class="target-label">🎯 Target Energy</div>
+        <div class="target-value" id="targetEnergy">-277.6</div>
+        <div class="target-unit">kJ/mol</div>
+      </div>
+
+      <!-- Your Energy -->
+      <div class="your-energy">
+        <div class="your-label">Your Build</div>
+        <div class="your-value empty" id="yourEnergy">—</div>
+        <div class="target-unit">kJ/mol</div>
+
+        <div class="energy-diff">
+          <div class="diff-bar">
+            <div class="diff-fill" id="diffFill" style="width: 0%; background: var(--text-muted);"></div>
+          </div>
+          <div class="diff-text" id="diffText">Place bricks to start</div>
+        </div>
+
+        <div class="star-preview">
+          <span class="star" id="star1">⭐</span>
+          <span class="star" id="star2">⭐</span>
+          <span class="star" id="star3">⭐</span>
+        </div>
+      </div>
+
+      <!-- Connection Status -->
+      <div class="connection-status">
+        <div class="status-title">Connections</div>
+        <div class="status-list" id="connectionsList">
+          <div class="status-item">
+            <span class="status-dot open"></span>
+            <span>Place bricks to see connections</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button class="submit-btn" id="submitBtn" disabled onclick="submitSolution()">
+        Complete Molecule ✓
+      </button>
+
+    </aside>
+
+  </main>
+
+  <!-- WIN MODAL -->
+  <div class="modal-overlay" id="winModal">
+    <div class="modal-content">
+      <div class="modal-stars" id="modalStars">⭐⭐⭐</div>
+      <div class="modal-title" id="modalTitle">Excellent!</div>
+      <div id="discoveryBonus" class="modal-discovery" style="display: none;">
+        <div class="modal-discovery-title">🏆 Discovery Bonus!</div>
+        <div>You found a MORE STABLE isomer!</div>
+      </div>
+      <div class="modal-energy">
+        <div>Your energy: <strong id="modalYourEnergy">-280.1</strong> kJ/mol</div>
+        <div style="opacity: 0.6;">Target: <span id="modalTargetEnergy">-277.6</span> kJ/mol</div>
+      </div>
+      <div style="opacity: 0.7;" id="moleculeName">You built: Ethanol (C₂H₅OH)</div>
+      <div class="modal-btns">
+        <button class="modal-btn secondary" onclick="resetCanvas()">Try Again</button>
+        <button class="modal-btn primary" onclick="nextLevel()">Next Level →</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════
+    // GAME DATA & STATE
+    // ═══════════════════════════════════════════
+
+    const BRICK_TYPES = {
+      methyl: {
+        id: 'methyl',
+        name: 'Methyl',
+        formula: '-CH₃',
+        valence: 1,
+        studs: ['left'],
+        baseEnergy: -42.5,
+        html: `
+          <div class="structure-container methyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen h1">H</div>
+            <div class="atom small hydrogen h2">H</div>
+            <div class="atom small hydrogen h3">H</div>
+            <div class="bond single ch1"></div>
+            <div class="bond single ch2"></div>
+            <div class="bond single ch3"></div>
+            <div class="stud" data-stud="left"></div>
+          </div>
+        `
+      },
+      methylene: {
+        id: 'methylene',
+        name: 'Methylene',
+        formula: '-CH₂-',
+        valence: 2,
+        studs: ['left', 'right'],
+        baseEnergy: -38.0,
+        html: `
+          <div class="structure-container methylene-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen h1">H</div>
+            <div class="atom small hydrogen h2">H</div>
+            <div class="bond single ch1"></div>
+            <div class="bond single ch2"></div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      hydroxyl: {
+        id: 'hydroxyl',
+        name: 'Hydroxyl',
+        formula: '-OH',
+        valence: 1,
+        studs: ['left'],
+        baseEnergy: -197.1,
+        html: `
+          <div class="structure-container hydroxyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom medium oxygen">O</div>
+            <div class="atom small hydrogen">H</div>
+            <div class="bond single oh"></div>
+            <div class="stud" data-stud="left"></div>
+          </div>
+        `
+      },
+      ether: {
+        id: 'ether',
+        name: 'Ether',
+        formula: '-O-',
+        valence: 2,
+        studs: ['left', 'right'],
+        baseEnergy: -184.5,
+        html: `
+          <div class="structure-container ether-struct">
+            <div class="base-plate"></div>
+            <div class="atom large oxygen">O</div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      methanediyl: {
+        id: 'methanediyl',
+        name: 'Methanediyl',
+        formula: '>CH-',
+        valence: 3,
+        studs: ['left', 'top', 'right'],
+        baseEnergy: -35.0,
+        html: `
+          <div class="structure-container methanediyl-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="atom small hydrogen">H</div>
+            <div class="bond single ch"></div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud top" data-stud="top"></div>
+            <div class="stud right" data-stud="right"></div>
+          </div>
+        `
+      },
+      carbon: {
+        id: 'carbon',
+        name: 'Carbon',
+        formula: 'C',
+        valence: 4,
+        studs: ['left', 'top', 'right', 'bottom'],
+        baseEnergy: -30.0,
+        html: `
+          <div class="structure-container carbon-struct">
+            <div class="base-plate"></div>
+            <div class="atom large carbon">C</div>
+            <div class="stud left" data-stud="left"></div>
+            <div class="stud top" data-stud="top"></div>
+            <div class="stud right" data-stud="right"></div>
+            <div class="stud bottom" data-stud="bottom"></div>
+          </div>
+        `
+      }
+    };
+
+    // Level definitions
+    const LEVELS = [
+      {
+        id: 1,
+        name: 'Ethanol',
+        formula: 'C₂H₅OH',
+        bricks: ['methyl', 'methylene', 'hydroxyl'],
+        targetEnergy: -277.6,
+        starThresholds: [30, 15, 5], // delta for 1, 2, 3 stars
+        hint: 'This molecule is found in alcoholic beverages'
+      },
+      {
+        id: 2,
+        name: 'Dimethyl Ether',
+        formula: 'C₂H₆O',
+        bricks: ['methyl', 'ether', 'methyl'],
+        targetEnergy: -269.0,
+        starThresholds: [30, 15, 5],
+        hint: 'Same atoms as ethanol, different arrangement!'
+      },
+      {
+        id: 3,
+        name: 'Propanol',
+        formula: 'C₃H₇OH',
+        bricks: ['methyl', 'methylene', 'methylene', 'hydroxyl'],
+        targetEnergy: -315.0,
+        starThresholds: [40, 20, 8],
+        hint: 'A 3-carbon alcohol'
+      }
+    ];
+
+    // Game state
+    let currentLevel = 0;
+    let placedBricks = [];
+    let connections = [];
+    let draggedBrick = null;
+    let dragOffset = { x: 0, y: 0 };
+
+    // ═══════════════════════════════════════════
+    // INITIALIZATION
+    // ═══════════════════════════════════════════
+
+    function init() {
+      loadLevel(currentLevel);
+      setupDragDrop();
+    }
+
+    function loadLevel(levelIndex) {
+      const level = LEVELS[levelIndex];
+
+      // Update header
+      document.querySelector('.level-badge').textContent = `Level ${level.id}`;
+      document.querySelector('.level-name').textContent = '???';
+      document.getElementById('targetEnergy').textContent = level.targetEnergy.toFixed(1);
+
+      // Populate brick tray
+      const tray = document.getElementById('trayBricks');
+      tray.innerHTML = '';
+
+      level.bricks.forEach((brickType, index) => {
+        const brick = BRICK_TYPES[brickType];
+        const wrapper = document.createElement('div');
+        wrapper.className = 'brick-wrapper';
+        wrapper.innerHTML = `
+          <div class="lewis-brick" data-brick-type="${brickType}" data-brick-index="${index}" draggable="true">
+            ${brick.html}
+          </div>
+          <span class="brick-name">${brick.formula}</span>
+        `;
+        tray.appendChild(wrapper);
+      });
+
+      document.getElementById('piecesCount').textContent = `${level.bricks.length} pieces`;
+
+      // Reset canvas
+      resetCanvas();
+    }
+
+    // ═══════════════════════════════════════════
+    // DRAG & DROP
+    // ═══════════════════════════════════════════
+
+    function setupDragDrop() {
+      const canvas = document.getElementById('buildCanvas');
+
+      // Tray bricks - drag start
+      document.getElementById('trayBricks').addEventListener('mousedown', (e) => {
+        const brick = e.target.closest('.lewis-brick');
+        if (!brick) return;
+
+        startDrag(brick, e, true);
+      });
+
+      // Canvas bricks - drag start
+      canvas.addEventListener('mousedown', (e) => {
+        const brick = e.target.closest('.lewis-brick.placed');
+        if (!brick) return;
+
+        startDrag(brick, e, false);
+      });
+
+      // Mouse move
+      document.addEventListener('mousemove', (e) => {
+        if (!draggedBrick) return;
+
+        const x = e.clientX - dragOffset.x;
+        const y = e.clientY - dragOffset.y;
+
+        draggedBrick.style.left = x + 'px';
+        draggedBrick.style.top = y + 'px';
+
+        checkSnapProximity();
+      });
+
+      // Mouse up
+      document.addEventListener('mouseup', (e) => {
+        if (!draggedBrick) return;
+
+        const canvas = document.getElementById('buildCanvas');
+        const canvasRect = canvas.getBoundingClientRect();
+
+        // Check if dropped on canvas
+        if (e.clientX >= canvasRect.left && e.clientX <= canvasRect.right &&
+            e.clientY >= canvasRect.top && e.clientY <= canvasRect.bottom) {
+
+          dropOnCanvas(e, canvasRect);
+        } else if (draggedBrick.dataset.fromCanvas === 'true') {
+          // Return to tray if dragged from canvas back to tray
+          returnToTray(draggedBrick);
+        }
+
+        endDrag();
+      });
+    }
+
+    function startDrag(brick, e, fromTray) {
+      const rect = brick.getBoundingClientRect();
+
+      if (fromTray) {
+        // Clone the brick for dragging
+        draggedBrick = brick.cloneNode(true);
+        draggedBrick.dataset.fromCanvas = 'false';
+        draggedBrick.dataset.originalIndex = brick.dataset.brickIndex;
+        brick.style.opacity = '0.3';
+        brick.dataset.originalBrick = 'true';
+      } else {
+        draggedBrick = brick;
+        draggedBrick.dataset.fromCanvas = 'true';
+      }
+
+      draggedBrick.classList.add('dragging');
+      draggedBrick.style.position = 'fixed';
+      draggedBrick.style.zIndex = '1000';
+      draggedBrick.style.left = rect.left + 'px';
+      draggedBrick.style.top = rect.top + 'px';
+
+      dragOffset.x = e.clientX - rect.left;
+      dragOffset.y = e.clientY - rect.top;
+
+      if (!fromTray) {
+        // Remove from placed bricks array
+        const idx = placedBricks.findIndex(b => b.element === brick);
+        if (idx !== -1) placedBricks.splice(idx, 1);
+      }
+
+      document.body.appendChild(draggedBrick);
+    }
+
+    function endDrag() {
+      if (!draggedBrick) return;
+
+      draggedBrick.classList.remove('dragging', 'snap-valid');
+
+      // Restore original brick opacity
+      const originals = document.querySelectorAll('[data-original-brick="true"]');
+      originals.forEach(b => {
+        b.style.opacity = '1';
+        delete b.dataset.originalBrick;
+      });
+
+      // If still floating, remove it
+      if (draggedBrick.parentElement === document.body && !draggedBrick.classList.contains('placed')) {
+        draggedBrick.remove();
+      }
+
+      draggedBrick = null;
+      updateGameState();
+    }
+
+    function dropOnCanvas(e, canvasRect) {
+      const canvas = document.getElementById('buildCanvas');
+
+      // Position relative to canvas
+      const x = e.clientX - canvasRect.left - dragOffset.x;
+      const y = e.clientY - canvasRect.top - dragOffset.y;
+
+      // Check for snap
+      const snapResult = findSnapTarget();
+
+      // Move to canvas
+      draggedBrick.style.position = 'absolute';
+
+      if (snapResult) {
+        // Snap to another brick
+        draggedBrick.style.left = snapResult.x + 'px';
+        draggedBrick.style.top = snapResult.y + 'px';
+
+        // Record connection
+        connections.push({
+          from: draggedBrick,
+          fromStud: snapResult.fromStud,
+          to: snapResult.target,
+          toStud: snapResult.toStud
+        });
+
+        // Mark studs as connected
+        markStudConnected(draggedBrick, snapResult.fromStud);
+        markStudConnected(snapResult.target, snapResult.toStud);
+      } else {
+        draggedBrick.style.left = Math.max(0, x) + 'px';
+        draggedBrick.style.top = Math.max(0, y) + 'px';
+      }
+
+      draggedBrick.classList.add('placed');
+      canvas.appendChild(draggedBrick);
+
+      // Add to placed bricks
+      placedBricks.push({
+        element: draggedBrick,
+        type: draggedBrick.dataset.brickType,
+        x: parseInt(draggedBrick.style.left),
+        y: parseInt(draggedBrick.style.top)
+      });
+
+      // Hide canvas hint
+      document.getElementById('canvasHint').classList.add('hidden');
+
+      // Hide original in tray
+      const originalIndex = draggedBrick.dataset.originalIndex;
+      if (originalIndex !== undefined) {
+        const trayBrick = document.querySelector(`[data-brick-index="${originalIndex}"]`);
+        if (trayBrick) {
+          trayBrick.parentElement.style.display = 'none';
+        }
+      }
+    }
+
+    function returnToTray(brick) {
+      // Show the brick back in tray
+      const originalIndex = brick.dataset.originalIndex;
+      if (originalIndex !== undefined) {
+        const trayBrick = document.querySelector(`[data-brick-index="${originalIndex}"]`);
+        if (trayBrick) {
+          trayBrick.parentElement.style.display = 'flex';
+        }
+      }
+      brick.remove();
+    }
+
+    function checkSnapProximity() {
+      const snapResult = findSnapTarget();
+
+      if (snapResult) {
+        draggedBrick.classList.add('snap-valid');
+      } else {
+        draggedBrick.classList.remove('snap-valid');
+      }
+    }
+
+    function findSnapTarget() {
+      if (!draggedBrick || placedBricks.length === 0) return null;
+
+      const dragRect = draggedBrick.getBoundingClientRect();
+      const SNAP_DISTANCE = 50;
+
+      // Get studs on dragged brick
+      const dragStuds = draggedBrick.querySelectorAll('.stud:not(.connected)');
+
+      for (const placed of placedBricks) {
+        if (placed.element === draggedBrick) continue;
+
+        const targetStuds = placed.element.querySelectorAll('.stud:not(.connected)');
+
+        for (const dragStud of dragStuds) {
+          for (const targetStud of targetStuds) {
+            const dragStudRect = dragStud.getBoundingClientRect();
+            const targetStudRect = targetStud.getBoundingClientRect();
+
+            const dist = Math.hypot(
+              dragStudRect.left - targetStudRect.left,
+              dragStudRect.top - targetStudRect.top
+            );
+
+            if (dist < SNAP_DISTANCE) {
+              // Calculate snap position
+              const canvas = document.getElementById('buildCanvas');
+              const canvasRect = canvas.getBoundingClientRect();
+
+              const offsetX = targetStudRect.left - dragStudRect.left;
+              const offsetY = targetStudRect.top - dragStudRect.top;
+
+              return {
+                target: placed.element,
+                fromStud: dragStud.dataset.stud,
+                toStud: targetStud.dataset.stud,
+                x: parseInt(draggedBrick.style.left) + offsetX - canvasRect.left + parseFloat(draggedBrick.style.left || 0),
+                y: parseInt(draggedBrick.style.top) + offsetY - canvasRect.top + parseFloat(draggedBrick.style.top || 0)
+              };
+            }
+          }
+        }
+      }
+
+      return null;
+    }
+
+    function markStudConnected(brick, studName) {
+      const stud = brick.querySelector(`[data-stud="${studName}"]`);
+      if (stud) {
+        stud.classList.add('connected');
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // ENERGY CALCULATION
+    // ═══════════════════════════════════════════
+
+    function calculateEnergy() {
+      if (placedBricks.length === 0) return null;
+
+      let totalEnergy = 0;
+
+      // Sum base energies
+      for (const brick of placedBricks) {
+        const brickType = BRICK_TYPES[brick.type];
+        totalEnergy += brickType.baseEnergy;
+      }
+
+      // Connection bonuses (simplified MM)
+      for (const conn of connections) {
+        totalEnergy += -5; // Bonus for each bond formed
+      }
+
+      return totalEnergy;
+    }
+
+    function updateGameState() {
+      const level = LEVELS[currentLevel];
+      const energy = calculateEnergy();
+
+      const yourEnergyEl = document.getElementById('yourEnergy');
+      const diffFillEl = document.getElementById('diffFill');
+      const diffTextEl = document.getElementById('diffText');
+      const submitBtn = document.getElementById('submitBtn');
+
+      if (energy === null) {
+        yourEnergyEl.textContent = '—';
+        yourEnergyEl.className = 'your-value empty';
+        diffFillEl.style.width = '0%';
+        diffFillEl.style.background = 'var(--text-muted)';
+        diffTextEl.textContent = 'Place bricks to start';
+        submitBtn.disabled = true;
+        updateStars(0);
+        updateConnectionStatus();
+        return;
+      }
+
+      yourEnergyEl.textContent = energy.toFixed(1);
+
+      const delta = Math.abs(energy - level.targetEnergy);
+      const maxDelta = 100;
+      const progress = Math.max(0, 100 - (delta / maxDelta * 100));
+
+      diffFillEl.style.width = progress + '%';
+
+      // Color based on how close
+      if (delta < level.starThresholds[2]) {
+        yourEnergyEl.className = 'your-value close';
+        diffFillEl.style.background = 'var(--success)';
+        diffTextEl.textContent = 'Excellent match!';
+      } else if (delta < level.starThresholds[1]) {
+        yourEnergyEl.className = 'your-value close';
+        diffFillEl.style.background = 'var(--success)';
+        diffTextEl.textContent = 'Very close!';
+      } else if (delta < level.starThresholds[0]) {
+        yourEnergyEl.className = 'your-value medium';
+        diffFillEl.style.background = 'var(--warning)';
+        diffTextEl.textContent = 'Getting warmer...';
+      } else {
+        yourEnergyEl.className = 'your-value far';
+        diffFillEl.style.background = 'var(--error)';
+        diffTextEl.textContent = `${delta.toFixed(1)} kJ/mol away`;
+      }
+
+      // Update stars
+      let stars = 0;
+      if (delta < level.starThresholds[0]) stars = 1;
+      if (delta < level.starThresholds[1]) stars = 2;
+      if (delta < level.starThresholds[2]) stars = 3;
+      updateStars(stars);
+
+      // Check if molecule is complete (all bricks placed and connected)
+      const isComplete = checkMoleculeComplete();
+      submitBtn.disabled = !isComplete;
+
+      updateConnectionStatus();
+    }
+
+    function updateStars(count) {
+      for (let i = 1; i <= 3; i++) {
+        const star = document.getElementById(`star${i}`);
+        if (i <= count) {
+          star.classList.add('earned');
+        } else {
+          star.classList.remove('earned');
+        }
+      }
+    }
+
+    function checkMoleculeComplete() {
+      const level = LEVELS[currentLevel];
+
+      // All bricks must be placed
+      if (placedBricks.length !== level.bricks.length) return false;
+
+      // All studs must be connected (simplified check)
+      let openStuds = 0;
+      for (const brick of placedBricks) {
+        const studs = brick.element.querySelectorAll('.stud');
+        studs.forEach(s => {
+          if (!s.classList.contains('connected')) openStuds++;
+        });
+      }
+
+      // For a valid molecule, exactly 0 open studs
+      // (In real game, we'd check for proper bonding)
+      return openStuds === 0;
+    }
+
+    function updateConnectionStatus() {
+      const list = document.getElementById('connectionsList');
+      list.innerHTML = '';
+
+      if (placedBricks.length === 0) {
+        list.innerHTML = `
+          <div class="status-item">
+            <span class="status-dot open"></span>
+            <span>Place bricks to see connections</span>
+          </div>
+        `;
+        return;
+      }
+
+      // Count studs
+      let totalStuds = 0;
+      let connectedStuds = 0;
+
+      for (const brick of placedBricks) {
+        const studs = brick.element.querySelectorAll('.stud');
+        totalStuds += studs.length;
+        studs.forEach(s => {
+          if (s.classList.contains('connected')) connectedStuds++;
+        });
+      }
+
+      const openStuds = totalStuds - connectedStuds;
+
+      if (connectedStuds > 0) {
+        list.innerHTML += `
+          <div class="status-item">
+            <span class="status-dot connected"></span>
+            <span>${connectedStuds / 2} bonds formed</span>
+          </div>
+        `;
+      }
+
+      if (openStuds > 0) {
+        list.innerHTML += `
+          <div class="status-item">
+            <span class="status-dot open"></span>
+            <span>${openStuds} open connection${openStuds !== 1 ? 's' : ''}</span>
+          </div>
+        `;
+      }
+
+      if (openStuds === 0 && placedBricks.length === LEVELS[currentLevel].bricks.length) {
+        list.innerHTML += `
+          <div class="status-item">
+            <span class="status-dot connected"></span>
+            <span style="color: var(--success);">Molecule complete!</span>
+          </div>
+        `;
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // GAME ACTIONS
+    // ═══════════════════════════════════════════
+
+    function resetCanvas() {
+      const canvas = document.getElementById('buildCanvas');
+      canvas.querySelectorAll('.lewis-brick').forEach(b => b.remove());
+
+      // Show all tray bricks
+      document.querySelectorAll('.brick-wrapper').forEach(w => w.style.display = 'flex');
+
+      placedBricks = [];
+      connections = [];
+
+      document.getElementById('canvasHint').classList.remove('hidden');
+      updateGameState();
+    }
+
+    function showHint() {
+      const level = LEVELS[currentLevel];
+      alert(level.hint);
+    }
+
+    function checkSolution() {
+      const energy = calculateEnergy();
+      const level = LEVELS[currentLevel];
+
+      if (energy === null) {
+        alert('Place some bricks first!');
+        return;
+      }
+
+      const delta = Math.abs(energy - level.targetEnergy);
+
+      if (delta > level.starThresholds[0]) {
+        alert(`Energy difference: ${delta.toFixed(1)} kJ/mol\nTry to get closer to the target!`);
+      } else {
+        alert(`Looking good! Energy difference: ${delta.toFixed(1)} kJ/mol\nComplete all connections to submit.`);
+      }
+    }
+
+    function submitSolution() {
+      const energy = calculateEnergy();
+      const level = LEVELS[currentLevel];
+      const delta = Math.abs(energy - level.targetEnergy);
+
+      // Calculate stars
+      let stars = 0;
+      if (delta < level.starThresholds[0]) stars = 1;
+      if (delta < level.starThresholds[1]) stars = 2;
+      if (delta < level.starThresholds[2]) stars = 3;
+
+      // Show modal
+      const modal = document.getElementById('winModal');
+      document.getElementById('modalStars').textContent = '⭐'.repeat(stars) + '☆'.repeat(3 - stars);
+      document.getElementById('modalYourEnergy').textContent = energy.toFixed(1);
+      document.getElementById('modalTargetEnergy').textContent = level.targetEnergy.toFixed(1);
+      document.getElementById('moleculeName').textContent = `You built: ${level.name} (${level.formula})`;
+
+      // Check for discovery bonus
+      const discovery = energy < level.targetEnergy;
+      document.getElementById('discoveryBonus').style.display = discovery ? 'block' : 'none';
+
+      if (stars === 3) {
+        document.getElementById('modalTitle').textContent = discovery ? '🏆 Discovery!' : 'Perfect!';
+      } else if (stars === 2) {
+        document.getElementById('modalTitle').textContent = 'Great Job!';
+      } else {
+        document.getElementById('modalTitle').textContent = 'Good Start!';
+      }
+
+      // Reveal level name
+      document.querySelector('.level-name').textContent = level.name;
+
+      modal.classList.add('visible');
+    }
+
+    function nextLevel() {
+      document.getElementById('winModal').classList.remove('visible');
+
+      if (currentLevel < LEVELS.length - 1) {
+        currentLevel++;
+        loadLevel(currentLevel);
+      } else {
+        alert('Congratulations! You completed all levels!');
+      }
+    }
+
+    // ═══════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════
+
+    init();
+  </script>
+
+</body>
+</html>
