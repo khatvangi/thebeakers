@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-02-25T14:30:53.946489",
+  "os": {
+    "system": "Linux",
+    "release": "5.15.0-168-generic",
+    "version": "#178-Ubuntu SMP Fri Jan 9 19:05:03 UTC 2026",
+    "machine": "x86_64",
+    "python_version": "3.12.4"
+  },
+  "cpu": {
+    "physical_cores": 4,
+    "logical_cores": 4,
+    "max_frequency_mhz": 4600.0,
+    "architecture": "x86_64",
+    "processor": "x86_64",
+    "current_frequency_mhz": 3795.36075
+  },
+  "memory": {
+    "total_gb": 31.04,
+    "available_gb": 25.41,
+    "used_gb": 5.63,
+    "percent_used": 18.1,
+    "swap_total_gb": 8.0,
+    "swap_available_gb": 7.22
+  },
+  "disk": {
+    "path": "/storage/thebeakers",
+    "total_gb": 1832.7,
+    "available_gb": 1220.87,
+    "used_gb": 518.66,
+    "percent_used": 29.8
+  },
+  "gpu": {
+    "nvidia_gpus": [],
+    "amd_gpus": [],
+    "apple_silicon": null,
+    "total_gpus": 0,
+    "available_backends": []
+  },
+  "recommendations": {
+    "parallel_processing": {
+      "strategy": "moderate_parallelism",
+      "suggested_workers": 3,
+      "libraries": [
+        "joblib",
+        "multiprocessing"
+      ]
+    },
+    "memory_strategy": {
+      "strategy": "memory_abundant",
+      "note": "Can load most datasets into memory"
+    },
+    "gpu_acceleration": {
+      "available": false,
+      "note": "No GPU detected, use CPU-based libraries"
+    },
+    "large_data_handling": {
+      "strategy": "disk_abundant",
+      "note": "Sufficient space for large intermediate files"
+    }
+  }
+}
