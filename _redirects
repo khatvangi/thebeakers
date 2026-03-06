@@ -1,3 +1,0 @@
-# serve newskaleidoscope as static files (bypass SPA fallback)
-/newskaleidoscope/events/iran-march-2026/ /newskaleidoscope/events/iran-march-2026/index.html 200
-/newskaleidoscope/ /newskaleidoscope/index.html 200
