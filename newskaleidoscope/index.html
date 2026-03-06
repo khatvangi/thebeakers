@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsKaleidoscope — Epistemic Mapping System</title>
+    <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+        line-height: 1.6; color: #1a1a1a; background: #fafafa;
+        max-width: 800px; margin: 0 auto; padding: 2rem 1rem;
+    }
+    h1 { font-size: 2rem; font-weight: 800; color: #1a3a5c; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; font-size: 0.95rem; margin-bottom: 2rem; }
+    h2 { font-size: 1.2rem; font-weight: 700; color: #1a3a5c; margin: 2rem 0 1rem;
+         border-bottom: 2px solid #e8f0f8; padding-bottom: 0.3rem; }
+    .event-card {
+        background: white; border: 1px solid #e0e0e0; border-radius: 8px;
+        padding: 1.25rem; margin-bottom: 1rem; text-decoration: none;
+        display: block; color: inherit; transition: border-color 0.2s;
+    }
+    .event-card:hover { border-color: #1a3a5c; }
+    .event-title { font-weight: 700; font-size: 1.05rem; color: #1a3a5c; }
+    .event-meta { font-size: 0.8rem; color: #888; margin-top: 0.3rem; }
+    .event-stats { font-size: 0.85rem; color: #444; margin-top: 0.5rem; }
+    .badge { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 3px;
+             font-size: 0.7rem; font-weight: 600; }
+    .badge-military { background: #f8d7da; color: #721c24; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #eee;
+             font-size: 0.75rem; color: #999; }
+    </style>
+</head>
+<body>
+    <h1>NewsKaleidoscope</h1>
+    <div class="subtitle">
+        How different regions, cultures, and institutions frame the same event.
+        Not a bias rating. An epistemic map.
+    </div>
+
+    <h2>Events</h2>
+
+    <a href="events/iran-march-2026/" class="event-card">
+        <div class="event-title">US-Israeli Military Strikes on Iran</div>
+        <div class="event-meta">
+            March 2026 | <span class="badge badge-military">military</span>
+        </div>
+        <div class="event-stats">
+            94 articles, 44 countries, 18 languages.
+            5 epistemic clusters. 87 presuppositions extracted.
+            Mirror gap: US frame vs. world frame.
+        </div>
+    </a>
+
+    <footer>
+        NewsKaleidoscope — epistemic mapping system<br>
+        Pipeline: GDELT + curated RSS + UN transcripts.
+        Analysis: 3-model LLM council + spaCy syntactic layer.<br>
+        <a href="https://github.com/newskaleidoscope" style="color:#999">methodology</a>
+    </footer>
+</body>
+</html>
