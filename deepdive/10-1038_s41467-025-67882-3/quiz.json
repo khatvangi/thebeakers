@@ -1,0 +1,307 @@
+{
+  "title": "Antibody Quiz",
+  "questions": [
+    {
+      "question": "According to the study, what is the primary structural advantage of the tetravalent anti-mCD27 antibody compared to its bivalent counterpart in terms of receptor binding?",
+      "answerOptions": [
+        {
+          "text": "It exhibits a significant increase in avidity due to a slower dissociation rate.",
+          "isCorrect": true,
+          "rationale": "Surface plasmon resonance (SPR) data showed that the tetravalent format has a slower dissociation rate, leading to a $> 5$-fold increase in apparent affinity."
+        },
+        {
+          "text": "It targets a completely different epitope on the CD27 receptor.",
+          "isCorrect": false,
+          "rationale": "The tetravalent antibody was engineered using the same Fab arms (clone AT124-1) as the bivalent version, meaning the epitope remains identical."
+        },
+        {
+          "text": "It significantly increases the association rate ($k_a$) for mCD27.",
+          "isCorrect": false,
+          "rationale": "The SPR analysis indicated that the association rates were relatively similar; the primary improvement was in the dissociation kinetics."
+        },
+        {
+          "text": "It prevents the dimerization of the CD27 receptor.",
+          "isCorrect": false,
+          "rationale": "The antibody is designed to promote, not prevent, receptor clustering and interactions to mimic physiological signaling."
+        }
+      ],
+      "hint": "Consider the kinetic parameters measured by surface plasmon resonance (SPR)."
+    },
+    {
+      "question": "What is the mechanisic role of $Fc\\gamma RIIB$ engagement in enhancing the agonistic activity of the tetravalent anti-hCD27 antibody?",
+      "answerOptions": [
+        {
+          "text": "It triggers the depletion of regulatory T cells (Tregs) via ADCC.",
+          "isCorrect": false,
+          "rationale": "The study specifically notes that the tetravalent anti-mCD27 did not impact Treg levels, and $Fc\\gamma RIIB$ is an inhibitory receptor not typically associated with ADCC."
+        },
+        {
+          "text": "It promotes the polarization of receptor clusters and reduces receptor internalization.",
+          "isCorrect": true,
+          "rationale": "Confocal microscopy showed that $Fc\\gamma RIIB$ binding localizes CD27 clusters to cell-cell contacts and keeps them on the cell surface longer."
+        },
+        {
+          "text": "It increases the thermal stability of the antibody-receptor complex.",
+          "isCorrect": false,
+          "rationale": "While stability is important for drugs, the paper focuses on the spatial distribution and persistence of the receptor at the membrane interface."
+        },
+        {
+          "text": "It directly activates the TCR signaling pathway independently of CD27.",
+          "isCorrect": false,
+          "rationale": "The effect is dependent on CD27 costimulation; the Fc receptor serves as a scaffold for crosslinking rather than a primary signaling unit for the T cell."
+        }
+      ],
+      "hint": "Think about the spatial arrangement of the receptors on the cell membrane during co-culture."
+    },
+    {
+      "question": "In the Jurkat $NF-\\kappa B$-GFP reporter assays, how did the tetravalent anti-mCD27 antibody compare to the bivalent version at low concentrations ($0.001\\text{--}1$ nM)?",
+      "answerOptions": [
+        {
+          "text": "The tetravalent antibody was significantly more active than the bivalent format.",
+          "isCorrect": true,
+          "rationale": "The study found that while both formats stimulated similar levels at high concentrations, the tetravalent format was far more potent in the lower nanomolar range."
+        },
+        {
+          "text": "Neither antibody was able to induce GFP expression without exogenous $CD70$.",
+          "isCorrect": false,
+          "rationale": "Both antibodies induced signaling when crosslinked by $Fc\\gamma RII+$ CHO cells, even in the absence of the natural ligand $CD70$."
+        },
+        {
+          "text": "The bivalent antibody was more effective due to less steric hindrance.",
+          "isCorrect": false,
+          "rationale": "Increased valency generally improves agonism for TNF receptor superfamily members by facilitating more efficient clustering."
+        },
+        {
+          "text": "Activity was only observed for the 'Fc silent' N297Q variants.",
+          "isCorrect": false,
+          "rationale": "Agonism was actually dependent on Fc-mediated crosslinking, so the N297Q variants showed no significant activity."
+        }
+      ],
+      "hint": "Reflect on the dose-response curves for NF-$\\kappa$B activation in the presence of crosslinking cells."
+    },
+    {
+      "question": "Why did the authors use the V11 mutation in the human $IgG1$ Fc region for their anti-hCD27 constructs?",
+      "answerOptions": [
+        {
+          "text": "To enhance binding to $Fc\\gamma RIIB$ while reducing affinity for $Fc\\gamma RI$.",
+          "isCorrect": true,
+          "rationale": "The V11 variant is engineered to selectively engage the inhibitory $Fc\\gamma RIIB$, which provides the necessary crosslinking without inducing T cell depletion."
+        },
+        {
+          "text": "To increase the plasma half-life of the tetravalent antibody.",
+          "isCorrect": false,
+          "rationale": "Mutations for half-life usually target the $FcRn$ receptor, whereas V11 is specific for $Fc\\gamma$ receptors to modulate agonism."
+        },
+        {
+          "text": "To prevent the antibody from forming monomers in solution.",
+          "isCorrect": false,
+          "rationale": "SEC analysis confirmed that all antibodies, including V11 variants, were already monomeric and free from aggregates."
+        },
+        {
+          "text": "To enable the antibody to bind to $CD70$ directly.",
+          "isCorrect": false,
+          "rationale": "The antibody targets the receptor CD27; the V11 mutation only affects how the Fc portion interacts with host Fc receptors."
+        }
+      ],
+      "hint": "Consider the trade-off between crosslinking for agonism and avoiding effector-cell mediated depletion."
+    },
+    {
+      "question": "What was the observed effect of standard human $IgG1$ isotype anti-hCD27 antibodies on T cell proliferation in human PBMC cultures?",
+      "answerOptions": [
+        {
+          "text": "It significantly boosted $CD8^+$ T cell expansion compared to the V11 variant.",
+          "isCorrect": false,
+          "rationale": "The hIgG1 format actually had a detrimental effect on proliferation compared to the V11 variant."
+        },
+        {
+          "text": "It had a slightly detrimental effect, likely due to T cell depletion.",
+          "isCorrect": true,
+          "rationale": "The high activating-to-inhibitory Fc receptor binding ratio of hIgG1 likely causes T cell deletion through engagement of activating $Fc\\gamma Rs$."
+        },
+        {
+          "text": "It induced massive cytokine release syndrome in the in vitro culture.",
+          "isCorrect": false,
+          "rationale": "While toxicity is a concern, the specific observation in the proliferation assay was a reduction in the proportion of dividing cells."
+        },
+        {
+          "text": "It worked identically to the 'Fc-inert' NA variant.",
+          "isCorrect": false,
+          "rationale": "The hIgG1 and NA variants performed differently, with NA simply failing to provide costimulation while hIgG1 appeared to actively deplete cells."
+        }
+      ],
+      "hint": "Look at the results for the wild-type hIgG1 backbone in the PBMC proliferation assay."
+    },
+    {
+      "question": "In the CT26 colon carcinoma model, what happened when responding mice were treated with the tetravalent anti-mCD27 antibody?",
+      "answerOptions": [
+        {
+          "text": "They experienced complete tumor regression in all cases.",
+          "isCorrect": true,
+          "rationale": "While the bivalent antibody had a $50\\%$ cure rate among responders, the tetravalent format achieved $100\\%$ regression in that group."
+        },
+        {
+          "text": "The tumors grew faster due to regulatory T cell activation.",
+          "isCorrect": false,
+          "rationale": "The treatment increased activated $CD8^+$ T cells and did not enhance Tregs, leading to better tumor control."
+        },
+        {
+          "text": "The treatment was abandoned due to high levels of liver enzymes (ALT/AST).",
+          "isCorrect": false,
+          "rationale": "The study measured ALT/AST and found no elevation, indicating the absence of liver toxicity."
+        },
+        {
+          "text": "Only a modest increase in median survival was observed compared to isotype controls.",
+          "isCorrect": false,
+          "rationale": "The result was a 'striking' complete regression in responders, which is significantly more than a 'modest' increase."
+        }
+      ],
+      "hint": "Focus on the 'responders' subgroup in the CT26 growth curves."
+    },
+    {
+      "question": "Which of the following was used to verify the tetrameric structure and flexibility of the engineered anti-mCD27 antibody?",
+      "answerOptions": [
+        {
+          "text": "Negative-staining electron microscopy.",
+          "isCorrect": true,
+          "rationale": "Class average image analysis from EM revealed four distinct Fab sections and mobility consistent with the peptide linkers."
+        },
+        {
+          "text": "X-ray crystallography of the full IgG.",
+          "isCorrect": false,
+          "rationale": "While useful for high resolution, the paper specifically used electron microscopy and SEC for structural characterization."
+        },
+        {
+          "text": "Mass spectrometry of the light chains only.",
+          "isCorrect": false,
+          "rationale": "Mass spec might confirm molecular weight, but it does not provide the visual class averages showing the tetrameric orientation."
+        },
+        {
+          "text": "Thermal shift assays to measure the melting point of the Fab arms.",
+          "isCorrect": false,
+          "rationale": "Thermal shift assays measure stability, not the physical tetrameric arrangement or flexibility of the arms."
+        }
+      ],
+      "hint": "Identify the imaging technique that produced 'class averages'."
+    },
+    {
+      "question": "The anti-tumor activity of the tetravalent anti-mCD27 antibody was primarily mediated by which cell type, based on tumor profiling?",
+      "answerOptions": [
+        {
+          "text": "$NK$ cells.",
+          "isCorrect": false,
+          "rationale": "While NK cells can express CD27, the study attributes the efficacy to the expansion and activation of $CD8^+$ T cells."
+        },
+        {
+          "text": "$CD8^+$ T cells.",
+          "isCorrect": true,
+          "rationale": "Treatment induced an increase in total and activated ($4\\text{--}1BB+$ and Granzyme $B+$) $CD8^+$ T cells within the tumor."
+        },
+        {
+          "text": "$B$ cells.",
+          "isCorrect": false,
+          "rationale": "B cells express $Fc\\gamma RIIB$ and can act as scaffolds, but they are not the primary effectors of the anti-tumor response described."
+        },
+        {
+          "text": "$CD4^+$ helper T cells.",
+          "isCorrect": false,
+          "rationale": "The data presented in the supplementary figures showed no significant impact on total $CD4^+$ T cell frequencies."
+        }
+      ],
+      "hint": "Check the markers like Granzyme B and 4-1BB mentioned in the tumor harvest results."
+    },
+    {
+      "question": "What happened to CD27 clusters induced by the tetravalent antibody in the absence of $Fc\\gamma R$ engagement?",
+      "answerOptions": [
+        {
+          "text": "They were randomly distributed and rapidly internalized.",
+          "isCorrect": true,
+          "rationale": "Confocal microscopy showed that without $Fc\\gamma Rs$, clusters formed but were internalized within $20\\text{--}30$ minutes."
+        },
+        {
+          "text": "They failed to form entirely due to low avidity.",
+          "isCorrect": false,
+          "rationale": "The tetravalent antibody actually induced *more* clusters per cell than the bivalent version even without crosslinking."
+        },
+        {
+          "text": "They localized permanently to the nucleus of the T cell.",
+          "isCorrect": false,
+          "rationale": "Internalization refers to endocytosis into the cytoplasm/degradation pathways, not translocation to the nucleus."
+        },
+        {
+          "text": "They were shed from the cell surface into the supernatant.",
+          "isCorrect": false,
+          "rationale": "The receptors were internalized into the cell, as shown by the measurement of intracellular GFP fluorescence."
+        }
+      ],
+      "hint": "Compare the 'WT CHO' and '$Fc\\gamma RIIB+$ CHO' conditions in the imaging experiments."
+    },
+    {
+      "question": "True or False: The tetravalent anti-mCD27 antibody induced significant weight loss and elevated liver enzymes in mice at therapeutic doses.",
+      "answerOptions": [
+        {
+          "text": "False",
+          "isCorrect": true,
+          "rationale": "The study reported no evidence of weight loss or elevated ALT/AST levels, suggesting the enhanced activity was not associated with increased toxicity."
+        },
+        {
+          "text": "True",
+          "isCorrect": false,
+          "rationale": "The experiments demonstrated that the therapy was well-tolerated without systemic signs of toxicity."
+        }
+      ],
+      "hint": "Review the safety and toxicity data mentioned for the CT26 model."
+    },
+    {
+      "question": "How did the apparent affinity ($K_D$) of the tetravalent anti-mCD27 compare to the bivalent version?",
+      "answerOptions": [
+        {
+          "text": "It was roughly $100$ times higher ($K_D$ was lower).",
+          "isCorrect": false,
+          "rationale": "The EC50 on cells was $\\sim 100$-fold lower, but the SPR apparent affinity ($K_D$) was only $\\sim 5$-fold improved ($1.8$ nM vs $9.5$ nM)."
+        },
+        {
+          "text": "It was roughly $5$ times higher ($K_D$ was lower).",
+          "isCorrect": true,
+          "rationale": "Table 1 shows the $K_D$ for the bivalent antibody is $9.5$ nM and for the tetravalent is $1.8$ nM, which is approximately a $5$-fold difference."
+        },
+        {
+          "text": "The affinities were identical, and only the valency changed.",
+          "isCorrect": false,
+          "rationale": "Increased valency leads to 'apparent affinity' or avidity changes, which were measured as distinct values in the SPR study."
+        },
+        {
+          "text": "The tetravalent antibody had a much lower affinity due to steric clash.",
+          "isCorrect": false,
+          "rationale": "The design actually increased the binding strength significantly through multivalent attachment."
+        }
+      ],
+      "hint": "Distinguish between the EC50 measured on cells and the $K_D$ measured by SPR in Table 1."
+    },
+    {
+      "question": "Which specific mutation was used to generate 'Fc silent' or 'Fc inert' control antibodies in this study?",
+      "answerOptions": [
+        {
+          "text": "$N297Q$ (or $N297A$)",
+          "isCorrect": true,
+          "rationale": "The N297 mutation abrogates glycosylation of the Fc region, which is essential for binding to $Fc\\gamma$ receptors."
+        },
+        {
+          "text": "$V11$",
+          "isCorrect": false,
+          "rationale": "V11 is a mutation that *enhances* selectivity for $Fc\\gamma RIIB$, rather than silencing all Fc receptor interactions."
+        },
+        {
+          "text": "$OKT3$",
+          "isCorrect": false,
+          "rationale": "OKT3 is the name of a specific anti-CD3 antibody clone, not an Fc mutation."
+        },
+        {
+          "text": "$G4S$ linker",
+          "isCorrect": false,
+          "rationale": "The G4S sequence is a peptide linker used to connect Fab arms, not a mutation to silence Fc function."
+        }
+      ],
+      "hint": "This common mutation targets the asparagine residue involved in Fc-glycosylation."
+    }
+  ]
+}

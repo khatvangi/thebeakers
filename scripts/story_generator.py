@@ -272,16 +272,22 @@ SUBJECT: {paper.discipline}
 Generate 5 chapters. For each chapter, provide:
 - chapter_title: Engaging title (3-6 words)
 - content: 2-3 paragraphs explaining the concept clearly for undergrads
-- mermaid_code: A simple Mermaid flowchart (flowchart LR or flowchart TB) with 4-8 nodes
+- mermaid_code: A simple Mermaid flowchart with 3-6 nodes connected by arrows (-->). CRITICAL: every node MUST be connected with --> arrows. Disconnected nodes are invalid.
 
 Output as JSON array:
 [
   {{
     "chapter_title": "The Challenge",
     "content": "Paragraph 1...\\n\\nParagraph 2...",
-    "mermaid_code": "flowchart LR\\n    A[Start] --> B[Process] --> C[End]"
+    "mermaid_code": "flowchart LR\\n    A[Start] --> B[Process]\\n    B --> C[Result]\\n    C --> D[End]"
   }}
 ]
+
+MERMAID RULES:
+- Start with "flowchart LR" or "flowchart TB"
+- Connect ALL nodes: A[Label] --> B[Label]
+- Do NOT list nodes without arrows
+- Do NOT use pipe characters (|) for layout
 
 Chapter flow:
 1. The Challenge - What problem needs solving
@@ -381,7 +387,15 @@ def generate_story_html(paper: Paper, curriculum: dict) -> str:
         # wrap paragraphs properly
         paragraphs = content.split("\n\n")
         content_html = "".join(f"<p>{p}</p>" for p in paragraphs if p.strip())
-        mermaid = ch.get("mermaid_code", "flowchart LR\n    A --> B")
+        mermaid = ch.get("mermaid_code", "flowchart LR\n    A[Question] --> B[Research] --> C[Discovery]")
+        # validate mermaid has arrows; fall back to simple chain if not
+        if "-->" not in mermaid:
+            nodes = re.findall(r'[A-Z]\[([^\]]+)\]', mermaid)
+            if len(nodes) >= 2:
+                chain = "\n    ".join(f"{chr(65+j)}[{n}] --> {chr(66+j)}[{nodes[j+1]}]" for j, n in enumerate(nodes[:-1]))
+                mermaid = f"flowchart LR\n    {chain}"
+            else:
+                mermaid = "flowchart LR\n    A[Topic] --> B[Analysis] --> C[Insight]"
 
         scenes_html += f'''
         <div class="scene">
@@ -405,7 +419,7 @@ def generate_story_html(paper: Paper, curriculum: dict) -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Story: {paper.title}</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
     <style>
         :root {{

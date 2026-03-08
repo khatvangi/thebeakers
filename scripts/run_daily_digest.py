@@ -83,7 +83,7 @@ def run_daily_digest(dry_run: bool = False, skip_email: bool = False):
     run_step("3. TRIAGE", [
         sys.executable, str(SCRIPT_DIR / "triage.py"),
         "--week", week,
-        "--disciplines", "biology,chemistry,physics,ai,engineering,mathematics",
+        "--disciplines", "biology,chemistry,physics,ai,engineering,mathematics,agriculture",
         "--limit", "30"
     ] + (["--dry-run"] if dry_run else []), dry_run)
 
@@ -103,7 +103,7 @@ def run_daily_digest(dry_run: bool = False, skip_email: bool = False):
     run_step("6. SELECT DAILY ISSUE", [
         sys.executable, str(SCRIPT_DIR / "select_weekly_issue.py"),
         "--week", week,
-        "--disciplines", "biology,chemistry,physics,ai,engineering,mathematics"
+        "--disciplines", "biology,chemistry,physics,ai,engineering,mathematics,agriculture"
     ] + (["--dry-run"] if dry_run else []), dry_run)
 
     # step 7: render digest page

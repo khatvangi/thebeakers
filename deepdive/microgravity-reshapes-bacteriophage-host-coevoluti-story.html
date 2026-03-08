@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visual Story: Microgravity reshapes bacteriophage–host coevolution aboard the International Space Station</title>
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -278,14 +278,9 @@
             <div class="diagram-box">
                 <div class="mermaid">
 flowchart TB
-    A[The Challenge]
-    |             |
-    |  Microgravity
-    |          |
-    |  Lacks study
-    |          |
-    |  Bacteriophage-host
-    |  interactions
+    A[The Challenge] --> B[Microgravity]
+    B --> C[Lacks study]
+    C --> D[Bacteriophage-host interactions]
                 </div>
             </div>
         </div>
@@ -299,12 +294,8 @@ flowchart TB
             <div class="diagram-box">
                 <div class="mermaid">
 flowchart LR
-    A[Experiment Aboard ISS]
-    |             |
-    |  Microgravity
-    |          |
-    |  T7 bacteriophage
-    |  and E. coli
+    A[Experiment Aboard ISS] --> B[Microgravity]
+    B --> C[T7 bacteriophage and E. coli]
                 </div>
             </div>
         </div>
@@ -318,11 +309,8 @@ flowchart LR
             <div class="diagram-box">
                 <div class="mermaid">
 flowchart LR
-    A[De Novo Mutations]
-    |             |
-    |  Enhanced Fitness
-    |          |
-    |  Phage and Bacteria
+    A[De Novo Mutations] --> B[Enhanced Fitness]
+    B --> C[Phage and Bacteria]
                 </div>
             </div>
         </div>
@@ -336,11 +324,8 @@ flowchart LR
             <div class="diagram-box">
                 <div class="mermaid">
 flowchart LR
-    A[Striking Differences]
-    |             |
-    |  Terrestrial vs Microgravity
-    |          |
-    |  Phage Receptor Binding Domain
+    A[Striking Differences] --> B[Terrestrial vs Microgravity]
+    B --> C[Phage Receptor Binding Domain]
                 </div>
             </div>
         </div>
@@ -354,11 +339,8 @@ flowchart LR
             <div class="diagram-box">
                 <div class="mermaid">
 flowchart LR
-    A[Future Research]
-    |             |
-    |  Terrestrial Implications
-    |          |
-    |  Understanding Microbial Communities
+    A[Future Research] --> B[Terrestrial Implications]
+    B --> C[Understanding Microbial Communities]
                 </div>
             </div>
         </div>

@@ -249,13 +249,13 @@ def run_skeptic(article: Dict, builder_result: Dict) -> Dict:
 
 
 def merge_scores(builder: Dict, skeptic: Dict) -> Dict:
-    """merge builder and skeptic scores, preferring skeptic for E and H"""
+    """merge builder and skeptic scores, averaging E and H across both models"""
     result = {
         "S": builder.get("S", 0),
-        "E": skeptic.get("E", builder.get("E", 0)),  # prefer skeptic
+        "E": round((builder.get("E", 0) + skeptic.get("E", 0)) / 2),  # average both
         "T": builder.get("T", 0),
         "M": builder.get("M", 0),
-        "H": skeptic.get("H", builder.get("H", 0)),  # prefer skeptic
+        "H": round((builder.get("H", 0) + skeptic.get("H", 0)) / 2),  # average both
         "tldr": builder.get("tldr", ""),
         "pivot_figure": builder.get("pivot_figure", ""),
         "course_hooks": builder.get("course_hooks", []),
