@@ -1,0 +1,11 @@
+# large media files (>25MB limit on Cloudflare Pages)
+solar/*.m4a
+*.mp4
+# dev/build artifacts
+node_modules/
+.git/
+logs/
+cache/
+beautiful-mermaid/
+__pycache__/
+*.pyc

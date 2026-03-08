@@ -288,9 +288,41 @@ articles/             # generated article JSON + index files per discipline
 
 ## Deployment
 
-- **Cloudflare Pages** auto-deploys on push to main
-- **Media:** Podcasts → SoundCloud, Videos → YouTube (Cloudflare has 25MB limit)
+- **Hosting:** Cloudflare Pages (project: `thebeakers`)
+- **DNS:** Cloudflare proxy → Pages (NOT the Cloudflare Tunnel on this machine)
+- **GitHub auto-deploy is BROKEN** — Vercel webhook intercepts and fails
+- **Manual deploy required:**
+  ```bash
+  # move >25MB files first (Cloudflare Pages limit)
+  mv solar/*.m4a /tmp/ && mv solar/*.mp4 /tmp/
+  mv deepdive/solar-cell-bromine/video.mp4 /tmp/ && mv deepdive/solar-cell-bromine/podcast.m4a /tmp/
+
+  export CLOUDFLARE_API_TOKEN="<token>"
+  export CLOUDFLARE_ACCOUNT_ID="fc52021d8b580a3b3ddcd6f22c730eb3"
+  npx wrangler pages deploy /storage/thebeakers --project-name=thebeakers --commit-dirty=true
+
+  # restore files after deploy
+  mv /tmp/*.m4a solar/ && mv /tmp/*.mp4 solar/
+  mv /tmp/video.mp4 deepdive/solar-cell-bromine/ && mv /tmp/podcast.m4a deepdive/solar-cell-bromine/
+  ```
+- **Media:** Podcasts → SoundCloud, Videos → YouTube (25MB file limit)
 - **Related:** spsdaily.thebeakers.com, newsletter.thebeakers.com (Listmonk)
+- **Cloudflare Tunnel** runs on this machine (port 80/Apache) but DNS does NOT point to it for thebeakers.com
+
+### NotebookLM Deep Dives (MCP integration)
+
+Automated via `scripts/process_indepth.py` (requires Claude Code with NotebookLM MCP):
+
+```bash
+python scripts/process_indepth.py --list                    # show candidates
+python scripts/process_indepth.py --prepare <article_url>   # setup + print MCP steps
+python scripts/process_indepth.py --build-html <article_url> # generate HTML from assets
+```
+
+MCP workflow: `notebook_create` → `source_add` (PDF) → `studio_create` (audio/video/report/quiz) → poll `studio_status` → `download_artifact` → `--build-html`
+
+Assets stored in `deepdive/<doi-slug>/` (audio.mp4, quiz.json, report.md).
+Note: `download_artifact` may fail for some types — use `notebook_query` for reports, `curl` audio URL from `studio_status`.
 
 ## Key Config Files
 
