@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Genetic Code Optimality — The Beakers</title>
+  <style>
+    body { margin: 0; background: #0a0a0f; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    #sketch-container { position: relative; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/p5.min.js"></script>
+</head>
+<body>
+  <div id="sketch-container"></div>
+  <script>
+// ─────────────────────────────────────────────
+// DATA: standard genetic code (61 sense codons)
+// ─────────────────────────────────────────────
+const CODON_TABLE = {
+  AAA:"K",AAC:"N",AAG:"K",AAU:"N",ACA:"T",ACC:"T",ACG:"T",ACU:"T",
+  AGA:"R",AGC:"S",AGG:"R",AGU:"S",AUA:"I",AUC:"I",AUG:"M",AUU:"I",
+  CAA:"Q",CAC:"H",CAG:"Q",CAU:"H",CCA:"P",CCC:"P",CCG:"P",CCU:"P",
+  CGA:"R",CGC:"R",CGG:"R",CGU:"R",CUA:"L",CUC:"L",CUG:"L",CUU:"L",
+  GAA:"E",GAC:"D",GAG:"E",GAU:"D",GCA:"A",GCC:"A",GCG:"A",GCU:"A",
+  GGA:"G",GGC:"G",GGG:"G",GGU:"G",GUA:"V",GUC:"V",GUG:"V",GUU:"V",
+  UAC:"Y",UAU:"Y",UCA:"S",UCC:"S",UCG:"S",UCU:"S",UGC:"C",UGG:"W",
+  UGU:"C",UUA:"L",UUC:"F",UUG:"L",UUU:"F"
+};
+
+const SENSE_CODONS = Object.keys(CODON_TABLE);
+const BASES = ["A","U","G","C"];
+
+// amino acid PCA vectors (pca1..pca8 from aa_props.parquet)
+const AA_PCA = {
+  A:[-0.6449,-2.8925,-0.4038,-1.2475,1.3376,-0.4853,-1.6093,0.1638],
+  C:[0.1027,-1.7236,1.2832,0.1356,-1.8711,-0.3928,-0.3067,0.7890],
+  D:[2.8114,-1.0181,-2.5774,1.6878,-0.6191,0.0115,0.4558,-0.8020],
+  E:[2.0325,0.3447,-4.4514,0.7479,0.1224,0.0736,-0.5117,-0.4378],
+  F:[-3.9799,0.2452,0.1187,0.9802,0.7632,0.6057,-0.1989,-0.1723],
+  G:[3.3608,-3.8461,1.6188,-0.7475,1.1395,2.6585,0.3447,0.0759],
+  H:[0.8318,1.9523,0.4608,1.5514,1.0037,0.5913,-0.9573,-0.0515],
+  I:[-3.8318,-1.0173,-0.3385,-1.6954,-0.3554,0.0560,0.5768,-0.4681],
+  K:[2.1007,3.6440,0.2580,-2.0836,0.6423,-0.4689,-0.1652,-0.1244],
+  L:[-3.4455,-0.9765,-0.5507,-1.4788,0.0043,-0.4225,0.3503,-0.2446],
+  M:[-1.6112,0.0678,-1.4378,-0.8342,-0.2139,-0.3028,-0.1370,1.9418],
+  N:[2.8285,-0.3278,0.2846,0.7229,0.0922,-0.1380,1.4830,0.3586],
+  P:[0.9213,-2.2009,2.0579,2.0833,1.5312,-2.5971,0.4058,-0.2927],
+  Q:[1.5249,0.8777,-1.0350,-0.1361,0.3244,-0.0035,1.1156,0.9076],
+  R:[2.2765,4.9937,1.3003,-2.3970,0.3658,-0.1355,0.0908,-0.3943],
+  S:[3.0214,-1.0088,1.0599,0.0187,-1.2736,-0.0757,-1.0978,-0.0973],
+  T:[1.4601,0.0207,0.6344,-0.2248,-1.8471,-0.4374,-0.2671,-0.2797],
+  V:[-3.6289,-1.6252,-0.0656,-1.7109,-0.3609,0.0387,0.4880,-0.9038],
+  W:[-4.2592,2.6323,0.2577,2.5529,0.5673,0.6050,-0.0133,0.3033],
+  Y:[-1.8713,1.8583,1.5259,2.0750,-1.3526,0.8192,-0.0465,-0.2716]
+};
+
+// RAA10 reduced alphabet mapping
+const RAA10 = {
+  A:"X1",G:"X1",V:"X2",L:"X2",I:"X2",M:"X2",
+  F:"X3",W:"X3",Y:"X3",S:"X4",T:"X4",
+  N:"X5",Q:"X5",D:"X6",E:"X6",K:"X7",R:"X7",
+  H:"X8",P:"X9",C:"X10"
+};
+
+// compute class centroid vectors for RAA10
+function computeClassCentroids() {
+  const sums = {}, counts = {};
+  for (const [aa, cls] of Object.entries(RAA10)) {
+    if (!sums[cls]) { sums[cls] = new Array(8).fill(0); counts[cls] = 0; }
+    const v = AA_PCA[aa];
+    for (let i = 0; i < 8; i++) sums[cls][i] += v[i];
+    counts[cls]++;
+  }
+  const centroids = {};
+  for (const cls of Object.keys(sums)) {
+    centroids[cls] = sums[cls].map(s => s / counts[cls]);
+  }
+  return centroids;
+}
+const CLASS_CENTROIDS = computeClassCentroids();
+
+// doublet table: 16 doublets -> RAA10 class via majority vote over 3rd base
+function buildDoubletTable() {
+  const doublets = {};
+  for (const b1 of BASES) {
+    for (const b2 of BASES) {
+      const db = b1 + b2;
+      const classCounts = {};
+      for (const b3 of BASES) {
+        const codon = b1 + b2 + b3;
+        const aa = CODON_TABLE[codon];
+        if (!aa) continue;
+        const cls = RAA10[aa];
+        classCounts[cls] = (classCounts[cls] || 0) + 1;
+      }
+      let best = null, bestCount = 0;
+      for (const [cls, cnt] of Object.entries(classCounts).sort((a,b) => a[0].localeCompare(b[0]))) {
+        if (cnt > bestCount) { best = cls; bestCount = cnt; }
+      }
+      if (best) doublets[db] = best;
+    }
+  }
+  return doublets;
+}
+const DOUBLET_TABLE = buildDoubletTable();
+const DOUBLET_CODONS = Object.keys(DOUBLET_TABLE);
+
+// publication reference values (sgcD computed at init)
+const PUB = {
+  tab1: { label:"Triplet \u00d7 20 AA", sgcD:null, pubZ:-16.56, nNull:1000000, nSense:61, nClasses:20 },
+  tab2: { label:"Doublet \u00d7 10 AA", sgcD:null, pubZ:-3.80, nNull:1000000, nSense:16, nClasses:9 },
+  tab3: { label:"Triplet \u00d7 10 AA", sgcD:null, pubZ:-14.81, nNull:1000000, nSense:61, nClasses:10 }
+};
+
+// amino acid colors by physicochemical class
+const AA_COLORS = {
+  A:[230,120,60],V:[210,90,50],L:[220,100,55],I:[200,80,45],
+  M:[190,70,40],F:[180,60,35],W:[170,50,30],
+  S:[70,160,200],T:[80,170,210],N:[60,150,190],Q:[90,180,220],
+  Y:[100,140,180],C:[50,130,170],
+  K:[150,80,180],R:[130,60,160],H:[170,100,200],
+  D:[80,180,80],E:[100,200,100],
+  G:[140,140,140],P:[140,100,70]
+};
+
+// RAA10 class colors
+const CLASS_COLORS = {};
+(function buildClassColors() {
+  const members = {};
+  for (const [aa, cls] of Object.entries(RAA10)) {
+    if (!members[cls]) members[cls] = [];
+    members[cls].push(AA_COLORS[aa]);
+  }
+  for (const [cls, cols] of Object.entries(members)) {
+    const avg = [0,0,0];
+    for (const c of cols) { avg[0]+=c[0]; avg[1]+=c[1]; avg[2]+=c[2]; }
+    CLASS_COLORS[cls] = avg.map(v => Math.round(v / cols.length));
+  }
+})();
+
+// ─────────────────────────────────────────────
+// SIMULATION ENGINE
+// ─────────────────────────────────────────────
+function l2(a, b) {
+  let sum = 0;
+  for (let i = 0; i < a.length; i++) { const d = a[i] - b[i]; sum += d * d; }
+  return Math.sqrt(sum);
+}
+
+function findNeighbors(codon, alphabet) {
+  alphabet = alphabet || BASES;
+  const neighs = [];
+  for (let i = 0; i < codon.length; i++) {
+    for (let j = 0; j < alphabet.length; j++) {
+      if (alphabet[j] !== codon[i]) {
+        neighs.push(codon.slice(0, i) + alphabet[j] + codon.slice(i + 1));
+      }
+    }
+  }
+  return neighs;
+}
+
+function computeD(codons, assignment, vectors) {
+  let total = 0, count = 0;
+  for (let ci = 0; ci < codons.length; ci++) {
+    const c = codons[ci];
+    const label = assignment[c];
+    if (!label || !vectors[label]) continue;
+    const vc = vectors[label];
+    const neighs = findNeighbors(c);
+    let localSum = 0, localCount = 0;
+    for (let ni = 0; ni < neighs.length; ni++) {
+      const nLabel = assignment[neighs[ni]];
+      if (!nLabel || !vectors[nLabel]) continue;
+      localSum += l2(vc, vectors[nLabel]);
+      localCount++;
+    }
+    if (localCount > 0) { total += localSum / localCount; count++; }
+  }
+  return count > 0 ? total / count : 0;
+}
+
+function fisherYates(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i]; arr[i] = arr[j]; arr[j] = tmp;
+  }
+  return arr;
+}
+
+function shuffleCode(codons, originalAssignment) {
+  const labels = [];
+  for (let i = 0; i < codons.length; i++) labels.push(originalAssignment[codons[i]]);
+  fisherYates(labels);
+  const newAssignment = {};
+  for (let i = 0; i < codons.length; i++) newAssignment[codons[i]] = labels[i];
+  return newAssignment;
+}
+
+// ─────────────────────────────────────────────
+// TAB CONFIGURATIONS
+// ─────────────────────────────────────────────
+function buildTabConfig(tabKey) {
+  var pub = PUB[tabKey];
+  var config;
+  if (tabKey === "tab1") {
+    var sa = {}; for (var k in CODON_TABLE) sa[k] = CODON_TABLE[k];
+    config = { codons: SENSE_CODONS, sgcAssignment: sa, vectors: AA_PCA, colorMap: AA_COLORS, exampleCodon: "GCU", pub: pub, labelType: "aa" };
+  } else if (tabKey === "tab2") {
+    var sa2 = {}; for (var k2 in DOUBLET_TABLE) sa2[k2] = DOUBLET_TABLE[k2];
+    config = { codons: DOUBLET_CODONS, sgcAssignment: sa2, vectors: CLASS_CENTROIDS, colorMap: CLASS_COLORS, exampleCodon: "GC", pub: pub, labelType: "class" };
+  } else {
+    var assignment = {};
+    for (var k3 in CODON_TABLE) assignment[k3] = RAA10[CODON_TABLE[k3]];
+    config = { codons: SENSE_CODONS, sgcAssignment: assignment, vectors: CLASS_CENTROIDS, colorMap: CLASS_COLORS, exampleCodon: "GCU", pub: pub, labelType: "class" };
+  }
+  pub.sgcD = computeD(config.codons, config.sgcAssignment, config.vectors);
+  return config;
+}
+
+// ─────────────────────────────────────────────
+// SKETCH (p5.js 1.x global mode)
+// ─────────────────────────────────────────────
+var W = 850, H = 540;
+var BG = [12, 12, 20];
+var PANEL_BG = [20, 22, 32];
+var TEXT_PRIMARY = [230, 235, 245];
+var TEXT_DIM = [140, 145, 160];
+var ACCENT = [100, 180, 255];
+var SGC_LINE_COLOR = [255, 200, 60];
+var TAB_ACTIVE = [60, 70, 100];
+var TAB_INACTIVE = [30, 33, 48];
+
+var activeTab = "tab1";
+var MAX_STAGE = 5;
+var TOTAL_SHUFFLES = 10000;
+var BATCH_SIZE = 100;
+var HIST_BINS = 80;
+var t = 0;
+
+var tabState = {};
+
+function setup() {
+  var cnv = createCanvas(W, H);
+  cnv.parent("sketch-container");
+  textFont("monospace");
+
+  var keys = ["tab1","tab2","tab3"];
+  for (var ki = 0; ki < keys.length; ki++) {
+    var key = keys[ki];
+    tabState[key] = {
+      config: buildTabConfig(key),
+      histogram: { bins: new Array(HIST_BINS).fill(0), lo: 0, hi: 1, maxCount: 0, initialized: false },
+      shuffleCount: 0,
+      countLeSgc: 0,
+      dValues: [],
+      running: false,
+      done: false,
+      currentShuffledAssignment: null,
+      stage: 0
+    };
+  }
+}
+
+function calibrateHistogram(ts) {
+  var conf = ts.config;
+  var samples = [];
+  for (var i = 0; i < 200; i++) {
+    var shuffled = shuffleCode(conf.codons, conf.sgcAssignment);
+    samples.push(computeD(conf.codons, shuffled, conf.vectors));
+  }
+  var mean = 0;
+  for (var i = 0; i < samples.length; i++) mean += samples[i];
+  mean /= samples.length;
+  var variance = 0;
+  for (var i = 0; i < samples.length; i++) variance += (samples[i] - mean) * (samples[i] - mean);
+  var std = Math.sqrt(variance / (samples.length - 1));
+  var lo = Math.min(conf.pub.sgcD - std, mean - 4 * std);
+  var hi = mean + 4 * std;
+  ts.histogram = { bins: new Array(HIST_BINS).fill(0), lo: lo, hi: hi, maxCount: 0, initialized: true };
+  for (var i = 0; i < samples.length; i++) {
+    addToHistogram(ts, samples[i]);
+    ts.dValues.push(samples[i]);
+    if (samples[i] <= conf.pub.sgcD) ts.countLeSgc++;
+    ts.shuffleCount++;
+  }
+}
+
+function addToHistogram(ts, dValue) {
+  var h = ts.histogram;
+  var idx = Math.floor((dValue - h.lo) / (h.hi - h.lo) * HIST_BINS);
+  if (idx >= 0 && idx < HIST_BINS) {
+    h.bins[idx]++;
+    if (h.bins[idx] > h.maxCount) h.maxCount = h.bins[idx];
+  }
+}
+
+function computeNeighborLayout(codon) {
+  var neighs = findNeighbors(codon);
+  var cx = 130, cy = 225, radius = 75;
+  var positions = [{ codon: codon, x: cx, y: cy }];
+  var n = neighs.length;
+  for (var i = 0; i < n; i++) {
+    var angle = (i / n) * TWO_PI - HALF_PI;
+    positions.push({ codon: neighs[i], x: cx + radius * Math.cos(angle), y: cy + radius * Math.sin(angle) });
+  }
+  return positions;
+}
+
+function draw() {
+  t = millis() * 0.001;
+  background(BG[0], BG[1], BG[2]);
+  var ts = tabState[activeTab];
+  var st = ts.stage;
+
+  drawTabs();
+  drawTitle(ts);
+  if (st >= 1) drawCodonGraph(ts);
+  if (st >= 3) drawHistogram(ts);
+  if (st >= 1) drawStatsCard(ts);
+  if (st >= 3 && ts.running && !ts.done) runSimBatch(ts);
+  drawStageHint(ts);
+}
+
+function drawTabs() {
+  var tabW = 220, tabH = 28, startX = (W - 3 * tabW - 20) / 2, startY = 8;
+  var keys = ["tab1","tab2","tab3"];
+  for (var i = 0; i < 3; i++) {
+    var key = keys[i];
+    var pub = PUB[key];
+    var x = startX + i * (tabW + 10);
+    var active = key === activeTab;
+    fill(active ? TAB_ACTIVE[0] : TAB_INACTIVE[0], active ? TAB_ACTIVE[1] : TAB_INACTIVE[1], active ? TAB_ACTIVE[2] : TAB_INACTIVE[2]);
+    noStroke();
+    rect(x, startY, tabW, tabH, 6);
+    fill(active ? TEXT_PRIMARY[0] : TEXT_DIM[0], active ? TEXT_PRIMARY[1] : TEXT_DIM[1], active ? TEXT_PRIMARY[2] : TEXT_DIM[2]);
+    textSize(11);
+    textAlign(CENTER, CENTER);
+    text((i+1) + ". " + pub.label, x + tabW/2, startY + tabH/2);
+  }
+}
+
+function drawTitle(ts) {
+  fill(ACCENT[0], ACCENT[1], ACCENT[2]);
+  textSize(14);
+  textAlign(LEFT, TOP);
+  text("Genetic Code Optimality \u2014 Monte Carlo Proof", 20, 44);
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(10);
+  text(ts.config.pub.label + " (" + ts.config.pub.nSense + " codons \u2192 " + ts.config.pub.nClasses + " classes)", 20, 62);
+}
+
+function drawCodonGraph(ts) {
+  var conf = ts.config;
+  var assignment = (ts.stage >= 2 && ts.currentShuffledAssignment) ? ts.currentShuffledAssignment : conf.sgcAssignment;
+  var layout = computeNeighborLayout(conf.exampleCodon);
+  var panelX = 15, panelY = 82, panelW = 235, panelH = 370;
+
+  fill(PANEL_BG[0], PANEL_BG[1], PANEL_BG[2]);
+  stroke(40, 45, 60);
+  strokeWeight(1);
+  rect(panelX, panelY, panelW, panelH, 8);
+
+  noStroke();
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(9);
+  textAlign(CENTER, TOP);
+  text("CODON NEIGHBORHOOD", panelX + panelW/2, panelY + 8);
+
+  // edges
+  var center = layout[0];
+  var centerLabel = assignment[center.codon];
+  for (var i = 1; i < layout.length; i++) {
+    var nb = layout[i];
+    var nbLabel = assignment[nb.codon];
+    if (!nbLabel) continue;
+    var same = centerLabel === nbLabel;
+    if (same) { stroke(80, 160, 255, 180); } else { stroke(255, 80, 80, 140); }
+    strokeWeight(same ? 2.5 : 1.5);
+    line(center.x + panelX + 3, center.y + panelY - 5, nb.x + panelX + 3, nb.y + panelY - 5);
+  }
+
+  // nodes
+  for (var i = 0; i < layout.length; i++) {
+    var node = layout[i];
+    var lbl = assignment[node.codon];
+    if (!lbl) continue;
+    var col = conf.colorMap[lbl] || [150,150,150];
+    var isCenter = i === 0;
+    var r = isCenter ? 22 : 16;
+    var breathe = Math.sin(t * 2 + i * 0.5) * 1.5;
+
+    noStroke();
+    fill(col[0], col[1], col[2], 30);
+    circle(node.x + panelX + 3, node.y + panelY - 5, r * 2 + breathe + 8);
+    fill(col[0], col[1], col[2]);
+    circle(node.x + panelX + 3, node.y + panelY - 5, r * 2 + breathe);
+
+    // codon label outside
+    fill(200, 205, 220);
+    textSize(isCenter ? 10 : 7);
+    textAlign(CENTER, CENTER);
+    var cx = 130, cy = 225;
+    var dx = node.x - cx, dy = node.y - cy;
+    var dist = Math.sqrt(dx*dx + dy*dy) || 1;
+    var labelDist = r + 10 + breathe/2;
+    var lx = isCenter ? node.x : node.x + (dx/dist) * labelDist;
+    var ly = isCenter ? node.y - r - 8 : node.y + (dy/dist) * labelDist;
+    text(node.codon, lx + panelX + 3, ly + panelY - 5);
+
+    // AA label inside node
+    fill(0);
+    textSize(isCenter ? 9 : 7);
+    text(lbl, node.x + panelX + 3, node.y + panelY - 5);
+  }
+
+  // legend
+  noStroke();
+  var legY = panelY + panelH - 22;
+  var codeLabel = (ts.stage >= 2 && ts.currentShuffledAssignment) ? "SHUFFLED CODE" : "STANDARD CODE (SGC)";
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(7);
+  textAlign(CENTER, BOTTOM);
+  text(codeLabel, panelX + panelW/2, panelY + panelH - 6);
+
+  fill(80, 160, 255);
+  rect(panelX + 15, legY, 10, 2, 1);
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textAlign(LEFT, CENTER);
+  text("syn", panelX + 30, legY + 1);
+
+  fill(255, 80, 80);
+  rect(panelX + 60, legY, 10, 2, 1);
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  text("nonsyn", panelX + 75, legY + 1);
+}
+
+function drawHistogram(ts) {
+  var panelX = 260, panelY = 82, panelW = 330, panelH = 370;
+  var h = ts.histogram;
+
+  fill(PANEL_BG[0], PANEL_BG[1], PANEL_BG[2]);
+  stroke(40, 45, 60);
+  strokeWeight(1);
+  rect(panelX, panelY, panelW, panelH, 8);
+
+  noStroke();
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(9);
+  textAlign(CENTER, TOP);
+  text("NULL DISTRIBUTION (D values)", panelX + panelW/2, panelY + 8);
+
+  var hx = panelX + 35, hy = panelY + 35, hw = panelW - 55, hh = panelH - 90;
+  var barW = hw / HIST_BINS;
+  var maxC = Math.max(h.maxCount, 1);
+  for (var i = 0; i < HIST_BINS; i++) {
+    if (h.bins[i] === 0) continue;
+    var barH = (h.bins[i] / maxC) * hh;
+    var frac = i / HIST_BINS;
+    var r = Math.round(60 + frac * 40);
+    var g = Math.round(120 + frac * 60);
+    var b = Math.round(200 - frac * 80);
+    fill(r, g, b, 200);
+    rect(hx + i * barW, hy + hh - barH, barW - 0.5, barH);
+  }
+
+  // SGC line
+  var sgcD = ts.config.pub.sgcD;
+  var sgcX = hx + ((sgcD - h.lo) / (h.hi - h.lo)) * hw;
+  if (sgcX >= hx && sgcX <= hx + hw) {
+    var pulse = Math.sin(t * 3) * 0.3 + 0.7;
+    stroke(SGC_LINE_COLOR[0], SGC_LINE_COLOR[1], SGC_LINE_COLOR[2], 60 * pulse);
+    strokeWeight(6);
+    line(sgcX, hy, sgcX, hy + hh);
+    stroke(SGC_LINE_COLOR[0], SGC_LINE_COLOR[1], SGC_LINE_COLOR[2]);
+    strokeWeight(2);
+    line(sgcX, hy, sgcX, hy + hh);
+    noStroke();
+    fill(SGC_LINE_COLOR[0], SGC_LINE_COLOR[1], SGC_LINE_COLOR[2]);
+    textSize(9);
+    textAlign(CENTER, BOTTOM);
+    text("SGC", sgcX, hy - 2);
+    textSize(7);
+    text("D=" + sgcD.toFixed(2), sgcX, hy - 12);
+  }
+
+  // x-axis
+  noStroke();
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(7);
+  textAlign(CENTER, TOP);
+  for (var i = 0; i <= 4; i++) {
+    var val = h.lo + (h.hi - h.lo) * (i / 4);
+    var x = hx + (i / 4) * hw;
+    text(val.toFixed(1), x, hy + hh + 4);
+  }
+  textSize(8);
+  text("Distortion (D)", hx + hw/2, hy + hh + 16);
+
+  fill(TEXT_PRIMARY[0], TEXT_PRIMARY[1], TEXT_PRIMARY[2]);
+  textSize(10);
+  textAlign(CENTER, BOTTOM);
+  text(ts.shuffleCount.toLocaleString() + " / " + TOTAL_SHUFFLES.toLocaleString() + " shuffles", panelX + panelW/2, panelY + panelH - 8);
+}
+
+function drawStatsCard(ts) {
+  var panelX = 600, panelY = 82, panelW = 235, panelH = 370;
+  var pub = ts.config.pub;
+
+  fill(PANEL_BG[0], PANEL_BG[1], PANEL_BG[2]);
+  stroke(40, 45, 60);
+  strokeWeight(1);
+  rect(panelX, panelY, panelW, panelH, 8);
+
+  noStroke();
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(9);
+  textAlign(CENTER, TOP);
+  text("STATISTICS", panelX + panelW/2, panelY + 8);
+
+  var y = panelY + 32;
+  var lx = panelX + 15;
+  var vx = panelX + panelW - 15;
+
+  function statRow(label, value, color, big) {
+    fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+    textSize(big ? 11 : 10);
+    textAlign(LEFT, TOP);
+    text(label, lx, y);
+    fill(color[0], color[1], color[2]);
+    textAlign(RIGHT, TOP);
+    text(value, vx, y);
+    y += big ? 24 : 20;
+  }
+
+  statRow("SGC Score (D)", pub.sgcD.toFixed(2), SGC_LINE_COLOR, true);
+
+  if (ts.stage >= 3) {
+    var n = ts.dValues.length;
+    var mean = 0, std = 0;
+    if (n > 1) {
+      for (var i = 0; i < n; i++) mean += ts.dValues[i];
+      mean /= n;
+      var variance = 0;
+      for (var i = 0; i < n; i++) variance += (ts.dValues[i] - mean) * (ts.dValues[i] - mean);
+      std = Math.sqrt(variance / (n - 1));
+    }
+    var z = std > 0 ? (pub.sgcD - mean) / std : 0;
+
+    statRow("Null Mean", mean.toFixed(2), TEXT_PRIMARY, false);
+    statRow("Null Std", std.toFixed(3), TEXT_PRIMARY, false);
+
+    var zColor = Math.abs(z) > 5 ? [255, 80, 80] : Math.abs(z) > 2 ? [255, 180, 60] : [100, 200, 100];
+    statRow("z-score", z.toFixed(2), zColor, true);
+
+    y += 5;
+    fill(PANEL_BG[0], PANEL_BG[1], PANEL_BG[2]);
+    stroke(60, 65, 80);
+    strokeWeight(1);
+    rect(lx - 5, y - 2, panelW - 20, 38, 6);
+    noStroke();
+
+    fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+    textSize(9);
+    textAlign(CENTER, TOP);
+    text("CODES \u2264 SGC", panelX + panelW/2, y + 2);
+
+    var dramaColor = ts.countLeSgc === 0 ? [100, 255, 100] : [255, 200, 60];
+    fill(dramaColor[0], dramaColor[1], dramaColor[2]);
+    textSize(14);
+    text(ts.countLeSgc + " / " + ts.shuffleCount.toLocaleString(), panelX + panelW/2, y + 16);
+    y += 48;
+  }
+
+  if (ts.stage < 3) {
+    statRow("Pub z-score", pub.pubZ.toFixed(2), ACCENT, false);
+    y += 10;
+  }
+
+  y += 5;
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(8);
+  textAlign(LEFT, TOP);
+  var explanations = {
+    tab1: "The standard genetic code\nassigns 20 amino acids to\n61 sense codons. A random\ncode almost never achieves\nthis level of error-\nminimization.",
+    tab2: "With only 2 positions (16\ncodons) and 10 classes, the\nSGC's optimization is modest\n\u2014 z \u2248 -3.8, landing in the\nnull distribution's tail but\nnot extreme.",
+    tab3: "Even with a reduced alphabet\n(10 classes), the triplet\narchitecture enables deep\noptimization \u2014 z \u2248 -14.8.\nIt's the 3-position structure\nthat matters."
+  };
+  var lines = explanations[activeTab].split("\n");
+  for (var li = 0; li < lines.length; li++) {
+    text(lines[li], lx, y);
+    y += 12;
+  }
+}
+
+function drawStageHint(ts) {
+  noStroke();
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(9);
+  textAlign(CENTER, BOTTOM);
+
+  var stageLabels = [
+    "Stage 0: Introduction \u2014 Press \u2192 to begin",
+    "Stage 1: The Standard Genetic Code",
+    "Stage 2: One Shuffle \u2014 watch the edges change",
+    "Stage 3: Monte Carlo Simulation running...",
+    "Stage 4: Simulation running...",
+    "Stage 5: Result \u2014 the SGC is deeply optimized"
+  ];
+
+  var label = stageLabels[Math.min(ts.stage, 5)];
+  if (ts.stage >= 3 && ts.done) label = stageLabels[5];
+
+  text(label, W/2, H - 18);
+
+  textSize(8);
+  fill(80, 85, 100);
+  text("\u2190 \u2192 advance stages  |  1 2 3 switch tabs", W/2, H - 6);
+
+  var dotY = H - 32;
+  for (var i = 0; i <= MAX_STAGE; i++) {
+    var dx = W/2 + (i - MAX_STAGE/2) * 14;
+    if (i <= ts.stage) { fill(ACCENT[0], ACCENT[1], ACCENT[2]); } else { fill(50, 55, 70); }
+    circle(dx, dotY, i === ts.stage ? 6 : 4);
+  }
+
+  if (ts.stage === 0) drawIntroOverlay(ts);
+}
+
+function drawIntroOverlay(ts) {
+  fill(12, 12, 20, 200);
+  rect(50, 80, W - 100, H - 170, 12);
+
+  fill(TEXT_PRIMARY[0], TEXT_PRIMARY[1], TEXT_PRIMARY[2]);
+  textSize(18);
+  textAlign(CENTER, TOP);
+  text("How Optimized Is the Genetic Code?", W/2, 110);
+
+  fill(TEXT_DIM[0], TEXT_DIM[1], TEXT_DIM[2]);
+  textSize(11);
+  var intro = [
+    "",
+    "The standard genetic code maps 64 nucleotide triplets (codons)",
+    "to 20 amino acids. Is this mapping random, or optimized to",
+    "minimize the damage from translation errors?",
+    "",
+    "We test this by shuffling the code 10,000 times,",
+    "preserving the degeneracy structure, and measuring",
+    "the average physicochemical distance between neighboring",
+    "codons' amino acids (noise distortion D).",
+    "",
+    "If the SGC is optimized, its D score should be far lower",
+    "than almost all random alternatives.",
+    ""
+  ];
+  var iy = 140;
+  for (var i = 0; i < intro.length; i++) {
+    text(intro[i], W/2, iy);
+    iy += 16;
+  }
+
+  var pulse = Math.sin(t * 3) * 5;
+  fill(ACCENT[0], ACCENT[1], ACCENT[2]);
+  textSize(14);
+  text("Press \u2192 to begin", W/2, iy + 10 + pulse);
+}
+
+function runSimBatch(ts) {
+  var conf = ts.config;
+  var batchEnd = Math.min(ts.shuffleCount + BATCH_SIZE, TOTAL_SHUFFLES);
+  while (ts.shuffleCount < batchEnd) {
+    var shuffled = shuffleCode(conf.codons, conf.sgcAssignment);
+    var d = computeD(conf.codons, shuffled, conf.vectors);
+    ts.dValues.push(d);
+    addToHistogram(ts, d);
+    if (d <= conf.pub.sgcD) ts.countLeSgc++;
+    ts.shuffleCount++;
+    ts.currentShuffledAssignment = shuffled;
+  }
+  if (ts.shuffleCount >= TOTAL_SHUFFLES) {
+    ts.done = true;
+    ts.running = false;
+    ts.stage = 5;
+  }
+}
+
+// keyboard
+window.addEventListener("keydown", function(e) {
+  var ts = tabState[activeTab];
+  if (e.key === "ArrowRight") {
+    e.preventDefault();
+    if (ts.stage < MAX_STAGE) { ts.stage++; onStageChange(ts); }
+  } else if (e.key === "ArrowLeft") {
+    e.preventDefault();
+    if (ts.stage > 0) { ts.stage--; onStageChange(ts); }
+  } else if (e.key === "1") { activeTab = "tab1"; }
+  else if (e.key === "2") { activeTab = "tab2"; }
+  else if (e.key === "3") { activeTab = "tab3"; }
+});
+
+function onStageChange(ts) {
+  if (ts.stage === 2) {
+    ts.currentShuffledAssignment = shuffleCode(ts.config.codons, ts.config.sgcAssignment);
+  }
+  if (ts.stage === 3 && !ts.done && ts.shuffleCount === 0) {
+    calibrateHistogram(ts);
+    ts.running = true;
+  }
+}
+
+// mouse click for tabs
+function mousePressed() {
+  var tabW = 220, tabH = 28, startX = (W - 3 * tabW - 20) / 2, startY = 8;
+  var keys = ["tab1","tab2","tab3"];
+  for (var i = 0; i < 3; i++) {
+    var x = startX + i * (tabW + 10);
+    if (mouseX >= x && mouseX <= x + tabW && mouseY >= startY && mouseY <= startY + tabH) {
+      activeTab = keys[i];
+    }
+  }
+}
+  </script>
+</body>
+</html>
