@@ -13,552 +13,533 @@
 <body>
   <div id="sketch-container"></div>
   <script>
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════
 // DATA
-// ─────────────────────────────────────────────
-var CODON_TABLE = {
-  AAA:"K",AAC:"N",AAG:"K",AAU:"N",ACA:"T",ACC:"T",ACG:"T",ACU:"T",
-  AGA:"R",AGC:"S",AGG:"R",AGU:"S",AUA:"I",AUC:"I",AUG:"M",AUU:"I",
-  CAA:"Q",CAC:"H",CAG:"Q",CAU:"H",CCA:"P",CCC:"P",CCG:"P",CCU:"P",
-  CGA:"R",CGC:"R",CGG:"R",CGU:"R",CUA:"L",CUC:"L",CUG:"L",CUU:"L",
-  GAA:"E",GAC:"D",GAG:"E",GAU:"D",GCA:"A",GCC:"A",GCG:"A",GCU:"A",
-  GGA:"G",GGC:"G",GGG:"G",GGU:"G",GUA:"V",GUC:"V",GUG:"V",GUU:"V",
-  UAC:"Y",UAU:"Y",UCA:"S",UCC:"S",UCG:"S",UCU:"S",UGC:"C",UGG:"W",
-  UGU:"C",UUA:"L",UUC:"F",UUG:"L",UUU:"F"
-};
-var SENSE_CODONS = Object.keys(CODON_TABLE);
-var BASES = ["A","U","G","C"];
+// ═══════════════════════════════════════════════
+var CT={AAA:"K",AAC:"N",AAG:"K",AAU:"N",ACA:"T",ACC:"T",ACG:"T",ACU:"T",AGA:"R",AGC:"S",AGG:"R",AGU:"S",AUA:"I",AUC:"I",AUG:"M",AUU:"I",CAA:"Q",CAC:"H",CAG:"Q",CAU:"H",CCA:"P",CCC:"P",CCG:"P",CCU:"P",CGA:"R",CGC:"R",CGG:"R",CGU:"R",CUA:"L",CUC:"L",CUG:"L",CUU:"L",GAA:"E",GAC:"D",GAG:"E",GAU:"D",GCA:"A",GCC:"A",GCG:"A",GCU:"A",GGA:"G",GGC:"G",GGG:"G",GGU:"G",GUA:"V",GUC:"V",GUG:"V",GUU:"V",UAC:"Y",UAU:"Y",UCA:"S",UCC:"S",UCG:"S",UCU:"S",UGC:"C",UGG:"W",UGU:"C",UUA:"L",UUC:"F",UUG:"L",UUU:"F"};
+var SC=Object.keys(CT), BA=["A","U","G","C"];
+var PCA={A:[-0.64,-2.89,-0.40,-1.25,1.34,-0.49,-1.61,0.16],C:[0.10,-1.72,1.28,0.14,-1.87,-0.39,-0.31,0.79],D:[2.81,-1.02,-2.58,1.69,-0.62,0.01,0.46,-0.80],E:[2.03,0.34,-4.45,0.75,0.12,0.07,-0.51,-0.44],F:[-3.98,0.25,0.12,0.98,0.76,0.61,-0.20,-0.17],G:[3.36,-3.85,1.62,-0.75,1.14,2.66,0.34,0.08],H:[0.83,1.95,0.46,1.55,1.00,0.59,-0.96,-0.05],I:[-3.83,-1.02,-0.34,-1.70,-0.36,0.06,0.58,-0.47],K:[2.10,3.64,0.26,-2.08,0.64,-0.47,-0.17,-0.12],L:[-3.45,-0.98,-0.55,-1.48,0.00,-0.42,0.35,-0.24],M:[-1.61,0.07,-1.44,-0.83,-0.21,-0.30,-0.14,1.94],N:[2.83,-0.33,0.28,0.72,0.09,-0.14,1.48,0.36],P:[0.92,-2.20,2.06,2.08,1.53,-2.60,0.41,-0.29],Q:[1.52,0.88,-1.04,-0.14,0.32,0.00,1.12,0.91],R:[2.28,4.99,1.30,-2.40,0.37,-0.14,0.09,-0.39],S:[3.02,-1.01,1.06,0.02,-1.27,-0.08,-1.10,-0.10],T:[1.46,0.02,0.63,-0.22,-1.85,-0.44,-0.27,-0.28],V:[-3.63,-1.63,-0.07,-1.71,-0.36,0.04,0.49,-0.90],W:[-4.26,2.63,0.26,2.55,0.57,0.61,-0.01,0.30],Y:[-1.87,1.86,1.53,2.08,-1.35,0.82,-0.05,-0.27]};
+var ACOL={A:[230,120,60],V:[210,90,50],L:[220,100,55],I:[200,80,45],M:[190,70,40],F:[180,60,35],W:[170,50,30],S:[70,160,200],T:[80,170,210],N:[60,150,190],Q:[90,180,220],Y:[100,140,180],C:[50,130,170],K:[150,80,180],R:[130,60,160],H:[170,100,200],D:[80,180,80],E:[100,200,100],G:[140,140,140],P:[140,100,70]};
 
-var AA_PCA = {
-  A:[-0.6449,-2.8925,-0.4038,-1.2475,1.3376,-0.4853,-1.6093,0.1638],
-  C:[0.1027,-1.7236,1.2832,0.1356,-1.8711,-0.3928,-0.3067,0.7890],
-  D:[2.8114,-1.0181,-2.5774,1.6878,-0.6191,0.0115,0.4558,-0.8020],
-  E:[2.0325,0.3447,-4.4514,0.7479,0.1224,0.0736,-0.5117,-0.4378],
-  F:[-3.9799,0.2452,0.1187,0.9802,0.7632,0.6057,-0.1989,-0.1723],
-  G:[3.3608,-3.8461,1.6188,-0.7475,1.1395,2.6585,0.3447,0.0759],
-  H:[0.8318,1.9523,0.4608,1.5514,1.0037,0.5913,-0.9573,-0.0515],
-  I:[-3.8318,-1.0173,-0.3385,-1.6954,-0.3554,0.0560,0.5768,-0.4681],
-  K:[2.1007,3.6440,0.2580,-2.0836,0.6423,-0.4689,-0.1652,-0.1244],
-  L:[-3.4455,-0.9765,-0.5507,-1.4788,0.0043,-0.4225,0.3503,-0.2446],
-  M:[-1.6112,0.0678,-1.4378,-0.8342,-0.2139,-0.3028,-0.1370,1.9418],
-  N:[2.8285,-0.3278,0.2846,0.7229,0.0922,-0.1380,1.4830,0.3586],
-  P:[0.9213,-2.2009,2.0579,2.0833,1.5312,-2.5971,0.4058,-0.2927],
-  Q:[1.5249,0.8777,-1.0350,-0.1361,0.3244,-0.0035,1.1156,0.9076],
-  R:[2.2765,4.9937,1.3003,-2.3970,0.3658,-0.1355,0.0908,-0.3943],
-  S:[3.0214,-1.0088,1.0599,0.0187,-1.2736,-0.0757,-1.0978,-0.0973],
-  T:[1.4601,0.0207,0.6344,-0.2248,-1.8471,-0.4374,-0.2671,-0.2797],
-  V:[-3.6289,-1.6252,-0.0656,-1.7109,-0.3609,0.0387,0.4880,-0.9038],
-  W:[-4.2592,2.6323,0.2577,2.5529,0.5673,0.6050,-0.0133,0.3033],
-  Y:[-1.8713,1.8583,1.5259,2.0750,-1.3526,0.8192,-0.0465,-0.2716]
-};
+// class names for legend
+var AA_CLASS={A:"hydrophobic",V:"hydrophobic",L:"hydrophobic",I:"hydrophobic",M:"hydrophobic",F:"aromatic",W:"aromatic",S:"polar",T:"polar",N:"polar",Q:"polar",Y:"polar",C:"polar",K:"positive",R:"positive",H:"positive",D:"negative",E:"negative",G:"special",P:"special"};
 
-var RAA10 = { A:"X1",G:"X1",V:"X2",L:"X2",I:"X2",M:"X2",F:"X3",W:"X3",Y:"X3",S:"X4",T:"X4",N:"X5",Q:"X5",D:"X6",E:"X6",K:"X7",R:"X7",H:"X8",P:"X9",C:"X10" };
-
-function computeClassCentroids() {
-  var sums = {}, counts = {};
-  for (var aa in RAA10) { var cls = RAA10[aa]; if (!sums[cls]) { sums[cls] = [0,0,0,0,0,0,0,0]; counts[cls] = 0; } var v = AA_PCA[aa]; for (var i=0;i<8;i++) sums[cls][i]+=v[i]; counts[cls]++; }
-  var c = {}; for (var cls in sums) { c[cls] = sums[cls].map(function(s){return s/counts[cls];}); } return c;
-}
-var CLASS_CENTROIDS = computeClassCentroids();
-
-function buildDoubletTable() {
-  var d = {};
-  for (var bi=0;bi<4;bi++) for (var bj=0;bj<4;bj++) {
-    var db = BASES[bi]+BASES[bj], cc = {};
-    for (var bk=0;bk<4;bk++) { var cod=db+BASES[bk], aa=CODON_TABLE[cod]; if(aa) { var cls=RAA10[aa]; cc[cls]=(cc[cls]||0)+1; } }
-    var best=null, bestC=0;
-    var sorted = Object.keys(cc).sort();
-    for (var si=0;si<sorted.length;si++) { if(cc[sorted[si]]>bestC){best=sorted[si];bestC=cc[sorted[si]];} }
-    if(best) d[db]=best;
-  }
-  return d;
-}
-var DOUBLET_TABLE = buildDoubletTable();
-var DOUBLET_CODONS = Object.keys(DOUBLET_TABLE);
-
-var PUB = {
-  tab1: { label:"Triplet \u00d7 20 AA", sgcD:null, pubZ:-16.56, nSense:61, nClasses:20 },
-  tab2: { label:"Doublet \u00d7 10 AA", sgcD:null, pubZ:-3.80, nSense:16, nClasses:9 },
-  tab3: { label:"Triplet \u00d7 10 AA", sgcD:null, pubZ:-14.81, nSense:61, nClasses:10 }
-};
-
-var AA_COLORS = { A:[230,120,60],V:[210,90,50],L:[220,100,55],I:[200,80,45],M:[190,70,40],F:[180,60,35],W:[170,50,30],S:[70,160,200],T:[80,170,210],N:[60,150,190],Q:[90,180,220],Y:[100,140,180],C:[50,130,170],K:[150,80,180],R:[130,60,160],H:[170,100,200],D:[80,180,80],E:[100,200,100],G:[140,140,140],P:[140,100,70] };
-var CLASS_COLORS = {};
-(function(){ var m={}; for(var aa in RAA10){var c=RAA10[aa]; if(!m[c])m[c]=[]; m[c].push(AA_COLORS[aa]);} for(var c in m){var a=[0,0,0]; for(var i=0;i<m[c].length;i++){a[0]+=m[c][i][0];a[1]+=m[c][i][1];a[2]+=m[c][i][2];} CLASS_COLORS[c]=[Math.round(a[0]/m[c].length),Math.round(a[1]/m[c].length),Math.round(a[2]/m[c].length)];} })();
-
-// ─────────────────────────────────────────────
-// SIMULATION ENGINE
-// ─────────────────────────────────────────────
 function l2(a,b){var s=0;for(var i=0;i<a.length;i++){var d=a[i]-b[i];s+=d*d;}return Math.sqrt(s);}
-function findNeighbors(cod){var n=[];for(var i=0;i<cod.length;i++)for(var j=0;j<4;j++)if(BASES[j]!==cod[i])n.push(cod.slice(0,i)+BASES[j]+cod.slice(i+1));return n;}
+function neighbors(c){var n=[];for(var i=0;i<c.length;i++)for(var j=0;j<4;j++)if(BA[j]!==c[i])n.push(c.slice(0,i)+BA[j]+c.slice(i+1));return n;}
+function computeD(codons,asgn,vecs){var t=0,c=0;for(var i=0;i<codons.length;i++){var cd=codons[i],lb=asgn[cd];if(!lb||!vecs[lb])continue;var vc=vecs[lb],ne=neighbors(cd),ls=0,lc=0;for(var j=0;j<ne.length;j++){var nl=asgn[ne[j]];if(!nl||!vecs[nl])continue;ls+=l2(vc,vecs[nl]);lc++;}if(lc>0){t+=ls/lc;c++;}}return c>0?t/c:0;}
+function shuffleCode(codons,orig){var lb=[];for(var i=0;i<codons.length;i++)lb.push(orig[codons[i]]);for(var i=lb.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),tmp=lb[i];lb[i]=lb[j];lb[j]=tmp;}var n={};for(var i=0;i<codons.length;i++)n[codons[i]]=lb[i];return n;}
 
-function computeD(codons,assignment,vectors){
-  var total=0,count=0;
-  for(var ci=0;ci<codons.length;ci++){var c=codons[ci],lab=assignment[c]; if(!lab||!vectors[lab])continue; var vc=vectors[lab],ne=findNeighbors(c),ls=0,lc=0;
-    for(var ni=0;ni<ne.length;ni++){var nl=assignment[ne[ni]]; if(!nl||!vectors[nl])continue; ls+=l2(vc,vectors[nl]);lc++;} if(lc>0){total+=ls/lc;count++;}}
-  return count>0?total/count:0;
-}
-function fisherYates(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function shuffleCode(codons,orig){var l=[];for(var i=0;i<codons.length;i++)l.push(orig[codons[i]]);fisherYates(l);var n={};for(var i=0;i<codons.length;i++)n[codons[i]]=l[i];return n;}
+// build SGC assignment
+var SGC_ASGN={};for(var k in CT)SGC_ASGN[k]=CT[k];
+var SGC_D=computeD(SC,SGC_ASGN,PCA);
 
-function buildTabConfig(tabKey){
-  var pub=PUB[tabKey],config;
-  if(tabKey==="tab1"){var sa={};for(var k in CODON_TABLE)sa[k]=CODON_TABLE[k]; config={codons:SENSE_CODONS,sgcAssignment:sa,vectors:AA_PCA,colorMap:AA_COLORS,exampleCodon:"GCU",pub:pub};}
-  else if(tabKey==="tab2"){var sa2={};for(var k2 in DOUBLET_TABLE)sa2[k2]=DOUBLET_TABLE[k2]; config={codons:DOUBLET_CODONS,sgcAssignment:sa2,vectors:CLASS_CENTROIDS,colorMap:CLASS_COLORS,exampleCodon:"GC",pub:pub};}
-  else{var asgn={};for(var k3 in CODON_TABLE)asgn[k3]=RAA10[CODON_TABLE[k3]]; config={codons:SENSE_CODONS,sgcAssignment:asgn,vectors:CLASS_CENTROIDS,colorMap:CLASS_COLORS,exampleCodon:"GCU",pub:pub};}
-  pub.sgcD=computeD(config.codons,config.sgcAssignment,config.vectors);
-  return config;
-}
-
-// ─────────────────────────────────────────────
+// ═══════════════════════════════════════════════
 // SKETCH
-// ─────────────────────────────────────────────
-var W=850, H=540;
-var BG=[12,12,20], PANEL_BG=[20,22,32], TEXT_PRIMARY=[230,235,245], TEXT_DIM=[140,145,160];
-var ACCENT=[100,180,255], SGC_COL=[255,200,60], TAB_ACT=[60,70,100], TAB_INACT=[30,33,48];
+// ═══════════════════════════════════════════════
+var W=850,H=540;
+var BG=[12,12,20],PBG=[20,22,32],TP=[230,235,245],TD=[140,145,160];
+var AC=[100,180,255],GC=[255,200,60],TR=[255,90,90];
 
-var activeTab="tab1", MAX_STAGE=5, TOTAL_SHUFFLES=1000000, BATCH_SIZE=2000;
-var HIST_BINS=60, DOT_R=2.5, MAX_DOTS_PER_BIN=80;
-var t=0, tabState={};
+var stage=0; // 0=intro, 1=SGC, 2=one shuffle, 3=slow sim, 4=fast sim, 5=done
+var t=0;
+
+// simulation state
+var simCount=0, simCountLe=0, simRunning=false, simDone=false;
+var wN=0,wMean=0,wM2=0;
+var TOTAL=1000000;
+var histBins=60, bins=new Array(histBins).fill(0), histLo=0, histHi=1, histReady=false;
+
+// slow phase: individual shuffles with animation
+var slowQueue=[]; // {d, assignment, age, ball:{x,y,vy,landed}}
+var slowInterval=30; // frames between slow shuffles (0.5 sec at 60fps)
+var slowTimer=0;
+var slowPhaseCount=0;
+var SLOW_PHASE_MAX=30; // do 30 slow shuffles before ramping
+var rampBatch=10; // starts small, grows
+
+// current displayed assignment
+var currentAsgn=null;
+var currentD=null;
+
+// falling balls for histogram
+var balls=[];
 
 function setup(){
   createCanvas(W,H).parent("sketch-container");
   textFont("monospace");
-  var keys=["tab1","tab2","tab3"];
-  for(var ki=0;ki<keys.length;ki++){
-    var key=keys[ki];
-    tabState[key]={
-      config:buildTabConfig(key),
-      // histogram bins + dot stacks
-      bins:new Array(HIST_BINS).fill(0), binDots:[], histLo:0, histHi:1, histReady:false,
-      // falling dots queue
-      fallingDots:[], landedDots:[],
-      // welford running stats
-      wN:0, wMean:0, wM2:0,
-      shuffleCount:0, countLeSgc:0,
-      running:false, done:false,
-      currentShuffledAssignment:null, stage:0
-    };
-    // init binDots arrays
-    for(var b=0;b<HIST_BINS;b++) tabState[key].binDots.push([]);
-  }
 }
 
-// welford online mean/variance
-function welfordPush(ts,val){ ts.wN++; var d=val-ts.wMean; ts.wMean+=d/ts.wN; var d2=val-ts.wMean; ts.wM2+=d*d2; }
-function welfordStd(ts){ return ts.wN>1?Math.sqrt(ts.wM2/(ts.wN-1)):0; }
+function welfordPush(v){wN++;var d=v-wMean;wMean+=d/wN;var d2=v-wMean;wM2+=d*d2;}
+function welfordStd(){return wN>1?Math.sqrt(wM2/(wN-1)):0;}
 
-function calibrateHist(ts){
-  var conf=ts.config, samples=[];
-  for(var i=0;i<300;i++){var sh=shuffleCode(conf.codons,conf.sgcAssignment); samples.push(computeD(conf.codons,sh,conf.vectors));}
-  var mean=0; for(var i=0;i<samples.length;i++) mean+=samples[i]; mean/=samples.length;
-  var v=0; for(var i=0;i<samples.length;i++) v+=(samples[i]-mean)*(samples[i]-mean); var std=Math.sqrt(v/(samples.length-1));
-  ts.histLo=Math.min(conf.pub.sgcD-std, mean-4*std);
-  ts.histHi=mean+4*std;
-  ts.histReady=true;
-  // add calibration samples
+function calibrate(){
+  var samples=[];
+  for(var i=0;i<300;i++){var sh=shuffleCode(SC,SGC_ASGN);samples.push(computeD(SC,sh,PCA));}
+  var m=0;for(var i=0;i<samples.length;i++)m+=samples[i];m/=samples.length;
+  var v=0;for(var i=0;i<samples.length;i++)v+=(samples[i]-m)*(samples[i]-m);var s=Math.sqrt(v/(samples.length-1));
+  histLo=Math.min(SGC_D-s,m-4*s); histHi=m+4*s; histReady=true;
   for(var i=0;i<samples.length;i++){
-    var d=samples[i]; welfordPush(ts,d);
-    var idx=Math.floor((d-ts.histLo)/(ts.histHi-ts.histLo)*HIST_BINS);
-    if(idx>=0&&idx<HIST_BINS) ts.bins[idx]++;
-    if(d<=conf.pub.sgcD) ts.countLeSgc++;
-    ts.shuffleCount++;
+    welfordPush(samples[i]);
+    var idx=Math.floor((samples[i]-histLo)/(histHi-histLo)*histBins);
+    if(idx>=0&&idx<histBins)bins[idx]++;
+    if(samples[i]<=SGC_D)simCountLe++;
+    simCount++;
   }
-}
-
-function addBinDot(ts,binIdx){
-  // add a visible dot to this bin column
-  if(binIdx<0||binIdx>=HIST_BINS) return;
-  var stack=ts.binDots[binIdx];
-  if(stack.length>=MAX_DOTS_PER_BIN) return; // column full visually
-  stack.push({landed:false, y:0, vy:0, targetY:0});
-}
-
-// spawn a falling dot at the right x position
-function spawnFallingDot(ts,dValue){
-  var frac=(dValue-ts.histLo)/(ts.histHi-ts.histLo);
-  var binIdx=Math.floor(frac*HIST_BINS);
-  if(binIdx<0||binIdx>=HIST_BINS) return;
-  var stack=ts.binDots[binIdx];
-  if(stack.length>=MAX_DOTS_PER_BIN) return;
-  // calculate target y based on stack height
-  var stackH=stack.length;
-  // falling dot: starts from top, falls to target
-  ts.fallingDots.push({ binIdx:binIdx, x:frac, y:0, vy:0, targetStackPos:stackH, age:0 });
-  stack.push(1); // reserve spot
 }
 
 function draw(){
   t=millis()*0.001;
   background(BG[0],BG[1],BG[2]);
-  var ts=tabState[activeTab], st=ts.stage;
 
-  drawTabs();
-  drawTitle(ts);
-  if(st>=1) drawCodonGraph(ts);
-  if(st>=3) drawBallDrop(ts);
-  if(st>=1) drawStatsCard(ts);
-  if(st>=3&&ts.running&&!ts.done) runSimBatch(ts);
-  drawStageHint(ts);
-}
-
-function drawTabs(){
-  var tabW=220,tabH=28,startX=(W-3*tabW-20)/2,startY=8,keys=["tab1","tab2","tab3"];
-  for(var i=0;i<3;i++){
-    var key=keys[i],pub=PUB[key],x=startX+i*(tabW+10),act=key===activeTab;
-    fill(act?TAB_ACT[0]:TAB_INACT[0],act?TAB_ACT[1]:TAB_INACT[1],act?TAB_ACT[2]:TAB_INACT[2]);
-    noStroke(); rect(x,startY,tabW,tabH,6);
-    fill(act?TEXT_PRIMARY[0]:TEXT_DIM[0],act?TEXT_PRIMARY[1]:TEXT_DIM[1],act?TEXT_PRIMARY[2]:TEXT_DIM[2]);
-    textSize(11); textAlign(CENTER,CENTER);
-    text((i+1)+". "+pub.label,x+tabW/2,startY+tabH/2);
+  if(stage<=2){
+    // full-screen graph mode
+    drawFullGraph();
+  } else {
+    // simulation mode: graph left, histogram right
+    drawSimGraph();
+    drawHistogram();
   }
+  drawBottomBar();
+
+  // run simulation logic
+  if(stage===3) runSlowSim();
+  if(stage===4) runFastSim();
 }
 
-function drawTitle(ts){
-  fill(ACCENT[0],ACCENT[1],ACCENT[2]); textSize(14); textAlign(LEFT,TOP);
-  text("Genetic Code Optimality \u2014 Monte Carlo Proof",20,44);
-  fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(10);
-  text(ts.config.pub.label+" ("+ts.config.pub.nSense+" codons \u2192 "+ts.config.pub.nClasses+" classes)",20,62);
-}
+// ═══════════════════════════════════════════════
+// FULL-SCREEN GRAPH (stages 0-2)
+// ═══════════════════════════════════════════════
+function drawFullGraph(){
+  var asgn=(stage>=2&&currentAsgn)?currentAsgn:SGC_ASGN;
+  var isSGC=!(stage>=2&&currentAsgn);
+  var ex="GCU";
+  var ne=neighbors(ex);
+  var cx=320,cy=260,radius=140;
 
-function drawCodonGraph(ts){
-  var conf=ts.config;
-  var assignment=(ts.stage>=2&&ts.currentShuffledAssignment)?ts.currentShuffledAssignment:conf.sgcAssignment;
-  var neighs=findNeighbors(conf.exampleCodon);
-  var cx=130,cy=225,radius=75;
-  var panelX=15,panelY=82,panelW=235,panelH=370;
-
-  fill(PANEL_BG[0],PANEL_BG[1],PANEL_BG[2]); stroke(40,45,60); strokeWeight(1);
-  rect(panelX,panelY,panelW,panelH,8);
-
-  noStroke(); fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(9); textAlign(CENTER,TOP);
-  text("CODON NEIGHBORHOOD",panelX+panelW/2,panelY+8);
+  // title
+  fill(AC[0],AC[1],AC[2]); textSize(16); textAlign(LEFT,TOP);
+  text("Genetic Code Optimality",20,15);
 
   // build layout
-  var layout=[{codon:conf.exampleCodon,x:cx,y:cy}];
-  for(var i=0;i<neighs.length;i++){
-    var angle=(i/neighs.length)*TWO_PI-HALF_PI;
-    layout.push({codon:neighs[i],x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)});
+  var layout=[{codon:ex,x:cx,y:cy}];
+  for(var i=0;i<ne.length;i++){
+    var angle=(i/ne.length)*TWO_PI-HALF_PI;
+    layout.push({codon:ne[i],x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)});
   }
 
-  // count syn/nonsyn for display
-  var synCount=0, nonsynCount=0;
-  var centerLabel=assignment[layout[0].codon];
+  var centerLabel=asgn[layout[0].codon];
+  var synC=0,nonC=0;
 
   // edges
   for(var i=1;i<layout.length;i++){
-    var nb=layout[i],nbLabel=assignment[nb.codon]; if(!nbLabel)continue;
-    var same=centerLabel===nbLabel;
-    if(same){synCount++;stroke(80,160,255,180);}else{nonsynCount++;stroke(255,80,80,140);}
-    strokeWeight(same?2.5:1.5);
-    line(layout[0].x+panelX+3,layout[0].y+panelY-5,nb.x+panelX+3,nb.y+panelY-5);
+    var nb=layout[i],nbLab=asgn[nb.codon]; if(!nbLab)continue;
+    var same=centerLabel===nbLab;
+    if(same){synC++;stroke(80,160,255,180);}else{nonC++;stroke(255,80,80,120);}
+    strokeWeight(same?3:2);
+    line(layout[0].x,layout[0].y,nb.x,nb.y);
   }
 
   // nodes
   for(var i=0;i<layout.length;i++){
-    var node=layout[i],lbl=assignment[node.codon]; if(!lbl)continue;
-    var col=conf.colorMap[lbl]||[150,150,150];
-    var isCenter=i===0, r=isCenter?22:16;
-    var breathe=Math.sin(t*2+i*0.5)*1.5;
+    var nd=layout[i],lb=asgn[nd.codon]; if(!lb)continue;
+    var col=ACOL[lb]||[150,150,150];
+    var isC=i===0,r=isC?32:22;
+    var breathe=Math.sin(t*2+i*0.5)*2;
     noStroke();
-    fill(col[0],col[1],col[2],30); circle(node.x+panelX+3,node.y+panelY-5,r*2+breathe+8);
-    fill(col[0],col[1],col[2]); circle(node.x+panelX+3,node.y+panelY-5,r*2+breathe);
-    // codon label outside
-    fill(200,205,220); textSize(isCenter?10:7); textAlign(CENTER,CENTER);
-    var dx=node.x-cx,dy=node.y-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
-    var ld=r+10+breathe/2;
-    var lx=isCenter?node.x:node.x+(dx/dist)*ld, ly=isCenter?node.y-r-8:node.y+(dy/dist)*ld;
-    text(node.codon,lx+panelX+3,ly+panelY-5);
+    fill(col[0],col[1],col[2],25); circle(nd.x,nd.y,r*2+breathe+12);
+    fill(col[0],col[1],col[2]); circle(nd.x,nd.y,r*2+breathe);
     // AA inside
-    fill(0); textSize(isCenter?9:7); text(lbl,node.x+panelX+3,node.y+panelY-5);
+    fill(0); textSize(isC?14:10); textAlign(CENTER,CENTER);
+    text(lb,nd.x,nd.y);
+    // codon label outside
+    fill(200,205,220); textSize(isC?11:9);
+    var dx=nd.x-cx,dy=nd.y-cy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+    var ld=r+14+breathe/2;
+    var lx=isC?nd.x:nd.x+(dx/dist)*ld, ly=isC?nd.y-r-12:nd.y+(dy/dist)*ld;
+    text(nd.codon,lx,ly);
+    // class name for outer nodes
+    if(!isC){
+      fill(col[0],col[1],col[2],100); textSize(7);
+      text(AA_CLASS[lb]||"",lx,ly+10);
+    }
   }
 
-  // bottom info
-  noStroke();
-  var isSGC=!(ts.stage>=2&&ts.currentShuffledAssignment);
-  var legY=panelY+panelH-35;
+  // right side info panel
+  var px=560,py=60,pw=270;
+  fill(PBG[0],PBG[1],PBG[2],200); noStroke();
+  rect(px,py,pw,stage===0?0:400,8);
 
-  // syn/nonsyn count badges
-  fill(80,160,255); textSize(9); textAlign(LEFT,CENTER);
-  circle(panelX+25,legY,8); fill(0); textSize(7); text(synCount,panelX+25,legY);
-  fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(7); textAlign(LEFT,CENTER);
-  text("syn",panelX+34,legY);
+  if(stage>=1){
+    fill(TP[0],TP[1],TP[2]); textSize(13); textAlign(LEFT,TOP);
+    text(isSGC?"Standard Genetic Code":"Shuffled Code",px+15,py+15);
 
-  fill(255,80,80); circle(panelX+70,legY,8); fill(0); textSize(7); textAlign(CENTER,CENTER); text(nonsynCount,panelX+70,legY);
-  fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(7); textAlign(LEFT,CENTER);
-  text("nonsyn",panelX+79,legY);
+    // D score
+    fill(isSGC?GC[0]:TR[0],isSGC?GC[1]:TR[1],isSGC?GC[2]:TR[2]);
+    textSize(28); text("D = "+(isSGC?SGC_D:currentD||0).toFixed(2),px+15,py+45);
 
-  // label
-  fill(isSGC?SGC_COL[0]:255,isSGC?SGC_COL[1]:100,isSGC?SGC_COL[2]:100);
-  textSize(9); textAlign(CENTER,BOTTOM);
-  text(isSGC?"STANDARD CODE (SGC)":"SHUFFLED CODE",panelX+panelW/2,panelY+panelH-8);
+    // edge counts
+    var ey=py+90;
+    fill(80,160,255); textSize(11); textAlign(LEFT,TOP);
+    text("\u2022 "+synC+" synonymous edges",px+15,ey);
+    fill(TD[0],TD[1],TD[2]); textSize(9);
+    text("  same amino acid \u2192 no damage",px+15,ey+16);
 
-  // if SGC, show "smooth!" annotation
-  if(isSGC&&ts.stage===1){
-    fill(SGC_COL[0],SGC_COL[1],SGC_COL[2],180); textSize(8); textAlign(CENTER,TOP);
-    text("neighbors share similar amino acids",panelX+panelW/2,panelY+25);
+    fill(255,80,80); textSize(11);
+    text("\u2022 "+nonC+" nonsynonymous edges",px+15,ey+38);
+    fill(TD[0],TD[1],TD[2]); textSize(9);
+    text("  different amino acid \u2192 potential damage",px+15,ey+54);
+
+    // explanation
+    var ty=ey+82;
+    fill(TD[0],TD[1],TD[2]); textSize(10); textAlign(LEFT,TOP);
+    if(isSGC){
+      text("D measures average physicochemical",px+15,ty);
+      text("distance between a codon's amino",px+15,ty+14);
+      text("acid and its neighbors' amino acids.",px+15,ty+28);
+      ty+=50;
+      text("Lower D = errors cause less damage.",px+15,ty);
+      text("The SGC has remarkably low D.",px+15,ty+14);
+      ty+=36;
+      fill(GC[0],GC[1],GC[2]); textSize(11);
+      text("Is this just luck?",px+15,ty);
+      text("Let's shuffle and find out...",px+15,ty+16);
+    } else {
+      text("We shuffled the amino acid labels",px+15,ty);
+      text("while keeping the same degeneracy",px+15,ty+14);
+      text("structure (same # of codons per AA).",px+15,ty+28);
+      ty+=50;
+      var diff=((currentD||0)-SGC_D).toFixed(2);
+      fill(TR[0],TR[1],TR[2]); textSize(12);
+      text("D went up by "+diff,px+15,ty);
+      fill(TD[0],TD[1],TD[2]); textSize(10);
+      text("More red edges = more damage",px+15,ty+18);
+      text("from translation errors.",px+15,ty+32);
+      ty+=56;
+      fill(AC[0],AC[1],AC[2]); textSize(11);
+      text("Was this one shuffle unlucky?",px+15,ty);
+      text("Let's try a million more...",px+15,ty+16);
+    }
   }
-  if(!isSGC&&ts.stage===2){
-    fill(255,100,100,180); textSize(8); textAlign(CENTER,TOP);
-    text("random \u2192 neighbors become dissimilar",panelX+panelW/2,panelY+25);
+
+  // intro overlay
+  if(stage===0){
+    fill(12,12,20,220); rect(40,50,W-80,H-120,12);
+    fill(TP[0],TP[1],TP[2]); textSize(22); textAlign(CENTER,TOP);
+    text("How Optimized Is the Genetic Code?",W/2,80);
+    fill(TD[0],TD[1],TD[2]); textSize(12);
+    var intro=["","64 codons map to 20 amino acids.","Is this mapping random, or carefully optimized","to minimize damage from translation errors?","",
+      "We'll show you the answer with 1,000,000 shuffles.",""];
+    var iy=120;
+    for(var i=0;i<intro.length;i++){text(intro[i],W/2,iy);iy+=20;}
+    var pulse=Math.sin(t*3)*5;
+    fill(AC[0],AC[1],AC[2]); textSize(16);
+    text("Click anywhere to begin",W/2,iy+15+pulse);
   }
 }
 
-// ── BALL DROP HISTOGRAM ──
-function drawBallDrop(ts){
-  var panelX=260,panelY=82,panelW=330,panelH=370;
+// ═══════════════════════════════════════════════
+// SIMULATION MODE (stages 3-5)
+// ═══════════════════════════════════════════════
+function drawSimGraph(){
+  var asgn=currentAsgn||SGC_ASGN;
+  var ex="GCU",ne=neighbors(ex);
+  var panelW=250,panelH=350;
+  var cx=125,cy=200,radius=70;
+  var px=10,py=80;
 
-  fill(PANEL_BG[0],PANEL_BG[1],PANEL_BG[2]); stroke(40,45,60); strokeWeight(1);
-  rect(panelX,panelY,panelW,panelH,8);
+  fill(PBG[0],PBG[1],PBG[2]); stroke(40,45,60); strokeWeight(1);
+  rect(px,py,panelW,panelH,8);
+  noStroke(); fill(TD[0],TD[1],TD[2]); textSize(8); textAlign(CENTER,TOP);
+  text("CURRENT SHUFFLE",px+panelW/2,py+6);
 
-  noStroke(); fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(9); textAlign(CENTER,TOP);
-  text("RANDOM CODES (each dot = one shuffled code)",panelX+panelW/2,panelY+8);
+  // title area
+  fill(AC[0],AC[1],AC[2]); textSize(13); textAlign(LEFT,TOP);
+  text("Genetic Code Optimality",10,15);
+  fill(TD[0],TD[1],TD[2]); textSize(10);
+  text("61 codons \u2192 20 amino acids | 1M Monte Carlo shuffles",10,33);
 
-  var hx=panelX+30, hy=panelY+30, hw=panelW-45, hh=panelH-80;
-  var barW=hw/HIST_BINS;
+  var layout=[{codon:ex,x:cx,y:cy}];
+  for(var i=0;i<ne.length;i++){
+    var angle=(i/ne.length)*TWO_PI-HALF_PI;
+    layout.push({codon:ne[i],x:cx+radius*Math.cos(angle),y:cy+radius*Math.sin(angle)});
+  }
+
+  var centerLabel=asgn[layout[0].codon];
+
+  // edges
+  for(var i=1;i<layout.length;i++){
+    var nb=layout[i],nbLab=asgn[nb.codon]; if(!nbLab)continue;
+    var same=centerLabel===nbLab;
+    if(same){stroke(80,160,255,180);}else{stroke(255,80,80,120);}
+    strokeWeight(same?2:1.2);
+    line(layout[0].x+px,layout[0].y+py,nb.x+px,nb.y+py);
+  }
+
+  // nodes
+  for(var i=0;i<layout.length;i++){
+    var nd=layout[i],lb=asgn[nd.codon]; if(!lb)continue;
+    var col=ACOL[lb]||[150,150,150];
+    var isC=i===0,r=isC?18:12;
+    var breathe=Math.sin(t*2+i*0.5)*1;
+    noStroke();
+    fill(col[0],col[1],col[2],25); circle(nd.x+px,nd.y+py,r*2+breathe+6);
+    fill(col[0],col[1],col[2]); circle(nd.x+px,nd.y+py,r*2+breathe);
+    fill(0); textSize(isC?8:6); textAlign(CENTER,CENTER);
+    text(lb,nd.x+px,nd.y+py);
+  }
+
+  // D score big
+  noStroke();
+  var dVal=currentD||SGC_D;
+  fill(TR[0],TR[1],TR[2]); textSize(16); textAlign(CENTER,TOP);
+  text("D = "+dVal.toFixed(2),px+panelW/2,py+panelH-55);
+
+  // SGC reference
+  fill(GC[0],GC[1],GC[2]); textSize(9);
+  text("SGC: D = "+SGC_D.toFixed(2),px+panelW/2,py+panelH-35);
+
+  // counter
+  fill(TD[0],TD[1],TD[2]); textSize(8);
+  text(simCount.toLocaleString()+" shuffles",px+panelW/2,py+panelH-18);
+}
+
+function drawHistogram(){
+  var px=270,py=55,pw=570,ph=430;
+
+  fill(PBG[0],PBG[1],PBG[2]); stroke(40,45,60); strokeWeight(1);
+  rect(px,py,pw,ph,8);
+
+  noStroke(); fill(TD[0],TD[1],TD[2]); textSize(9); textAlign(CENTER,TOP);
+  text("WHERE DO RANDOM CODES LAND?",px+pw/2,py+8);
+
+  var hx=px+50,hy=py+35,hw=pw-80,hh=ph-120;
+  var barW=hw/histBins;
+
+  // find max bin
   var maxBin=1;
-  for(var i=0;i<HIST_BINS;i++) if(ts.bins[i]>maxBin) maxBin=ts.bins[i];
+  for(var i=0;i<histBins;i++) if(bins[i]>maxBin) maxBin=bins[i];
 
-  // draw stacked dots as bars with dot texture
-  for(var i=0;i<HIST_BINS;i++){
-    if(ts.bins[i]===0)continue;
-    var barH=(ts.bins[i]/maxBin)*hh;
+  // draw bars as stacked dots
+  var maxDotsPerCol=60;
+  for(var i=0;i<histBins;i++){
+    if(bins[i]===0)continue;
     var bx=hx+i*barW+barW/2;
-    var dotsToShow=Math.min(Math.ceil((ts.bins[i]/maxBin)*MAX_DOTS_PER_BIN),MAX_DOTS_PER_BIN);
-    var dotSpacing=Math.min(barH/dotsToShow, DOT_R*2.2);
-
-    // color gradient based on position
-    var frac=i/HIST_BINS;
-    var cr=Math.round(60+frac*50), cg=Math.round(130+frac*50), cb=Math.round(210-frac*90);
+    var dotsToShow=Math.min(Math.ceil((bins[i]/maxBin)*maxDotsPerCol),maxDotsPerCol);
+    var barH=(bins[i]/maxBin)*hh;
+    var dotSpacing=Math.min(barH/dotsToShow,4);
+    var frac=i/histBins;
+    var cr=Math.round(60+frac*50),cg=Math.round(130+frac*50),cb=Math.round(210-frac*90);
 
     for(var d=0;d<dotsToShow;d++){
-      var dy=hy+hh-d*dotSpacing-DOT_R;
-      if(dy<hy) break;
-      // slight wobble for life
-      var wobX=Math.sin(t*1.5+i*0.3+d*0.7)*0.5;
-      fill(cr,cg,cb,200);
-      noStroke();
-      circle(bx+wobX,dy,DOT_R*2);
+      var dy=hy+hh-d*dotSpacing-2;
+      if(dy<hy)break;
+      var wob=Math.sin(t*1.2+i*0.3+d*0.5)*0.4;
+      fill(cr,cg,cb,190); noStroke();
+      circle(bx+wob,dy,3.5);
     }
   }
 
-  // animate falling dots
-  for(var fi=ts.fallingDots.length-1;fi>=0;fi--){
-    var fd=ts.fallingDots[fi];
-    fd.age++;
-    fd.vy+=0.8; // gravity
-    fd.y+=fd.vy;
-    // target y position
-    var targetY=hh-4;
-    if(fd.y>=targetY){
-      // landed — remove from falling
-      ts.fallingDots.splice(fi,1);
-      continue;
-    }
-    // draw falling dot
-    var fx=hx+(fd.x)*hw;
-    var fy=hy+fd.y;
-    if(fy>hy&&fy<hy+hh){
-      fill(255,255,255,220); noStroke();
-      circle(fx,fy,DOT_R*2.5);
+  // falling balls
+  for(var bi=balls.length-1;bi>=0;bi--){
+    var b=balls[bi];
+    b.vy+=0.6;
+    b.y+=b.vy;
+    if(b.y>=hh){balls.splice(bi,1);continue;}
+    var bx=hx+b.frac*hw;
+    var by=hy+b.y;
+    if(by>hy&&by<hy+hh){
+      // ball
+      fill(255,255,255,240); noStroke();
+      circle(bx,by,5);
+      // D value label floating with ball
+      if(b.y<hh*0.5){
+        fill(255,255,255,150); textSize(7); textAlign(CENTER,BOTTOM);
+        text(b.d.toFixed(1),bx,by-6);
+      }
       // trail
-      fill(255,255,255,60);
-      circle(fx,fy-4,DOT_R*1.5);
-      circle(fx,fy-8,DOT_R);
+      fill(255,255,255,40);
+      circle(bx,by-5,3); circle(bx,by-10,2);
     }
   }
 
-  // SGC line — the golden wall
-  var sgcD=ts.config.pub.sgcD;
-  var sgcFrac=(sgcD-ts.histLo)/(ts.histHi-ts.histLo);
+  // SGC golden line
+  var sgcFrac=(SGC_D-histLo)/(histHi-histLo);
   var sgcX=hx+sgcFrac*hw;
   if(sgcX>=hx&&sgcX<=hx+hw){
-    // glow
     var pulse=Math.sin(t*3)*0.3+0.7;
-    stroke(SGC_COL[0],SGC_COL[1],SGC_COL[2],40*pulse); strokeWeight(8);
+    stroke(GC[0],GC[1],GC[2],30*pulse); strokeWeight(12);
     line(sgcX,hy,sgcX,hy+hh);
-    stroke(SGC_COL[0],SGC_COL[1],SGC_COL[2],200); strokeWeight(2.5);
+    stroke(GC[0],GC[1],GC[2],220); strokeWeight(2.5);
     line(sgcX,hy,sgcX,hy+hh);
-    // label
-    noStroke(); fill(SGC_COL[0],SGC_COL[1],SGC_COL[2]);
-    textSize(10); textAlign(CENTER,BOTTOM);
-    text("\u2190 SGC",sgcX-2,hy-4);
-    textSize(7);
-    text("D="+sgcD.toFixed(2),sgcX,hy-15);
+    noStroke(); fill(GC[0],GC[1],GC[2]);
+    textSize(11); textAlign(CENTER,BOTTOM);
+    text("\u2190 SGC (D="+SGC_D.toFixed(2)+")",sgcX+2,hy-6);
   }
 
   // x-axis
-  noStroke(); fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(7); textAlign(CENTER,TOP);
+  noStroke(); fill(TD[0],TD[1],TD[2]); textSize(8); textAlign(CENTER,TOP);
   for(var i=0;i<=4;i++){
-    var val=ts.histLo+(ts.histHi-ts.histLo)*(i/4);
-    text(val.toFixed(1),hx+(i/4)*hw,hy+hh+4);
+    var val=histLo+(histHi-histLo)*(i/4);
+    text(val.toFixed(1),hx+(i/4)*hw,hy+hh+5);
   }
-  textSize(8); text("Noise Distortion (D)",hx+hw/2,hy+hh+16);
+  textSize(9); text("Noise Distortion D (lower = better error protection)",hx+hw/2,hy+hh+20);
 
-  // counter
-  fill(TEXT_PRIMARY[0],TEXT_PRIMARY[1],TEXT_PRIMARY[2]); textSize(11); textAlign(CENTER,BOTTOM);
-  var countStr=ts.shuffleCount>=1000000?"1,000,000":ts.shuffleCount.toLocaleString();
-  text(countStr+" / 1,000,000 shuffles",panelX+panelW/2,panelY+panelH-8);
+  // stats panel on right side of histogram
+  var sx=px+pw-180, sy=hy+hh-140;
+  fill(PBG[0],PBG[1],PBG[2],230); noStroke();
+  rect(sx,sy,170,135,6); stroke(50,55,70); strokeWeight(1); noFill();
+  rect(sx,sy,170,135,6); noStroke();
 
-  // if done, flash "none reached SGC"
-  if(ts.done&&ts.countLeSgc===0){
+  var sty=sy+8;
+  fill(TD[0],TD[1],TD[2]); textSize(8); textAlign(CENTER,TOP);
+  text("LIVE STATISTICS",sx+85,sty); sty+=16;
+
+  function sRow(lab,val,col){
+    fill(TD[0],TD[1],TD[2]); textSize(9); textAlign(LEFT,TOP); text(lab,sx+10,sty);
+    fill(col[0],col[1],col[2]); textAlign(RIGHT,TOP); text(val,sx+160,sty); sty+=15;
+  }
+
+  sRow("SGC Score",SGC_D.toFixed(2),GC);
+  sRow("Null Mean",wMean.toFixed(2),TP);
+  var z=welfordStd()>0?(SGC_D-wMean)/welfordStd():0;
+  var zCol=Math.abs(z)>5?[255,80,80]:[255,180,60];
+  sRow("z-score",z.toFixed(2),zCol);
+  sty+=4;
+
+  // drama counter
+  fill(simCountLe===0?[100,255,100]:[255,200,60]);
+  fill(100,255,100); textSize(14); textAlign(CENTER,TOP);
+  text(simCountLe+" / "+simCount.toLocaleString(),sx+85,sty);
+  sty+=18;
+  fill(TD[0],TD[1],TD[2]); textSize(7); textAlign(CENTER,TOP);
+  text("codes that beat the SGC",sx+85,sty);
+
+  // counter at bottom
+  fill(TP[0],TP[1],TP[2]); textSize(12); textAlign(CENTER,BOTTOM);
+  text(simCount.toLocaleString()+" / 1,000,000",px+pw/2,py+ph-10);
+
+  // done message
+  if(simDone&&simCountLe===0){
     var flash=Math.sin(t*2)*0.3+0.7;
-    fill(100,255,100,200*flash); textSize(10); textAlign(CENTER,CENTER);
-    text("no random code reached the SGC!",panelX+panelW/2,panelY+panelH-25);
+    fill(100,255,100,220*flash); textSize(13); textAlign(CENTER,CENTER);
+    text("1,000,000 random codes \u2014 NONE reached the SGC",px+pw/2,py+ph-35);
   }
 }
 
-function drawStatsCard(ts){
-  var panelX=600,panelY=82,panelW=235,panelH=370;
-  var pub=ts.config.pub;
+// ═══════════════════════════════════════════════
+// SLOW SIMULATION (stage 3)
+// ═══════════════════════════════════════════════
+function runSlowSim(){
+  slowTimer++;
+  // gradually speed up: start at 30 frames/shuffle, end at 3 frames/shuffle
+  var interval=Math.max(3, Math.round(30-slowPhaseCount*0.9));
 
-  fill(PANEL_BG[0],PANEL_BG[1],PANEL_BG[2]); stroke(40,45,60); strokeWeight(1);
-  rect(panelX,panelY,panelW,panelH,8);
-  noStroke(); fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(9); textAlign(CENTER,TOP);
-  text("STATISTICS",panelX+panelW/2,panelY+8);
+  if(slowTimer>=interval){
+    slowTimer=0;
+    // do one shuffle
+    var sh=shuffleCode(SC,SGC_ASGN);
+    var d=computeD(SC,sh,PCA);
+    welfordPush(d);
+    var idx=Math.floor((d-histLo)/(histHi-histLo)*histBins);
+    if(idx>=0&&idx<histBins) bins[idx]++;
+    if(d<=SGC_D) simCountLe++;
+    simCount++;
+    currentAsgn=sh;
+    currentD=d;
+    slowPhaseCount++;
 
-  var y=panelY+32, lx=panelX+15, vx=panelX+panelW-15;
-  function row(label,value,color,big){
-    fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(big?11:10); textAlign(LEFT,TOP); text(label,lx,y);
-    fill(color[0],color[1],color[2]); textAlign(RIGHT,TOP); text(value,vx,y); y+=big?24:20;
-  }
+    // spawn a falling ball
+    var frac=(d-histLo)/(histHi-histLo);
+    if(frac>=0&&frac<=1) balls.push({frac:frac,y:0,vy:0,d:d});
 
-  row("SGC Score (D)",pub.sgcD.toFixed(2),SGC_COL,true);
-
-  if(ts.stage>=3){
-    var mean=ts.wMean, std=welfordStd(ts);
-    var z=std>0?(pub.sgcD-mean)/std:0;
-    row("Null Mean",mean.toFixed(2),TEXT_PRIMARY,false);
-    row("Null Std",std.toFixed(3),TEXT_PRIMARY,false);
-    var zCol=Math.abs(z)>5?[255,80,80]:Math.abs(z)>2?[255,180,60]:[100,200,100];
-    row("z-score",z.toFixed(2),zCol,true);
-
-    y+=5;
-    // drama counter box
-    fill(PANEL_BG[0],PANEL_BG[1],PANEL_BG[2]); stroke(60,65,80); strokeWeight(1);
-    rect(lx-5,y-2,panelW-20,42,6); noStroke();
-    fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(9); textAlign(CENTER,TOP);
-    text("CODES \u2264 SGC",panelX+panelW/2,y+2);
-    var dCol=ts.countLeSgc===0?[100,255,100]:[255,200,60];
-    fill(dCol[0],dCol[1],dCol[2]); textSize(16);
-    text(ts.countLeSgc+" / "+ts.shuffleCount.toLocaleString(),panelX+panelW/2,y+18);
-    y+=52;
-  }
-
-  if(ts.stage<3){
-    row("Pub z-score",pub.pubZ.toFixed(2),ACCENT,false);
-    y+=10;
-  }
-
-  y+=5; fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(8); textAlign(LEFT,TOP);
-  var expl={
-    tab1:"The standard genetic code\nassigns 20 amino acids to\n61 sense codons.\n\nA random code almost never\nachieves this level of\nerror-minimization.\n\nThe SGC is deeply optimized.",
-    tab2:"With only 2 positions (16\ncodons) and 10 classes, the\nSGC's optimization is modest.\n\nz \u2248 -3.8 \u2014 in the tail,\nbut not extreme.\n\nDoublet = not enough room\nfor deep optimization.",
-    tab3:"Even with a reduced alphabet\n(10 classes), the triplet\narchitecture enables deep\noptimization.\n\nz \u2248 -14.8 \u2014 it's the\n3-position structure that\nmatters, not alphabet size."
-  };
-  var lines=expl[activeTab].split("\n");
-  for(var li=0;li<lines.length;li++){text(lines[li],lx,y);y+=11;}
-}
-
-function drawStageHint(ts){
-  noStroke(); fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(9); textAlign(CENTER,BOTTOM);
-  var labels=["Click or press \u2192 to begin","The Standard Genetic Code — click or \u2192 to shuffle",
-    "One Shuffle \u2014 click or \u2192 to start simulation","Simulation running... "+ts.shuffleCount.toLocaleString()+" shuffles",
-    "Simulation running...","Result \u2014 the SGC is deeply optimized"];
-  var label=labels[Math.min(ts.stage,5)];
-  if(ts.stage>=3&&ts.done) label=labels[5];
-  text(label,W/2,H-18);
-
-  textSize(8); fill(80,85,100);
-  text("click / \u2190\u2192 advance  |  1 2 3 switch tabs",W/2,H-6);
-
-  var dotY=H-32;
-  for(var i=0;i<=MAX_STAGE;i++){
-    var dx=W/2+(i-MAX_STAGE/2)*14;
-    if(i<=ts.stage){fill(ACCENT[0],ACCENT[1],ACCENT[2]);}else{fill(50,55,70);}
-    circle(dx,dotY,i===ts.stage?6:4);
-  }
-
-  if(ts.stage===0) drawIntroOverlay(ts);
-}
-
-function drawIntroOverlay(ts){
-  fill(12,12,20,210); rect(50,80,W-100,H-170,12);
-  fill(TEXT_PRIMARY[0],TEXT_PRIMARY[1],TEXT_PRIMARY[2]); textSize(18); textAlign(CENTER,TOP);
-  text("How Optimized Is the Genetic Code?",W/2,110);
-  fill(TEXT_DIM[0],TEXT_DIM[1],TEXT_DIM[2]); textSize(11);
-  var intro=["","The standard genetic code maps 64 nucleotide triplets (codons)",
-    "to 20 amino acids. Is this mapping random, or optimized to",
-    "minimize the damage from translation errors?","",
-    "We test this by shuffling the code 1,000,000 times,",
-    "preserving the degeneracy structure, and measuring",
-    "the average physicochemical distance between neighboring",
-    "codons' amino acids (noise distortion D).","",
-    "If the SGC is optimized, its D score should be far lower",
-    "than almost all random alternatives.",""];
-  var iy=140;
-  for(var i=0;i<intro.length;i++){text(intro[i],W/2,iy);iy+=16;}
-  var pulse=Math.sin(t*3)*5;
-  fill(ACCENT[0],ACCENT[1],ACCENT[2]); textSize(14);
-  text("Click anywhere to begin",W/2,iy+10+pulse);
-}
-
-// ── SIMULATION ──
-function runSimBatch(ts){
-  var conf=ts.config;
-  var batchEnd=Math.min(ts.shuffleCount+BATCH_SIZE,TOTAL_SHUFFLES);
-  var dotsToSpawn=3; // spawn a few visible falling dots per frame
-  var spawnInterval=Math.max(1,Math.floor(BATCH_SIZE/dotsToSpawn));
-  var localCount=0;
-
-  while(ts.shuffleCount<batchEnd){
-    var sh=shuffleCode(conf.codons,conf.sgcAssignment);
-    var d=computeD(conf.codons,sh,conf.vectors);
-    welfordPush(ts,d);
-    var idx=Math.floor((d-ts.histLo)/(ts.histHi-ts.histLo)*HIST_BINS);
-    if(idx>=0&&idx<HIST_BINS) ts.bins[idx]++;
-    if(d<=conf.pub.sgcD) ts.countLeSgc++;
-    ts.shuffleCount++;
-    ts.currentShuffledAssignment=sh;
-    localCount++;
-    // spawn visible falling dot periodically
-    if(localCount%spawnInterval===0&&ts.fallingDots.length<8){
-      spawnFallingDot(ts,d);
+    // transition to fast phase after SLOW_PHASE_MAX
+    if(slowPhaseCount>=SLOW_PHASE_MAX){
+      stage=4;
+      rampBatch=50;
     }
   }
-  if(ts.shuffleCount>=TOTAL_SHUFFLES){ts.done=true;ts.running=false;ts.stage=5;}
 }
 
-// ── INPUT ──
-function advanceStage(){
-  var ts=tabState[activeTab];
-  if(ts.stage<MAX_STAGE){ts.stage++;onStageChange(ts);}
-}
+// ═══════════════════════════════════════════════
+// FAST SIMULATION (stage 4)
+// ═══════════════════════════════════════════════
+function runFastSim(){
+  // ramp up batch size gradually
+  if(rampBatch<3000) rampBatch=Math.min(3000,Math.round(rampBatch*1.05));
 
-window.addEventListener("keydown",function(e){
-  var ts=tabState[activeTab];
-  if(e.key==="ArrowRight"){e.preventDefault();advanceStage();}
-  else if(e.key==="ArrowLeft"){e.preventDefault();if(ts.stage>0){ts.stage--;onStageChange(ts);}}
-  else if(e.key==="1")activeTab="tab1";
-  else if(e.key==="2")activeTab="tab2";
-  else if(e.key==="3")activeTab="tab3";
-});
+  var batchEnd=Math.min(simCount+rampBatch,TOTAL);
+  var spawnEvery=Math.max(1,Math.floor(rampBatch/4));
+  var lc=0;
 
-function mousePressed(){
-  // tab clicks
-  var tabW=220,tabH=28,startX=(W-3*tabW-20)/2,startY=8,keys=["tab1","tab2","tab3"];
-  for(var i=0;i<3;i++){
-    var x=startX+i*(tabW+10);
-    if(mouseX>=x&&mouseX<=x+tabW&&mouseY>=startY&&mouseY<=startY+tabH){activeTab=keys[i];return;}
+  while(simCount<batchEnd){
+    var sh=shuffleCode(SC,SGC_ASGN);
+    var d=computeD(SC,sh,PCA);
+    welfordPush(d);
+    var idx=Math.floor((d-histLo)/(histHi-histLo)*histBins);
+    if(idx>=0&&idx<histBins)bins[idx]++;
+    if(d<=SGC_D)simCountLe++;
+    simCount++;
+    currentAsgn=sh;
+    currentD=d;
+    lc++;
+    if(lc%spawnEvery===0&&balls.length<10){
+      var frac=(d-histLo)/(histHi-histLo);
+      if(frac>=0&&frac<=1)balls.push({frac:frac,y:0,vy:0,d:d});
+    }
   }
-  // anywhere else = advance stage
-  advanceStage();
+  if(simCount>=TOTAL){simDone=true;stage=5;}
 }
 
-function onStageChange(ts){
-  if(ts.stage===2) ts.currentShuffledAssignment=shuffleCode(ts.config.codons,ts.config.sgcAssignment);
-  if(ts.stage===3&&!ts.done&&ts.shuffleCount===0){calibrateHist(ts);ts.running=true;}
+// ═══════════════════════════════════════════════
+// BOTTOM BAR
+// ═══════════════════════════════════════════════
+function drawBottomBar(){
+  noStroke(); fill(TD[0],TD[1],TD[2]); textSize(9); textAlign(CENTER,BOTTOM);
+  var labels=["Click anywhere to begin",
+    "The real genetic code \u2014 click to shuffle it",
+    "One random shuffle \u2014 click to test 1,000,000",
+    "Slow simulation... watching each shuffle",
+    "Accelerating... "+simCount.toLocaleString()+" shuffles",
+    "Done \u2014 the SGC is deeply optimized"];
+  var label=labels[Math.min(stage,5)];
+  text(label,W/2,H-8);
+
+  // stage dots
+  var dotY=H-22;
+  for(var i=0;i<=5;i++){
+    var dx=W/2+(i-2.5)*14;
+    if(i<=stage){fill(AC[0],AC[1],AC[2]);}else{fill(50,55,70);}
+    circle(dx,dotY,i===stage?6:4);
+  }
 }
+
+// ═══════════════════════════════════════════════
+// INPUT
+// ═══════════════════════════════════════════════
+function advance(){
+  if(stage===0){stage=1;}
+  else if(stage===1){
+    // do one shuffle
+    currentAsgn=shuffleCode(SC,SGC_ASGN);
+    currentD=computeD(SC,currentAsgn,PCA);
+    stage=2;
+  }
+  else if(stage===2){
+    // start simulation
+    if(!histReady) calibrate();
+    stage=3;
+    slowTimer=0;
+    slowPhaseCount=0;
+  }
+  // stages 3-5: clicking doesn't skip (let it play)
+}
+
+function mousePressed(){advance();}
+window.addEventListener("keydown",function(e){
+  if(e.key==="ArrowRight"){e.preventDefault();advance();}
+  else if(e.key==="ArrowLeft"){e.preventDefault();if(stage>0&&stage<=2){stage--;currentAsgn=null;currentD=null;}}
+  else if(e.key===" "){e.preventDefault();advance();}
+});
   </script>
 </body>
 </html>
