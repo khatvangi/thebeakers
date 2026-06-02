@@ -5,15 +5,19 @@ Sends collected STEM articles to Telegram for weekly curation
 """
 
 import json
+import os
 import requests
 import time
 import sqlite3
 from pathlib import Path
 from datetime import datetime
 
-# Telegram Bot Configuration
-BOT_TOKEN = "8059001447:AAEqUzCwmxbvI8apmu50vAtk2Q9nMJAsHPw"
-CHAT_ID = "5314021805"  # Same curator as SPS Daily
+# Telegram Bot Configuration — secrets loaded from gitignored scripts/_secrets.py
+try:
+    from _secrets import BOT_TOKEN, CHAT_ID
+except ImportError:
+    BOT_TOKEN = os.environ.get("BEAKERS_BOT_TOKEN", "")
+    CHAT_ID = os.environ.get("BEAKERS_CHAT_ID", "")
 API_URL = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
 # Paths

@@ -16,10 +16,12 @@ Usage:
 """
 
 import argparse
+import json
 import subprocess
 import sqlite3
 import shutil
 import os
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
 
@@ -30,6 +32,7 @@ DATA = ROOT / "data"
 ARCHIVE = DATA / "archive"
 LOGS = ROOT / "logs"
 DB_PATH = DATA / "articles.db"
+HEALTH_FILE = LOGS / "weekly-automation-health.json"
 
 # subjects
 SUBJECTS = ["chemistry", "physics", "biology", "mathematics", "engineering", "ai", "agriculture"]
@@ -39,6 +42,15 @@ def log(msg: str, level: str = "INFO"):
     """log with timestamp"""
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}] [{level}] {msg}")
+
+
+def write_health(status: str, details: str = ""):
+    """write health status file for watchdog"""
+    HEALTH_FILE.write_text(json.dumps({
+        "status": status,
+        "timestamp": datetime.now().isoformat(),
+        "details": details,
+    }))
 
 
 def run_cmd(cmd: list, description: str, dry_run: bool = False, timeout: int = 600) -> bool:
@@ -86,14 +98,14 @@ def step_collect(dry_run: bool = False) -> bool:
     # society fetcher for each discipline
     for subject in SUBJECTS:
         run_cmd(
-            ["python", str(SCRIPTS / "society_fetcher.py"), subject],
+            [sys.executable, str(SCRIPTS / "society_fetcher.py"), subject],
             f"Fetch {subject} papers",
             dry_run
         )
 
     # feed collector
     run_cmd(
-        ["python", str(SCRIPTS / "feed_collector.py")],
+        [sys.executable, str(SCRIPTS / "feed_collector.py")],
         "Collect from RSS feeds",
         dry_run
     )
@@ -109,7 +121,7 @@ def step_pipeline(dry_run: bool = False) -> bool:
 
     # weekly pipeline handles triage, scoring, generation
     return run_cmd(
-        ["python", str(SCRIPTS / "weekly_pipeline.py")],
+        [sys.executable, str(SCRIPTS / "weekly_pipeline.py")],
         "Run weekly pipeline",
         dry_run,
         timeout=1800  # 30 min for full pipeline
@@ -152,11 +164,13 @@ def step_archive(dry_run: bool = False, days: int = 30) -> bool:
             cursor = conn.cursor()
 
             # mark old seen_articles as archived
+            # schema has `first_seen TIMESTAMP DEFAULT CURRENT_TIMESTAMP`,
+            # not `collected_at` — original query silently failed for months
             cutoff_str = cutoff.strftime("%Y-%m-%d")
             cursor.execute("""
                 UPDATE seen_articles
                 SET status = 'archived'
-                WHERE collected_at < ? AND status = 'pending'
+                WHERE first_seen < ? AND status = 'pending'
             """, (cutoff_str,))
 
             db_archived = cursor.rowcount
@@ -179,7 +193,7 @@ def step_indexes(dry_run: bool = False) -> bool:
     log("=" * 50)
 
     return run_cmd(
-        ["python", str(SCRIPTS / "generate_indexes.py")],
+        [sys.executable, str(SCRIPTS / "generate_indexes.py")],
         "Generate article indexes",
         dry_run
     )
@@ -276,10 +290,22 @@ def main():
     else:
         # run all steps
         success = True
+        failed_steps: list = []
         for name, func in steps.items():
             if not func():
                 log(f"Step {name} failed, continuing...", "WARN")
                 success = False
+                failed_steps.append(name)
+
+        # surface overall outcome to watchdog (see pipeline_failures.md)
+        # dry-run must not touch the health file — otherwise it resets the
+        # watchdog clock and masks real pipeline failures
+        if not args.dry_run:
+            date_str = datetime.now().strftime("%Y-%m-%d")
+            if success:
+                write_health("ok", f"completed {date_str}")
+            else:
+                write_health("failed", "failed steps: " + ", ".join(failed_steps))
 
     log("=" * 60)
     log(f"COMPLETED {'(with warnings)' if not success else 'successfully'}")

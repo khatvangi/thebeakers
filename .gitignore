@@ -28,3 +28,6 @@ data/stories/
 .idea/
 *.swp
 *.swo
+
+# Secrets — telegram bot token / chat id (loaded by run_daily_digest, watchdog, telegram_curator)
+scripts/_secrets.py

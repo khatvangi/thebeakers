@@ -16,18 +16,61 @@ run: python run_daily_digest.py
 """
 
 import argparse
+import fcntl
+import json
+import os
 import subprocess
 import sys
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent
 LOG_DIR = SCRIPT_DIR.parent / "logs"
+LOCK_FILE = LOG_DIR / "daily-digest.lock"
+HEALTH_FILE = LOG_DIR / "daily-digest-health.json"
+
+# telegram alerts — secrets loaded from gitignored scripts/_secrets.py,
+# falling back to env vars so systemd units can override without a checkout edit
+try:
+    from _secrets import BOT_TOKEN, CHAT_ID
+except ImportError:
+    BOT_TOKEN = os.environ.get("BEAKERS_BOT_TOKEN", "")
+    CHAT_ID = os.environ.get("BEAKERS_CHAT_ID", "")
 
 
 def log(msg: str):
     """print with timestamp"""
     print(f"[{datetime.now().strftime('%H:%M:%S')}] {msg}")
+
+
+def send_telegram(msg: str):
+    """send a telegram alert"""
+    try:
+        data = json.dumps({"chat_id": CHAT_ID, "text": msg}).encode("utf-8")
+        req = urllib.request.Request(
+            f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
+            data=data, headers={"Content-Type": "application/json"}
+        )
+        urllib.request.urlopen(req, timeout=10)
+    except Exception as e:
+        log(f"  telegram alert failed: {e}")
+
+
+def write_health(status: str, details: str = ""):
+    """write health status file for watchdog"""
+    HEALTH_FILE.write_text(json.dumps({
+        "status": status,
+        "timestamp": datetime.now().isoformat(),
+        "details": details,
+    }))
+
+
+# tracks which steps failed during the current run so the final health
+# write reflects overall status. without this, a later successful step
+# would overwrite the "failed" health written by an earlier broken step,
+# blinding the watchdog. see pipeline_failures.md "Step 3 silent failure".
+FAILED_STEPS: list = []
 
 
 def run_step(name: str, cmd: list, dry_run: bool = False) -> bool:
@@ -48,13 +91,21 @@ def run_step(name: str, cmd: list, dry_run: bool = False) -> bool:
             return True
         else:
             log(f"  FAILED (exit {result.returncode})")
-            log(f"    stderr: {result.stderr[:500]}")
+            # full stderr to log so a future debugger sees the whole trace,
+            # truncated only for the telegram alert (Telegram cap ~4096 chars)
+            log(f"    stderr: {result.stderr}")
+            send_telegram(f"🧪 Beakers daily FAILED at step: {name}\n{result.stderr[:1500]}")
+            FAILED_STEPS.append(name)
             return False
     except subprocess.TimeoutExpired:
         log(f"  TIMEOUT")
+        send_telegram(f"🧪 Beakers daily TIMEOUT at step: {name}")
+        FAILED_STEPS.append(f"{name} (timeout)")
         return False
     except Exception as e:
         log(f"  ERROR: {e}")
+        send_telegram(f"🧪 Beakers daily ERROR at step: {name}\n{e}")
+        FAILED_STEPS.append(f"{name} (error: {e})")
         return False
 
 
@@ -62,6 +113,16 @@ def run_daily_digest(dry_run: bool = False, skip_email: bool = False):
     """run the full daily digest pipeline"""
     week = datetime.now().strftime("%Y-%m-%d")
     LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+    # flock-based locking (crash-safe — OS releases lock when process dies)
+    lock_fd = open(LOCK_FILE, "w")
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except BlockingIOError:
+        log("another instance is already running (flock held), exiting")
+        return
+
+    write_health("running", f"started {week}")
 
     log(f"=== DAILY DIGEST PIPELINE ===")
     log(f"date: {week}")
@@ -115,18 +176,38 @@ def run_daily_digest(dry_run: bool = False, skip_email: bool = False):
         "--title", f"The Beakers — Daily Digest ({week})"
     ] + (["--dry-run"] if dry_run else []), dry_run)
 
-    # step 8: send email
+    # step 7b: update homepage headlines json
+    run_step("7b. UPDATE HOMEPAGE JSON", [
+        sys.executable, str(SCRIPT_DIR / "generate_latest_json.py"), week
+    ], dry_run)
+
+    # step 7c: refresh discipline pages with latest articles
+    run_step("7c. REFRESH DISCIPLINE PAGES", [
+        sys.executable, str(SCRIPT_DIR / "populate_discipline_pages.py")
+    ], dry_run)
+
+    # step 8: send email (--send actually triggers delivery, not just create draft)
     if not skip_email:
         run_step("8. SEND EMAIL", [
             sys.executable, str(SCRIPT_DIR / "email" / "send_campaign_listmonk.py"),
             "--cadence", "daily",
             "--html", str(output_file),
-            "--subject", f"The Beakers — Daily Digest ({week})"
+            "--subject", f"The Beakers — Daily Digest ({week})",
+            "--send"
         ] + (["--dry-run"] if dry_run else []), dry_run)
     else:
         log("=== 8. SEND EMAIL (skipped) ===")
 
-    log(f"\n=== PIPELINE COMPLETE ===")
+    # final health status reflects whether ANY step failed during this run.
+    # watchdog reads this — never claim "ok" when something broke mid-pipeline.
+    if FAILED_STEPS:
+        details = f"{week} — failed steps: {', '.join(FAILED_STEPS)}"
+        write_health("failed", details)
+        log(f"\n=== PIPELINE COMPLETE WITH FAILURES ===")
+        log(f"  failed steps: {FAILED_STEPS}")
+    else:
+        write_health("ok", f"completed {week}")
+        log(f"\n=== PIPELINE COMPLETE ===")
 
 
 def main():
